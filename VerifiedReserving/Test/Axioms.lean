@@ -1,5 +1,6 @@
 import VerifiedReserving.ChainLadder
 import VerifiedReserving.Recursion
+import VerifiedReserving.Stochastic
 
 /-! Axiom audit: every theorem in the development must depend only on
 `propext`, `Classical.choice`, `Quot.sound`. Run with
@@ -17,3 +18,5 @@ open VerifiedReserving
 #print axioms msep_eq_sum_mackTerm
 #print axioms se2rec_eq_closed
 #print axioms se2rec_eq_msep
+#print axioms RandomTriangle.stronglyMeasurable_Srv
+#print axioms condExp_fhatRv

@@ -7,7 +7,7 @@ Each item is a theorem to build, with the mathlib tool it needs. Order is the bu
    (M2) accident years independent (`iIndepFun` over the rows);
    (M3) `Var[C i (k+1) | D k] = σ² k * C i k` a.e.
    Tool: `MeasureTheory.condExp`, `ProbabilityTheory.iIndepFun`, `ProbabilityTheory.condVar` if present, otherwise define conditional variance via condExp of the squared centred variable.
-2. Theorem 2a (Mack 1993). `μ[fhat k | D k] = f k` under (M1) and (M2): linearity of condExp plus pulling out the `D k`-measurable denominator. Tool: `condExp_add`, `condExp_smul`, `condExp_stronglyMeasurable_mul`.
+2. DONE 2026-08-24 (Stochastic.lean, `condExp_fhatRv`). Theorem 2a (Mack 1993): `μ[fhat k | D k] = f k` under (M1) in the `D_k`-conditioned form, on `{S_k ≠ 0}`, with integrability hypotheses. Tools used: `condExp_mul_of_stronglyMeasurable_left`, `condExp_finsetSum`, `Finset.stronglyMeasurable_sum`. Still to build: (M2) independence across rows implies the `D_k` form from Mack's row-conditioned assumption.
 3. Theorem 2b. `fhat j` and `fhat k` are uncorrelated for `j < k`: tower property with `D k`. Tool: `condExp_condExp_of_le`.
 4. Unbiasedness of `sigma2 k` under (M1)-(M3): uses `weighted_sq_dev_at_fhat` from the deterministic layer plus conditional variance of the weighted mean. This is where the `(n-k-2)` degrees of freedom are justified.
 5. Process variance of `C i (n-1)` given the data: iterated conditional variance along the row, giving `Ĉ² ∑ σ²_k/(f_k² Ĉ_{ik})` after plugging estimates. Tool: law of total variance for condExp (prove as a lemma if absent).
