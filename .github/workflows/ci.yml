@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+
+      - name: Get Mathlib cache
+        run: lake exe cache get
+
+      - name: Build
+        run: lake build VerifiedReserving
+
+      - name: Verify no sorry or admit
+        run: |
+          if grep -rnE --include="*.lean" '^[[:space:]]*(sorry|admit)([[:space:]]|$)' VerifiedReserving/ VerifiedReserving.lean; then
+            echo "ERROR: sorry or admit found"
+            exit 1
+          fi
+
+      - name: Verify no custom axioms
+        run: |
+          if grep -rnE --include="*.lean" '^[[:space:]]*axiom[[:space:]]+' VerifiedReserving/ VerifiedReserving.lean; then
+            echo "ERROR: custom axiom found"
+            exit 1
+          fi
+
+      - name: Axiom audit
+        run: |
+          lake env lean VerifiedReserving/Test/Axioms.lean | tee axioms.txt
+          if grep -v -E "depends on axioms: \[propext, Classical.choice, Quot.sound\]$" axioms.txt | grep -q "depends on axioms"; then
+            echo "ERROR: a theorem depends on a nonstandard axiom"
+            exit 1
+          fi
+          n=$(grep -c "depends on axioms" axioms.txt)
+          echo "audited theorems: $n"
+          test "$n" -ge 12

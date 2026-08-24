@@ -1,0 +1,23 @@
+% Web version of the blueprint. Build with `leanblueprint web`.
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{hyperref}
+\usepackage[showmore, dep_graph, project=../../]{blueprint}
+
+\input{macros/common}
+\input{macros/web}
+
+\title{Mack's chain-ladder model in Lean 4: blueprint}
+\author{Robert Sneiderman}
+
+\home{https://robby955.github.io/verified-reserving/}
+\github{https://github.com/Robby955/verified-reserving}
+\dochome{https://robby955.github.io/verified-reserving/docs/}
+
+\begin{document}
+\maketitle
+\input{content}
+\end{document}

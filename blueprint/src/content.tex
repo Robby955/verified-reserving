@@ -1,0 +1,247 @@
+% Blueprint for verified-reserving: Mack's chain-ladder model in Lean 4.
+% Conventions: accident years i = 0,...,n-1 and development years k = 0,...,n-1,
+% both zero-based; C_{i,k} is observed when i + k <= n-1.
+
+\chapter{Introduction}
+
+This blueprint tracks the formalization of Mack's distribution-free chain-ladder model
+\cite{Mack1993} in Lean 4 on top of mathlib. Each statement below carries the name of its
+Lean declaration; green nodes in the dependency graph are proved, the others are open work
+listed in the roadmap. Statements are given in the paper's own terms, and where a published
+formula is an estimator or an approximation rather than an identity, the text says so.
+
+A run-off triangle with $n$ accident years and $n$ development years is a function
+$C : \mathbb{N} \to \mathbb{N} \to \mathbb{R}$; $C_{i,k}$ is the cumulative claims of accident
+year $i$ at development year $k$, observed when $i + k \le n-1$. The latest observed entry of
+accident year $i$ is $C_{i,\,n-1-i}$.
+
+\chapter{The chain-ladder estimators}
+
+\section{Definitions}
+
+\begin{definition}[Contributors]\label{def:contributors}\lean{VerifiedReserving.contributors}\leanok
+The accident years contributing to the development factor $k \to k+1$ are
+$i = 0, \dots, n-k-2$, those with $C_{i,k+1}$ observed.
+\end{definition}
+
+\begin{definition}[Column sums]\label{def:S}\lean{VerifiedReserving.S, VerifiedReserving.T}\leanok
+\uses{def:contributors}
+$S_k = \sum_{i=0}^{n-k-2} C_{i,k}$ and $T_k = \sum_{i=0}^{n-k-2} C_{i,k+1}$.
+\end{definition}
+
+\begin{definition}[Development factor]\label{def:fhat}\lean{VerifiedReserving.fhat}\leanok
+\uses{def:S}
+$\hat f_k = T_k / S_k$. (In Lean, division by zero is zero.)
+\end{definition}
+
+\begin{definition}[Individual factor]\label{def:F}\lean{VerifiedReserving.F}\leanok
+$F_{i,k} = C_{i,k+1} / C_{i,k}$.
+\end{definition}
+
+\begin{definition}[Mack's variance estimator]\label{def:sigma2}\lean{VerifiedReserving.sigma2}\leanok
+\uses{def:fhat, def:F, def:contributors}
+$\hat\sigma_k^2 = \frac{1}{n-k-2}\sum_{i=0}^{n-k-2} C_{i,k}\,(F_{i,k} - \hat f_k)^2$.
+The value for $k = n-2$ (a single contributor) is an extrapolation convention in
+\cite{Mack1993}, not an estimator; no theorem here uses it.
+\end{definition}
+
+\begin{definition}[Projection]\label{def:Chat}\lean{VerifiedReserving.Chat}\leanok
+\uses{def:fhat}
+$\hat C_{i,k} = C_{i,n-1-i} \prod_{j=n-1-i}^{k-1} \hat f_j$ for $k \ge n-1-i$.
+\end{definition}
+
+\begin{definition}[Ultimate and reserve]\label{def:reserve}\lean{VerifiedReserving.ultimate, VerifiedReserving.reserve}\leanok
+\uses{def:Chat}
+$\hat C_{i,n-1}$ is the chain-ladder ultimate and $\hat R_i = \hat C_{i,n-1} - C_{i,n-1-i}$ the reserve.
+\end{definition}
+
+\begin{definition}[Mack's MSEP estimator]\label{def:msep}\lean{VerifiedReserving.msep}\leanok
+\uses{def:reserve, def:sigma2, def:S}
+Mack (1993), Theorem 3:
+\[
+\widehat{\mathrm{msep}}(\hat R_i)
+ = \hat C_{i,n-1}^2 \sum_{k=n-1-i}^{n-2} \frac{\hat\sigma_k^2}{\hat f_k^2}
+   \Big(\frac{1}{\hat C_{i,k}} + \frac{1}{S_k}\Big).
+\]
+\end{definition}
+
+\section{Deterministic identities}
+
+\begin{lemma}[Weighted-average form]\label{lem:weighted}\lean{VerifiedReserving.fhat_eq_weighted_average}\leanok
+\uses{def:fhat, def:F}
+If $C_{i,k} \neq 0$ for every contributor $i$, then
+$\hat f_k = \sum_{i} \frac{C_{i,k}}{S_k} F_{i,k}$.
+\end{lemma}
+\begin{proof}\leanok Termwise: $\frac{C_{i,k}}{S_k}\cdot\frac{C_{i,k+1}}{C_{i,k}} = \frac{C_{i,k+1}}{S_k}$. \end{proof}
+
+\begin{lemma}\label{lem:T}\lean{VerifiedReserving.T_eq_sum_weighted_F}\leanok
+\uses{def:S, def:F}
+If $C_{i,k} \neq 0$ for every contributor, $T_k = \sum_i C_{i,k} F_{i,k}$.
+\end{lemma}
+\begin{proof}\leanok Cancel the denominator termwise. \end{proof}
+
+\begin{lemma}[Sum-of-squares decomposition]\label{lem:sq}\lean{VerifiedReserving.weighted_sq_dev}\leanok
+\uses{lem:T}
+For any centre $f$, with $C_{i,k} \neq 0$ for every contributor,
+$\sum_i C_{i,k}(F_{i,k}-f)^2 = \sum_i C_{i,k}F_{i,k}^2 - 2 f T_k + f^2 S_k$.
+\end{lemma}
+\begin{proof}\leanok Expand the square and use Lemma~\ref{lem:T}. \end{proof}
+
+\begin{lemma}[Collapse at the chain-ladder centre]\label{lem:sq_fhat}\lean{VerifiedReserving.weighted_sq_dev_at_fhat}\leanok
+\uses{lem:sq, def:fhat}
+If moreover $S_k \neq 0$, then
+$\sum_i C_{i,k}(F_{i,k}-\hat f_k)^2 = \sum_i C_{i,k}F_{i,k}^2 - S_k \hat f_k^2$.
+This is the identity behind the $n-k-2$ degrees of freedom in $\hat\sigma_k^2$.
+\end{lemma}
+\begin{proof}\leanok Put $f = \hat f_k = T_k/S_k$ in Lemma~\ref{lem:sq}. \end{proof}
+
+\begin{lemma}[Projection step]\label{lem:Chat_succ}\lean{VerifiedReserving.Chat_succ}\leanok
+\uses{def:Chat}
+For $k \ge n-1-i$, $\hat C_{i,k+1} = \hat C_{i,k}\,\hat f_k$.
+\end{lemma}
+\begin{proof}\leanok Split off the top factor of the product. \end{proof}
+
+\begin{lemma}\label{lem:Chat_diag}\lean{VerifiedReserving.Chat_diag}\leanok
+\uses{def:Chat}
+$\hat C_{i,n-1-i} = C_{i,n-1-i}$.
+\end{lemma}
+\begin{proof}\leanok Empty product. \end{proof}
+
+\begin{lemma}\label{lem:oldest}\lean{VerifiedReserving.reserve_zero_of_oldest}\leanok
+\uses{def:reserve}
+The oldest accident year is fully developed: $\hat R_0 = 0$.
+\end{lemma}
+\begin{proof}\leanok Empty product again. \end{proof}
+
+\chapter{Mack 1999 equals Mack 1993}
+
+\begin{definition}[Mack's 1999 recursion]\label{def:se2rec}\lean{VerifiedReserving.se2rec}\leanok
+\uses{def:Chat, def:sigma2, def:S, def:fhat}
+For $\alpha = 1$ and unit weights \cite{Mack1999}, starting from $\mathrm{se}^2 = 0$ on the
+latest diagonal $d = n-1-i$ and stepping $m$ times,
+\[
+\mathrm{se}^2_{m+1} = \hat C_{i,d+m}^2\Big(\frac{\hat\sigma_{d+m}^2}{\hat C_{i,d+m}} + \frac{\hat\sigma_{d+m}^2}{S_{d+m}}\Big) + \mathrm{se}^2_m\,\hat f_{d+m}^2 .
+\]
+\end{definition}
+
+\begin{definition}\label{def:mackTerm}\lean{VerifiedReserving.mackTerm}\leanok
+\uses{def:sigma2, def:fhat, def:Chat, def:S}
+The summand of the closed form:
+$\mathrm{term}_{i,k} = \frac{\hat\sigma_k^2}{\hat f_k^2}\big(\frac{1}{\hat C_{i,k}} + \frac{1}{S_k}\big)$.
+\end{definition}
+
+\begin{lemma}\label{lem:msep_sum}\lean{VerifiedReserving.msep_eq_sum_mackTerm}\leanok
+\uses{def:msep, def:mackTerm}
+$\widehat{\mathrm{msep}}(\hat R_i) = \hat C_{i,n-1}^2 \sum_{k=n-1-i}^{n-2} \mathrm{term}_{i,k}$.
+\end{lemma}
+\begin{proof}\leanok By definition. \end{proof}
+
+\begin{lemma}[Truncated closed form]\label{lem:se2rec_closed}\lean{VerifiedReserving.se2rec_eq_closed}\leanok
+\uses{def:se2rec, def:mackTerm, lem:Chat_succ}
+If $\hat f_k \neq 0$ for $d \le k < d+m$, then
+$\mathrm{se}^2_m = \hat C_{i,d+m}^2 \sum_{k=d}^{d+m-1} \mathrm{term}_{i,k}$.
+\end{lemma}
+\begin{proof}\leanok Induction on $m$ using Lemma~\ref{lem:Chat_succ} and $\hat f_{d+m}^2/\hat f_{d+m}^2 = 1$. \end{proof}
+
+\begin{theorem}[Mack 1999 = Mack 1993]\label{thm:recursion}\lean{VerifiedReserving.se2rec_eq_msep}\leanok
+\uses{lem:se2rec_closed, lem:msep_sum}
+For $i \le n-1$ and $\hat f_k \neq 0$ along the row, $i$ steps of the 1999 recursion return
+exactly Mack's 1993 estimator: $\mathrm{se}^2_i = \widehat{\mathrm{msep}}(\hat R_i)$.
+\end{theorem}
+\begin{proof}\leanok Lemma~\ref{lem:se2rec_closed} with $m = i$, since $d + i = n-1$. \end{proof}
+
+\chapter{The stochastic layer}
+
+\section{Model}
+
+\begin{definition}[Random triangle]\label{def:RandomTriangle}\lean{VerifiedReserving.RandomTriangle}\leanok
+A random run-off triangle on a measurable space $\Omega$ is a family of random variables
+$C_{i,k} : \Omega \to \mathbb{R}$ together with a filtration $\mathcal{D}_k$ such that $C_{i,j}$
+is $\mathcal{D}_k$-measurable whenever $j \le k$ ("everything observed up to development year $k$").
+\end{definition}
+
+\begin{definition}[Assumption (M1)]\label{def:Mack1}\lean{VerifiedReserving.Mack1}\leanok
+\uses{def:RandomTriangle}
+$E[C_{i,k+1} \mid \mathcal{D}_k] = f_k\, C_{i,k}$ almost surely, for all $i$ and $k$.
+This is Mack's first assumption in the form conditioned on $\mathcal{D}_k$; Mack states it
+conditioned on the row's own history and obtains this form from independence across accident
+years (M2), a passage still to be formalized.
+\end{definition}
+
+\begin{definition}[Estimators as random variables]\label{def:rv}\lean{VerifiedReserving.RandomTriangle.Srv, VerifiedReserving.RandomTriangle.fhatRv}\leanok
+\uses{def:RandomTriangle, def:S, def:fhat}
+$S_k(\omega)$ and $\hat f_k(\omega)$ are the deterministic estimators applied to the triangle
+observed at $\omega$.
+\end{definition}
+
+\begin{lemma}\label{lem:Srv_meas}\lean{VerifiedReserving.RandomTriangle.stronglyMeasurable_Srv}\leanok
+\uses{def:rv}
+$S_k$ is $\mathcal{D}_k$-measurable.
+\end{lemma}
+\begin{proof}\leanok A finite sum of $\mathcal{D}_k$-measurable functions. \end{proof}
+
+\section{Mack's Theorem 2}
+
+\begin{theorem}[Conditional unbiasedness of the development factor]\label{thm:unbiased}\lean{VerifiedReserving.condExp_fhatRv}\leanok
+\uses{def:Mack1, def:rv, lem:Srv_meas}
+Assume (M1), that $S_k \neq 0$ almost surely, that each $C_{i,k+1}$ and $\hat f_k$ are
+integrable. Then $E[\hat f_k \mid \mathcal{D}_k] = f_k$ almost surely.
+\end{theorem}
+\begin{proof}\leanok
+$\hat f_k = S_k^{-1} \sum_i C_{i,k+1}$. The factor $S_k^{-1}$ is $\mathcal{D}_k$-measurable and
+comes out of the conditional expectation; by (M1) the conditional expectation of the sum is
+$f_k \sum_i C_{i,k} = f_k S_k$; cancel $S_k$ where it is nonzero.
+\end{proof}
+
+\begin{theorem}[Uncorrelated development factors]\label{thm:uncorrelated}
+\uses{thm:unbiased}
+Under (M1), for $j < k$, $E[\hat f_j \hat f_k \mid \mathcal{D}_j] = \hat f_j f_k$, so $\hat f_j$ and
+$\hat f_k$ are uncorrelated (Mack 1993, Theorem 2, second part).
+\end{theorem}
+\begin{proof}
+Tower property with $\mathcal{D}_k \supseteq \mathcal{D}_j$ and Theorem~\ref{thm:unbiased}.
+\end{proof}
+
+\section{Open: variance estimator and the MSEP theorem}
+
+\begin{definition}[Assumption (M3)]\label{def:Mack3}
+\uses{def:RandomTriangle}
+$\mathrm{Var}(C_{i,k+1} \mid \mathcal{D}_k) = \sigma_k^2\, C_{i,k}$ almost surely.
+\end{definition}
+
+\begin{theorem}[Unbiasedness of the variance estimator]\label{thm:sigma2}
+\uses{def:Mack3, thm:unbiased, lem:sq_fhat}
+Under (M1) and (M3), $E[\hat\sigma_k^2 \mid \mathcal{D}_k] = \sigma_k^2$ for $k \le n-3$.
+\end{theorem}
+\begin{proof}
+Lemma~\ref{lem:sq_fhat} reduces the sum of squares to $\sum_i C_{i,k}F_{i,k}^2 - S_k\hat f_k^2$;
+take conditional expectations using (M3) and the conditional variance of $\hat f_k$, which is
+$\sigma_k^2 / S_k$.
+\end{proof}
+
+\begin{theorem}[Mack's Theorem 3]\label{thm:msep}
+\uses{def:msep, thm:unbiased, thm:uncorrelated, thm:sigma2}
+Under (M1)-(M3), Mack's estimator $\widehat{\mathrm{msep}}(\hat R_i)$ is the sum of the process
+variance $\hat C_{i,n-1}^2\sum_k \hat\sigma_k^2/(\hat f_k^2 \hat C_{i,k})$ and the estimation-error
+term $\hat C_{i,n-1}^2\sum_k \hat\sigma_k^2/(\hat f_k^2 S_k)$, where the estimation-error term is
+obtained by Mack's conditional-resampling step (replacing $(\hat f_k - f_k)^2$ by
+$\sigma_k^2/S_k$ and dropping cross terms by Theorem~\ref{thm:uncorrelated}). The statement to
+formalize is the estimator as Mack defines it; the exact conditional MSEP is a different object
+(Buchwalder, Bühlmann, Merz and Wüthrich 2006).
+\end{theorem}
+\begin{proof}
+Iterated conditional variance along the row for the process part; Mack's approximation step for
+the estimation part.
+\end{proof}
+
+\chapter{Reference computation}
+
+Mack's 1993 example (the Taylor and Ashe 1983 triangle) is reproduced to every printed digit
+(nine reserves, the total 18,681 thousand, all standard-error percentages) by a dependency-free
+script implementing the definitions above in floating point. The Lean definitions are over
+$\mathbb{R}$ and noncomputable; the script is the reference computation, not the Lean code.
+
+\begin{thebibliography}{9}
+\bibitem{Mack1993} T. Mack, Distribution-free calculation of the standard error of chain ladder reserve estimates, ASTIN Bulletin 23 (1993) 213-225.
+\bibitem{Mack1999} T. Mack, The standard error of chain ladder reserve estimates: recursive calculation and inclusion of a tail factor, ASTIN Bulletin 29 (1999) 361-366.
+\end{thebibliography}
