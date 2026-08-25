@@ -12,8 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mack’s chain-ladder model in Lean 4: blueprint</title>
-<link rel="next" href="sect0001.html" title="Introduction" />
+<title>Reference computation</title>
+<link rel="prev" href="sect0017.html" title="Non-vacuity: a nondegenerate model" />
+<link rel="up" href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
 <link rel="stylesheet" href="styles/showmore.css" />
@@ -24,6 +25,7 @@
 <body>
 <header>
 <svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Mack’s chain-ladder model in Lean 4: blueprint</a></h1>
 </header>
 
 <div class="wrapper">
@@ -216,7 +218,7 @@
 <li class="">
   <a href="sect0017.html"><span class="toc_ref">17</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0018.html"><span class="toc_ref">18</span> <span class="toc_entry">Reference computation</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
@@ -228,198 +230,18 @@
 
 
 <div class="main-text">
-<div class="titlepage">
-<h1>Mack’s chain-ladder model in Lean 4: blueprint</h1>
-<p class="authors">
-<span class="author">Robert Sneiderman</span>
-</p>
-</div>
+<h1 id="a0000000019">18 Reference computation</h1>
+<p>Mack’s 1993 example (the Taylor and Ashe 1983 triangle) is reproduced to every printed digit (nine reserves, the total 18,681 thousand, all standard-error percentages) by a dependency-free script implementing the definitions above in floating point. The Lean definitions are over \(\mathbb {R}\) and noncomputable; the script is the reference computation, not the Lean code. </p>
+<dl class="bibliography">
+  <dt><a name="Mack1993">1</a></dt>
+  <dd><p>T. Mack, Distribution-free calculation of the standard error of chain ladder reserve estimates, ASTIN Bulletin 23 (1993) 213-225. </p>
+</dd>
+  <dt><a name="Mack1999">2</a></dt>
+  <dd><p>T. Mack, The standard error of chain ladder reserve estimates: recursive calculation and inclusion of a tail factor, ASTIN Bulletin 29 (1999) 361-366. </p>
+</dd>
+</dl>
 
 </div> <!--main-text -->
-<nav class=local_toc>
-<ul>
-  <li>	
-  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
-  </li>
-  <li>	
-  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">The chain-ladder estimators</span></a>
-	<ul>
-		   <li>	
-  <a href="sect0002.html#a0000000020"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
-  </li>
-  <li>	
-  <a href="sect0002.html#a0000000021"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
-  </li>
-
-	</ul>
-  </li>
-  <li>	
-  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Mack 1999 equals Mack 1993</span></a>
-  </li>
-  <li>	
-  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Bornhuetter-Ferguson on the chain-ladder pattern</span></a>
-  </li>
-  <li>	
-  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">The stochastic layer</span></a>
-	<ul>
-		   <li>	
-  <a href="sect0005.html#a0000000022"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
-  </li>
-  <li>	
-  <a href="sect0005.html#a0000000023"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
-  </li>
-  <li>	
-  <a href="sect0005.html#a0000000024"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
-  </li>
-  <li>	
-  <a href="sect0005.html#a0000000025"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
-  </li>
-  <li>	
-  <a href="sect0005.html#a0000000026"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
-  </li>
-  <li>	
-  <a href="sect0005.html#a0000000027"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
-  </li>
-  <li>	
-  <a href="sect0005.html#a0000000028"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
-  </li>
-
-	</ul>
-  </li>
-  <li>	
-  <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">The variant catalogue: Mack versus conditional resampling</span></a>
-	<ul>
-		   <li>	
-  <a href="sect0006.html#a0000000029"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
-  </li>
-
-	</ul>
-  </li>
-  <li>	
-  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Solvency II: the one-year view</span></a>
-	<ul>
-		   <li>	
-  <a href="sect0007.html#a0000000030"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
-  </li>
-
-	</ul>
-  </li>
-  <li>	
-  <a href="sect0008.html"><span class="toc_ref">8</span> <span class="toc_entry">Röhr 2016: the error-propagation form</span></a>
-	<ul>
-		   <li>	
-  <a href="sect0008.html#a0000000031"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
-  </li>
-  <li>	
-  <a href="sect0008.html#a0000000032"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
-  </li>
-  <li>	
-  <a href="sect0008.html#a0000000033"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
-  </li>
-  <li>	
-  <a href="sect0008.html#a0000000034"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
-  </li>
-  <li>	
-  <a href="sect0008.html#a0000000035"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
-  </li>
-
-	</ul>
-  </li>
-  <li>	
-  <a href="sect0009.html"><span class="toc_ref">9</span> <span class="toc_entry">Mack 1999: general weights and exponent</span></a>
-	<ul>
-		   <li>	
-  <a href="sect0009.html#a0000000036"><span class="toc_ref">9.1</span> <span class="toc_entry">Definitions</span></a>
-  </li>
-  <li>	
-  <a href="sect0009.html#a0000000037"><span class="toc_ref">9.2</span> <span class="toc_entry">Deterministic identities</span></a>
-  </li>
-  <li>	
-  <a href="sect0009.html#a0000000038"><span class="toc_ref">9.3</span> <span class="toc_entry">The recursion equals \((*)\)</span></a>
-  </li>
-  <li>	
-  <a href="sect0009.html#a0000000039"><span class="toc_ref">9.4</span> <span class="toc_entry">The 1993 case</span></a>
-  </li>
-  <li>	
-  <a href="sect0009.html#a0000000040"><span class="toc_ref">9.5</span> <span class="toc_entry">Conditional unbiasedness of the weighted estimator</span></a>
-  </li>
-
-	</ul>
-  </li>
-  <li>	
-  <a href="sect0010.html"><span class="toc_ref">10</span> <span class="toc_entry">The over-dispersed Poisson model</span></a>
-	<ul>
-		   <li>	
-  <a href="sect0010.html#a0000000041"><span class="toc_ref">10.1</span> <span class="toc_entry">Definitions</span></a>
-  </li>
-  <li>	
-  <a href="sect0010.html#a0000000042"><span class="toc_ref">10.2</span> <span class="toc_entry">The score equations are score equations</span></a>
-  </li>
-  <li>	
-  <a href="sect0010.html#a0000000043"><span class="toc_ref">10.3</span> <span class="toc_entry">Chain ladder solves the score equations</span></a>
-  </li>
-  <li>	
-  <a href="sect0010.html#a0000000044"><span class="toc_ref">10.4</span> <span class="toc_entry">Uniqueness: the marginal-sum solution is chain ladder</span></a>
-  </li>
-
-	</ul>
-  </li>
-  <li>	
-  <a href="sect0011.html"><span class="toc_ref">11</span> <span class="toc_entry">A finite independent-row witness</span></a>
-  </li>
-  <li>	
-  <a href="sect0012.html"><span class="toc_ref">12</span> <span class="toc_entry">Merz-Wüthrich: the MSEP of the one-year claims development result</span></a>
-	<ul>
-		   <li>	
-  <a href="sect0012.html#a0000000045"><span class="toc_ref">12.1</span> <span class="toc_entry">The exact one-year process variance</span></a>
-  </li>
-  <li>	
-  <a href="sect0012.html#a0000000046"><span class="toc_ref">12.2</span> <span class="toc_entry">The estimator of Merz and Wüthrich</span></a>
-  </li>
-  <li>	
-  <a href="sect0012.html#a0000000047"><span class="toc_ref">12.3</span> <span class="toc_entry">The bridge to the exact statement</span></a>
-  </li>
-  <li>	
-  <a href="sect0012.html#a0000000048"><span class="toc_ref">12.4</span> <span class="toc_entry">Aggregation over accident years</span></a>
-  </li>
-
-	</ul>
-  </li>
-  <li>	
-  <a href="sect0013.html"><span class="toc_ref">13</span> <span class="toc_entry">The observed data: Mack’s hypotheses discharged</span></a>
-	<ul>
-		   <li>	
-  <a href="sect0013.html#a0000000049"><span class="toc_ref">13.1</span> <span class="toc_entry">From independence across accident years to the hypotheses</span></a>
-  </li>
-
-	</ul>
-  </li>
-  <li>	
-  <a href="sect0014.html"><span class="toc_ref">14</span> <span class="toc_entry">Mack’s published numerical example</span></a>
-  </li>
-  <li>	
-  <a href="sect0015.html"><span class="toc_ref">15</span> <span class="toc_entry">Mack’s model diagnostics</span></a>
-	<ul>
-		   <li>	
-  <a href="sect0015.html#a0000000050"><span class="toc_ref">15.1</span> <span class="toc_entry">Development-factor correlation</span></a>
-  </li>
-  <li>	
-  <a href="sect0015.html#a0000000051"><span class="toc_ref">15.2</span> <span class="toc_entry">Calendar-year labels</span></a>
-  </li>
-
-	</ul>
-  </li>
-  <li>	
-  <a href="sect0016.html"><span class="toc_ref">16</span> <span class="toc_entry">Mack’s lognormal approximation</span></a>
-  </li>
-  <li>	
-  <a href="sect0017.html"><span class="toc_ref">17</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
-  </li>
-  <li>	
-  <a href="sect0018.html"><span class="toc_ref">18</span> <span class="toc_entry">Reference computation</span></a>
-  </li>
-</ul>
-</nav>
 </div> <!-- content-wrapper -->
 </div> <!-- content -->
 </div> <!-- wrapper -->
@@ -429,7 +251,9 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0001.html" title="Introduction"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0017.html" title="Non-vacuity: a nondegenerate model"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
 </nav>
 
