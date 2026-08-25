@@ -12,9 +12,8 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mack’s lognormal approximation</title>
-<link rel="next" href="sect0017.html" title="Prior uncertainty in Bornhuetter-Ferguson" />
-<link rel="prev" href="sect0015.html" title="Mack’s model diagnostics" />
+<title>Reference computation</title>
+<link rel="prev" href="sect0018.html" title="Non-vacuity: a nondegenerate model" />
 <link rel="up" href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -213,7 +212,7 @@
 
   </ul>
  </li>
-<li class=" active current">
+<li class="">
   <a href="sect0016.html"><span class="toc_ref">16</span> <span class="toc_entry">Mack’s lognormal approximation</span></a>
  </li>
 <li class="">
@@ -222,7 +221,7 @@
 <li class="">
   <a href="sect0018.html"><span class="toc_ref">18</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0019.html"><span class="toc_ref">19</span> <span class="toc_entry">Reference computation</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
@@ -234,147 +233,16 @@
 
 
 <div class="main-text">
-<h1 id="a0000000017">16 Mack’s lognormal approximation</h1>
-<p>The parameter conversion appears in Thomas Mack, “Measuring the Variability of Chain Ladder Reserve Estimates,” Casualty Actuarial Society Forum, Spring 1994, Chapter 4, equation (10), pages 118–119. The 1993 ASTIN paper does not contain this construction. </p>
-<div class="definition_thmwrapper theorem-style-definition" id="def:mack-lognormal">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">16.1</span>
-    <span class="definition_thmtitle">Moment-matched parameters</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0016.html#def:mack-lognormal">#</a>
-    
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackLognormalSigma2" class="lean_decl">VerifiedReserving.mackLognormalSigma2</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackLognormalMu" class="lean_decl">VerifiedReserving.mackLognormalMu</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p>For an arithmetic mean \(m\) and variance \(v\), define </p>
-<div class="displaymath" id="a0000000186">
-  \[  \sigma ^2=\log (1+v/m^2), \qquad \mu =\log m-\sigma ^2/2.  \]
-</div>
-<p> These are the log-variance and log-mean parameters in Mack’s equation (10). </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:mack-lognormal">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">16.2</span>
-    <span class="theorem_thmtitle">Matched lognormal moments</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0016.html#thm:mack-lognormal">#</a>
-    
-    <a class="icon proof" href="sect0016.html#a0000000187"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0016.html#def:mack-lognormal">Definition 16.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackLognormal_mean_eq" class="lean_decl">VerifiedReserving.mackLognormal_mean_eq</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackLognormal_variance_eq" class="lean_decl">VerifiedReserving.mackLognormal_variance_eq</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p> If \(m{\gt}0\) and \(v\ge 0\), then </p>
-<div class="displaymath" id="a0000000188">
-  \[  \exp (\mu +\sigma ^2/2)=m  \]
-</div>
-<p> and </p>
-<div class="displaymath" id="a0000000189">
-  \[  \exp (2\mu +\sigma ^2)\bigl(\exp (\sigma ^2)-1\bigr)=v.  \]
-</div>
-<p> Thus the standard lognormal moment expressions reproduce the supplied mean and variance. This identity does not state that the underlying reserve follows a lognormal law. </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000187">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Substitute the parameter definitions, use \(\exp (\log x)=x\) for positive \(x\), and simplify the resulting rational identity. </p>
-
-  </div>
-</div>
+<h1 id="a0000000020">19 Reference computation</h1>
+<p>Mack’s 1993 example (the Taylor and Ashe 1983 triangle) is reproduced to every printed digit (nine reserves, the total 18,681 thousand, all standard-error percentages) by a dependency-free script implementing the definitions above in floating point. The Lean definitions are over \(\mathbb {R}\) and noncomputable; the script is the reference computation, not the Lean code. </p>
+<dl class="bibliography">
+  <dt><a name="Mack1993">1</a></dt>
+  <dd><p>T. Mack, Distribution-free calculation of the standard error of chain ladder reserve estimates, ASTIN Bulletin 23 (1993) 213-225. </p>
+</dd>
+  <dt><a name="Mack1999">2</a></dt>
+  <dd><p>T. Mack, The standard error of chain ladder reserve estimates: recursive calculation and inclusion of a tail factor, ASTIN Bulletin 29 (1999) 361-366. </p>
+</dd>
+</dl>
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
@@ -386,11 +254,9 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0015.html" title="Mack’s model diagnostics"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0018.html" title="Non-vacuity: a nondegenerate model"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
-</a>
-  <a href="sect0017.html" title="Prior uncertainty in Bornhuetter-Ferguson"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 
