@@ -51,7 +51,7 @@ jobs:
           fi
           n=$(grep -c "^'VerifiedReserving" axioms.txt)
           echo "audited theorems: $n"
-          test "$n" -ge 66
+          test "$n" -ge 77
 
       # A concrete triangle satisfying every hypothesis of the stochastic
       # theorems, with the headline theorems instantiated on it: the statements

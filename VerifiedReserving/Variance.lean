@@ -9,7 +9,8 @@ Mack's remaining assumptions, stated in the `D_k`-conditioned form:
 
 (M2') `E[(C_{i,k+1} - f_k C_{i,k})(C_{j,k+1} - f_k C_{j,k}) | D_k] = 0` for `i ≠ j`
       (conditional uncorrelatedness across accident years, which is what
-      independence of accident years contributes to the variance calculation).
+      independence of accident years contributes to the variance calculation;
+      `mack2'_of_rows` in `Independence.lean` derives it from that independence).
 
 Main result: on `{S_k ≠ 0}`,
 

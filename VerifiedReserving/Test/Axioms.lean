@@ -75,3 +75,15 @@ set_option format.width 400
 #print axioms NontrivialModel.ultimate_unbiased
 #print axioms NontrivialModel.var_fhat0
 #print axioms NontrivialModel.sigma2_unbiased
+
+#print axioms setIntegral_inter_of_indep
+#print axioms condExp_sup_of_indep
+#print axioms RandomTriangle.stronglyMeasurable_rowSigmaAll
+#print axioms RandomTriangle.stronglyMeasurable_rowSigma
+#print axioms indep_rowSigmaAll_otherRowsAll
+#print axioms indep_rowSigmaAll_otherRowsSigma
+#print axioms RandomTriangle.D_eq_sup
+#print axioms mack1_of_mack1Row
+#print axioms mack3_of_mack3Row
+#print axioms condExp_eps_rowSigma
+#print axioms mack2'_of_rows

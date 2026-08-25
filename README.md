@@ -25,6 +25,8 @@ Mack's Theorem 1 (`VerifiedReserving/Ultimate.lean`). `condExp_C_of_Mack1` itera
 
 Estimation variance (`VerifiedReserving/Variance.lean`). Assumptions (M3) (conditional variance) and (M2') (conditional uncorrelatedness of residuals across accident years) as definitions; `condExp_sq_fhatRv_sub` proves E[(f̂_k − f_k)² | D_k] = σ²_k / S_k, the estimation-variance term of Mack's formula.
 
+Independence across accident years (`VerifiedReserving/Independence.lean`). Mack states (M1) and (M3) conditioned on a single accident year's own history and assumes separately that the accident years are independent; every theorem above conditions on `D_k`. `condExp_sup_of_indep` is the general fact behind the passage: if `m₂` is independent of a σ-algebra `m₁'` that carries both `f` and `m₁`, then `E[f | m₁ ⊔ m₂] = E[f | m₁]`. Mathlib has the case `m₁ = ⊥` (`condExp_indep_eq`); the join version is proved here from the characterisation of conditional expectation, on the π-system of rectangles `a ∩ b`. With the row σ-algebras `rowSigma`, `rowSigmaAll`, `otherRowsSigma`, with `RowsIndep` as (M2) and `RowsGenerateD` saying that `D_k` is the join of the rows' histories up to `k`, `mack1_of_mack1Row` and `mack3_of_mack3Row` derive (M1) and (M3) in the `D_k` form from Mack's row-conditioned statements. `mack2'_of_rows` goes one step further: the cross-term assumption (M2'), a hypothesis of the variance theorems, is a consequence of independence across accident years rather than an extra assumption.
+
 Unbiasedness of σ̂² (`VerifiedReserving/SigmaUnbiased.lean`). `weighted_sq_dev_eps` rewrites the weighted sum of squares around f̂_k as residual terms minus S_k(f̂_k − f_k)²; `condExp_sigma2Rv` then gives E[σ̂²_k | D_k] = σ²_k for k + 3 ≤ n, which is exactly why Mack divides by n − k − 2.
 
 Process variance and Theorem 3 (`VerifiedReserving/ProcessVariance.lean`, `VerifiedReserving/Msep.lean`). Conditional second moments and their tower recursion; `procVar`, the process variance along a row, proved equal to the conditional variance of the true claims; the exact conditional-MSEP decomposition for any measurable predictor; and `condMsep_eq`, Mack's Theorem 3 in exact form conditioned on the observed data: process variance plus squared estimation error. Mack's plug-in estimators of the two terms, including the conditional-resampling approximation, are definitions (`mackProcess`, `mackEstimation`), so the exact statement and the approximation never get confused.
@@ -35,7 +37,7 @@ Non-vacuity (`VerifiedReserving/Test/NontrivialModel.lean`, `Test/Witness.lean`)
 
 Total reserve (`VerifiedReserving/TotalReserve.lean`). Mack's Corollary (the aggregate MSEP with cross terms between accident years) and the aggregated conditional-resampling counterpart as definitions; the difference of the aggregated estimation-error terms is the row-wise product-minus-sum remainder weighted by the ultimates, so Mack's total is at most the resampling total under nonnegativity.
 
-Sixty-six theorems as of 2026-08-26. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
+Seventy-seven theorems as of 2026-08-26. What is left in [ROADMAP.md](ROADMAP.md) is no longer the core of the model: a witness satisfying the independence and generation hypotheses of `Independence.lean`, Röhr's 2016 linearized variant as a further catalogue row, and a tail factor. Each entry names the mathlib tools it needs and is a self-contained contribution.
 
 ## Theorem map
 
@@ -60,7 +62,9 @@ Where each statement of Mack (1993, 1999) and its variants lives in the library.
 | Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve_of_ultimate`, `one_le_cdf`, `bfReserve_le` | theorem |
 | A nondegenerate model satisfying every hypothesis | `NontrivialModel.exists_nontrivial_mack_model` | theorem |
 | Last-period σ² extrapolation (Mack's minimum rule) | not formalized: a convention, kept outside the theorems | convention |
-| Passage from independence across accident years to the D_k form of (M1) | hypothesis of the stochastic theorems | future work |
+| Conditioning on an independent enlargement, `E[f given m₁ ⊔ m₂] = E[f given m₁]` | `condExp_sup_of_indep` | theorem |
+| Passage from independence across accident years to the D_k form of (M1) and (M3) | `mack1_of_mack1Row`, `mack3_of_mack3Row` | theorem |
+| (M2'), the cross-term assumption, from independence across accident years | `mack2'_of_rows` | theorem |
 
 ## Why
 

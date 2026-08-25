@@ -20,7 +20,7 @@ turns the remaining sum into `f_k S_k`.
 
 Independence across accident years (M2) is not used here; it is what
 justifies passing from Mack's row-conditioned assumption to the
-`D_k`-conditioned form, and that passage is a separate lemma to build.
+`D_k`-conditioned form, and that passage is `Independence.lean`.
 -/
 
 open MeasureTheory Finset Filter
