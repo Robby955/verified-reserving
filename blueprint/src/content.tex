@@ -387,6 +387,36 @@ $\hat f, \hat\sigma^2$. This is a definition, not a theorem: it is the approxima
 Bühlmann, Merz and Wüthrich 2006 estimate the same object differently).
 \end{definition}
 
+\chapter{The variant catalogue: Mack versus conditional resampling}
+
+Write $a_k = \hat\sigma_k^2/(\hat f_k^2 S_k)$ for the relative estimation variance of
+development factor $k$ along the row. Mack's estimation-error term is
+$\hat C_{i,n-1}^2\sum_k a_k$; the conditional-resampling term of Buchwalder, Bühlmann,
+Merz and Wüthrich (2006), which Murphy (1994) also reaches, is
+$\hat C_{i,n-1}^2\big(\prod_k (1+a_k) - 1\big)$.
+
+\begin{definition}\label{def:bbmw}\lean{VerifiedReserving.relVar, VerifiedReserving.bbmwEstimation}\leanok
+\uses{def:mackEst}
+$a_k$ and the conditional-resampling estimator $\hat C_{i,n-1}^2(\prod_k (1+a_k) - 1)$.
+\end{definition}
+
+\begin{lemma}[Product minus sum]\label{lem:remainder}\lean{VerifiedReserving.one_add_sum_le_prod_one_add, VerifiedReserving.remainder_nonneg, VerifiedReserving.remainder_two, VerifiedReserving.remainder_eq_zero_of_subsingleton_support, VerifiedReserving.prod_one_add_le_exp_sum}\leanok
+For $a_k \ge 0$: $1 + \sum a_k \le \prod (1+a_k) \le \exp(\sum a_k)$; for two terms
+$(1+a)(1+b) - 1 - (a+b) = ab$; and $\prod(1+a_k) - 1 - \sum a_k = 0$ when at most one $a_k$ is
+nonzero.
+\end{lemma}
+\begin{proof}\leanok Induction over the index set for the Weierstrass inequality; $1 + x \le e^x$ termwise for the exponential bound. \end{proof}
+
+\begin{theorem}[Catalogue row: Mack is the first-order part of BBMW]\label{thm:catalogue}\lean{VerifiedReserving.mackEstimation_le_bbmwEstimation, VerifiedReserving.bbmwEstimation_sub_mackEstimation, VerifiedReserving.bbmwEstimation_eq_mackEstimation_of_one_factor, VerifiedReserving.bbmwEstimation_sub_mackEstimation_le}\leanok
+\uses{def:bbmw, lem:remainder}
+With $a_k \ge 0$ along the row: (i) Mack $\le$ BBMW; (ii) the difference is exactly
+$\hat C_{i,n-1}^2\big(\prod_k(1+a_k) - 1 - \sum_k a_k\big)$; (iii) the two coincide for the
+second-latest accident year, which has a single development factor; (iv) the difference is at most
+$\hat C_{i,n-1}^2\big(e^{\sum a_k} - 1 - \sum a_k\big)$, second order in the relative estimation
+variances.
+\end{theorem}
+\begin{proof}\leanok Lemma~\ref{lem:remainder} scaled by $\hat C_{i,n-1}^2$. \end{proof}
+
 \chapter{Reference computation}
 
 Mack's 1993 example (the Taylor and Ashe 1983 triangle) is reproduced to every printed digit

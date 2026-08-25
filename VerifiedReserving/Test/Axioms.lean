@@ -1,12 +1,4 @@
-import VerifiedReserving.ChainLadder
-import VerifiedReserving.Recursion
-import VerifiedReserving.BornhuetterFerguson
-import VerifiedReserving.Stochastic
-import VerifiedReserving.Ultimate
-import VerifiedReserving.Variance
-import VerifiedReserving.SigmaUnbiased
-import VerifiedReserving.ProcessVariance
-import VerifiedReserving.Msep
+import VerifiedReserving
 
 /-! Axiom audit: every theorem in the development must depend only on
 `propext`, `Classical.choice`, `Quot.sound`. Run with
@@ -58,3 +50,13 @@ open VerifiedReserving
 #print axioms condVar_C_eq_procVar
 #print axioms condExp_sq_sub_of_stronglyMeasurable
 #print axioms condMsep_eq
+#print axioms mackEstimation_eq_sum_relVar
+#print axioms one_add_sum_le_prod_one_add
+#print axioms remainder_nonneg
+#print axioms remainder_two
+#print axioms remainder_eq_zero_of_subsingleton_support
+#print axioms prod_one_add_le_exp_sum
+#print axioms mackEstimation_le_bbmwEstimation
+#print axioms bbmwEstimation_sub_mackEstimation
+#print axioms bbmwEstimation_eq_mackEstimation_of_one_factor
+#print axioms bbmwEstimation_sub_mackEstimation_le

@@ -24,7 +24,11 @@ Unbiasedness of σ̂² (`VerifiedReserving/SigmaUnbiased.lean`). `weighted_sq_de
 
 Process variance and Theorem 3 (`VerifiedReserving/ProcessVariance.lean`, `VerifiedReserving/Msep.lean`). Conditional second moments and their tower recursion; `procVar`, the process variance along a row, proved equal to the conditional variance of the true claims; the exact conditional-MSEP decomposition for any measurable predictor; and `condMsep_eq`, Mack's Theorem 3 in exact form conditioned on the observed data: process variance plus squared estimation error. Mack's plug-in estimators of the two terms, including the conditional-resampling approximation, are definitions (`mackProcess`, `mackEstimation`), so the exact statement and the approximation never get confused.
 
-Forty-four theorems as of 2026-08-25. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
+The variant catalogue (`VerifiedReserving/Catalogue.lean`). With `a_k = σ̂²_k/(f̂²_k S_k)`, Mack's estimation-error term `Ĉ² Σ a_k` is proved to be the first-order part of the conditional-resampling term `Ĉ² (∏(1 + a_k) − 1)` of Buchwalder, Bühlmann, Merz and Wüthrich (2006): Mack ≤ BBMW, the difference is exactly `Ĉ² (∏(1+a_k) − 1 − Σ a_k)`, the two coincide when a single development factor is involved, and the difference is second order (at most `Ĉ² (e^{Σ a} − 1 − Σ a)`). That is the algebraic content of a twenty-year discussion, settled by the kernel; which estimator has better statistical properties remains a statistical question (Gisler 2019, Siegenthaler 2023).
+
+A non-vacuity witness (`VerifiedReserving/Test/Witness.lean`, run in CI) exhibits a concrete random triangle satisfying every hypothesis of the stochastic theorems and instantiates Theorems 1 and 2 on it. Writing it caught a hypothesis that no real triangle could satisfy (a nonvanishing column sum demanded for columns with no contributors); the theorems now ask for it only where the row uses it.
+
+Fifty-four theorems as of 2026-08-25. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
 
 ## Why
 

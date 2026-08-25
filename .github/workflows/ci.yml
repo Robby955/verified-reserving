@@ -46,4 +46,10 @@ jobs:
           fi
           n=$(grep -c "depends on axioms" axioms.txt)
           echo "audited theorems: $n"
-          test "$n" -ge 12
+          test "$n" -ge 54
+
+      # A concrete triangle satisfying every hypothesis of the stochastic
+      # theorems, with the headline theorems instantiated on it: the statements
+      # are not vacuous.
+      - name: Non-vacuity witness
+        run: lake env lean VerifiedReserving/Test/Witness.lean
