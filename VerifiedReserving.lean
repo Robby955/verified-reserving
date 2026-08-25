@@ -12,4 +12,5 @@ import VerifiedReserving.Msep
 import VerifiedReserving.Catalogue
 import VerifiedReserving.Counterexample
 import VerifiedReserving.TotalReserve
+import VerifiedReserving.Rohr
 import VerifiedReserving.Test.NontrivialModel

@@ -1,0 +1,139 @@
+% Blueprint chapter for VerifiedReserving/Rohr.lean.
+% Roehr, Chain ladder and error propagation, ASTIN Bulletin 46 (2016) 293-330.
+% Same zero-based conventions as content.tex; d = n-1-i is the latest observed
+% development year of accident year i.
+
+\chapter{R\"ohr 2016: the error-propagation form}
+
+R\"ohr, \emph{Chain ladder and error propagation}, ASTIN Bulletin 46 (2016) 293--330,
+derives the chain-ladder prediction error from the error-propagation formula. The
+chain-ladder ultimate $\hat C_{i,n-1} = C_{i,d}\prod_{k=d}^{n-2}\hat f_k$, $d = n-1-i$,
+is a product, so a first-order expansion in the development factors turns the relative
+squared error of the product into the \emph{sum} of the relative squared errors of the
+factors. The paper's classical-case display is
+\[
+  \frac{\widehat{\mathrm{msep}}(\hat R_i)}{\hat C_{i,n-1}^2} = \sum_k \hat u_k^2 ,
+\]
+where $\hat u_k^2$ is the relative uncertainty attached to development step $k$, and the
+derivation splits it into a process part and a parameter part,
+\[
+  \hat u_k^2
+   = \frac{\hat\sigma_k^2}{\hat f_k^2\,\hat C_{i,k}}
+   + \frac{\hat\sigma_k^2}{\hat f_k^2\,S_k},
+\]
+the first from the conditional variance $\sigma_k^2 C_{i,k}$ of the step itself, the second
+from the estimation variance $\sigma_k^2/S_k$ of $\hat f_k$.
+
+\emph{Source note.} The full text of R\"ohr (2016) is paywalled and was not available for
+this formalization. What is formalized is the classical-case (ultimate run-off, single
+accident year) display quoted above, taken from the paper's own abstract --- ``in the
+classical case treated by Mack (1993) the mean squared prediction error divided by the
+squared estimated ultimate loss can be written as $\sum_j \hat u_j^2$, where $\hat u_j$
+measures the (relative) uncertainty around the $j$-th development factor and the proportion
+of the estimated ultimate loss that it affects'', with ``a split into process error and
+parameter error'' --- together with the two parts in the form above. The paper's
+claims-development-result formulas between two arbitrary future horizons are not formalized
+here, and neither is its own aggregation over accident years.
+
+\section{Definitions}
+
+\begin{definition}[R\"ohr's relative uncertainties]\label{def:rohrRel}\lean{VerifiedReserving.rohrRelProcess, VerifiedReserving.rohrRelParam, VerifiedReserving.rohrRelVar}\leanok
+\uses{def:sigma2, def:fhat, def:Chat, def:S}
+$\hat u_{k,\mathrm{proc}}^2 = \hat\sigma_k^2/(\hat f_k^2 \hat C_{i,k})$,
+$\hat u_{k,\mathrm{par}}^2 = \hat\sigma_k^2/(\hat f_k^2 S_k)$, and
+$\hat u_k^2 = \hat u_{k,\mathrm{proc}}^2 + \hat u_{k,\mathrm{par}}^2$.
+\end{definition}
+
+\begin{definition}[R\"ohr's linearized prediction error]\label{def:rohrMsep}\lean{VerifiedReserving.rohrProcess, VerifiedReserving.rohrParameter, VerifiedReserving.rohrMsep}\leanok
+\uses{def:rohrRel, def:reserve}
+The process term $\hat C_{i,n-1}^2 \sum_{k=d}^{n-2}\hat u_{k,\mathrm{proc}}^2$, the parameter
+term $\hat C_{i,n-1}^2 \sum_{k=d}^{n-2}\hat u_{k,\mathrm{par}}^2$, and their sum
+$\mathrm{rohrMsep}_i = \hat C_{i,n-1}^2 \sum_{k=d}^{n-2}\hat u_k^2$.
+\end{definition}
+
+\section{The split, and the two Mack plug-ins}
+
+\begin{lemma}[Process plus parameter]\label{lem:rohrSplit}\lean{VerifiedReserving.rohrMsep_eq_rohrProcess_add_rohrParameter}\leanok
+\uses{def:rohrMsep}
+$\mathrm{rohrMsep}_i$ is the process term plus the parameter term.
+\end{lemma}
+\begin{proof}\leanok Termwise, by construction. \end{proof}
+
+\begin{lemma}[Parameter term is Mack's estimation term]\label{lem:rohrParam}\lean{VerifiedReserving.rohrRelParam_eq_relVar, VerifiedReserving.rohrParameter_eq_mackEstimation}\leanok
+\uses{def:rohrMsep, def:bbmw}
+$\hat u_{k,\mathrm{par}}^2 = a_k$, so R\"ohr's parameter term is Mack's estimation-error term
+$\hat C_{i,n-1}^2 \sum_k a_k$ exactly.
+\end{lemma}
+\begin{proof}\leanok $\hat\sigma_k^2/(\hat f_k^2 S_k) = (\hat\sigma_k^2/\hat f_k^2)/S_k$. \end{proof}
+
+\begin{lemma}[Splitting the projection]\label{lem:ChatSplit}\lean{VerifiedReserving.Chat_eq_Chat_mul_prod}\leanok
+\uses{def:Chat}
+For $n-1-i \le k \le m$, $\hat C_{i,m} = \hat C_{i,k}\prod_{l=k}^{m-1}\hat f_l$.
+\end{lemma}
+\begin{proof}\leanok Split the product of the definition at $k$. \end{proof}
+
+\begin{theorem}[Process term is Mack's process variance]\label{thm:rohrProcess}\lean{VerifiedReserving.rohrProcess_eq_mackProcess}\leanok
+\uses{def:rohrMsep, def:mackEst, lem:ChatSplit}
+Let $i \le n-1$ and suppose $\hat f_k \neq 0$ and $\hat C_{i,k} \neq 0$ for every
+$k = d,\dots,n-2$. Then R\"ohr's process term equals $\mathrm{procVar}$, Mack's process
+variance recursion $V_{m+1} = \hat f_{d+m}^2 V_m + \hat\sigma_{d+m}^2 \hat C_{i,d+m}$,
+$V_0 = 0$, run for $i$ steps with $\hat f, \hat\sigma^2$ plugged in.
+\end{theorem}
+\begin{proof}\leanok
+Write $\hat C_{i,n-1} = \hat C_{i,k}\,\hat f_k \prod_{l=k+1}^{n-2}\hat f_l$ by
+Lemma~\ref{lem:ChatSplit}. Then
+$\hat C_{i,n-1}^2 \hat\sigma_k^2/(\hat f_k^2 \hat C_{i,k})
+ = \big(\prod_{l=k+1}^{n-2}\hat f_l\big)^2 \hat\sigma_k^2 \hat C_{i,k}$,
+which is the $k$-th summand of the closed form of $\mathrm{procVar}$; reindex
+$k = d+j$, $j = 0,\dots,i-1$.
+\end{proof}
+
+\section{Catalogue row 3}
+
+\begin{theorem}[R\"ohr $=$ Mack 1993]\label{thm:rohrMsep}\lean{VerifiedReserving.rohrMsep_eq_msep, VerifiedReserving.msep_div_ultimate_sq}\leanok
+\uses{def:rohrMsep, def:msep}
+$\mathrm{rohrMsep}_i = \widehat{\mathrm{msep}}(\hat R_i)$, with no side condition: the
+linearized error-propagation form and Mack's 1993 closed form are equal term by term. This
+catalogue row therefore has zero correction term, in contrast with
+Theorem~\ref{thm:catalogue}. Dividing by $\hat C_{i,n-1}^2 \neq 0$ recovers R\"ohr's display
+$\widehat{\mathrm{msep}}(\hat R_i)/\hat C_{i,n-1}^2 = \sum_k \hat u_k^2$.
+\end{theorem}
+\begin{proof}\leanok
+$\hat\sigma_k^2/(\hat f_k^2 \hat C_{i,k}) + \hat\sigma_k^2/(\hat f_k^2 S_k)
+ = (\hat\sigma_k^2/\hat f_k^2)(1/\hat C_{i,k} + 1/S_k)$ termwise.
+\end{proof}
+
+\begin{corollary}[Mack's closed form is process plus estimation]\label{cor:msepSplit}\lean{VerifiedReserving.msep_eq_mackProcess_add_mackEstimation, VerifiedReserving.rohrMsep_eq_mackProcess_add_mackEstimation}\leanok
+\uses{thm:rohrMsep, thm:rohrProcess, lem:rohrParam, lem:rohrSplit}
+Under the hypotheses of Theorem~\ref{thm:rohrProcess},
+$\widehat{\mathrm{msep}}(\hat R_i) = \mathrm{mackProcess}_i + \mathrm{mackEstimation}_i$:
+reading Mack's formula through R\"ohr's split identifies its two halves with the two plug-in
+estimators of the stochastic layer.
+\end{corollary}
+\begin{proof}\leanok Chain Theorem~\ref{thm:rohrMsep}, Lemma~\ref{lem:rohrSplit},
+Theorem~\ref{thm:rohrProcess} and Lemma~\ref{lem:rohrParam}. \end{proof}
+
+\begin{theorem}[What the linearization costs]\label{thm:rohrVsBbmw}\lean{VerifiedReserving.bbmwEstimation_sub_rohrParameter, VerifiedReserving.rohrParameter_le_bbmwEstimation}\leanok
+\uses{lem:rohrParam, def:bbmw, thm:catalogue}
+R\"ohr's parameter term is the first-order part of the conditional-resampling term: their
+difference is exactly $\hat C_{i,n-1}^2\big(\prod_k(1+a_k) - 1 - \sum_k a_k\big)$, and with
+$a_k \ge 0$ along the row R\"ohr's term is the smaller one. Linearizing in the estimated
+factors is precisely the step that replaces the product by the sum.
+\end{theorem}
+\begin{proof}\leanok Lemma~\ref{lem:rohrParam} and Theorem~\ref{thm:catalogue}. \end{proof}
+
+\section{The total reserve}
+
+\begin{definition}[Aggregate]\label{def:rohrTotal}\lean{VerifiedReserving.rohrMsepTotal}\leanok
+\uses{def:rohrMsep, def:total}
+R\"ohr's single-year terms carried into Mack's Corollary, with Mack's cross terms:
+$\sum_i \mathrm{rohrMsep}_i + \sum_i \mathrm{mackCross}_i$. The cross terms are Mack's; the
+paper's own aggregation over accident years could not be checked against the source, so this
+is recorded as a definition rather than attributed.
+\end{definition}
+
+\begin{theorem}\label{thm:rohrTotal}\lean{VerifiedReserving.rohrMsepTotal_eq_msepTotal}\leanok
+\uses{def:rohrTotal, thm:rohrMsep, def:total}
+That aggregate is Mack's total-reserve estimator $\widehat{\mathrm{msep}}(\hat R)$.
+\end{theorem}
+\begin{proof}\leanok Theorem~\ref{thm:rohrMsep} row by row. \end{proof}
