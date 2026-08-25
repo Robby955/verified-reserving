@@ -265,3 +265,9 @@ set_option format.width 400
 #print axioms mackLognormal_variance_eq
 #print axioms condExp_bfReservePriorRv
 #print axioms condVar_bfReservePriorRv
+#print axioms buhlmannStraub_weighted_sq_dev
+#print axioms buhlmannStraubEstimate_normal_eq
+#print axioms buhlmannStraubLoss_eq_at_estimate_add
+#print axioms buhlmannStraubEstimate_minimizes
+#print axioms buhlmannStraubEstimate_eq_credibility
+#print axioms buhlmannStraubCredibility_mem_Icc
