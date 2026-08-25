@@ -1,0 +1,41 @@
+name: API docs
+
+# doc-gen4 documents every dependency, including all of mathlib, which takes
+# hours on a hosted runner. Run weekly and on demand, not on every push.
+on:
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+
+      - name: Get Mathlib cache and resolve dev dependencies
+        run: lake -Kenv=dev exe cache get
+
+      - name: Build API docs
+        run: lake -Kenv=dev build VerifiedReserving:docs
+
+      - name: Publish docs/ into gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .lake/build/doc
+          destination_dir: docs
+          keep_files: true

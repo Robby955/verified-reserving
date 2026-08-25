@@ -1,4 +1,4 @@
-name: Docs and blueprint
+name: Blueprint
 
 on:
   push:
@@ -6,12 +6,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
+  group: gh-pages
   cancel-in-progress: false
 
 jobs:
@@ -34,9 +32,6 @@ jobs:
       - name: Check blueprint declarations exist
         run: lake -Kenv=dev exe checkdecls blueprint/lean_decls
 
-      - name: Build API docs
-        run: lake -Kenv=dev build VerifiedReserving:docs
-
       - name: Install blueprint tooling
         run: |
           sudo apt-get update
@@ -51,27 +46,16 @@ jobs:
 
       - name: Assemble site
         run: |
-          mkdir -p home_page/docs home_page/blueprint
-          cp -r .lake/build/doc/. home_page/docs/
+          mkdir -p home_page/blueprint
           cp -r blueprint/web/. home_page/blueprint/
-          cp blueprint/print/print.pdf home_page/blueprint.pdf || true
-          cp blueprint/index.html home_page/index.html || cp home_page/blueprint/index.html home_page/index.html
+          cp blueprint/print/print.pdf home_page/blueprint.pdf
+          cp blueprint/index.html home_page/index.html
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      # Publish into gh-pages, keeping the docs/ directory that the weekly
+      # API-docs workflow maintains.
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: home_page
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deploy
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: home_page
+          keep_files: true
