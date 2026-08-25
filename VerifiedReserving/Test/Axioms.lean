@@ -263,3 +263,5 @@ set_option format.width 400
 #print axioms mackCalendarNullMoments_five
 #print axioms mackLognormal_mean_eq
 #print axioms mackLognormal_variance_eq
+#print axioms condExp_bfReservePriorRv
+#print axioms condVar_bfReservePriorRv
