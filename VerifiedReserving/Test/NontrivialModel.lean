@@ -1,5 +1,6 @@
 import VerifiedReserving.Ultimate
 import VerifiedReserving.SigmaUnbiased
+import VerifiedReserving.TotalMsep
 
 /-!
 # A nondegenerate Mack model
@@ -267,6 +268,48 @@ theorem sigma2_unbiased : μ[X.sigma2Rv 0 | X.D 0] =ᵐ[μ] fun _ => σ2 0 :=
       rw [Cw_zero]; simp [c])
     (Srv_pos 0 (by norm_num)) (fun _ _ => integrable_all _) (fun _ => integrable_all _)
     (integrable_all _) (integrable_all _)
+
+/-! ## The cross-term condition of the total reserve, on the model -/
+
+/-- The true ultimates of the model, written out. -/
+theorem Cw_two (i : ℕ) : Cw i 2 = fun ω => c * fdev ^ 2 * (1 + s * xi i ω) := by
+  ext ω; simp [Cw]
+
+/-- The unconditional mean of the true ultimate is `c f²`. -/
+theorem condExp_ultimate_bot (i : ℕ) (hi : i < 3) :
+    μ[X.C i 2 | Dfil 0] = fun _ => c * fdev ^ 2 := by
+  show μ[Cw i 2 | Dfil 0] = _
+  rw [condExp_bot_eq_sum]
+  funext _
+  interval_cases i <;> simp [Cw, xi, c, fdev, s, Fin.sum_univ_eight] <;> norm_num
+
+/-- **The cross-term condition holds on the nondegenerate model.** The shocks of
+different accident years are uncorrelated, so the centred true ultimates are
+conditionally uncorrelated given the trivial σ-algebra. -/
+theorem crossFree_ultimates : CondCrossFree μ (Dfil 0) (range 3) fun i => X.C i 2 := by
+  intro i hi j hj hij
+  have hi3 : i < 3 := mem_range.mp hi
+  have hj3 : j < 3 := mem_range.mp hj
+  rw [condExp_ultimate_bot i hi3, condExp_ultimate_bot j hj3, condExp_bot_eq_sum]
+  refine EventuallyEq.of_eq ?_
+  funext _
+  simp only [Pi.zero_apply]
+  interval_cases i <;> interval_cases j <;>
+    simp_all [X, Cw, xi, c, fdev, s, Fin.sum_univ_eight] <;> norm_num
+
+/-- The ultimate is genuinely random, so the cross-term condition is not
+satisfied for want of randomness. -/
+theorem ultimate_nontrivial : X.C 0 2 (0 : Ω) ≠ X.C 0 2 (1 : Ω) := by
+  show Cw 0 2 0 ≠ Cw 0 2 1
+  rw [Cw_two]
+  simp [xi, c, fdev, s]
+  norm_num
+
+/-- **The hypotheses of the total-reserve decomposition are not vacuous.** -/
+theorem exists_crossFree_nondegenerate :
+    CondCrossFree μ (Dfil 0) (range 3) (fun i => X.C i 2)
+      ∧ ∃ ω₁ ω₂, X.C 0 2 ω₁ ≠ X.C 0 2 ω₂ :=
+  ⟨crossFree_ultimates, 0, 1, ultimate_nontrivial⟩
 
 end
 

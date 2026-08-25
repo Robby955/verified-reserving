@@ -89,6 +89,17 @@ set_option format.width 400
 #print axioms bbmwEstimation_sub_rohrParameter
 #print axioms rohrParameter_le_bbmwEstimation
 #print axioms rohrMsepTotal_eq_msepTotal
+#print axioms integrable_sq_of_memLp
+#print axioms condExp_sq_sub_condExp
+#print axioms condExp_sq_finsetSum_of_cross
+#print axioms condExp_sq_finsetSum_sub_of_stronglyMeasurable
+#print axioms memLp_eps
+#print axioms condExp_ultimate_of_Mack1
+#print axioms condVar_ultimate_eq_procVar
+#print axioms condMsepTotal_eq
+#print axioms sum_procVar_le_condMsepTotal
+#print axioms msep_eq_mackProcess_add_mackEstimation_of_lt
+#print axioms msepTotal_eq_sum_mackProcess_add_mackTotalEstimation
 #print axioms NontrivialModel.exists_nontrivial_mack_model
 #print axioms NontrivialModel.fhat0_unbiased
 #print axioms NontrivialModel.ultimate_unbiased
@@ -106,3 +117,7 @@ set_option format.width 400
 #print axioms mack3_of_mack3Row
 #print axioms condExp_eps_rowSigma
 #print axioms mack2'_of_rows
+#print axioms NontrivialModel.condExp_ultimate_bot
+#print axioms NontrivialModel.crossFree_ultimates
+#print axioms NontrivialModel.ultimate_nontrivial
+#print axioms NontrivialModel.exists_crossFree_nondegenerate

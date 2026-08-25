@@ -1,0 +1,130 @@
+% The exact conditional MSEP of the total reserve.
+% Intended to be \input into content.tex after the section on the total reserve.
+
+\section{The total reserve: the exact conditional MSEP}
+
+Mack's Corollary estimates the mean squared error of prediction of the total reserve
+$\hat R = \sum_i \hat R_i$. The estimator is Definition~\ref{def:total}; the object it
+estimates is the conditional MSEP of the sum, and this section proves what that object is.
+
+Write $\hat C_i = \hat C_{i,n-1}$ for the chain-ladder ultimate of accident year $i$,
+$C_i = C_{i,n-1}$ for the true ultimate, $\mathcal{D}$ for the $\sigma$-algebra of the observed
+data (the one Theorem~\ref{thm:msep} conditions on) and $M_i = E[C_i \mid \mathcal{D}]$.
+
+\begin{definition}[Cross-term condition]\label{def:crossFree}\lean{VerifiedReserving.CondCrossFree}\leanok
+For a finite set $s$ of accident years and targets $Y_i$,
+\[
+  E\big[(Y_i - E[Y_i \mid \mathcal{D}])(Y_j - E[Y_j \mid \mathcal{D}]) \;\big|\; \mathcal{D}\big] = 0
+  \qquad \text{for } i \ne j \text{ in } s .
+\]
+This is what independence across accident years supplies, in the same way that the
+$\mathcal{D}_k$-conditioned form of (M1) (Definition~\ref{def:Mack1}) is what it supplies for a
+single row. Like (M1), (M3) and the ``no extra information'' hypotheses of
+Theorem~\ref{thm:msep}, it is carried as a hypothesis; the passage from independence of the rows
+to it is not formalized.
+\end{definition}
+
+\begin{lemma}[Conditional variance as a centred second moment]\label{lem:centred}\lean{VerifiedReserving.integrable_sq_of_memLp, VerifiedReserving.condExp_sq_sub_condExp}\leanok
+\uses{lem:msep_decomp}
+For $Y \in L^2$, $E[(E[Y \mid \mathcal{D}] - Y)^2 \mid \mathcal{D}] = E[Y^2 \mid \mathcal{D}] - E[Y \mid \mathcal{D}]^2$.
+\end{lemma}
+\begin{proof}\leanok
+Lemma~\ref{lem:msep_decomp} with the predictor taken to be $E[Y \mid \mathcal{D}]$ itself, so that
+the estimation-error term is zero. Square integrability supplies every product integrability side
+condition by H\"older.
+\end{proof}
+
+\begin{lemma}[Conditional variances add]\label{lem:varAdd}\lean{VerifiedReserving.condExp_sq_finsetSum_of_cross}\leanok
+\uses{def:crossFree}
+If $E[Z_i Z_j \mid \mathcal{D}] = 0$ for $i \ne j$ in $s$ and each $Z_i \in L^2$, then
+$E[(\sum_i Z_i)^2 \mid \mathcal{D}] = \sum_i E[Z_i^2 \mid \mathcal{D}]$.
+\end{lemma}
+\begin{proof}\leanok
+Expand the square into the double sum $\sum_{i,j} Z_i Z_j$, take conditional expectations term by
+term, and drop the off-diagonal terms.
+\end{proof}
+
+\begin{theorem}[Conditional MSEP of a sum]\label{thm:msepSum}\lean{VerifiedReserving.condExp_sq_finsetSum_sub_of_stronglyMeasurable}\leanok
+\uses{def:crossFree, lem:centred, lem:varAdd}
+For $\mathcal{D}$-measurable predictors $P_i$ of square-integrable targets $Y_i$ whose centred
+versions satisfy Definition~\ref{def:crossFree},
+\[
+  E\Big[\Big(\sum_i P_i - \sum_i Y_i\Big)^2 \;\Big|\; \mathcal{D}\Big]
+  = \sum_i \big(E[Y_i^2 \mid \mathcal{D}] - E[Y_i \mid \mathcal{D}]^2\big)
+  + \Big(\sum_i \big(P_i - E[Y_i \mid \mathcal{D}]\big)\Big)^2 .
+\]
+The conditional variances add; the estimation errors add \emph{before} they are squared.
+\end{theorem}
+\begin{proof}\leanok
+Lemma~\ref{lem:msep_decomp} applied to the totals, then Lemma~\ref{lem:centred} to rewrite the
+conditional variance of the total as a centred second moment, then Lemma~\ref{lem:varAdd} to split
+it, then Lemma~\ref{lem:centred} again on each accident year.
+\end{proof}
+
+\begin{lemma}[Theorem~1 and the process variance at the ultimate]\label{lem:ultimateD}\lean{VerifiedReserving.memLp_eps, VerifiedReserving.condExp_ultimate_of_Mack1, VerifiedReserving.condVar_ultimate_eq_procVar}\leanok
+\uses{lem:C_succ, thm:procVar}
+Under (M1), (M3) and the hypotheses of Theorem~\ref{thm:msep} that $\mathcal{D}$ carries no
+information about row $i$'s future beyond $\mathcal{D}_{n-1-i}$,
+\[
+  M_i = C_{i,n-1-i} \prod_{l=n-1-i}^{n-2} f_l,
+  \qquad
+  E[C_i^2 \mid \mathcal{D}] - M_i^2 = \mathrm{procVar}\big(C_{i,n-1-i}, f, \sigma^2, n-1-i\big)_i .
+\]
+\end{lemma}
+\begin{proof}\leanok
+Specialize Lemma~\ref{lem:C_succ} and Theorem~\ref{thm:procVar} to $m = i$, where
+$(n-1-i) + i = n-1$, and transport them from $\mathcal{D}_{n-1-i}$ to $\mathcal{D}$.
+\end{proof}
+
+\begin{theorem}[Mack's Corollary, exact form]\label{thm:msepTotalExact}\lean{VerifiedReserving.condMsepTotal_eq}\leanok
+\uses{thm:msepSum, lem:ultimateD, def:total}
+Under (M1), (M3), square integrability of the claims and of the chain-ladder predictions, the
+``no extra information'' hypotheses of Theorem~\ref{thm:msep} for each accident year, and
+Definition~\ref{def:crossFree} for the true ultimates,
+\[
+  E\Big[\Big(\sum_i \hat C_i - \sum_i C_i\Big)^2 \;\Big|\; \mathcal{D}\Big]
+  = \sum_i \mathrm{procVar}_i + \Big(\sum_i \big(\hat C_i - M_i\big)\Big)^2 .
+\]
+The process variances add; the estimation errors add before being squared, and expanding that
+square is the exact origin of the cross terms of Definition~\ref{def:total}.
+\end{theorem}
+\begin{proof}\leanok
+Theorem~\ref{thm:msepSum} with $P_i = \hat C_i$ and $Y_i = C_i$, then Lemma~\ref{lem:ultimateD}
+term by term.
+\end{proof}
+
+\begin{corollary}[The total MSEP dominates the process variance]\label{cor:msepTotalLower}\lean{VerifiedReserving.sum_procVar_le_condMsepTotal}\leanok
+\uses{thm:msepTotalExact}
+$\sum_i \mathrm{procVar}_i \le E[(\sum_i \hat C_i - \sum_i C_i)^2 \mid \mathcal{D}]$ almost
+everywhere, whatever the chain-ladder predictions happen to be.
+\end{corollary}
+\begin{proof}\leanok The estimation-error term of Theorem~\ref{thm:msepTotalExact} is a square. \end{proof}
+
+\begin{theorem}[The plug-in has the same two-part shape]\label{thm:plugin}\lean{VerifiedReserving.msep_eq_mackProcess_add_mackEstimation, VerifiedReserving.msepTotal_eq_sum_mackProcess_add_mackTotalEstimation}\leanok
+\uses{def:msep, def:mackEst, def:total, thm:msepTotalExact}
+On a row whose development factors $\hat f_k$ and projections $\hat C_{i,k}$ do not vanish, the
+$1/\hat C_{i,k}$ half of Mack's formula is exactly $\mathrm{procVar}$ with $\hat f, \hat\sigma^2$
+substituted and the $1/S_k$ half is exactly the plug-in estimation error:
+$\widehat{\mathrm{msep}}_i = \mathrm{mackProcess}_i + \mathrm{mackEstimation}_i$, hence
+$\widehat{\mathrm{msep}}(\hat R) = \sum_i \mathrm{mackProcess}_i + \mathrm{mackTotalEstimation}$.
+This is the plug-in counterpart of Theorem~\ref{thm:msepTotalExact}: process variances added, and
+everything else, single-year terms and cross terms alike, estimating the squared summed estimation
+error.
+\end{theorem}
+\begin{proof}\leanok
+Reindex the row sum over $\mathrm{Ico}(n-1-i, n-1)$ by $j < i$, split the product
+$\prod_{l=n-1-i}^{n-2} \hat f_l$ at the factor $\hat f_{n-1-i+j}$, and cancel; then sum over
+accident years.
+\end{proof}
+
+\begin{theorem}[The cross-term condition is not vacuous]\label{thm:crossFreeWitness}\lean{VerifiedReserving.NontrivialModel.condExp_ultimate_bot, VerifiedReserving.NontrivialModel.crossFree_ultimates, VerifiedReserving.NontrivialModel.ultimate_nontrivial, VerifiedReserving.NontrivialModel.exists_crossFree_nondegenerate}\leanok
+\uses{def:crossFree, thm:nontrivial}
+On the nondegenerate model of Theorem~\ref{thm:nontrivial} the three true ultimates are genuinely
+random and their centred versions are conditionally uncorrelated given the trivial
+$\sigma$-algebra: Definition~\ref{def:crossFree} holds for $s = \{0,1,2\}$ without holding for want
+of randomness.
+\end{theorem}
+\begin{proof}\leanok
+The unconditional mean of each ultimate is $c f^2$; the centred ultimates are proportional to the
+shocks $\xi_i$, which are orthogonal.
+\end{proof}
