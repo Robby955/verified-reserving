@@ -95,7 +95,7 @@ leanblueprint web
 
 ## Reference computation
 
-Mack's 1993 example (the Taylor and Ashe 1983 triangle) is reproduced to every printed digit by a dependency-free Python script kept with the paper's evidence tree; it will move into `scripts/` here. The Lean definitions are over `ℝ` and noncomputable; the script is the reference computation, not the Lean code.
+Dependency-free Python in [`scripts/`](scripts/README.md) implements the formalized definitions with the same index conventions: `reproduce_mack1993.py` reproduces Mack's 1993 example to every printed digit, `case_study/` matches R's `ChainLadder` on the RAA triangle to printed precision, and `audit/` runs the theorem-aware audit of the CAS Schedule P database (779 company triangles: which data hypotheses of the theorems hold on each, where approximations and conventions enter, and how far the published variants of the prediction-error formula differ on real data). The Lean definitions are over `ℝ` and noncomputable; the scripts are the reference computation, not the Lean code, and their agreement with the definitions is checked numerically.
 
 ## Citation
 
