@@ -68,7 +68,7 @@ Mack's formula is quoted from secondary sources, circulates in several typograph
 
 ## Related work
 
-To our knowledge this is the first formalization of Mack's model, or of any claims-reserving method, in a proof assistant. Formalized actuarial mathematics does exist and this project builds beside it: Yosuke Ito's `Actuarial_Mathematics` in the Isabelle Archive of Formal Proofs and his `coq-actuary` package (interest theory, survival models, life tables, life reserves); Bjørn Kjos-Hanssen's `actlib` in Lean 4 (Cramér-Lundberg ruin, compound Poisson, interest theory, extreme value distributions); Raphael Coelho's `formal-mathfin` in Lean 4 (mathematical finance with an actuarial section). None covers chain ladder, development factors, or reserve prediction error. Corrections welcome: open an issue with a pointer.
+To our knowledge this is the first formalization of Mack's model, or of any claims-reserving method, in a proof assistant. Formalized actuarial mathematics does exist and this project builds beside it: Yosuke Ito's `Actuarial_Mathematics` in the Isabelle Archive of Formal Proofs and his `coq-actuary` package (interest theory, survival models, life tables, life reserves); Bjørn Kjos-Hanssen's `actlib` in Lean 4 (Cramér-Lundberg ruin, compound Poisson, interest theory, extreme value distributions); Raphael Coelho's `formal-mathfin` in Lean 4 (mathematical finance with an actuarial section). None covers chain ladder, development factors, or reserve prediction error, and the public archive of the Lean community Zulip has no thread on chain ladder or claims reserving (searched 2026-08-26). Corrections welcome: open an issue with a pointer.
 
 ## Build
 
