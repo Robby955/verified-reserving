@@ -17,6 +17,8 @@ Deterministic layer (`VerifiedReserving/ChainLadder.lean`). A run-off triangle i
 
 Published numerical example (`VerifiedReserving/Mack1993Table1.lean`). The Taylor-Ashe cumulative triangle from Mack (1993), Table 1 is an exact Lean definition. `taylorAshe_fhat_0` through `_8` and `taylorAshe_sigma2_0` through `_7` prove the rational estimator values corresponding to Mack's printed development factors and the eight variances supplied by the estimator. `taylorAshe_total_reserve_rounds` proves that the summed reserve lies in the nearest-thousand interval printed as 18,681 in Table 2. The ninth printed variance is excluded because Mack specifies it by extrapolation.
 
+Lognormal approximation (`VerifiedReserving/LognormalCI.lean`). Mack's moment-matched parameters `σ² = log(1 + v/m²)` and `μ = log m - σ²/2` are definitions. For positive mean `m` and nonnegative variance `v`, the standard lognormal mean and variance expressions are proved to equal `m` and `v`. This checks the parameter conversion but makes no claim that a reserve distribution is lognormal.
+
 Mack 1999 equals Mack 1993 (`VerifiedReserving/Recursion.lean`). Mack's 1999 paper restates the 1993 MSEP as a recursion along each accident year and says the recursion leads to the closed form. `se2rec_eq_msep` proves the two are the same estimator (for the unit-weight, `α = 1` case) whenever the development factors along the row are nonzero.
 
 Bornhuetter-Ferguson (`VerifiedReserving/BornhuetterFerguson.lean`). The BF reserve and ultimate on the chain-ladder pattern as definitions; proved: linearity in the a priori ultimate, BF with the chain-ladder ultimate as prior returns chain ladder exactly, and the BF reserve is a fraction of the prior when every development factor is at least one.

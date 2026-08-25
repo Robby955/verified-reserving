@@ -249,3 +249,6 @@ set_option format.width 400
 #print axioms taylorAshe_sigma2_6
 #print axioms taylorAshe_sigma2_7
 #print axioms taylorAshe_total_reserve_rounds
+
+#print axioms mackLognormal_mean_eq
+#print axioms mackLognormal_variance_eq

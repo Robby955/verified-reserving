@@ -1,0 +1,35 @@
+\chapter{Mack's lognormal approximation}
+
+The parameter conversion appears in Thomas Mack, ``Measuring the Variability
+of Chain Ladder Reserve Estimates,'' Casualty Actuarial Society Forum, Spring
+1994, Chapter 4, equation (10), pages 118--119. The 1993 ASTIN paper does not
+contain this construction.
+
+\begin{definition}[Moment-matched parameters]\label{def:mack-lognormal}\lean{VerifiedReserving.mackLognormalSigma2, VerifiedReserving.mackLognormalMu}\leanok
+For an arithmetic mean $m$ and variance $v$, define
+\[
+  \sigma^2=\log(1+v/m^2),
+  \qquad
+  \mu=\log m-\sigma^2/2.
+\]
+These are the log-variance and log-mean parameters in Mack's equation (10).
+\end{definition}
+
+\begin{theorem}[Matched lognormal moments]\label{thm:mack-lognormal}\lean{VerifiedReserving.mackLognormal_mean_eq, VerifiedReserving.mackLognormal_variance_eq}\leanok
+\uses{def:mack-lognormal}
+If $m>0$ and $v\ge0$, then
+\[
+  \exp(\mu+\sigma^2/2)=m
+\]
+and
+\[
+  \exp(2\mu+\sigma^2)\bigl(\exp(\sigma^2)-1\bigr)=v.
+\]
+Thus the standard lognormal moment expressions reproduce the supplied mean
+and variance. This identity does not state that the underlying reserve follows
+a lognormal law.
+\end{theorem}
+\begin{proof}\leanok Substitute the parameter definitions, use
+$\exp(\log x)=x$ for positive $x$, and simplify the resulting rational
+identity.
+\end{proof}
