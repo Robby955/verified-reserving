@@ -52,6 +52,13 @@ and the recursion displayed immediately below it is
   conditionally unbiased, `E[f̂^w_k | D_k] = f_k`, when the weights and the
   triangle entries of development year `k` are `D_k`-measurable. This
   generalizes `condExp_fhatRv`.
+* `condExp_sq_fhatWrv_sub`, `condVar_fhatWrv`: under the weighted (M3)
+  assumption and conditional uncorrelatedness across accident years, the
+  weighted squared estimation error is `σ_k² / S_k^{w,α}`, and conditional
+  unbiasedness identifies it with the conditional variance.
+* `condExp_sigma2Wrv`: under the same assumptions, `sigma2W` is conditionally
+  unbiased when every contributing weighted volume is nonzero. Zero-weight
+  cells require a separate active-contributor set and degrees of freedom.
 * `tailUltimate`, `tailSe2Step`: the tail factor of Section 3 as a convention.
   Mack leaves the tail parameters to the user, so these are definitions with no
   theorem attached.
@@ -335,7 +342,7 @@ end
 
 /-! ## Stochastic layer: conditional unbiasedness of the weighted estimator -/
 
-open MeasureTheory Filter
+open MeasureTheory ProbabilityTheory Filter
 
 noncomputable section
 
@@ -448,6 +455,462 @@ theorem condExp_fhatWrv (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → �
   refine h1.trans ?_
   filter_upwards [h2, hS] with ω hω hSω
   simp only [Pi.mul_apply, hω]
+  field_simp
+
+/-! ## Conditional variance and weighted variance-estimator unbiasedness -/
+
+/-- The volume `w_{ik} C_{ik}^α` attached to one observation in Mack's
+weighted family. -/
+def RandomTriangle.weightVolume
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α i k : ℕ) : Ω → ℝ :=
+  fun ω => w i k ω * X.C i k ω ^ α
+
+/-- The individual-factor residual `F_{ik} - f_k`. -/
+def RandomTriangle.factorResidual
+    (X : RandomTriangle Ω n) (f : ℕ → ℝ) (i k : ℕ) : Ω → ℝ :=
+  fun ω => F (X.at ω) i k - f k
+
+/-- Mack's weighted (M3), in conditional second-moment form:
+`E[(F_{ik} - f_k)² | D_k] = σ_k² / (w_{ik} C_{ik}^α)`.
+This is the `D_k`-conditioned form of the paper's row-conditioned CL2. -/
+def Mack3W (X : RandomTriangle Ω n) (μ : Measure Ω)
+    (w : ℕ → ℕ → Ω → ℝ) (α : ℕ) (f σ2 : ℕ → ℝ) : Prop :=
+  ∀ i, i < n → ∀ k,
+    μ[fun ω => (X.factorResidual f i k ω) ^ 2 | X.D k]
+      =ᵐ[μ] fun ω => σ2 k / X.weightVolume w α i k ω
+
+/-- Conditional uncorrelatedness of individual-factor residuals across
+accident years. This is the factor-residual form of what independence across
+accident years supplies to the weighted variance calculation. -/
+def Mack2Factor' (X : RandomTriangle Ω n) (μ : Measure Ω) (f : ℕ → ℝ) : Prop :=
+  ∀ k, ∀ i ∈ contributors n k, ∀ j ∈ contributors n k, i ≠ j →
+    μ[fun ω => X.factorResidual f i k ω * X.factorResidual f j k ω | X.D k]
+      =ᵐ[μ] fun _ => 0
+
+/-- A weighted volume is `D_k`-measurable when its weight is. -/
+theorem RandomTriangle.stronglyMeasurable_weightVolume
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α i k : ℕ)
+    (hw : StronglyMeasurable[X.D k] (w i k)) :
+    StronglyMeasurable[X.D k] (X.weightVolume w α i k) := by
+  exact ((hw.measurable.mul
+    ((X.meas i k k le_rfl).measurable.pow_const α))).stronglyMeasurable
+
+/-- Pointwise weighted residual form of `f̂_k^w - f_k`. -/
+theorem RandomTriangle.fhatWrv_sub_eq
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α : ℕ)
+    (f : ℕ → ℝ) (k : ℕ) (ω : Ω) (hS : X.SWrv w α k ω ≠ 0) :
+    X.fhatWrv w α k ω - f k =
+      (X.SWrv w α k ω)⁻¹ *
+        ∑ i ∈ contributors n k,
+          X.weightVolume w α i k ω * X.factorResidual f i k ω := by
+  change fhatW (X.at ω) n (fun i k => w i k ω) α k - f k =
+    (SW (X.at ω) n (fun i k => w i k ω) α k)⁻¹ *
+      ∑ i ∈ contributors n k,
+        (w i k ω * X.C i k ω ^ α) * (F (X.at ω) i k - f k)
+  have hsum :
+      (∑ i ∈ contributors n k,
+          (w i k ω * X.C i k ω ^ α) * (F (X.at ω) i k - f k)) =
+        TW (X.at ω) n (fun i k => w i k ω) α k -
+          f k * SW (X.at ω) n (fun i k => w i k ω) α k := by
+    calc
+      _ = ∑ i ∈ contributors n k,
+          (w i k ω * X.C i k ω ^ α * F (X.at ω) i k -
+            w i k ω * X.C i k ω ^ α * f k) := by
+          exact sum_congr rfl fun i _ => by ring
+      _ = (∑ i ∈ contributors n k,
+            w i k ω * X.C i k ω ^ α * F (X.at ω) i k) -
+          ∑ i ∈ contributors n k, w i k ω * X.C i k ω ^ α * f k := by
+          rw [sum_sub_distrib]
+      _ = (∑ i ∈ contributors n k,
+            w i k ω * X.C i k ω ^ α * F (X.at ω) i k) -
+          f k * ∑ i ∈ contributors n k, w i k ω * X.C i k ω ^ α := by
+          rw [← sum_mul]
+          ring
+      _ = _ := by rfl
+  rw [hsum]
+  unfold fhatW
+  change _ / _ - _ = _
+  change SW (X.at ω) n (fun i k => w i k ω) α k ≠ 0 at hS
+  field_simp [hS]
+
+/-- The squared weighted factor residual as an explicit double sum. -/
+theorem RandomTriangle.sq_fhatWrv_sub
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α : ℕ)
+    (f : ℕ → ℝ) (k : ℕ) (ω : Ω) (hS : X.SWrv w α k ω ≠ 0) :
+    (X.fhatWrv w α k ω - f k) ^ 2 =
+      (X.SWrv w α k ω)⁻¹ ^ 2 *
+        ∑ i ∈ contributors n k, ∑ j ∈ contributors n k,
+          (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+            (X.weightVolume w α j k ω * X.factorResidual f j k ω) := by
+  rw [X.fhatWrv_sub_eq w α f k ω hS, mul_pow,
+    sq (∑ i ∈ contributors n k,
+      X.weightVolume w α i k ω * X.factorResidual f i k ω),
+    sum_mul_sum]
+
+/-- **Conditional variance of Mack's weighted development factor.** Under
+weighted (M3) and conditional uncorrelatedness across accident years,
+`E[(f̂_k^w - f_k)² | D_k] = σ_k² / S_k^{w,α}`. The nonvanishing hypotheses
+keep the statement in the ordinary-ratio domain of Mack's formulas. -/
+theorem condExp_sq_fhatWrv_sub [IsFiniteMeasure μ]
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α : ℕ)
+    (f σ2 : ℕ → ℝ) (k : ℕ)
+    (hw : ∀ i, StronglyMeasurable[X.D k] (w i k))
+    (h3 : Mack3W X μ w α f σ2) (h2 : Mack2Factor' X μ f)
+    (hC : ∀ i ∈ contributors n k, ∀ᵐ ω ∂μ, X.C i k ω ≠ 0)
+    (ha : ∀ i ∈ contributors n k,
+      ∀ᵐ ω ∂μ, X.weightVolume w α i k ω ≠ 0)
+    (hS : ∀ᵐ ω ∂μ, X.SWrv w α k ω ≠ 0)
+    (hδ : ∀ i j, Integrable (fun ω =>
+      X.factorResidual f i k ω * X.factorResidual f j k ω) μ)
+    (hweighted : ∀ i j, Integrable (fun ω =>
+      (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+        (X.weightVolume w α j k ω * X.factorResidual f j k ω)) μ)
+    (hint : Integrable (fun ω => (X.fhatWrv w α k ω - f k) ^ 2) μ) :
+    μ[fun ω => (X.fhatWrv w α k ω - f k) ^ 2 | X.D k]
+      =ᵐ[μ] fun ω => σ2 k / X.SWrv w α k ω := by
+  set s := contributors n k
+  set Q : Ω → ℝ := fun ω =>
+    ∑ i ∈ s, ∑ j ∈ s,
+      (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+        (X.weightVolume w α j k ω * X.factorResidual f j k ω) with hQ
+  set W : Ω → ℝ := fun ω => (X.SWrv w α k ω)⁻¹ ^ 2 with hW
+  -- Source-domain guard: the algebra itself does not use this because Lean
+  -- totalizes division by zero, while Mack's individual factor does not.
+  have hCall : ∀ᵐ ω ∂μ, ∀ i ∈ contributors n k, X.C i k ω ≠ 0 := by
+    rw [eventually_all_finset]
+    exact hC
+  have hrw : (fun ω => (X.fhatWrv w α k ω - f k) ^ 2) =ᵐ[μ] W * Q := by
+    filter_upwards [hS, hCall] with ω hSω _
+    simp only [Pi.mul_apply, hW, hQ]
+    exact X.sq_fhatWrv_sub w α f k ω hSω
+  have hWmeas : StronglyMeasurable[X.D k] W :=
+    (((X.stronglyMeasurable_SWrv w α k hw).measurable.inv).pow_const 2).stronglyMeasurable
+  have hinnerInt : ∀ i, Integrable (∑ j ∈ s, fun ω =>
+      (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+        (X.weightVolume w α j k ω * X.factorResidual f j k ω)) μ :=
+    fun i => (integrable_finsetSum s (fun j _ => hweighted i j)).congr
+      (Eventually.of_forall fun ω => by simp [Finset.sum_apply])
+  have hQint : Integrable Q μ := by
+    have h := integrable_finsetSum s (fun i _ => hinnerInt i)
+    refine h.congr (Eventually.of_forall fun ω => ?_)
+    simp [hQ, Finset.sum_apply]
+  have hWQint : Integrable (W * Q) μ := hint.congr hrw
+  have h1 : μ[fun ω => (X.fhatWrv w α k ω - f k) ^ 2 | X.D k]
+      =ᵐ[μ] W * μ[Q | X.D k] :=
+    (condExp_congr_ae hrw).trans
+      (condExp_mul_of_stronglyMeasurable_left hWmeas hWQint hQint)
+  have hQ' : Q = ∑ i ∈ s, ∑ j ∈ s, fun ω =>
+      (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+        (X.weightVolume w α j k ω * X.factorResidual f j k ω) := by
+    ext ω
+    simp [hQ, Finset.sum_apply]
+  have h2' : μ[Q | X.D k] =ᵐ[μ] fun ω => σ2 k * X.SWrv w α k ω := by
+    rw [hQ']
+    have hsum := condExp_finsetSum (μ := μ) (m := X.D k) (s := s)
+      (f := fun i => ∑ j ∈ s, fun ω =>
+        (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+          (X.weightVolume w α j k ω * X.factorResidual f j k ω))
+      (fun i _ => hinnerInt i)
+    refine hsum.trans ?_
+    have hinner : ∀ i ∈ s,
+        μ[∑ j ∈ s, fun ω =>
+          (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+            (X.weightVolume w α j k ω * X.factorResidual f j k ω) | X.D k]
+          =ᵐ[μ] fun ω => σ2 k * X.weightVolume w α i k ω := by
+      intro i hi
+      have hs := condExp_finsetSum (μ := μ) (m := X.D k) (s := s)
+        (f := fun j => fun ω =>
+          (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+            (X.weightVolume w α j k ω * X.factorResidual f j k ω))
+        (fun j _ => hweighted i j)
+      refine hs.trans ?_
+      have hterm : ∀ j ∈ s,
+          μ[fun ω =>
+            (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+              (X.weightVolume w α j k ω * X.factorResidual f j k ω) | X.D k]
+            =ᵐ[μ] fun ω => if j = i then
+              σ2 k * X.weightVolume w α i k ω else 0 := by
+        intro j hj
+        by_cases hij : j = i
+        · subst j
+          let a : Ω → ℝ := X.weightVolume w α i k
+          let d : Ω → ℝ := X.factorResidual f i k
+          have hameas : StronglyMeasurable[X.D k] (a * a) :=
+            (X.stronglyMeasurable_weightVolume w α i k (hw i)).mul
+              (X.stronglyMeasurable_weightVolume w α i k (hw i))
+          have hd2 : Integrable (fun ω => (d ω) ^ 2) μ :=
+            (hδ i i).congr (Eventually.of_forall fun ω => by simp [d, sq])
+          have heq : (fun ω => (a ω * d ω) * (a ω * d ω)) =
+              (a * a) * fun ω => (d ω) ^ 2 := by
+            ext ω
+            simp [Pi.mul_apply]
+            ring
+          rw [show (fun ω =>
+              (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+                (X.weightVolume w α i k ω * X.factorResidual f i k ω)) =
+              (fun ω => (a ω * d ω) * (a ω * d ω)) by rfl,
+            heq]
+          refine (condExp_mul_of_stronglyMeasurable_left hameas
+            (by rw [← heq]; exact hweighted i i) hd2).trans ?_
+          filter_upwards [h3 i (lt_of_mem_contributors hi) k, ha i hi]
+            with ω h3ω haω
+          simp only [Pi.mul_apply, d, h3ω, a, RandomTriangle.weightVolume, if_true]
+          field_simp
+        · have hameas : StronglyMeasurable[X.D k]
+              (X.weightVolume w α i k * X.weightVolume w α j k) :=
+            (X.stronglyMeasurable_weightVolume w α i k (hw i)).mul
+              (X.stronglyMeasurable_weightVolume w α j k (hw j))
+          have heq : (fun ω =>
+              (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+                (X.weightVolume w α j k ω * X.factorResidual f j k ω)) =
+              (X.weightVolume w α i k * X.weightVolume w α j k) *
+                fun ω => X.factorResidual f i k ω * X.factorResidual f j k ω := by
+            ext ω
+            simp [Pi.mul_apply]
+            ring
+          rw [heq]
+          refine (condExp_mul_of_stronglyMeasurable_left hameas
+            (by rw [← heq]; exact hweighted i j) (hδ i j)).trans ?_
+          filter_upwards [h2 k i hi j hj (Ne.symm hij)] with ω h2ω
+          simp [Pi.mul_apply, h2ω, hij]
+      have hall : ∀ᵐ ω ∂μ, ∀ j ∈ s,
+          (μ[fun ω =>
+            (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+              (X.weightVolume w α j k ω * X.factorResidual f j k ω) | X.D k]) ω =
+            if j = i then σ2 k * X.weightVolume w α i k ω else 0 := by
+        rw [eventually_all_finset]
+        exact hterm
+      filter_upwards [hall] with ω hω
+      rw [Finset.sum_apply, Finset.sum_congr rfl (fun j hj => hω j hj),
+        Finset.sum_ite_eq' s i]
+      simp [hi]
+    have hall' : ∀ᵐ ω ∂μ, ∀ i ∈ s,
+        (μ[∑ j ∈ s, fun ω =>
+          (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+            (X.weightVolume w α j k ω * X.factorResidual f j k ω) | X.D k]) ω =
+          σ2 k * X.weightVolume w α i k ω := by
+      rw [eventually_all_finset]
+      exact hinner
+    filter_upwards [hall'] with ω hω
+    rw [Finset.sum_apply, Finset.sum_congr rfl (fun i hi => hω i hi),
+      ← Finset.mul_sum, X.SWrv_eq_sum, Finset.sum_apply]
+    rfl
+  refine h1.trans ?_
+  filter_upwards [h2', hS] with ω h2ω hSω
+  simp only [Pi.mul_apply, h2ω, hW]
+  field_simp
+
+/-- The weighted squared-error result read as an actual conditional variance
+when the weighted estimator has conditional mean `f_k`. -/
+theorem condVar_fhatWrv [IsFiniteMeasure μ]
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α : ℕ)
+    (f σ2 : ℕ → ℝ) (k : ℕ)
+    (hmean : μ[X.fhatWrv w α k | X.D k] =ᵐ[μ] fun _ => f k)
+    (hw : ∀ i, StronglyMeasurable[X.D k] (w i k))
+    (h3 : Mack3W X μ w α f σ2) (h2 : Mack2Factor' X μ f)
+    (hC : ∀ i ∈ contributors n k, ∀ᵐ ω ∂μ, X.C i k ω ≠ 0)
+    (ha : ∀ i ∈ contributors n k,
+      ∀ᵐ ω ∂μ, X.weightVolume w α i k ω ≠ 0)
+    (hS : ∀ᵐ ω ∂μ, X.SWrv w α k ω ≠ 0)
+    (hδ : ∀ i j, Integrable (fun ω =>
+      X.factorResidual f i k ω * X.factorResidual f j k ω) μ)
+    (hweighted : ∀ i j, Integrable (fun ω =>
+      (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+        (X.weightVolume w α j k ω * X.factorResidual f j k ω)) μ)
+    (hint : Integrable (fun ω => (X.fhatWrv w α k ω - f k) ^ 2) μ) :
+    Var[X.fhatWrv w α k; μ | X.D k]
+      =ᵐ[μ] fun ω => σ2 k / X.SWrv w α k ω := by
+  have hcentered :
+      ((X.fhatWrv w α k - μ[X.fhatWrv w α k | X.D k]) ^ 2) =ᵐ[μ]
+        fun ω => (X.fhatWrv w α k ω - f k) ^ 2 := by
+    filter_upwards [hmean] with ω hω
+    simp only [Pi.pow_apply, Pi.sub_apply]
+    rw [hω]
+  rw [condVar]
+  exact (condExp_congr_ae hcentered).trans
+    (condExp_sq_fhatWrv_sub X w α f σ2 k hw h3 h2 hC ha hS hδ hweighted hint)
+
+/-- Weighted residual-sum-of-squares decomposition around the true factor. -/
+theorem weighted_sq_devW_factorResidual
+    (C : ℕ → ℕ → ℝ) (n : ℕ) (w : ℕ → ℕ → ℝ) (α k : ℕ) (f : ℝ)
+    (hS : SW C n w α k ≠ 0) :
+    (∑ i ∈ contributors n k,
+      w i k * C i k ^ α * (F C i k - fhatW C n w α k) ^ 2) =
+      (∑ i ∈ contributors n k, w i k * C i k ^ α * (F C i k - f) ^ 2) -
+        SW C n w α k * (fhatW C n w α k - f) ^ 2 := by
+  have h1 := weighted_sq_devW C n w α k (fhatW C n w α k)
+  have h2 := weighted_sq_devW C n w α k f
+  have hT : TW C n w α k = fhatW C n w α k * SW C n w α k := by
+    unfold fhatW
+    field_simp
+  linear_combination h1 - h2 + (2 * (f - fhatW C n w α k)) * hT
+
+/-- `sigma2W` evaluated at the random triangle and random predictable
+weights. -/
+def RandomTriangle.sigma2Wrv
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α k : ℕ) : Ω → ℝ :=
+  fun ω => sigma2W (X.at ω) n (fun i k => w i k ω) α k
+
+/-- The weighted residual sum of squares around `fhatWrv`. -/
+def RandomTriangle.wssWrv
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α k : ℕ) : Ω → ℝ :=
+  fun ω => ∑ i ∈ contributors n k,
+    X.weightVolume w α i k ω *
+      (F (X.at ω) i k - X.fhatWrv w α k ω) ^ 2
+
+theorem RandomTriangle.sigma2Wrv_eq
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α k : ℕ) :
+    X.sigma2Wrv w α k =
+      fun ω => (1 / ((n : ℝ) - k - 2)) * X.wssWrv w α k ω := by
+  ext ω
+  rfl
+
+/-- The weighted residual sum of squares has conditional expectation
+`(n-k-2) σ_k²` under weighted (M3) and cross-year uncorrelatedness. -/
+theorem condExp_wssWrv [IsFiniteMeasure μ]
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α : ℕ)
+    (f σ2 : ℕ → ℝ) (k : ℕ) (hk : k + 2 ≤ n)
+    (hw : ∀ i, StronglyMeasurable[X.D k] (w i k))
+    (h3 : Mack3W X μ w α f σ2) (h2 : Mack2Factor' X μ f)
+    (hC : ∀ i ∈ contributors n k, ∀ᵐ ω ∂μ, X.C i k ω ≠ 0)
+    (ha : ∀ i ∈ contributors n k,
+      ∀ᵐ ω ∂μ, X.weightVolume w α i k ω ≠ 0)
+    (hS : ∀ᵐ ω ∂μ, X.SWrv w α k ω ≠ 0)
+    (hδ : ∀ i j, Integrable (fun ω =>
+      X.factorResidual f i k ω * X.factorResidual f j k ω) μ)
+    (hweighted : ∀ i j, Integrable (fun ω =>
+      (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+        (X.weightVolume w α j k ω * X.factorResidual f j k ω)) μ)
+    (hweightedSq : ∀ i, Integrable (fun ω =>
+      X.weightVolume w α i k ω * (X.factorResidual f i k ω) ^ 2) μ)
+    (hsq : Integrable (fun ω => (X.fhatWrv w α k ω - f k) ^ 2) μ)
+    (hSsq : Integrable (fun ω =>
+      X.SWrv w α k ω * (X.fhatWrv w α k ω - f k) ^ 2) μ) :
+    μ[X.wssWrv w α k | X.D k] =ᵐ[μ]
+      fun _ => ((n : ℝ) - k - 2) * σ2 k := by
+  set s := contributors n k with hs
+  set A : Ω → ℝ := fun ω => ∑ i ∈ s,
+    X.weightVolume w α i k ω * (X.factorResidual f i k ω) ^ 2 with hA
+  set B : Ω → ℝ := fun ω =>
+    X.SWrv w α k ω * (X.fhatWrv w α k ω - f k) ^ 2 with hB
+  have hrw : X.wssWrv w α k =ᵐ[μ] A - B := by
+    filter_upwards [hS] with ω hSω
+    simp only [Pi.sub_apply, hA, hB, RandomTriangle.wssWrv,
+      RandomTriangle.factorResidual]
+    have h := weighted_sq_devW_factorResidual (X.at ω) n
+      (fun i k => w i k ω) α k (f k) hSω
+    simpa [RandomTriangle.at, RandomTriangle.fhatWrv, RandomTriangle.SWrv,
+      RandomTriangle.weightVolume] using h
+  have hAint : Integrable A μ :=
+    (integrable_finsetSum s (fun i _ => hweightedSq i)).congr
+      (Eventually.of_forall fun ω => by simp [hA])
+  have hBint : Integrable B μ := hSsq
+  have hAcond : μ[A | X.D k] =ᵐ[μ] fun _ => (s.card : ℝ) * σ2 k := by
+    have hA' : A = ∑ i ∈ s, fun ω =>
+        X.weightVolume w α i k ω * (X.factorResidual f i k ω) ^ 2 := by
+      ext ω
+      simp [hA, Finset.sum_apply]
+    rw [hA']
+    have hsum := condExp_finsetSum (μ := μ) (m := X.D k) (s := s)
+      (f := fun i => fun ω =>
+        X.weightVolume w α i k ω * (X.factorResidual f i k ω) ^ 2)
+      (fun i _ => hweightedSq i)
+    refine hsum.trans ?_
+    have hterm : ∀ i ∈ s,
+        μ[fun ω =>
+          X.weightVolume w α i k ω * (X.factorResidual f i k ω) ^ 2 | X.D k]
+          =ᵐ[μ] fun _ => σ2 k := by
+      intro i hi
+      have hameas := X.stronglyMeasurable_weightVolume w α i k (hw i)
+      have hd2 : Integrable (fun ω => (X.factorResidual f i k ω) ^ 2) μ :=
+        (hδ i i).congr (Eventually.of_forall fun ω => by simp [sq])
+      refine (condExp_mul_of_stronglyMeasurable_left hameas
+        (hweightedSq i) hd2).trans ?_
+      filter_upwards [h3 i (lt_of_mem_contributors hi) k, ha i hi]
+        with ω h3ω haω
+      simp only [Pi.mul_apply, h3ω]
+      field_simp
+    have hall : ∀ᵐ ω ∂μ, ∀ i ∈ s,
+        (μ[fun ω =>
+          X.weightVolume w α i k ω * (X.factorResidual f i k ω) ^ 2 | X.D k]) ω =
+          σ2 k := by
+      rw [eventually_all_finset]
+      exact hterm
+    filter_upwards [hall] with ω hω
+    rw [Finset.sum_apply, Finset.sum_congr rfl (fun i hi => hω i hi),
+      Finset.sum_const, nsmul_eq_mul]
+  have hBcond : μ[B | X.D k] =ᵐ[μ] fun _ => σ2 k := by
+    have heq : B = X.SWrv w α k *
+        fun ω => (X.fhatWrv w α k ω - f k) ^ 2 := by
+      ext ω
+      simp [hB]
+    rw [heq]
+    refine (condExp_mul_of_stronglyMeasurable_left
+      (X.stronglyMeasurable_SWrv w α k hw)
+      (by rw [← heq]; exact hBint) hsq).trans ?_
+    filter_upwards [condExp_sq_fhatWrv_sub X w α f σ2 k hw h3 h2 hC ha hS
+      hδ hweighted hsq, hS] with ω hω hSω
+    simp only [Pi.mul_apply, hω]
+    field_simp
+  have hcard : (s.card : ℝ) = (n : ℝ) - k - 1 := by
+    have h1 : s.card = n - (k + 1) := by
+      rw [hs]
+      unfold contributors
+      rw [card_range]
+      omega
+    rw [h1, Nat.cast_sub (by omega : k + 1 ≤ n)]
+    push_cast
+    ring
+  have hfinal : μ[X.wssWrv w α k | X.D k] =ᵐ[μ]
+      μ[A | X.D k] - μ[B | X.D k] :=
+    (condExp_congr_ae hrw).trans (condExp_sub hAint hBint (X.D k))
+  refine hfinal.trans ?_
+  filter_upwards [hAcond, hBcond] with ω hAω hBω
+  simp only [Pi.sub_apply, hAω, hBω, hcard]
+  ring
+
+/-- **Mack's weighted variance estimator is conditionally unbiased.** For
+`k + 3 ≤ n`, weighted (M3), conditional uncorrelatedness, predictable weights,
+and the stated nonvanishing and integrability hypotheses imply
+`E[sigma2W_k | D_k] = σ_k²`. Every contributing weighted volume is required
+to be nonzero because `sigma2W` uses the fixed denominator `n-k-2`; omitting
+zero-weight cells requires an active set and its corresponding degrees of
+freedom. -/
+theorem condExp_sigma2Wrv [IsFiniteMeasure μ]
+    (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α : ℕ)
+    (f σ2 : ℕ → ℝ) (k : ℕ) (hk : k + 3 ≤ n)
+    (hw : ∀ i, StronglyMeasurable[X.D k] (w i k))
+    (h3 : Mack3W X μ w α f σ2) (h2 : Mack2Factor' X μ f)
+    (hC : ∀ i ∈ contributors n k, ∀ᵐ ω ∂μ, X.C i k ω ≠ 0)
+    (ha : ∀ i ∈ contributors n k,
+      ∀ᵐ ω ∂μ, X.weightVolume w α i k ω ≠ 0)
+    (hS : ∀ᵐ ω ∂μ, X.SWrv w α k ω ≠ 0)
+    (hδ : ∀ i j, Integrable (fun ω =>
+      X.factorResidual f i k ω * X.factorResidual f j k ω) μ)
+    (hweighted : ∀ i j, Integrable (fun ω =>
+      (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
+        (X.weightVolume w α j k ω * X.factorResidual f j k ω)) μ)
+    (hweightedSq : ∀ i, Integrable (fun ω =>
+      X.weightVolume w α i k ω * (X.factorResidual f i k ω) ^ 2) μ)
+    (hsq : Integrable (fun ω => (X.fhatWrv w α k ω - f k) ^ 2) μ)
+    (hSsq : Integrable (fun ω =>
+      X.SWrv w α k ω * (X.fhatWrv w α k ω - f k) ^ 2) μ) :
+    μ[X.sigma2Wrv w α k | X.D k] =ᵐ[μ] fun _ => σ2 k := by
+  have h := condExp_wssWrv X w α f σ2 k (by omega) hw h3 h2 hC ha hS
+    hδ hweighted hweightedSq hsq hSsq
+  rw [X.sigma2Wrv_eq]
+  have hc : (fun ω => (1 / ((n : ℝ) - k - 2)) * X.wssWrv w α k ω) =
+      (1 / ((n : ℝ) - k - 2)) • X.wssWrv w α k := by
+    ext ω
+    simp [smul_eq_mul]
+  rw [hc]
+  refine (condExp_smul _ _ _).trans ?_
+  have hk' : (k : ℝ) + 3 ≤ n := by exact_mod_cast hk
+  have hne : (n : ℝ) - k - 2 ≠ 0 := by
+    have : 0 < (n : ℝ) - k - 2 := by linarith
+    exact this.ne'
+  filter_upwards [h] with ω hω
+  simp only [Pi.smul_apply, smul_eq_mul, hω]
   field_simp
 
 end

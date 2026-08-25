@@ -146,6 +146,15 @@ set_option format.width 400
 #print axioms RandomTriangle.stronglyMeasurable_gW
 #print axioms RandomTriangle.fhatWrv_eq
 #print axioms condExp_fhatWrv
+#print axioms RandomTriangle.stronglyMeasurable_weightVolume
+#print axioms RandomTriangle.fhatWrv_sub_eq
+#print axioms RandomTriangle.sq_fhatWrv_sub
+#print axioms condExp_sq_fhatWrv_sub
+#print axioms condVar_fhatWrv
+#print axioms weighted_sq_devW_factorResidual
+#print axioms RandomTriangle.sigma2Wrv_eq
+#print axioms condExp_wssWrv
+#print axioms condExp_sigma2Wrv
 
 #print axioms mem_obsRow
 #print axioms mem_obsCol

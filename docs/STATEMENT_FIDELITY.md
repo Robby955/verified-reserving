@@ -57,6 +57,8 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Mack 1999, recursion equals the 1993 closed form (`α = 1`, unit weights) | `se2rec_eq_msep`, `se2rec_eq_closed` | Lean stronger hypothesis: nonzero development factors along the row |
 | Mack 1999, eq. (*) and the recursion below it, general `w` and `α` | `msepW`, `se2recW`, `se2recW_eq_msepW`, `msepW_unit`, `se2recW_eq_msep_unit` | Lean more general in `w` and `α`, narrower in the type of `α` (natural, not real) |
 | Mack 1999, weighted factor is conditionally unbiased | `condExp_fhatWrv` | not displayed as a theorem in the source; Lean proves it under (M1) in the `D_k` form |
+| Mack 1999, CL2 and `s.e.(f̂_k)² = σ_k² / ∑_j w_jk C_jk^α` | `Mack3W`, `Mack2Factor'`, `condExp_sq_fhatWrv_sub`, `condVar_fhatWrv` | proved from explicit `D_k` assumptions on nonzero weighted volumes; row-to-`D_k` and cross-factor derivations remain open |
+| Mack 1999, weighted `σ̂_k²` is unbiased | `condExp_wssWrv`, `condExp_sigma2Wrv` | Lean assumes fixed contributors, nonzero weighted volumes, and the stated conditioned model; zero-weight omission needs a different index set and degrees of freedom |
 | Mack 1999, Section 3, tail factor | `tailUltimate`, `tailSe2Step` | convention, no theorem |
 | Mack 1993, last-period `σ²` extrapolation | not formalized | convention, no theorem |
 | BBMW 2006 / Murphy 1994, conditional-resampling term | `bbmwEstimation`, `mackEstimation_le_bbmwEstimation`, `bbmwEstimation_sub_mackEstimation`, `bbmwEstimation_sub_mackEstimation_le`, `bbmwEstimation_eq_mackEstimation_of_one_factor` | source statement is an estimator; Lean has it as a definition and proves the exact difference against Mack's |
@@ -413,6 +415,34 @@ sum `SWrv w α k` is almost surely nonzero, integrability of each `C i (k+1)`, o
 statement is the natural generalization of `condExp_fhatRv`, with the extra hypothesis that the
 contributing entries are almost surely nonzero, which `α = 0` cannot do without.
 
+### Weighted estimation variance and unbiasedness of `sigma2W`
+
+**Source.** Mack (1999), pp. 362-363, gives CL2 as
+`Var(F_{ik} | observed history) = σ_k²/(w_{ik} C_{ik}^α)`, displays
+`s.e.(f̂_k)² = σ̂_k²/∑_j w_{jk} C_{jk}^α`, and defines
+`σ̂_k² = (n-k-2)⁻¹ ∑_i w_{ik} C_{ik}^α(F_{ik}-f̂_k)²`.
+
+**Lean.** `Mack3W X μ w α f σ2` is CL2 in conditional second-moment form around `f k`, and
+`Mack2Factor' X μ f` states conditional uncorrelatedness of different accident years' factor
+residuals. `condExp_sq_fhatWrv_sub` assumes both, predictable weights, almost-surely nonzero
+claims, weighted volumes and weighted column sum, plus the listed integrability conditions, and
+concludes
+`μ[(fhatWrv w α k - f k)² | D k] =ᵐ fun ω => σ2 k / SWrv w α k ω`.
+Given the conditional-mean equality proved separately by `condExp_fhatWrv`, `condVar_fhatWrv`
+identifies the same expression with mathlib's conditional variance.
+`condExp_wssWrv` proves that the weighted residual sum of squares has conditional expectation
+`(n-k-2)σ2 k`; for `k+3≤n`, `condExp_sigma2Wrv` divides by the nonzero degrees of freedom and
+concludes `μ[sigma2Wrv w α k | D k] =ᵐ fun _ => σ2 k`.
+
+**Gap.** Mack permits weights in `[0,1]`, but CL2 divides by `w_{ik}C_{ik}^α`. A zero-weight cell
+is naturally omitted from the sample. The current Lean estimator keeps the fixed
+`contributors n k` set and denominator `n-k-2`, so the theorem requires every contributing
+weighted volume to be nonzero. A theorem allowing zero weights needs an active-contributor set
+and denominator `active.card-1`. `Mack3W` is conditioned on the full `D_k`; deriving it from the
+paper's row-conditioned CL2 and independence is not included. Lean also permits predictable
+random weights; deterministic weights are a special case, while weights chosen after observing
+`F_{ik}` are not covered.
+
 ### Section 3: the tail factor
 
 **Source.** Mack (1999), Section 3, attaches a tail factor to the ultimate and carries variance
@@ -736,16 +766,20 @@ Ordered roughly by how much they matter.
    `integral_fhatRv_mul`, `condExp_ChatRv`, `condExp_ultimate_eq`, `condExp_sq_fhatRv_sub`,
    `condExp_wssRv`, `condExp_sigma2Rv`, `condExp_sq_C_succ`, `condExp_sq_C_succ_tower`,
    `condVar_C_eq_procVar`, `condMsep_eq`, `mack1_of_mack1Row`, `mack3_of_mack3Row`,
-   `mack2'_of_rows`, `condExp_fhatWrv`. In `TotalMsep.lean` these are replaced by `MemLp _ 2 μ`
+   `mack2'_of_rows`, `condExp_fhatWrv`, `condExp_sq_fhatWrv_sub`, `condExp_wssWrv` and
+   `condExp_sigma2Wrv`. In `TotalMsep.lean` these are replaced by `MemLp _ 2 μ`
    hypotheses (`hPmem`, `hCmem`), from which Hölder supplies the products. Nothing derives any of
    them from a moment condition on the model.
 7. **Almost-sure nonvanishing of the column sums.** `hS : ∀ᵐ ω ∂μ, X.Srv k ω ≠ 0` in
    `condExp_fhatRv`, `condExp_fhatRv_mul`, `integral_fhatRv`, `integral_fhatRv_mul`,
    `condExp_sq_fhatRv_sub`, `condExp_wssRv`, `condExp_sigma2Rv`, and in the quantified form
    `∀ k, k + 2 ≤ n → ...` in `condExp_ChatRv` and `condExp_ultimate_eq`. The weighted analogue is
-   `hS : ∀ᵐ ω, X.SWrv w α k ω ≠ 0` in `condExp_fhatWrv`.
+   `hS : ∀ᵐ ω, X.SWrv w α k ω ≠ 0` in `condExp_fhatWrv`,
+   `condExp_sq_fhatWrv_sub`, `condExp_wssWrv` and `condExp_sigma2Wrv`.
 8. **Almost-sure nonvanishing of the individual entries.** `hC : ∀ i ∈ contributors n k, ∀ᵐ ω, X.C i k ω ≠ 0`
-   in `condExp_wssRv` and `condExp_sigma2Rv`, and `hC0` in `condExp_fhatWrv`. The deterministic
+   in `condExp_wssRv` and `condExp_sigma2Rv`, `hC0` in `condExp_fhatWrv`, and `hC` in the weighted
+   variance theorems. Those weighted theorems also require every `weightVolume w α i k` to be
+   almost surely nonzero. The deterministic
    counterpart is `h : ∀ i ∈ contributors n k, C i k ≠ 0` in `fhat_eq_weighted_average`,
    `T_eq_sum_weighted_F`, `weighted_sq_dev`, `weighted_sq_dev_at_fhat`, `weighted_sq_dev_eps`,
    `TW_unit`, `fhatW_unit`, `sigma2W_unit`, `ChatW_unit`, `ultimateW_unit`, `mackTermW_unit`,
@@ -772,8 +806,9 @@ Ordered roughly by how much they matter.
     `patternCum_mul_prod`, `fhat_pos_of_mult`, `mult_cum_eq_CLcum` and `multFit_eq_CLincr`.
 12. **Measurability of the predictor and of the weights.** `hPmeas : StronglyMeasurable[D] (X.ChatRv i m)`
     in `condMsep_eq` and `condMsepTotal_eq`; `hw : ∀ i, StronglyMeasurable[X.D k] (w i k)` in
-    `condExp_fhatWrv`, `RandomTriangle.stronglyMeasurable_SWrv` and
-    `RandomTriangle.stronglyMeasurable_gW`.
+    `condExp_fhatWrv`, `condExp_sq_fhatWrv_sub`, `condExp_wssWrv`, `condExp_sigma2Wrv`,
+    `RandomTriangle.stronglyMeasurable_SWrv`, `RandomTriangle.stronglyMeasurable_gW` and
+    `RandomTriangle.stronglyMeasurable_weightVolume`.
 13. **Finiteness of the measure.** `IsFiniteMeasure μ` in most stochastic theorems and
     `IsProbabilityMeasure μ` in `integral_fhatRv` and `integral_fhatRv_mul`. `condExp_fhatRv` and
     `condExp_fhatWrv` need neither.

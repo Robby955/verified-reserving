@@ -205,3 +205,69 @@ $E[C_{i,k+1}\mid\mathcal{D}_k]$ into $f_k C_{ik}$, and $g_{ik}C_{ik} = w_{ik}C_{
 when $C_{ik} \neq 0$, so the sum is $f_k S_k^{w,\alpha}$. The hypothesis $C_{ik}\neq 0$ is what
 the individual factors need in any case and cannot be dropped at $\alpha = 0$.
 \end{proof}
+
+\section{Weighted variance and estimator unbiasedness}
+
+\begin{definition}[Weighted variance assumptions]\label{def:mwVarianceAssumptions}\lean{VerifiedReserving.RandomTriangle.weightVolume, VerifiedReserving.RandomTriangle.factorResidual, VerifiedReserving.Mack3W, VerifiedReserving.Mack2Factor'}\leanok
+\uses{def:mwRv}
+Write $a_{ik}=w_{ik}C_{ik}^{\alpha}$ and $d_{ik}=F_{ik}-f_k$. The weighted
+conditional second-moment assumption is
+\[
+  E[d_{ik}^2\mid\mathcal D_k]=\frac{\sigma_k^2}{a_{ik}}.
+\]
+The cross-year assumption says $E[d_{ik}d_{jk}\mid\mathcal D_k]=0$ for $i\ne j$.
+These are the $\mathcal D_k$-conditioned forms used in the calculation.
+\end{definition}
+
+\begin{lemma}[Weighted residual algebra]\label{lem:mwVarianceAlgebra}\lean{VerifiedReserving.RandomTriangle.stronglyMeasurable_weightVolume, VerifiedReserving.RandomTriangle.fhatWrv_sub_eq, VerifiedReserving.RandomTriangle.sq_fhatWrv_sub, VerifiedReserving.weighted_sq_devW_factorResidual}\leanok
+\uses{def:mwVarianceAssumptions, def:mwFhat}
+For predictable weights and $S_k^{w,\alpha}\ne0$,
+\[
+  \hat f_k^w-f_k=(S_k^{w,\alpha})^{-1}\sum_i a_{ik}d_{ik}.
+\]
+Squaring gives the corresponding double sum. The weighted residual sum of squares also satisfies
+\[
+  \sum_i a_{ik}(F_{ik}-\hat f_k^w)^2
+  =\sum_i a_{ik}d_{ik}^2-S_k^{w,\alpha}(\hat f_k^w-f_k)^2.
+\]
+\end{lemma}
+\begin{proof}\leanok Expand the weighted sums and use
+$T_k^{w,\alpha}=\hat f_k^w S_k^{w,\alpha}$. \end{proof}
+
+\begin{theorem}[Conditional variance of the weighted factor]\label{thm:mwVariance}\lean{VerifiedReserving.condExp_sq_fhatWrv_sub, VerifiedReserving.condVar_fhatWrv}\leanok
+\uses{def:mwVarianceAssumptions, lem:mwVarianceAlgebra, thm:mwUnbiased}
+Under the weighted second-moment and cross-year assumptions, with predictable weights,
+nonzero contributing claims and weighted volumes, nonzero $S_k^{w,\alpha}$, and the stated
+integrability hypotheses,
+\[
+  E[(\hat f_k^w-f_k)^2\mid\mathcal D_k]
+  =\frac{\sigma_k^2}{S_k^{w,\alpha}}.
+\]
+When $E[\hat f_k^w\mid\mathcal D_k]=f_k$, the same expression is the conditional variance
+$\operatorname{Var}(\hat f_k^w\mid\mathcal D_k)$.
+\end{theorem}
+\begin{proof}\leanok Pull out the measurable weighted volumes, discard the cross terms, apply
+the weighted second-moment assumption on the diagonal, and cancel one weighted column sum.
+\end{proof}
+
+\begin{definition}[Weighted variance estimator as a random variable]\label{def:mwSigmaRv}\lean{VerifiedReserving.RandomTriangle.sigma2Wrv, VerifiedReserving.RandomTriangle.wssWrv}\leanok
+\uses{def:mwFhat, def:mwVarianceAssumptions}
+Evaluate $\hat\sigma_k^2$ and its weighted residual sum of squares at the random triangle and
+predictable weights.
+\end{definition}
+
+\begin{theorem}[Unbiasedness of the weighted variance estimator]\label{thm:mwSigmaUnbiased}\lean{VerifiedReserving.RandomTriangle.sigma2Wrv_eq, VerifiedReserving.condExp_wssWrv, VerifiedReserving.condExp_sigma2Wrv}\leanok
+\uses{def:mwSigmaRv, thm:mwVariance, lem:mwVarianceAlgebra}
+If $k+3\le n$ and the hypotheses of Theorem~\ref{thm:mwVariance} hold with the additional
+integrability needed by the weighted residual sum of squares, then
+\[
+ E[\mathrm{WSS}_k\mid\mathcal D_k]=(n-k-2)\sigma_k^2,
+ \qquad E[\hat\sigma_k^2\mid\mathcal D_k]=\sigma_k^2.
+\]
+Every contributing $a_{ik}$ is required to be nonzero. If zero-weight cells are omitted, an
+active-contributor set and its cardinality minus one must replace the fixed denominator.
+\end{theorem}
+\begin{proof}\leanok The first term of the residual decomposition contributes
+$(n-k-1)\sigma_k^2$ and Theorem~\ref{thm:mwVariance} makes the correction term
+$\sigma_k^2$. Divide their difference by $n-k-2$.
+\end{proof}
