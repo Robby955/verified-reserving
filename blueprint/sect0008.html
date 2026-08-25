@@ -12,8 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Reference computation</title>
-<link rel="prev" href="sect0007.html" title="Non-vacuity: a nondegenerate model" />
+<title>Röhr 2016: the error-propagation form</title>
+<link rel="next" href="sect0009.html" title="Non-vacuity: a nondegenerate model" />
+<link rel="prev" href="sect0007.html" title="Solvency II: the one-year view" />
 <link rel="up" href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -39,10 +40,10 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0002.html#a0000000010"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0002.html#a0000000012"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000011"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
+  <a href="sect0002.html#a0000000013"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
  </li>
 
   </ul>
@@ -58,25 +59,25 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0005.html#a0000000012"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
+  <a href="sect0005.html#a0000000014"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000013"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
+  <a href="sect0005.html#a0000000015"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000014"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
+  <a href="sect0005.html#a0000000016"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000015"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
+  <a href="sect0005.html#a0000000017"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000016"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
+  <a href="sect0005.html#a0000000018"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000017"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
+  <a href="sect0005.html#a0000000019"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000018"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
+  <a href="sect0005.html#a0000000020"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
  </li>
 
   </ul>
@@ -86,16 +87,48 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0006.html#a0000000019"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
+  <a href="sect0006.html#a0000000021"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
  </li>
 
   </ul>
  </li>
 <li class="">
-  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Solvency II: the one-year view</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0007.html#a0000000022"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
+ </li>
+
+  </ul>
  </li>
 <li class=" active current">
-  <a href="sect0008.html"><span class="toc_ref">8</span> <span class="toc_entry">Reference computation</span></a>
+  <a href="sect0008.html"><span class="toc_ref">8</span> <span class="toc_entry">Röhr 2016: the error-propagation form</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0008.html#a0000000023"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000024"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000025"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000026"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000027"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0009.html"><span class="toc_ref">9</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html"><span class="toc_ref">10</span> <span class="toc_entry">Reference computation</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
@@ -106,16 +139,1618 @@
 
 
 <div class="main-text">
-<h1 id="a0000000009">8 Reference computation</h1>
-<p>Mack’s 1993 example (the Taylor and Ashe 1983 triangle) is reproduced to every printed digit (nine reserves, the total 18,681 thousand, all standard-error percentages) by a dependency-free script implementing the definitions above in floating point. The Lean definitions are over \(\mathbb {R}\) and noncomputable; the script is the reference computation, not the Lean code. </p>
-<dl class="bibliography">
-  <dt><a name="Mack1993">1</a></dt>
-  <dd><p>T. Mack, Distribution-free calculation of the standard error of chain ladder reserve estimates, ASTIN Bulletin 23 (1993) 213-225. </p>
-</dd>
-  <dt><a name="Mack1999">2</a></dt>
-  <dd><p>T. Mack, The standard error of chain ladder reserve estimates: recursive calculation and inclusion of a tail factor, ASTIN Bulletin 29 (1999) 361-366. </p>
-</dd>
-</dl>
+<h1 id="a0000000009">8 Röhr 2016: the error-propagation form</h1>
+<p>Röhr, <em>Chain ladder and error propagation</em>, ASTIN Bulletin 46 (2016) 293–330, derives the chain-ladder prediction error from the error-propagation formula. The chain-ladder ultimate \(\hat C_{i,n-1} = C_{i,d}\prod _{k=d}^{n-2}\hat f_k\), \(d = n-1-i\), is a product, so a first-order expansion in the development factors turns the relative squared error of the product into the <em>sum</em> of the relative squared errors of the factors. The paper’s classical-case display is </p>
+<div class="displaymath" id="a0000000075">
+  \[  \frac{\widehat{\mathrm{msep}}(\hat R_i)}{\hat C_{i,n-1}^2} = \sum _k \hat u_k^2 ,  \]
+</div>
+<p> where \(\hat u_k^2\) is the relative uncertainty attached to development step \(k\), and the derivation splits it into a process part and a parameter part, </p>
+<div class="displaymath" id="a0000000076">
+  \[  \hat u_k^2 = \frac{\hat\sigma _k^2}{\hat f_k^2\, \hat C_{i,k}} + \frac{\hat\sigma _k^2}{\hat f_k^2\, S_k},  \]
+</div>
+<p> the first from the conditional variance \(\sigma _k^2 C_{i,k}\) of the step itself, the second from the estimation variance \(\sigma _k^2/S_k\) of \(\hat f_k\). </p>
+<p><em>Source note.</em> The full text of Röhr (2016) is paywalled and was not available for this formalization. What is formalized is the classical-case (ultimate run-off, single accident year) display quoted above, taken from the paper’s own abstract — “in the classical case treated by Mack (1993) the mean squared prediction error divided by the squared estimated ultimate loss can be written as \(\sum _j \hat u_j^2\), where \(\hat u_j\) measures the (relative) uncertainty around the \(j\)-th development factor and the proportion of the estimated ultimate loss that it affects”, with “a split into process error and parameter error” — together with the two parts in the form above. The paper’s claims-development-result formulas between two arbitrary future horizons are not formalized here, and neither is its own aggregation over accident years. </p>
+<h1 id="a0000000023">8.1 Definitions</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rohrRel">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.1</span>
+    <span class="definition_thmtitle">Röhr’s relative uncertainties</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:rohrRel">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:sigma2">Definition 2.5</a></li>
+          
+          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
+          
+          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
+          
+          <li><a href="sect0002.html#def:S">Definition 2.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrRelProcess" class="lean_decl">VerifiedReserving.rohrRelProcess</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrRelParam" class="lean_decl">VerifiedReserving.rohrRelParam</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrRelVar" class="lean_decl">VerifiedReserving.rohrRelVar</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(\hat u_{k,\mathrm{proc}}^2 = \hat\sigma _k^2/(\hat f_k^2 \hat C_{i,k})\), \(\hat u_{k,\mathrm{par}}^2 = \hat\sigma _k^2/(\hat f_k^2 S_k)\), and \(\hat u_k^2 = \hat u_{k,\mathrm{proc}}^2 + \hat u_{k,\mathrm{par}}^2\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rohrMsep">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.2</span>
+    <span class="definition_thmtitle">Röhr’s linearized prediction error</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:rohrMsep">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#def:rohrRel">Definition 8.1</a></li>
+          
+          <li><a href="sect0002.html#def:reserve">Definition 2.7</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrProcess" class="lean_decl">VerifiedReserving.rohrProcess</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrParameter" class="lean_decl">VerifiedReserving.rohrParameter</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrMsep" class="lean_decl">VerifiedReserving.rohrMsep</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> The process term \(\hat C_{i,n-1}^2 \sum _{k=d}^{n-2}\hat u_{k,\mathrm{proc}}^2\), the parameter term \(\hat C_{i,n-1}^2 \sum _{k=d}^{n-2}\hat u_{k,\mathrm{par}}^2\), and their sum \(\mathrm{rohrMsep}_i = \hat C_{i,n-1}^2 \sum _{k=d}^{n-2}\hat u_k^2\). </p>
+
+  </div>
+</div>
+<h1 id="a0000000024">8.2 The split, and the two Mack plug-ins</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:rohrSplit">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.3</span>
+    <span class="lemma_thmtitle">Process plus parameter</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#lem:rohrSplit">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000077"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#def:rohrMsep">Definition 8.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrMsep_eq_rohrProcess_add_rohrParameter" class="lean_decl">VerifiedReserving.rohrMsep_eq_rohrProcess_add_rohrParameter</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> \(\mathrm{rohrMsep}_i\) is the process term plus the parameter term. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000077">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Termwise, by construction. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:rohrParam">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.4</span>
+    <span class="lemma_thmtitle">Parameter term is Mack’s estimation term</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#lem:rohrParam">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000078"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#def:rohrMsep">Definition 8.2</a></li>
+          
+          <li><a href="sect0006.html#def:bbmw">Definition 6.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrRelParam_eq_relVar" class="lean_decl">VerifiedReserving.rohrRelParam_eq_relVar</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrParameter_eq_mackEstimation" class="lean_decl">VerifiedReserving.rohrParameter_eq_mackEstimation</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> \(\hat u_{k,\mathrm{par}}^2 = a_k\), so Röhr’s parameter term is Mack’s estimation-error term \(\hat C_{i,n-1}^2 \sum _k a_k\) exactly. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000078">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\hat\sigma _k^2/(\hat f_k^2 S_k) = (\hat\sigma _k^2/\hat f_k^2)/S_k\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:ChatSplit">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.5</span>
+    <span class="lemma_thmtitle">Splitting the projection</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#lem:ChatSplit">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000079"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.Chat_eq_Chat_mul_prod" class="lean_decl">VerifiedReserving.Chat_eq_Chat_mul_prod</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> For \(n-1-i \le k \le m\), \(\hat C_{i,m} = \hat C_{i,k}\prod _{l=k}^{m-1}\hat f_l\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000079">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Split the product of the definition at \(k\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rohrProcess">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.6</span>
+    <span class="theorem_thmtitle">Process term is Mack’s process variance</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:rohrProcess">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000080"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#def:rohrMsep">Definition 8.2</a></li>
+          
+          <li><a href="sect0005.html#def:mackEst">Definition 5.24</a></li>
+          
+          <li><a href="sect0008.html#lem:ChatSplit">Lemma 8.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrProcess_eq_mackProcess" class="lean_decl">VerifiedReserving.rohrProcess_eq_mackProcess</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Let \(i \le n-1\) and suppose \(\hat f_k \neq 0\) and \(\hat C_{i,k} \neq 0\) for every \(k = d,\dots ,n-2\). Then Röhr’s process term equals \(\mathrm{procVar}\), Mack’s process variance recursion \(V_{m+1} = \hat f_{d+m}^2 V_m + \hat\sigma _{d+m}^2 \hat C_{i,d+m}\), \(V_0 = 0\), run for \(i\) steps with \(\hat f, \hat\sigma ^2\) plugged in. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000080">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Write \(\hat C_{i,n-1} = \hat C_{i,k}\, \hat f_k \prod _{l=k+1}^{n-2}\hat f_l\) by Lemma&#160;<a href="sect0008.html#lem:ChatSplit">8.5</a>. Then \(\hat C_{i,n-1}^2 \hat\sigma _k^2/(\hat f_k^2 \hat C_{i,k}) = \big(\prod _{l=k+1}^{n-2}\hat f_l\big)^2 \hat\sigma _k^2 \hat C_{i,k}\), which is the \(k\)-th summand of the closed form of \(\mathrm{procVar}\); reindex \(k = d+j\), \(j = 0,\dots ,i-1\). </p>
+
+  </div>
+</div>
+<h1 id="a0000000025">8.3 Catalogue row 3</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rohrMsep">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.7</span>
+    <span class="theorem_thmtitle">Röhr \(=\) Mack 1993</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:rohrMsep">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000081"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#def:rohrMsep">Definition 8.2</a></li>
+          
+          <li><a href="sect0002.html#def:msep">Definition 2.8</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrMsep_eq_msep" class="lean_decl">VerifiedReserving.rohrMsep_eq_msep</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msep_div_ultimate_sq" class="lean_decl">VerifiedReserving.msep_div_ultimate_sq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(\mathrm{rohrMsep}_i = \widehat{\mathrm{msep}}(\hat R_i)\), with no side condition: the linearized error-propagation form and Mack’s 1993 closed form are equal term by term. This catalogue row therefore has zero correction term, in contrast with Theorem&#160;<a href="sect0006.html#thm:catalogue">6.3</a>. Dividing by \(\hat C_{i,n-1}^2 \neq 0\) recovers Röhr’s display \(\widehat{\mathrm{msep}}(\hat R_i)/\hat C_{i,n-1}^2 = \sum _k \hat u_k^2\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000081">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\hat\sigma _k^2/(\hat f_k^2 \hat C_{i,k}) + \hat\sigma _k^2/(\hat f_k^2 S_k) = (\hat\sigma _k^2/\hat f_k^2)(1/\hat C_{i,k} + 1/S_k)\) termwise. </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:msepSplit">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">8.8</span>
+    <span class="corollary_thmtitle">Mack’s closed form is process plus estimation</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#cor:msepSplit">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000082"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#thm:rohrMsep">Theorem 8.7</a></li>
+          
+          <li><a href="sect0008.html#thm:rohrProcess">Theorem 8.6</a></li>
+          
+          <li><a href="sect0008.html#lem:rohrParam">Lemma 8.4</a></li>
+          
+          <li><a href="sect0008.html#lem:rohrSplit">Lemma 8.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msep_eq_mackProcess_add_mackEstimation" class="lean_decl">VerifiedReserving.msep_eq_mackProcess_add_mackEstimation</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrMsep_eq_mackProcess_add_mackEstimation" class="lean_decl">VerifiedReserving.rohrMsep_eq_mackProcess_add_mackEstimation</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> Under the hypotheses of Theorem&#160;<a href="sect0008.html#thm:rohrProcess">8.6</a>, \(\widehat{\mathrm{msep}}(\hat R_i) = \mathrm{mackProcess}_i + \mathrm{mackEstimation}_i\): reading Mack’s formula through Röhr’s split identifies its two halves with the two plug-in estimators of the stochastic layer. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000082">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Chain Theorem&#160;<a href="sect0008.html#thm:rohrMsep">8.7</a>, Lemma&#160;<a href="sect0008.html#lem:rohrSplit">8.3</a>, Theorem&#160;<a href="sect0008.html#thm:rohrProcess">8.6</a> and Lemma&#160;<a href="sect0008.html#lem:rohrParam">8.4</a>. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rohrVsBbmw">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.9</span>
+    <span class="theorem_thmtitle">What the linearization costs</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:rohrVsBbmw">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000083"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#lem:rohrParam">Lemma 8.4</a></li>
+          
+          <li><a href="sect0006.html#def:bbmw">Definition 6.1</a></li>
+          
+          <li><a href="sect0006.html#thm:catalogue">Theorem 6.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bbmwEstimation_sub_rohrParameter" class="lean_decl">VerifiedReserving.bbmwEstimation_sub_rohrParameter</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrParameter_le_bbmwEstimation" class="lean_decl">VerifiedReserving.rohrParameter_le_bbmwEstimation</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Röhr’s parameter term is the first-order part of the conditional-resampling term: their difference is exactly \(\hat C_{i,n-1}^2\big(\prod _k(1+a_k) - 1 - \sum _k a_k\big)\), and with \(a_k \ge 0\) along the row Röhr’s term is the smaller one. Linearizing in the estimated factors is precisely the step that replaces the product by the sum. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000083">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Lemma&#160;<a href="sect0008.html#lem:rohrParam">8.4</a> and Theorem&#160;<a href="sect0006.html#thm:catalogue">6.3</a>. </p>
+
+  </div>
+</div>
+<h1 id="a0000000026">8.4 The total reserve</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rohrTotal">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.10</span>
+    <span class="definition_thmtitle">Aggregate</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:rohrTotal">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#def:rohrMsep">Definition 8.2</a></li>
+          
+          <li><a href="sect0006.html#def:total">Definition 6.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrMsepTotal" class="lean_decl">VerifiedReserving.rohrMsepTotal</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> Röhr’s single-year terms carried into Mack’s Corollary, with Mack’s cross terms: \(\sum _i \mathrm{rohrMsep}_i + \sum _i \mathrm{mackCross}_i\). The cross terms are Mack’s; the paper’s own aggregation over accident years could not be checked against the source, so this is recorded as a definition rather than attributed. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rohrTotal">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.11</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:rohrTotal">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000084"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#def:rohrTotal">Definition 8.10</a></li>
+          
+          <li><a href="sect0008.html#thm:rohrMsep">Theorem 8.7</a></li>
+          
+          <li><a href="sect0006.html#def:total">Definition 6.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrMsepTotal_eq_msepTotal" class="lean_decl">VerifiedReserving.rohrMsepTotal_eq_msepTotal</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> That aggregate is Mack’s total-reserve estimator \(\widehat{\mathrm{msep}}(\hat R)\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000084">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Theorem&#160;<a href="sect0008.html#thm:rohrMsep">8.7</a> row by row. </p>
+
+  </div>
+</div>
+<h1 id="a0000000027">8.5 The total reserve: the exact conditional MSEP</h1>
+<p>Mack’s Corollary estimates the mean squared error of prediction of the total reserve \(\hat R = \sum _i \hat R_i\). The estimator is Definition&#160;<a href="sect0006.html#def:total">6.5</a>; the object it estimates is the conditional MSEP of the sum, and this section proves what that object is. </p>
+<p>Write \(\hat C_i = \hat C_{i,n-1}\) for the chain-ladder ultimate of accident year \(i\), \(C_i = C_{i,n-1}\) for the true ultimate, \(\mathcal{D}\) for the \(\sigma \)-algebra of the observed data (the one Theorem&#160;<a href="sect0005.html#thm:msep">5.23</a> conditions on) and \(M_i = E[C_i \mid \mathcal{D}]\). </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:crossFree">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.12</span>
+    <span class="definition_thmtitle">Cross-term condition</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:crossFree">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.CondCrossFree" class="lean_decl">VerifiedReserving.CondCrossFree</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>For a finite set \(s\) of accident years and targets \(Y_i\), </p>
+<div class="displaymath" id="a0000000085">
+  \[  E\big[(Y_i - E[Y_i \mid \mathcal{D}])(Y_j - E[Y_j \mid \mathcal{D}]) \; \big|\;  \mathcal{D}\big] = 0 \qquad \text{for } i \ne j \text{ in } s .  \]
+</div>
+<p> This is what independence across accident years supplies, in the same way that the \(\mathcal{D}_k\)-conditioned form of (M1) (Definition&#160;<a href="sect0005.html#def:Mack1">5.2</a>) is what it supplies for a single row. Like (M1), (M3) and the “no extra information” hypotheses of Theorem&#160;<a href="sect0005.html#thm:msep">5.23</a>, it is carried as a hypothesis; the passage from independence of the rows to it is not formalized. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:centred">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.13</span>
+    <span class="lemma_thmtitle">Conditional variance as a centred second moment</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#lem:centred">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000086"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#lem:msep_decomp">Lemma 5.22</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integrable_sq_of_memLp" class="lean_decl">VerifiedReserving.integrable_sq_of_memLp</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_sq_sub_condExp" class="lean_decl">VerifiedReserving.condExp_sq_sub_condExp</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> For \(Y \in L^2\), \(E[(E[Y \mid \mathcal{D}] - Y)^2 \mid \mathcal{D}] = E[Y^2 \mid \mathcal{D}] - E[Y \mid \mathcal{D}]^2\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000086">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Lemma&#160;<a href="sect0005.html#lem:msep_decomp">5.22</a> with the predictor taken to be \(E[Y \mid \mathcal{D}]\) itself, so that the estimation-error term is zero. Square integrability supplies every product integrability side condition by Hölder. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:varAdd">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.14</span>
+    <span class="lemma_thmtitle">Conditional variances add</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#lem:varAdd">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000087"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#def:crossFree">Definition 8.12</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_sq_finsetSum_of_cross" class="lean_decl">VerifiedReserving.condExp_sq_finsetSum_of_cross</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> If \(E[Z_i Z_j \mid \mathcal{D}] = 0\) for \(i \ne j\) in \(s\) and each \(Z_i \in L^2\), then \(E[(\sum _i Z_i)^2 \mid \mathcal{D}] = \sum _i E[Z_i^2 \mid \mathcal{D}]\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000087">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Expand the square into the double sum \(\sum _{i,j} Z_i Z_j\), take conditional expectations term by term, and drop the off-diagonal terms. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:msepSum">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.15</span>
+    <span class="theorem_thmtitle">Conditional MSEP of a sum</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:msepSum">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000088"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#def:crossFree">Definition 8.12</a></li>
+          
+          <li><a href="sect0008.html#lem:centred">Lemma 8.13</a></li>
+          
+          <li><a href="sect0008.html#lem:varAdd">Lemma 8.14</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_sq_finsetSum_sub_of_stronglyMeasurable" class="lean_decl">VerifiedReserving.condExp_sq_finsetSum_sub_of_stronglyMeasurable</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> For \(\mathcal{D}\)-measurable predictors \(P_i\) of square-integrable targets \(Y_i\) whose centred versions satisfy Definition&#160;<a href="sect0008.html#def:crossFree">8.12</a>, </p>
+<div class="displaymath" id="a0000000089">
+  \[  E\Big[\Big(\sum _i P_i - \sum _i Y_i\Big)^2 \; \Big|\;  \mathcal{D}\Big] = \sum _i \big(E[Y_i^2 \mid \mathcal{D}] - E[Y_i \mid \mathcal{D}]^2\big) + \Big(\sum _i \big(P_i - E[Y_i \mid \mathcal{D}]\big)\Big)^2 .  \]
+</div>
+<p> The conditional variances add; the estimation errors add <em>before</em> they are squared. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000088">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Lemma&#160;<a href="sect0005.html#lem:msep_decomp">5.22</a> applied to the totals, then Lemma&#160;<a href="sect0008.html#lem:centred">8.13</a> to rewrite the conditional variance of the total as a centred second moment, then Lemma&#160;<a href="sect0008.html#lem:varAdd">8.14</a> to split it, then Lemma&#160;<a href="sect0008.html#lem:centred">8.13</a> again on each accident year. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:ultimateD">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.16</span>
+    <span class="lemma_thmtitle">Theorem&#160;1 and the process variance at the ultimate</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#lem:ultimateD">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000090"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#lem:C_succ">Lemma 5.11</a></li>
+          
+          <li><a href="sect0005.html#thm:procVar">Theorem 5.21</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.memLp_eps" class="lean_decl">VerifiedReserving.memLp_eps</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_ultimate_of_Mack1" class="lean_decl">VerifiedReserving.condExp_ultimate_of_Mack1</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condVar_ultimate_eq_procVar" class="lean_decl">VerifiedReserving.condVar_ultimate_eq_procVar</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Under (M1), (M3) and the hypotheses of Theorem&#160;<a href="sect0005.html#thm:msep">5.23</a> that \(\mathcal{D}\) carries no information about row \(i\)’s future beyond \(\mathcal{D}_{n-1-i}\), </p>
+<div class="displaymath" id="a0000000091">
+  \[  M_i = C_{i,n-1-i} \prod _{l=n-1-i}^{n-2} f_l, \qquad E[C_i^2 \mid \mathcal{D}] - M_i^2 = \mathrm{procVar}\big(C_{i,n-1-i}, f, \sigma ^2, n-1-i\big)_i .  \]
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000090">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Specialize Lemma&#160;<a href="sect0005.html#lem:C_succ">5.11</a> and Theorem&#160;<a href="sect0005.html#thm:procVar">5.21</a> to \(m = i\), where \((n-1-i) + i = n-1\), and transport them from \(\mathcal{D}_{n-1-i}\) to \(\mathcal{D}\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:msepTotalExact">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.17</span>
+    <span class="theorem_thmtitle">Mack’s Corollary, exact form</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:msepTotalExact">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000092"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#thm:msepSum">Theorem 8.15</a></li>
+          
+          <li><a href="sect0008.html#lem:ultimateD">Lemma 8.16</a></li>
+          
+          <li><a href="sect0006.html#def:total">Definition 6.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condMsepTotal_eq" class="lean_decl">VerifiedReserving.condMsepTotal_eq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Under (M1), (M3), square integrability of the claims and of the chain-ladder predictions, the “no extra information” hypotheses of Theorem&#160;<a href="sect0005.html#thm:msep">5.23</a> for each accident year, and Definition&#160;<a href="sect0008.html#def:crossFree">8.12</a> for the true ultimates, </p>
+<div class="displaymath" id="a0000000093">
+  \[  E\Big[\Big(\sum _i \hat C_i - \sum _i C_i\Big)^2 \; \Big|\;  \mathcal{D}\Big] = \sum _i \mathrm{procVar}_i + \Big(\sum _i \big(\hat C_i - M_i\big)\Big)^2 .  \]
+</div>
+<p> The process variances add; the estimation errors add before being squared, and expanding that square is the exact origin of the cross terms of Definition&#160;<a href="sect0006.html#def:total">6.5</a>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000092">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Theorem&#160;<a href="sect0008.html#thm:msepSum">8.15</a> with \(P_i = \hat C_i\) and \(Y_i = C_i\), then Lemma&#160;<a href="sect0008.html#lem:ultimateD">8.16</a> term by term. </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:msepTotalLower">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">8.18</span>
+    <span class="corollary_thmtitle">The total MSEP dominates the process variance</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#cor:msepTotalLower">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000094"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#thm:msepTotalExact">Theorem 8.17</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_procVar_le_condMsepTotal" class="lean_decl">VerifiedReserving.sum_procVar_le_condMsepTotal</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> \(\sum _i \mathrm{procVar}_i \le E[(\sum _i \hat C_i - \sum _i C_i)^2 \mid \mathcal{D}]\) almost everywhere, whatever the chain-ladder predictions happen to be. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000094">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>The estimation-error term of Theorem&#160;<a href="sect0008.html#thm:msepTotalExact">8.17</a> is a square. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:plugin">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.19</span>
+    <span class="theorem_thmtitle">The plug-in has the same two-part shape</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:plugin">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000095"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:msep">Definition 2.8</a></li>
+          
+          <li><a href="sect0005.html#def:mackEst">Definition 5.24</a></li>
+          
+          <li><a href="sect0006.html#def:total">Definition 6.5</a></li>
+          
+          <li><a href="sect0008.html#thm:msepTotalExact">Theorem 8.17</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msep_eq_mackProcess_add_mackEstimation" class="lean_decl">VerifiedReserving.msep_eq_mackProcess_add_mackEstimation</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msepTotal_eq_sum_mackProcess_add_mackTotalEstimation" class="lean_decl">VerifiedReserving.msepTotal_eq_sum_mackProcess_add_mackTotalEstimation</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> On a row whose development factors \(\hat f_k\) and projections \(\hat C_{i,k}\) do not vanish, the \(1/\hat C_{i,k}\) half of Mack’s formula is exactly \(\mathrm{procVar}\) with \(\hat f, \hat\sigma ^2\) substituted and the \(1/S_k\) half is exactly the plug-in estimation error: \(\widehat{\mathrm{msep}}_i = \mathrm{mackProcess}_i + \mathrm{mackEstimation}_i\), hence \(\widehat{\mathrm{msep}}(\hat R) = \sum _i \mathrm{mackProcess}_i + \mathrm{mackTotalEstimation}\). This is the plug-in counterpart of Theorem&#160;<a href="sect0008.html#thm:msepTotalExact">8.17</a>: process variances added, and everything else, single-year terms and cross terms alike, estimating the squared summed estimation error. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000095">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Reindex the row sum over \(\mathrm{Ico}(n-1-i, n-1)\) by \(j {\lt} i\), split the product \(\prod _{l=n-1-i}^{n-2} \hat f_l\) at the factor \(\hat f_{n-1-i+j}\), and cancel; then sum over accident years. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:crossFreeWitness">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.20</span>
+    <span class="theorem_thmtitle">The cross-term condition is not vacuous</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:crossFreeWitness">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000096"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0008.html#def:crossFree">Definition 8.12</a></li>
+          
+          <li><a href="sect0009.html#thm:nontrivial">Theorem 9.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.condExp_ultimate_bot" class="lean_decl">VerifiedReserving.NontrivialModel.condExp_ultimate_bot</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.crossFree_ultimates" class="lean_decl">VerifiedReserving.NontrivialModel.crossFree_ultimates</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.ultimate_nontrivial" class="lean_decl">VerifiedReserving.NontrivialModel.ultimate_nontrivial</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.exists_crossFree_nondegenerate" class="lean_decl">VerifiedReserving.NontrivialModel.exists_crossFree_nondegenerate</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> On the nondegenerate model of Theorem&#160;<a href="sect0009.html#thm:nontrivial">9.1</a> the three true ultimates are genuinely random and their centred versions are conditionally uncorrelated given the trivial \(\sigma \)-algebra: Definition&#160;<a href="sect0008.html#def:crossFree">8.12</a> holds for \(s = \{ 0,1,2\} \) without holding for want of randomness. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000096">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>The unconditional mean of each ultimate is \(c f^2\); the centred ultimates are proportional to the shocks \(\xi _i\), which are orthogonal. </p>
+
+  </div>
+</div>
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
@@ -127,9 +1762,11 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0007.html" title="Non-vacuity: a nondegenerate model"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0007.html" title="Solvency II: the one-year view"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0009.html" title="Non-vacuity: a nondegenerate model"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

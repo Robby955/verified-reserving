@@ -12,9 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bornhuetter-Ferguson on the chain-ladder pattern</title>
-<link rel="next" href="sect0005.html" title="The stochastic layer" />
-<link rel="prev" href="sect0003.html" title="Mack 1999 equals Mack 1993" />
+<title>Non-vacuity: a nondegenerate model</title>
+<link rel="next" href="sect0010.html" title="Reference computation" />
+<link rel="prev" href="sect0008.html" title="Röhr 2016: the error-propagation form" />
 <link rel="up" href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -51,7 +51,7 @@
 <li class="">
   <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Mack 1999 equals Mack 1993</span></a>
  </li>
-<li class=" active current">
+<li class="">
   <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Bornhuetter-Ferguson on the chain-ladder pattern</span></a>
  </li>
 <li class="">
@@ -124,7 +124,7 @@
 
   </ul>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0009.html"><span class="toc_ref">9</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
  </li>
 <li class="">
@@ -139,165 +139,14 @@
 
 
 <div class="main-text">
-<h1 id="a0000000005">4 Bornhuetter-Ferguson on the chain-ladder pattern</h1>
-<div class="definition_thmwrapper theorem-style-definition" id="def:bf">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">4.1</span>
-    <span class="definition_thmtitle">Cumulative development factor, BF reserve and ultimate</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#def:bf">#</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
-          
-          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.cdf" class="lean_decl">VerifiedReserving.cdf</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve" class="lean_decl">VerifiedReserving.bfReserve</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfUltimate" class="lean_decl">VerifiedReserving.bfUltimate</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p> \(\mathrm{cdf}_i = \prod _{k=d}^{n-2}\hat f_k\); for an a priori ultimate \(U\), \(R^{BF}_i = U\, (1 - 1/\mathrm{cdf}_i)\) and \(\hat C^{BF}_{i,n-1} = C_{i,d} + R^{BF}_i\). </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:bf_linear">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">4.2</span>
-    <span class="lemma_thmtitle">Linearity</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:bf_linear">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000040"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0004.html#def:bf">Definition 4.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve_smul" class="lean_decl">VerifiedReserving.bfReserve_smul</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve_add" class="lean_decl">VerifiedReserving.bfReserve_add</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> \(R^{BF}_i(aU) = a\, R^{BF}_i(U)\) and \(R^{BF}_i(U+V) = R^{BF}_i(U) + R^{BF}_i(V)\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000040">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Ring identities. </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:bf_cl">
+<h1 id="a0000000010">9 Non-vacuity: a nondegenerate model</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:nontrivial">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">4.3</span>
-    <span class="theorem_thmtitle">BF with the chain-ladder prior is chain ladder</span>
+    <span class="theorem_thmlabel">9.1</span>
+    <span class="theorem_thmtitle">A nondegenerate Mack model exists</span>
     <div class="thm_header_extras">
 
     
@@ -305,9 +154,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#thm:bf_cl">#</a>
+    <a class="icon proof" href="sect0009.html#thm:nontrivial">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000041"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0009.html#a0000000097"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -323,9 +172,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0004.html#def:bf">Definition 4.1</a></li>
+          <li><a href="sect0005.html#def:Mack1">Definition 5.2</a></li>
           
-          <li><a href="sect0002.html#def:reserve">Definition 2.7</a></li>
+          <li><a href="sect0005.html#def:Mack3">Definition 5.13</a></li>
           
         </ul>
     
@@ -345,9 +194,9 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfUltimate_of_ultimate" class="lean_decl">VerifiedReserving.bfUltimate_of_ultimate</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.X" class="lean_decl">VerifiedReserving.NontrivialModel.X</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve_of_ultimate" class="lean_decl">VerifiedReserving.bfReserve_of_ultimate</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.exists_nontrivial_mack_model" class="lean_decl">VerifiedReserving.NontrivialModel.exists_nontrivial_mack_model</a></li>
           
         </ul>
     
@@ -358,11 +207,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> If \(\mathrm{cdf}_i \neq 0\) and \(U = \hat C_{i,n-1}\), then \(\hat C^{BF}_{i,n-1} = \hat C_{i,n-1}\) and \(R^{BF}_i = \hat R_i\). </p>
+  <p> There is a probability space, a random triangle with three accident years, and constants \(f_k\), \(\sigma _k^2\) with \(\sigma _0^2 {\gt} 0\), satisfying (M1), (M3) and (M2’), in which the first development step is genuinely random. The model: eight equally likely outcomes, an independent \(\pm 1\) shock per accident year, \(C_{i,0} = c\) and \(C_{i,k} = c f^k (1 + s\, \xi _i)\) for \(k \ge 1\), with \(\mathcal{D}_0\) trivial and \(\mathcal{D}_k\) everything for \(k \ge 1\). </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000041">
+<div class="proof_wrapper" id="a0000000097">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -370,17 +219,17 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>\(\hat C_{i,n-1} = C_{i,d}\, \mathrm{cdf}_i\), so \(U(1 - 1/\mathrm{cdf}_i) = C_{i,d}\mathrm{cdf}_i - C_{i,d}\). </p>
+  <p>Conditional expectations given the trivial \(\sigma \)-algebra are eight-term averages; the shocks sum to zero, have unit square, and are orthogonal. </p>
 
   </div>
 </div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:bf_frac">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:instantiated">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
     </span>
-    <span class="lemma_thmlabel">4.4</span>
-    <span class="lemma_thmtitle">The BF reserve is a fraction of the prior</span>
+    <span class="theorem_thmlabel">9.2</span>
+    <span class="theorem_thmtitle">Headline theorems instantiated</span>
     <div class="thm_header_extras">
 
     
@@ -388,9 +237,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#lem:bf_frac">#</a>
+    <a class="icon proof" href="sect0009.html#thm:instantiated">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000042"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0009.html#a0000000098"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -406,7 +255,15 @@
         
         <ul class="uses">
           
-          <li><a href="sect0004.html#def:bf">Definition 4.1</a></li>
+          <li><a href="sect0009.html#thm:nontrivial">Theorem 9.1</a></li>
+          
+          <li><a href="sect0005.html#thm:unbiased">Theorem 5.5</a></li>
+          
+          <li><a href="sect0005.html#thm:mack1">Theorem 5.12</a></li>
+          
+          <li><a href="sect0005.html#thm:var_fhat">Theorem 5.15</a></li>
+          
+          <li><a href="sect0005.html#thm:sigma2">Theorem 5.18</a></li>
           
         </ul>
     
@@ -426,11 +283,13 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.one_le_cdf" class="lean_decl">VerifiedReserving.one_le_cdf</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.fhat0_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.fhat0_unbiased</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve_nonneg" class="lean_decl">VerifiedReserving.bfReserve_nonneg</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.ultimate_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.ultimate_unbiased</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve_le" class="lean_decl">VerifiedReserving.bfReserve_le</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.var_fhat0" class="lean_decl">VerifiedReserving.NontrivialModel.var_fhat0</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.sigma2_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.sigma2_unbiased</a></li>
           
         </ul>
     
@@ -440,12 +299,12 @@
     
         </div>
   </div>
-  <div class="lemma_thmcontent">
-  <p> If every development factor along the row is at least \(1\), then \(\mathrm{cdf}_i \ge 1\) and, for \(U \ge 0\), \(0 \le R^{BF}_i(U) \le U\). </p>
+  <div class="theorem_thmcontent">
+  <p> On that model, \(E[\hat f_0 \mid \mathcal{D}_0] = 2\) although \(\hat f_0\) is random; \(E[\hat C_{2,2} \mid \mathcal{D}_0] = E[C_{2,2} \mid \mathcal{D}_0]\); \(E[(\hat f_0 - 2)^2 \mid \mathcal{D}_0] = \sigma _0^2 / S_0\); and \(E[\hat\sigma _0^2 \mid \mathcal{D}_0] = \sigma _0^2 = 4\). </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000042">
+<div class="proof_wrapper" id="a0000000098">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -453,7 +312,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>A product of numbers at least \(1\) is at least \(1\); then \(0 \le 1 - 1/\mathrm{cdf}_i \le 1\). </p>
+  <p>Direct instantiation of the general theorems; every hypothesis is discharged. </p>
 
   </div>
 </div>
@@ -468,11 +327,11 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0003.html" title="Mack 1999 equals Mack 1993"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0008.html" title="Röhr 2016: the error-propagation form"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0005.html" title="The stochastic layer"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0010.html" title="Reference computation"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

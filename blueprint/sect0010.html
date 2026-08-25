@@ -12,9 +12,8 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Introduction</title>
-<link rel="next" href="sect0002.html" title="The chain-ladder estimators" />
-<link rel="prev" href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint" />
+<title>Reference computation</title>
+<link rel="prev" href="sect0009.html" title="Non-vacuity: a nondegenerate model" />
 <link rel="up" href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -32,7 +31,7 @@
 <div class="wrapper">
 <nav class="toc">
 <ul class="sub-toc-0">
-<li class=" active current">
+<li class="">
   <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
  </li>
 <li class="">
@@ -127,7 +126,7 @@
 <li class="">
   <a href="sect0009.html"><span class="toc_ref">9</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0010.html"><span class="toc_ref">10</span> <span class="toc_entry">Reference computation</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
@@ -139,13 +138,16 @@
 
 
 <div class="main-text">
-<h1 id="a0000000002">1 Introduction</h1>
-<p>This blueprint tracks the formalization of Mack’s distribution-free chain-ladder model <span class="cite">
-	[
-	<a href="sect0010.html#Mack1993" >1</a>
-	]
-</span> in Lean 4 on top of mathlib. Each statement below carries the name of its Lean declaration; green nodes in the dependency graph are proved, the others are open work listed in the roadmap. Statements are given in the paper’s own terms, and where a published formula is an estimator or an approximation rather than an identity, the text says so. </p>
-<p>A run-off triangle with \(n\) accident years and \(n\) development years is a function \(C : \mathbb {N} \to \mathbb {N} \to \mathbb {R}\); \(C_{i,k}\) is the cumulative claims of accident year \(i\) at development year \(k\), observed when \(i + k \le n-1\). The latest observed entry of accident year \(i\) is \(C_{i,\, n-1-i}\). </p>
+<h1 id="a0000000011">10 Reference computation</h1>
+<p>Mack’s 1993 example (the Taylor and Ashe 1983 triangle) is reproduced to every printed digit (nine reserves, the total 18,681 thousand, all standard-error percentages) by a dependency-free script implementing the definitions above in floating point. The Lean definitions are over \(\mathbb {R}\) and noncomputable; the script is the reference computation, not the Lean code. </p>
+<dl class="bibliography">
+  <dt><a name="Mack1993">1</a></dt>
+  <dd><p>T. Mack, Distribution-free calculation of the standard error of chain ladder reserve estimates, ASTIN Bulletin 23 (1993) 213-225. </p>
+</dd>
+  <dt><a name="Mack1999">2</a></dt>
+  <dd><p>T. Mack, The standard error of chain ladder reserve estimates: recursive calculation and inclusion of a tail factor, ASTIN Bulletin 29 (1999) 361-366. </p>
+</dd>
+</dl>
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
@@ -157,11 +159,9 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0009.html" title="Non-vacuity: a nondegenerate model"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
-</a>
-  <a href="sect0002.html" title="The chain-ladder estimators"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 
