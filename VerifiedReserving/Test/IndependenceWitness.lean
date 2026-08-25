@@ -1,4 +1,5 @@
 import VerifiedReserving.Independence
+import VerifiedReserving.ObservedData
 import VerifiedReserving.Test.NontrivialModel
 
 /-!
@@ -394,6 +395,28 @@ theorem exists_independence_witness :
           ∃ ω₁ ω₂, X'.C 0 1 ω₁ ≠ X'.C 0 1 ω₂ :=
   ⟨X, rowsIndep, rowsGenerateD, mack1Row, mack1_from_rows, mack2'_from_rows,
     0, 1, nontrivial⟩
+
+/-- Every real function on the eight-outcome space is square integrable. -/
+theorem memLp_all (g : Ω → ℝ) : MemLp g 2 μ :=
+  ⟨(measurable_of_countable g).aestronglyMeasurable, eLpNorm_lt_top_of_finite⟩
+
+/-- **No further information about one accident year, on the witness.**  The
+observed data and the row's development-year filtration at its latest diagonal
+give the same conditional expectation of any entry of the row.  This is the
+hypothesis Mack discharges in one sentence in the proof of Theorem 3
+(1993, pp. 217-219). -/
+theorem condExp_obsSigma_eq_D_of_witness {i : ℕ} (hi : i < 3) (k : ℕ) :
+    μ[X.C i k | X.obsSigma] =ᵐ[μ] μ[X.C i k | X.D (3 - 1 - i)] :=
+  condExp_C_obsSigma_eq_D X rowsGenerateD rowsIndep hi k (integrable_all _)
+
+/-- **Mack's cross-term condition on the witness, from independence alone.**
+The centred true ultimates of the three accident years are conditionally
+uncorrelated given the observed data, by `condCrossFree_of_rows`; the same
+model has genuinely random claims, so the condition does not hold for want of
+randomness. -/
+theorem condCrossFree_obs_of_rows :
+    CondCrossFree μ X.obsSigma (Finset.range 3) fun i => X.C i 2 :=
+  condCrossFree_of_rows X rowsIndep fun _ _ => memLp_all _
 
 end
 

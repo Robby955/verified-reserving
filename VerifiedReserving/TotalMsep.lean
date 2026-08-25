@@ -54,8 +54,8 @@ uncorrelated given `D`:
 This is what independence across accident years supplies, in the same way that
 the `D_k`-conditioned form of (M1) is what it supplies for a single row. Like
 `Mack1`, `Mack3` and the `hfut` hypotheses of `condMsep_eq`, it is recorded here
-as a hypothesis; the passage from independence of the rows to it is not
-formalized. -/
+as a hypothesis; the passage from independence of the rows to it is
+`condCrossFree_of_rows` in `ObservedData.lean`. -/
 def CondCrossFree (μ : Measure Ω) (D : MeasurableSpace Ω) (s : Finset ι) (Y : ι → Ω → ℝ) : Prop :=
   ∀ i ∈ s, ∀ j ∈ s, i ≠ j →
     μ[fun ω => (Y i ω - (μ[Y i | D]) ω) * (Y j ω - (μ[Y j | D]) ω) | D] =ᵐ[μ] 0
