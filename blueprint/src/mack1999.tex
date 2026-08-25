@@ -1,0 +1,207 @@
+% Blueprint chapter for VerifiedReserving/Mack1999.lean.
+% Mack, The standard error of chain ladder reserve estimates: recursive
+% calculation and inclusion of a tail factor, ASTIN Bulletin 29 (1999) 361-366.
+% Same zero-based conventions as content.tex; d = n-1-i is the latest observed
+% development year of accident year i.
+
+\chapter{Mack 1999: general weights and exponent}
+
+\cite{Mack1999} generalizes the development factor of \cite{Mack1993} to
+\[
+  \hat f_k
+   = \frac{\sum_i w_{ik} C_{ik}^{\alpha} F_{ik}}{\sum_i w_{ik} C_{ik}^{\alpha}},
+  \qquad F_{ik} = \frac{C_{i,k+1}}{C_{ik}},
+\]
+with weights $w_{ik} \in [0,1]$ and an exponent $\alpha$. The three cases the paper names
+are $\alpha = 1$ with unit weights (the 1993 estimator), $\alpha = 0$ (the simple average of
+the individual factors) and $\alpha = 2$ (the ordinary regression of $C_{i,k+1}$ on $C_{ik}$
+through the origin). The variance assumption becomes
+$\mathrm{Var}(F_{ik} \mid \cdot) = \sigma_k^2/(w_{ik} C_{ik}^{\alpha})$ and the variance
+estimator
+\[
+  \hat\sigma_k^2 = \frac{1}{n-k-2}\sum_i w_{ik} C_{ik}^{\alpha}\,(F_{ik} - \hat f_k)^2 .
+\]
+
+Two displays of that paper are formalized here. The first is its equation~$(*)$,
+\[
+  \mathrm{s.e.}(\hat C_{in})^2
+   = \hat C_{in}^2 \sum_{k} \frac{\hat\sigma_k^2}{\hat f_k^2}
+     \Big( \frac{1}{w_{ik}\hat C_{ik}^{\alpha}} + \frac{1}{\sum_j w_{jk} C_{jk}^{\alpha}} \Big),
+\]
+the second is the recursion displayed immediately below it,
+\[
+  \mathrm{s.e.}(\hat C_{i,k+1})^2
+   = \hat C_{ik}^2\big(\mathrm{s.e.}(F_{ik})^2 + \mathrm{s.e.}(\hat f_k)^2\big)
+     + \mathrm{s.e.}(\hat C_{ik})^2 \hat f_k^2,
+  \qquad
+  \mathrm{s.e.}(F_{ik})^2 = \frac{\hat\sigma_k^2}{w_{ik}\hat C_{ik}^{\alpha}},
+  \quad
+  \mathrm{s.e.}(\hat f_k)^2 = \frac{\hat\sigma_k^2}{\sum_j w_{jk} C_{jk}^{\alpha}} .
+\]
+Theorem~\ref{thm:recursion} proves the two agree for $\alpha = 1$ and unit weights; the
+theorem below carries the weights and the exponent through, and the unit case recovers the
+earlier statement. Mack's restriction $w_{ik} \in [0,1]$ and $\alpha \in \{0,1,2\}$ is a
+modelling choice and no identity here uses it, so it is not imposed. Section~3 of the paper,
+the tail factor, is a convention: the tail factor and the variance parameters attached to it
+are supplied by the actuary, so they are definitions with no theorem attached.
+
+\section{Definitions}
+
+\begin{definition}[Weighted column sums]\label{def:mwSums}\lean{VerifiedReserving.unitWeights, VerifiedReserving.SW, VerifiedReserving.TW}\leanok
+\uses{def:contributors, def:F}
+$S_k^{w,\alpha} = \sum_{i=0}^{n-k-2} w_{ik} C_{ik}^{\alpha}$ and
+$T_k^{w,\alpha} = \sum_{i=0}^{n-k-2} w_{ik} C_{ik}^{\alpha} F_{ik}$;
+\texttt{unitWeights} is $w_{ik} = 1$.
+\end{definition}
+
+\begin{definition}[Weighted development factor and variance estimator]\label{def:mwFhat}\lean{VerifiedReserving.fhatW, VerifiedReserving.sigma2W}\leanok
+\uses{def:mwSums}
+$\hat f_k = T_k^{w,\alpha}/S_k^{w,\alpha}$ and
+$\hat\sigma_k^2 = \frac{1}{n-k-2}\sum_i w_{ik} C_{ik}^{\alpha}(F_{ik} - \hat f_k)^2$.
+As in the 1993 case, division by zero is zero, and the value at $k = n-2$ is an
+extrapolation convention rather than an estimator.
+\end{definition}
+
+\begin{definition}[Weighted projection and ultimate]\label{def:mwChat}\lean{VerifiedReserving.ChatW, VerifiedReserving.ultimateW}\leanok
+\uses{def:mwFhat}
+$\hat C_{ik} = C_{i,n-1-i}\prod_{j=n-1-i}^{k-1}\hat f_j$ and $\hat C_{i,n-1}$, both built from
+the weighted factors.
+\end{definition}
+
+\begin{definition}[Mack 1999, equation $(*)$]\label{def:mwMsep}\lean{VerifiedReserving.mackTermW, VerifiedReserving.msepW}\leanok
+\uses{def:mwChat, def:mwFhat}
+\[
+  \mathrm{msepW}_i
+   = \hat C_{i,n-1}^2 \sum_{k=n-1-i}^{n-2} \frac{\hat\sigma_k^2}{\hat f_k^2}
+     \Big( \frac{1}{w_{ik}\hat C_{ik}^{\alpha}} + \frac{1}{S_k^{w,\alpha}} \Big).
+\]
+\end{definition}
+
+\begin{definition}[Mack 1999, the recursion below $(*)$]\label{def:mwRec}\lean{VerifiedReserving.se2recW}\leanok
+\uses{def:mwChat, def:mwFhat}
+$m$ steps of
+$V_{m+1} = \hat C_{ik}^2\big(\hat\sigma_k^2/(w_{ik}\hat C_{ik}^{\alpha}) + \hat\sigma_k^2/S_k^{w,\alpha}\big) + V_m \hat f_k^2$
+with $k = n-1-i+m$, started at $V_0 = 0$ on the latest observed diagonal.
+\end{definition}
+
+\begin{definition}[Tail factor, Section 3]\label{def:mwTail}\lean{VerifiedReserving.tailUltimate, VerifiedReserving.tailSe2Step}\leanok
+\uses{def:mwRec}
+The ultimate extended by a tail factor, $\hat C_{i,\infty} = \hat C_{i,n-1} f_{\mathrm{tail}}$,
+and one further step of the recursion with actuary-supplied
+$f_{\mathrm{tail}}, \sigma^2_{\mathrm{tail}}, S_{\mathrm{tail}}$. The paper gives no estimator
+for these, only the arithmetic of carrying them through; they are conventions and no theorem
+here uses them.
+\end{definition}
+
+\section{Deterministic identities}
+
+\begin{lemma}[Weighted-average form]\label{lem:mwWeighted}\lean{VerifiedReserving.fhatW_eq_weighted_average}\leanok
+\uses{def:mwFhat}
+$\hat f_k = \sum_i \big(w_{ik} C_{ik}^{\alpha}/S_k^{w,\alpha}\big) F_{ik}$: the generalized
+factor is the $w_{ik}C_{ik}^{\alpha}$-weighted mean of the individual factors. This is
+Lemma~\ref{lem:weighted} with the weights carried through; because the numerator is written
+with the individual factors, no nonvanishing hypothesis is needed.
+\end{lemma}
+\begin{proof}\leanok Divide the numerator termwise by $S_k^{w,\alpha}$. \end{proof}
+
+\begin{lemma}[Weighted sum of squares]\label{lem:mwSq}\lean{VerifiedReserving.weighted_sq_devW, VerifiedReserving.weighted_sq_devW_at_fhatW}\leanok
+\uses{def:mwFhat}
+For any centre $f$,
+$\sum_i w_{ik}C_{ik}^{\alpha}(F_{ik}-f)^2 = \sum_i w_{ik}C_{ik}^{\alpha}F_{ik}^2 - 2fT_k^{w,\alpha} + f^2 S_k^{w,\alpha}$;
+at $f = \hat f_k$, and provided $S_k^{w,\alpha}\neq 0$, the cross term collapses to
+$\sum_i w_{ik}C_{ik}^{\alpha}F_{ik}^2 - S_k^{w,\alpha}\hat f_k^2$. These generalize
+Lemmas~\ref{lem:sq} and~\ref{lem:sq_fhat}, the identity behind the $n-k-2$ degrees of freedom.
+\end{lemma}
+\begin{proof}\leanok Expand termwise; substitute $\hat f_k = T_k^{w,\alpha}/S_k^{w,\alpha}$. \end{proof}
+
+\begin{lemma}[Weighted projection identities]\label{lem:mwChat}\lean{VerifiedReserving.ChatW_succ, VerifiedReserving.ChatW_diag, VerifiedReserving.msepW_eq_sum_mackTermW}\leanok
+\uses{def:mwChat, def:mwMsep}
+$\hat C_{i,k+1} = \hat C_{ik}\hat f_k$ for $k \ge n-1-i$, $\hat C_{i,n-1-i} = C_{i,n-1-i}$, and
+$(*)$ is the ultimate squared times the sum of its summands.
+\end{lemma}
+\begin{proof}\leanok Split the product at the top; the empty product is one. \end{proof}
+
+\section{The recursion equals $(*)$}
+
+\begin{lemma}[One recursion step]\label{lem:mwStep}\lean{VerifiedReserving.se2recW_step}\leanok
+For reals $A, B, P, S, f, X$ with $f \neq 0$,
+\[
+  A^2\Big(\frac{B}{P} + \frac{B}{S}\Big) + A^2 X f^2
+   = (Af)^2\Big(X + \frac{B}{f^2}\Big(\frac{1}{P} + \frac{1}{S}\Big)\Big).
+\]
+With $A = \hat C_{ik}$, $f = \hat f_k$, $B = \hat\sigma_k^2$, $P = w_{ik}\hat C_{ik}^{\alpha}$
+and $S = S_k^{w,\alpha}$: one step of the recursion adds exactly the $k$-th summand of $(*)$,
+scaled by the next projection. Only $\hat f_k \neq 0$ is used.
+\end{lemma}
+\begin{proof}\leanok Clear the $f^2$ and expand. \end{proof}
+
+\begin{lemma}[Truncated form]\label{lem:mwClosed}\lean{VerifiedReserving.se2recW_eq_closed}\leanok
+\uses{def:mwRec, def:mwMsep, lem:mwStep, lem:mwChat}
+If $\hat f_k \neq 0$ for $k = n-1-i, \dots, n-2-i+m$, then $m$ steps of the recursion equal
+$\hat C_{i,n-1-i+m}^2 \sum_{k=n-1-i}^{n-2-i+m}$ of the summands of $(*)$.
+\end{lemma}
+\begin{proof}\leanok Induction on $m$, using Lemma~\ref{lem:mwStep} at each step. \end{proof}
+
+\begin{theorem}[Mack 1999: the recursion is $(*)$, for general $w$ and $\alpha$]\label{thm:mwRecursion}\lean{VerifiedReserving.se2recW_eq_msepW}\leanok
+\uses{lem:mwClosed}
+Let $i \le n-1$ and suppose $\hat f_k \neq 0$ for $k = n-1-i, \dots, n-2$. Then $i$ steps of
+the recursion displayed below Mack's $(*)$ return $(*)$ itself, for every weight function and
+every exponent.
+\end{theorem}
+\begin{proof}\leanok Lemma~\ref{lem:mwClosed} at $m = i$, where $n-1-i+i = n-1$. \end{proof}
+
+\section{The 1993 case}
+
+\begin{lemma}[Unit weights, $\alpha = 1$]\label{lem:mwUnit}\lean{VerifiedReserving.SW_unit, VerifiedReserving.TW_unit, VerifiedReserving.fhatW_unit, VerifiedReserving.sigma2W_unit, VerifiedReserving.ChatW_unit, VerifiedReserving.ultimateW_unit, VerifiedReserving.mackTermW_unit}\leanok
+\uses{def:mwSums, def:mwFhat, def:mwChat, def:fhat, def:sigma2, def:Chat}
+At $\alpha = 1$ with $w \equiv 1$, and provided the contributing entries $C_{ik}$ do not
+vanish, $S_k^{w,\alpha} = S_k$, $T_k^{w,\alpha} = T_k$, $\hat f_k$ is the 1993 factor,
+$\hat\sigma_k^2$ is Mack's 1993 variance estimator, and the projection, the ultimate and the
+summands of $(*)$ are the 1993 ones.
+\end{lemma}
+\begin{proof}\leanok Termwise; $C_{ik} F_{ik} = C_{i,k+1}$ needs $C_{ik} \neq 0$. \end{proof}
+
+\begin{theorem}[Specialization to Mack 1993]\label{thm:mwUnit}\lean{VerifiedReserving.msepW_unit, VerifiedReserving.se2recW_unit, VerifiedReserving.se2recW_eq_msep_unit}\leanok
+\uses{lem:mwUnit, thm:mwRecursion, def:msep, def:se2rec, thm:recursion}
+At $\alpha = 1$ with unit weights, $(*)$ is $\widehat{\mathrm{msep}}(\hat R_i)$ and the
+generalized recursion is the recursion of Theorem~\ref{thm:recursion}; consequently $i$ steps
+of it return Mack's 1993 estimator, which is the statement of Theorem~\ref{thm:recursion}.
+\end{theorem}
+\begin{proof}\leanok Rewrite with Lemma~\ref{lem:mwUnit} and apply Theorem~\ref{thm:mwRecursion}. \end{proof}
+
+\section{Conditional unbiasedness of the weighted estimator}
+
+\begin{definition}[The weighted estimator as a random variable]\label{def:mwRv}\lean{VerifiedReserving.RandomTriangle.SWrv, VerifiedReserving.RandomTriangle.fhatWrv, VerifiedReserving.RandomTriangle.gW}\leanok
+\uses{def:RandomTriangle, def:mwFhat}
+$S_k^{w,\alpha}$ and $\hat f_k$ evaluated at the random triangle, with weights
+$w_{ik} : \Omega \to \mathbb{R}$, together with the multiplier
+$g_{ik} = w_{ik} C_{ik}^{\alpha}/C_{ik}$ of $C_{i,k+1}$ inside $\hat f_k$. For $\alpha = 1$
+and unit weights $g_{ik} = 1$; writing the multiplier this way keeps $\alpha = 0$, where it
+is $1/C_{ik}$, in range.
+\end{definition}
+
+\begin{lemma}[Measurability and the linear form]\label{lem:mwMeas}\lean{VerifiedReserving.RandomTriangle.SWrv_eq_sum, VerifiedReserving.RandomTriangle.stronglyMeasurable_SWrv, VerifiedReserving.RandomTriangle.stronglyMeasurable_gW, VerifiedReserving.RandomTriangle.fhatWrv_eq}\leanok
+\uses{def:mwRv}
+If every $w_{ik}$ is $\mathcal{D}_k$-measurable then so are $S_k^{w,\alpha}$ and $g_{ik}$
+(for $\alpha = 2$ this uses only measurability of $C_{ik}$, since $C_{ik}^2$ is then
+measurable), and
+$\hat f_k = (S_k^{w,\alpha})^{-1}\sum_i g_{ik} C_{i,k+1}$: the weighted estimator is a
+$\mathcal{D}_k$-measurable linear combination of the next column.
+\end{lemma}
+\begin{proof}\leanok Sums, products, powers and quotients of measurable functions; the linear
+form is $w_{ik}C_{ik}^{\alpha}F_{ik} = (w_{ik}C_{ik}^{\alpha}/C_{ik})C_{i,k+1}$. \end{proof}
+
+\begin{theorem}[The weighted estimator is conditionally unbiased]\label{thm:mwUnbiased}\lean{VerifiedReserving.condExp_fhatWrv}\leanok
+\uses{lem:mwMeas, def:Mack1, thm:unbiased}
+Under (M1) in the $\mathcal{D}_k$ form, with $\mathcal{D}_k$-measurable weights, on the event
+that the weighted column sum is nonzero and where the contributing entries $C_{ik}$ do not
+vanish, $E[\hat f_k \mid \mathcal{D}_k] = f_k$ for every exponent $\alpha$. This is
+Theorem~\ref{thm:unbiased} with the weights and the exponent carried through.
+\end{theorem}
+\begin{proof}\leanok
+By Lemma~\ref{lem:mwMeas} the factor $(S_k^{w,\alpha})^{-1}$ is $\mathcal{D}_k$-measurable and
+comes out of the conditional expectation, and so does each $g_{ik}$. (M1) turns
+$E[C_{i,k+1}\mid\mathcal{D}_k]$ into $f_k C_{ik}$, and $g_{ik}C_{ik} = w_{ik}C_{ik}^{\alpha}$
+when $C_{ik} \neq 0$, so the sum is $f_k S_k^{w,\alpha}$. The hypothesis $C_{ik}\neq 0$ is what
+the individual factors need in any case and cannot be dropped at $\alpha = 0$.
+\end{proof}

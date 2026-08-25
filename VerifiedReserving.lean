@@ -14,4 +14,5 @@ import VerifiedReserving.Counterexample
 import VerifiedReserving.TotalReserve
 import VerifiedReserving.Rohr
 import VerifiedReserving.TotalMsep
+import VerifiedReserving.Mack1999
 import VerifiedReserving.Test.NontrivialModel
