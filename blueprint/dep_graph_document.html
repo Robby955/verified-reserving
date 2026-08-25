@@ -446,7 +446,7 @@
       </span>
       <span class="definition_thmlabel">2.8</span><span class="definition_thmtitle">Mack’s MSEP estimator</span></div>
     <div class="thm_thmcontent"><p> Mack (1993), Theorem 3: </p>
-<div class="displaymath" id="a0000000018">
+<div class="displaymath" id="a0000000019">
   \[  \widehat{\mathrm{msep}}(\hat R_i) = \hat C_{i,n-1}^2 \sum _{k=n-1-i}^{n-2} \frac{\hat\sigma _k^2}{\hat f_k^2} \Big(\frac{1}{\hat C_{i,k}} + \frac{1}{S_k}\Big).  \]
 </div>
 </div>
@@ -669,7 +669,7 @@
 	<a href="sect0008.html#Mack1999" >2</a>
 	]
 </span>, starting from \(\mathrm{se}^2 = 0\) on the latest diagonal \(d = n-1-i\) and stepping \(m\) times, </p>
-<div class="displaymath" id="a0000000026">
+<div class="displaymath" id="a0000000027">
   \[  \mathrm{se}^2_{m+1} = \hat C_{i,d+m}^2\Big(\frac{\hat\sigma _{d+m}^2}{\hat C_{i,d+m}} + \frac{\hat\sigma _{d+m}^2}{S_{d+m}}\Big) + \mathrm{se}^2_m\, \hat f_{d+m}^2 .  \]
 </div>
 </div>
@@ -748,6 +748,51 @@
            <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.sigma2Rv" class="lean_decl">VerifiedReserving.RandomTriangle.sigma2Rv</a></li>
         
            <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.wssRv" class="lean_decl">VerifiedReserving.RandomTriangle.wssRv</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:total_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:total" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">6.5</span><span class="definition_thmtitle">Total-reserve estimators</span></div>
+    <div class="thm_thmcontent"><p> Mack’s Corollary: \(\widehat{\mathrm{msep}}(\hat R) = \sum _i \widehat{\mathrm{msep}}_i + \sum _i \hat C_i \big(\sum _{j{\gt}i}\hat C_j\big)\,  2\sum _{k \in \mathrm{row}\, i} a_k\), the cross terms running over the older year’s remaining factors. The conditional-resampling aggregate replaces \(2\sum _k a_k\) by \(2(\prod _k (1+a_k) - 1)\) (Buchwalder et al. 2006, Section 4.3). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#def:total">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msepTotal" class="lean_decl">VerifiedReserving.msepTotal</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackCross" class="lean_decl">VerifiedReserving.mackCross</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bbmwCross" class="lean_decl">VerifiedReserving.bbmwCross</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackTotalEstimation" class="lean_decl">VerifiedReserving.mackTotalEstimation</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bbmwTotalEstimation" class="lean_decl">VerifiedReserving.bbmwTotalEstimation</a></li>
         
       </ul>
   </div>
@@ -1683,7 +1728,7 @@
       </span>
       <span class="theorem_thmlabel">5.23</span><span class="theorem_thmtitle">Mack’s Theorem 3, exact form</span></div>
     <div class="thm_thmcontent"><p> Let \(\mathcal{D}\) be the observed data. Assume \(\hat C_{i,d+m}\) is \(\mathcal{D}\)-measurable and that \(\mathcal{D}\) adds nothing to \(\mathcal{D}_d\) about row \(i\)’s future (the conditional mean and second moment of \(C_{i,d+m}\) given \(\mathcal{D}\) agree with those given \(\mathcal{D}_d\); this is what independence across accident years supplies). Then under (M1) and (M3) </p>
-<div class="displaymath" id="a0000000049">
+<div class="displaymath" id="a0000000050">
   \[  E\big[(\hat C_{i,d+m} - C_{i,d+m})^2 \mid \mathcal{D}\big] = V_m + \big(\hat C_{i,d+m} - C_{i,d}\textstyle \prod _{l{\lt}m} f_{d+l}\big)^2 .  \]
 </div>
 </div>
@@ -1841,6 +1886,45 @@
 
 
     
+    <div class="dep-modal-container" id="thm:total_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:total" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6.6</span><span class="theorem_thmtitle">Aggregated catalogue row</span></div>
+    <div class="thm_thmcontent"><p> The aggregated estimation-error terms differ by \(\sum _i \big(\hat C_i^2 + 2\hat C_i \sum _{j{\gt}i}\hat C_j\big)\big(\prod _{k \in \mathrm{row}\, i}(1+a_k) - 1 - \sum _{k \in \mathrm{row}\, i} a_k\big)\), which is nonnegative when the ultimates and the \(a_k\) are: Mack’s total is at most the resampling total, by the same row-wise second-order remainder as in the single-year case. </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#thm:total">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bbmwTotalEstimation_sub_mackTotalEstimation" class="lean_decl">VerifiedReserving.bbmwTotalEstimation_sub_mackTotalEstimation</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackTotalEstimation_le_bbmwTotalEstimation" class="lean_decl">VerifiedReserving.mackTotalEstimation_le_bbmwTotalEstimation</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="thm:unbiased_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -1947,7 +2031,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:RandomTriangle"	[color=green,		fillcolor="#B0ECA3",		label=RandomTriangle,		shape=box,		style=filled];	"def:Mack3"	[color=green,		fillcolor="#B0ECA3",		label=Mack3,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:Mack3"	[style=dashed];	"def:Mack1"	[color=green,		fillcolor="#B0ECA3",		label=Mack1,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:Mack1"	[style=dashed];	"def:rv"	[color=green,		fillcolor="#B0ECA3",		label=rv,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:rv"	[style=dashed];	"thm:nontrivial"	[color=green,		fillcolor="#1CAC78",		label=nontrivial,		shape=ellipse,		style=filled];	"def:Mack3" -> "thm:nontrivial"	[style=dashed];	"lem:fhat_sub"	[color=green,		fillcolor="#1CAC78",		label=fhat_sub,		shape=ellipse,		style=filled];	"def:Mack3" -> "lem:fhat_sub"	[style=dashed];	"lem:second_moment"	[color=green,		fillcolor="#1CAC78",		label=second_moment,		shape=ellipse,		style=filled];	"def:Mack3" -> "lem:second_moment"	[style=dashed];	"def:Mack1" -> "thm:nontrivial"	[style=dashed];	"def:Mack1" -> "lem:second_moment"	[style=dashed];	"thm:unbiased"	[color=green,		fillcolor="#1CAC78",		label=unbiased,		shape=ellipse,		style=filled];	"def:Mack1" -> "thm:unbiased"	[style=dashed];	"lem:C_succ"	[color=green,		fillcolor="#1CAC78",		label=C_succ,		shape=ellipse,		style=filled];	"def:Mack1" -> "lem:C_succ"	[style=dashed];	"def:rv" -> "lem:fhat_sub"	[style=dashed];	"def:sigma2Rv"	[color=green,		fillcolor="#B0ECA3",		label=sigma2Rv,		shape=box,		style=filled];	"def:rv" -> "def:sigma2Rv"	[style=dashed];	"lem:Srv_meas"	[color=green,		fillcolor="#1CAC78",		label=Srv_meas,		shape=ellipse,		style=filled];	"def:rv" -> "lem:Srv_meas"	[style=dashed];	"def:ChatRv"	[color=green,		fillcolor="#B0ECA3",		label=ChatRv,		shape=box,		style=filled];	"def:rv" -> "def:ChatRv"	[style=dashed];	"thm:instantiated"	[color=green,		fillcolor="#1CAC78",		label=instantiated,		shape=ellipse,		style=filled];	"thm:nontrivial" -> "thm:instantiated"	[style=dashed];	"thm:var_fhat"	[color=green,		fillcolor="#1CAC78",		label=var_fhat,		shape=ellipse,		style=filled];	"lem:fhat_sub" -> "thm:var_fhat"	[style=dashed];	"thm:procVar"	[color=green,		fillcolor="#1CAC78",		label=procVar,		shape=ellipse,		style=filled];	"lem:second_moment" -> "thm:procVar"	[style=dashed];	"thm:mack1"	[color=green,		fillcolor="#1CAC78",		label=mack1,		shape=ellipse,		style=filled];	"thm:unbiased" -> "thm:mack1"	[style=dashed];	"thm:uncorrelated"	[color=green,		fillcolor="#1CAC78",		label=uncorrelated,		shape=ellipse,		style=filled];	"thm:unbiased" -> "thm:uncorrelated"	[style=dashed];	"lem:C_succ" -> "thm:procVar"	[style=dashed];	"lem:C_succ" -> "thm:mack1"	[style=dashed];	"thm:sigma2"	[color=green,		fillcolor="#1CAC78",		label=sigma2,		shape=ellipse,		style=filled];	"def:sigma2Rv" -> "thm:sigma2"	[style=dashed];	"lem:Srv_meas" -> "thm:unbiased"	[style=dashed];	"lem:Srv_meas" -> "thm:var_fhat"	[style=dashed];	"lem:fhat_meas"	[color=green,		fillcolor="#1CAC78",		label=fhat_meas,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "lem:fhat_meas"	[style=dashed];	"lem:ChatRv_meas"	[color=green,		fillcolor="#1CAC78",		label=ChatRv_meas,		shape=ellipse,		style=filled];	"def:ChatRv" -> "lem:ChatRv_meas"	[style=dashed];	"thm:var_fhat" -> "thm:sigma2"	[style=dashed];	"thm:sigma2" -> "thm:instantiated"	[style=dashed];	"thm:msep"	[color=green,		fillcolor="#1CAC78",		label=msep,		shape=ellipse,		style=filled];	"thm:procVar" -> "thm:msep"	[style=dashed];	"def:procVar"	[color=green,		fillcolor="#B0ECA3",		label=procVar,		shape=box,		style=filled];	"def:procVar" -> "thm:procVar"	[style=dashed];	"def:mackEst"	[color=green,		fillcolor="#B0ECA3",		label=mackEst,		shape=box,		style=filled];	"def:procVar" -> "def:mackEst"	[style=dashed];	"def:bbmw"	[color=green,		fillcolor="#B0ECA3",		label=bbmw,		shape=box,		style=filled];	"def:mackEst" -> "def:bbmw"	[style=dashed];	"thm:catalogue"	[color=green,		fillcolor="#1CAC78",		label=catalogue,		shape=ellipse,		style=filled];	"def:bbmw" -> "thm:catalogue"	[style=dashed];	"lem:weighted"	[color=green,		fillcolor="#1CAC78",		label=weighted,		shape=ellipse,		style=filled];	"lem:oldest"	[color=green,		fillcolor="#1CAC78",		label=oldest,		shape=ellipse,		style=filled];	"lem:se2rec_closed"	[color=green,		fillcolor="#1CAC78",		label=se2rec_closed,		shape=ellipse,		style=filled];	"thm:recursion"	[color=green,		fillcolor="#1CAC78",		label=recursion,		shape=ellipse,		style=filled];	"lem:se2rec_closed" -> "thm:recursion"	[style=dashed];	"lem:ChatRv_meas" -> "thm:mack1"	[style=dashed];	"thm:mack1" -> "thm:instantiated"	[style=dashed];	"thm:mack1" -> "thm:msep"	[style=dashed];	"thm:counterexample"	[color=green,		fillcolor="#1CAC78",		label=counterexample,		shape=ellipse,		style=filled];	"thm:catalogue" -> "thm:counterexample"	[style=dashed];	"thm:mack2"	[color=green,		fillcolor="#1CAC78",		label=mack2,		shape=ellipse,		style=filled];	"thm:uncorrelated" -> "thm:mack2"	[style=dashed];	"lem:T"	[color=green,		fillcolor="#1CAC78",		label=T,		shape=ellipse,		style=filled];	"lem:sq"	[color=green,		fillcolor="#1CAC78",		label=sq,		shape=ellipse,		style=filled];	"lem:T" -> "lem:sq"	[style=dashed];	"lem:sq_fhat"	[color=green,		fillcolor="#1CAC78",		label=sq_fhat,		shape=ellipse,		style=filled];	"lem:sq" -> "lem:sq_fhat"	[style=dashed];	"lem:sq_eps"	[color=green,		fillcolor="#1CAC78",		label=sq_eps,		shape=ellipse,		style=filled];	"lem:sq" -> "lem:sq_eps"	[style=dashed];	"lem:sq_eps" -> "thm:sigma2"	[style=dashed];	"lem:bf_linear"	[color=green,		fillcolor="#1CAC78",		label=bf_linear,		shape=ellipse,		style=filled];	"lem:bf_frac"	[color=green,		fillcolor="#1CAC78",		label=bf_frac,		shape=ellipse,		style=filled];	"lem:fhat_meas" -> "lem:ChatRv_meas"	[style=dashed];	"lem:fhat_meas" -> "thm:uncorrelated"	[style=dashed];	"def:Chat"	[color=green,		fillcolor="#B0ECA3",		label=Chat,		shape=box,		style=filled];	"lem:Chat_succ"	[color=green,		fillcolor="#1CAC78",		label=Chat_succ,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:Chat_succ"	[style=dashed];	"def:bf"	[color=green,		fillcolor="#B0ECA3",		label=bf,		shape=box,		style=filled];	"def:Chat" -> "def:bf"	[style=dashed];	"lem:Chat_diag"	[color=green,		fillcolor="#1CAC78",		label=Chat_diag,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:Chat_diag"	[style=dashed];	"def:reserve"	[color=green,		fillcolor="#B0ECA3",		label=reserve,		shape=box,		style=filled];	"def:Chat" -> "def:reserve"	[style=dashed];	"def:mackTerm"	[color=green,		fillcolor="#B0ECA3",		label=mackTerm,		shape=box,		style=filled];	"def:Chat" -> "def:mackTerm"	[style=dashed];	"def:se2rec"	[color=green,		fillcolor="#B0ECA3",		label=se2rec,		shape=box,		style=filled];	"def:Chat" -> "def:se2rec"	[style=dashed];	"lem:Chat_succ" -> "lem:se2rec_closed"	[style=dashed];	"def:bf" -> "lem:bf_linear"	[style=dashed];	"def:bf" -> "lem:bf_frac"	[style=dashed];	"thm:bf_cl"	[color=green,		fillcolor="#1CAC78",		label=bf_cl,		shape=ellipse,		style=filled];	"def:bf" -> "thm:bf_cl"	[style=dashed];	"def:reserve" -> "lem:oldest"	[style=dashed];	"def:reserve" -> "thm:bf_cl"	[style=dashed];	"def:msep"	[color=green,		fillcolor="#B0ECA3",		label=msep,		shape=box,		style=filled];	"def:reserve" -> "def:msep"	[style=dashed];	"def:mackTerm" -> "lem:se2rec_closed"	[style=dashed];	"lem:msep_sum"	[color=green,		fillcolor="#1CAC78",		label=msep_sum,		shape=ellipse,		style=filled];	"def:mackTerm" -> "lem:msep_sum"	[style=dashed];	"def:se2rec" -> "lem:se2rec_closed"	[style=dashed];	"def:msep" -> "lem:msep_sum"	[style=dashed];	"lem:msep_sum" -> "thm:recursion"	[style=dashed];	"def:fhat"	[color=green,		fillcolor="#B0ECA3",		label=fhat,		shape=box,		style=filled];	"def:fhat" -> "def:rv"	[style=dashed];	"def:fhat" -> "lem:weighted"	[style=dashed];	"def:fhat" -> "lem:sq_fhat"	[style=dashed];	"def:fhat" -> "lem:sq_eps"	[style=dashed];	"def:fhat" -> "def:Chat"	[style=dashed];	"def:sigma2"	[color=green,		fillcolor="#B0ECA3",		label=sigma2,		shape=box,		style=filled];	"def:fhat" -> "def:sigma2"	[style=dashed];	"def:sigma2" -> "def:sigma2Rv"	[style=dashed];	"def:sigma2" -> "def:mackEst"	[style=dashed];	"def:sigma2" -> "def:mackTerm"	[style=dashed];	"def:sigma2" -> "def:se2rec"	[style=dashed];	"def:sigma2" -> "def:msep"	[style=dashed];	"lem:msep_decomp"	[color=green,		fillcolor="#1CAC78",		label=msep_decomp,		shape=ellipse,		style=filled];	"lem:msep_decomp" -> "thm:msep"	[style=dashed];	"def:contributors"	[color=green,		fillcolor="#B0ECA3",		label=contributors,		shape=box,		style=filled];	"def:S"	[color=green,		fillcolor="#B0ECA3",		label=S,		shape=box,		style=filled];	"def:contributors" -> "def:S"	[style=dashed];	"def:S" -> "lem:T"	[style=dashed];	"def:S" -> "def:fhat"	[style=dashed];	"def:F"	[color=green,		fillcolor="#B0ECA3",		label=F,		shape=box,		style=filled];	"def:F" -> "lem:weighted"	[style=dashed];	"def:F" -> "lem:T"	[style=dashed];	"def:F" -> "def:sigma2"	[style=dashed];	"lem:remainder"	[color=green,		fillcolor="#1CAC78",		label=remainder,		shape=ellipse,		style=filled];	"lem:remainder" -> "thm:catalogue"	[style=dashed];}`)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:fhat"	[color=green,		fillcolor="#B0ECA3",		label=fhat,		shape=box,		style=filled];	"lem:sq_fhat"	[color=green,		fillcolor="#1CAC78",		label=sq_fhat,		shape=ellipse,		style=filled];	"def:fhat" -> "lem:sq_fhat"	[style=dashed];	"lem:sq_eps"	[color=green,		fillcolor="#1CAC78",		label=sq_eps,		shape=ellipse,		style=filled];	"def:fhat" -> "lem:sq_eps"	[style=dashed];	"def:rv"	[color=green,		fillcolor="#B0ECA3",		label=rv,		shape=box,		style=filled];	"def:fhat" -> "def:rv"	[style=dashed];	"lem:weighted"	[color=green,		fillcolor="#1CAC78",		label=weighted,		shape=ellipse,		style=filled];	"def:fhat" -> "lem:weighted"	[style=dashed];	"def:sigma2"	[color=green,		fillcolor="#B0ECA3",		label=sigma2,		shape=box,		style=filled];	"def:fhat" -> "def:sigma2"	[style=dashed];	"def:Chat"	[color=green,		fillcolor="#B0ECA3",		label=Chat,		shape=box,		style=filled];	"def:fhat" -> "def:Chat"	[style=dashed];	"thm:sigma2"	[color=green,		fillcolor="#1CAC78",		label=sigma2,		shape=ellipse,		style=filled];	"lem:sq_eps" -> "thm:sigma2"	[style=dashed];	"lem:fhat_sub"	[color=green,		fillcolor="#1CAC78",		label=fhat_sub,		shape=ellipse,		style=filled];	"def:rv" -> "lem:fhat_sub"	[style=dashed];	"def:sigma2Rv"	[color=green,		fillcolor="#B0ECA3",		label=sigma2Rv,		shape=box,		style=filled];	"def:rv" -> "def:sigma2Rv"	[style=dashed];	"lem:Srv_meas"	[color=green,		fillcolor="#1CAC78",		label=Srv_meas,		shape=ellipse,		style=filled];	"def:rv" -> "lem:Srv_meas"	[style=dashed];	"def:ChatRv"	[color=green,		fillcolor="#B0ECA3",		label=ChatRv,		shape=box,		style=filled];	"def:rv" -> "def:ChatRv"	[style=dashed];	"def:sigma2" -> "def:sigma2Rv"	[style=dashed];	"def:se2rec"	[color=green,		fillcolor="#B0ECA3",		label=se2rec,		shape=box,		style=filled];	"def:sigma2" -> "def:se2rec"	[style=dashed];	"def:mackEst"	[color=green,		fillcolor="#B0ECA3",		label=mackEst,		shape=box,		style=filled];	"def:sigma2" -> "def:mackEst"	[style=dashed];	"def:mackTerm"	[color=green,		fillcolor="#B0ECA3",		label=mackTerm,		shape=box,		style=filled];	"def:sigma2" -> "def:mackTerm"	[style=dashed];	"def:msep"	[color=green,		fillcolor="#B0ECA3",		label=msep,		shape=box,		style=filled];	"def:sigma2" -> "def:msep"	[style=dashed];	"def:bf"	[color=green,		fillcolor="#B0ECA3",		label=bf,		shape=box,		style=filled];	"def:Chat" -> "def:bf"	[style=dashed];	"def:Chat" -> "def:se2rec"	[style=dashed];	"def:Chat" -> "def:mackTerm"	[style=dashed];	"lem:Chat_succ"	[color=green,		fillcolor="#1CAC78",		label=Chat_succ,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:Chat_succ"	[style=dashed];	"lem:Chat_diag"	[color=green,		fillcolor="#1CAC78",		label=Chat_diag,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:Chat_diag"	[style=dashed];	"def:reserve"	[color=green,		fillcolor="#B0ECA3",		label=reserve,		shape=box,		style=filled];	"def:Chat" -> "def:reserve"	[style=dashed];	"thm:bf_cl"	[color=green,		fillcolor="#1CAC78",		label=bf_cl,		shape=ellipse,		style=filled];	"def:bf" -> "thm:bf_cl"	[style=dashed];	"lem:bf_frac"	[color=green,		fillcolor="#1CAC78",		label=bf_frac,		shape=ellipse,		style=filled];	"def:bf" -> "lem:bf_frac"	[style=dashed];	"lem:bf_linear"	[color=green,		fillcolor="#1CAC78",		label=bf_linear,		shape=ellipse,		style=filled];	"def:bf" -> "lem:bf_linear"	[style=dashed];	"thm:instantiated"	[color=green,		fillcolor="#1CAC78",		label=instantiated,		shape=ellipse,		style=filled];	"thm:sigma2" -> "thm:instantiated"	[style=dashed];	"thm:var_fhat"	[color=green,		fillcolor="#1CAC78",		label=var_fhat,		shape=ellipse,		style=filled];	"lem:fhat_sub" -> "thm:var_fhat"	[style=dashed];	"def:sigma2Rv" -> "thm:sigma2"	[style=dashed];	"lem:Srv_meas" -> "thm:var_fhat"	[style=dashed];	"lem:fhat_meas"	[color=green,		fillcolor="#1CAC78",		label=fhat_meas,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "lem:fhat_meas"	[style=dashed];	"thm:unbiased"	[color=green,		fillcolor="#1CAC78",		label=unbiased,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "thm:unbiased"	[style=dashed];	"lem:ChatRv_meas"	[color=green,		fillcolor="#1CAC78",		label=ChatRv_meas,		shape=ellipse,		style=filled];	"def:ChatRv" -> "lem:ChatRv_meas"	[style=dashed];	"lem:se2rec_closed"	[color=green,		fillcolor="#1CAC78",		label=se2rec_closed,		shape=ellipse,		style=filled];	"def:se2rec" -> "lem:se2rec_closed"	[style=dashed];	"def:bbmw"	[color=green,		fillcolor="#B0ECA3",		label=bbmw,		shape=box,		style=filled];	"def:mackEst" -> "def:bbmw"	[style=dashed];	"def:mackTerm" -> "lem:se2rec_closed"	[style=dashed];	"lem:msep_sum"	[color=green,		fillcolor="#1CAC78",		label=msep_sum,		shape=ellipse,		style=filled];	"def:mackTerm" -> "lem:msep_sum"	[style=dashed];	"def:msep" -> "lem:msep_sum"	[style=dashed];	"def:total"	[color=green,		fillcolor="#B0ECA3",		label=total,		shape=box,		style=filled];	"def:msep" -> "def:total"	[style=dashed];	"thm:recursion"	[color=green,		fillcolor="#1CAC78",		label=recursion,		shape=ellipse,		style=filled];	"lem:se2rec_closed" -> "thm:recursion"	[style=dashed];	"thm:catalogue"	[color=green,		fillcolor="#1CAC78",		label=catalogue,		shape=ellipse,		style=filled];	"def:bbmw" -> "thm:catalogue"	[style=dashed];	"def:bbmw" -> "def:total"	[style=dashed];	"lem:msep_sum" -> "thm:recursion"	[style=dashed];	"lem:Chat_succ" -> "lem:se2rec_closed"	[style=dashed];	"def:reserve" -> "thm:bf_cl"	[style=dashed];	"def:reserve" -> "def:msep"	[style=dashed];	"lem:oldest"	[color=green,		fillcolor="#1CAC78",		label=oldest,		shape=ellipse,		style=filled];	"def:reserve" -> "lem:oldest"	[style=dashed];	"thm:var_fhat" -> "thm:sigma2"	[style=dashed];	"thm:counterexample"	[color=green,		fillcolor="#1CAC78",		label=counterexample,		shape=ellipse,		style=filled];	"thm:catalogue" -> "thm:counterexample"	[style=dashed];	"lem:fhat_meas" -> "lem:ChatRv_meas"	[style=dashed];	"thm:uncorrelated"	[color=green,		fillcolor="#1CAC78",		label=uncorrelated,		shape=ellipse,		style=filled];	"lem:fhat_meas" -> "thm:uncorrelated"	[style=dashed];	"thm:mack1"	[color=green,		fillcolor="#1CAC78",		label=mack1,		shape=ellipse,		style=filled];	"lem:ChatRv_meas" -> "thm:mack1"	[style=dashed];	"thm:mack2"	[color=green,		fillcolor="#1CAC78",		label=mack2,		shape=ellipse,		style=filled];	"thm:uncorrelated" -> "thm:mack2"	[style=dashed];	"thm:mack1" -> "thm:instantiated"	[style=dashed];	"thm:msep"	[color=green,		fillcolor="#1CAC78",		label=msep,		shape=ellipse,		style=filled];	"thm:mack1" -> "thm:msep"	[style=dashed];	"thm:nontrivial"	[color=green,		fillcolor="#1CAC78",		label=nontrivial,		shape=ellipse,		style=filled];	"thm:nontrivial" -> "thm:instantiated"	[style=dashed];	"thm:procVar"	[color=green,		fillcolor="#1CAC78",		label=procVar,		shape=ellipse,		style=filled];	"thm:procVar" -> "thm:msep"	[style=dashed];	"def:contributors"	[color=green,		fillcolor="#B0ECA3",		label=contributors,		shape=box,		style=filled];	"def:S"	[color=green,		fillcolor="#B0ECA3",		label=S,		shape=box,		style=filled];	"def:contributors" -> "def:S"	[style=dashed];	"def:S" -> "def:fhat"	[style=dashed];	"lem:T"	[color=green,		fillcolor="#1CAC78",		label=T,		shape=ellipse,		style=filled];	"def:S" -> "lem:T"	[style=dashed];	"lem:sq"	[color=green,		fillcolor="#1CAC78",		label=sq,		shape=ellipse,		style=filled];	"lem:T" -> "lem:sq"	[style=dashed];	"thm:total"	[color=green,		fillcolor="#1CAC78",		label=total,		shape=ellipse,		style=filled];	"def:total" -> "thm:total"	[style=dashed];	"thm:unbiased" -> "thm:uncorrelated"	[style=dashed];	"thm:unbiased" -> "thm:mack1"	[style=dashed];	"def:procVar"	[color=green,		fillcolor="#B0ECA3",		label=procVar,		shape=box,		style=filled];	"def:procVar" -> "def:mackEst"	[style=dashed];	"def:procVar" -> "thm:procVar"	[style=dashed];	"lem:sq" -> "lem:sq_fhat"	[style=dashed];	"lem:sq" -> "lem:sq_eps"	[style=dashed];	"lem:second_moment"	[color=green,		fillcolor="#1CAC78",		label=second_moment,		shape=ellipse,		style=filled];	"lem:second_moment" -> "thm:procVar"	[style=dashed];	"lem:msep_decomp"	[color=green,		fillcolor="#1CAC78",		label=msep_decomp,		shape=ellipse,		style=filled];	"lem:msep_decomp" -> "thm:msep"	[style=dashed];	"def:RandomTriangle"	[color=green,		fillcolor="#B0ECA3",		label=RandomTriangle,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:rv"	[style=dashed];	"def:Mack1"	[color=green,		fillcolor="#B0ECA3",		label=Mack1,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:Mack1"	[style=dashed];	"def:Mack3"	[color=green,		fillcolor="#B0ECA3",		label=Mack3,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:Mack3"	[style=dashed];	"def:Mack1" -> "thm:nontrivial"	[style=dashed];	"def:Mack1" -> "thm:unbiased"	[style=dashed];	"def:Mack1" -> "lem:second_moment"	[style=dashed];	"lem:C_succ"	[color=green,		fillcolor="#1CAC78",		label=C_succ,		shape=ellipse,		style=filled];	"def:Mack1" -> "lem:C_succ"	[style=dashed];	"def:Mack3" -> "lem:fhat_sub"	[style=dashed];	"def:Mack3" -> "thm:nontrivial"	[style=dashed];	"def:Mack3" -> "lem:second_moment"	[style=dashed];	"lem:C_succ" -> "thm:mack1"	[style=dashed];	"lem:C_succ" -> "thm:procVar"	[style=dashed];	"def:F"	[color=green,		fillcolor="#B0ECA3",		label=F,		shape=box,		style=filled];	"def:F" -> "lem:weighted"	[style=dashed];	"def:F" -> "def:sigma2"	[style=dashed];	"def:F" -> "lem:T"	[style=dashed];	"lem:remainder"	[color=green,		fillcolor="#1CAC78",		label=remainder,		shape=ellipse,		style=filled];	"lem:remainder" -> "thm:catalogue"	[style=dashed];	"lem:remainder" -> "thm:total"	[style=dashed];}`)
     .on("end", interactive);
 
 latexLabelEscaper = function(label) {
