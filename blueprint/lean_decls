@@ -46,6 +46,14 @@ VerifiedReserving.condExp_C_succ
 VerifiedReserving.condExp_C_of_Mack1
 VerifiedReserving.condExp_ChatRv
 VerifiedReserving.condExp_ultimate_eq
+VerifiedReserving.RandomTriangle.trueCDR
+VerifiedReserving.condExp_trueCDR_eq_zero
+VerifiedReserving.condExp_C_of_Mack1_at
+VerifiedReserving.condExp_C_ultimate_of_Mack1
+VerifiedReserving.trueCDR_eq
+VerifiedReserving.obsCDR
+VerifiedReserving.obsCDR_eq_reserve_sub
+VerifiedReserving.RandomTriangle.obsCDRRv
 VerifiedReserving.RandomTriangle.eps
 VerifiedReserving.Mack3
 VerifiedReserving.Mack2'

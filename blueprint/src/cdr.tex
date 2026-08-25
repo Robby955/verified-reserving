@@ -1,0 +1,87 @@
+\chapter{Solvency II: the one-year view}
+
+\section{The one-year claims development result}
+
+Solvency II prices the uncertainty of the next twelve months, not of the run-off to ultimate.
+Merz and Wüthrich (2008) call the twelve-month move of the predicted ultimate the claims
+development result and separate the true one from the observable one. The filtration here is the
+one carried by \texttt{RandomTriangle}: $\mathcal{D}_k$ is everything observed up to development
+year $k$, for every accident year, the filtration in which (M1) is assumed in this development.
+Merz and Wüthrich index information by calendar year instead; the martingale property below is
+the same tower property in either filtration, and the closed form is stated in the filtration
+(M1) is assumed in.
+
+\begin{definition}[True one-year claims development result]\label{def:trueCDR}\lean{VerifiedReserving.RandomTriangle.trueCDR}\leanok
+\uses{def:rv}
+For accident year $i$ and development year $k$,
+\[
+  \mathrm{CDR}_i(k) = E[C_{i,n-1} \mid \mathcal{D}_k] - E[C_{i,n-1} \mid \mathcal{D}_{k+1}],
+\]
+the change in the predicted ultimate claim when the information grows by one year.
+\end{definition}
+
+\begin{theorem}[Merz-Wüthrich 2008: the true CDR has conditional mean zero]\label{thm:cdr_martingale}\lean{VerifiedReserving.condExp_trueCDR_eq_zero}\leanok
+\uses{def:trueCDR}
+On a finite measure space, $E[\mathrm{CDR}_i(k) \mid \mathcal{D}_k] = 0$ almost surely, for every
+accident year $i$ and every $k$: the reserve set at time $k$ is unbiased for the reserve that
+will be set at time $k+1$ together with the payments made in between.
+\end{theorem}
+\begin{proof}\leanok
+Linearity of the conditional expectation, then the tower property twice: the inner
+$\mathcal{D}_k$-conditional expectation is idempotent, and
+$E[E[C_{i,n-1} \mid \mathcal{D}_{k+1}] \mid \mathcal{D}_k] = E[C_{i,n-1} \mid \mathcal{D}_k]$
+because $\mathcal{D}_k \subseteq \mathcal{D}_{k+1}$. The two terms cancel. The only hypotheses
+are that $\mathcal{D}$ is a filtration inside the ambient $\sigma$-algebra and that the measure
+is finite; no integrability assumption on $C_{i,n-1}$ is needed for the identity as stated,
+since both conditional expectations are $0$ off the integrable case.
+\end{proof}
+
+\begin{lemma}[Iterating (M1) from an arbitrary development year]\label{lem:C_at}\lean{VerifiedReserving.condExp_C_of_Mack1_at, VerifiedReserving.condExp_C_ultimate_of_Mack1}\leanok
+\uses{def:Mack1, lem:C_succ}
+Under (M1), $E[C_{i,d+m} \mid \mathcal{D}_d] = C_{i,d}\prod_{j=d}^{d+m-1} f_j$ for every starting
+year $d$, hence $E[C_{i,n-1} \mid \mathcal{D}_k] = C_{i,k}\prod_{j=k}^{n-2} f_j$ for $k \le n-1$.
+\end{lemma}
+\begin{proof}\leanok
+The induction of Lemma~\ref{lem:C_succ} with the starting year free rather than pinned to the
+latest observed year $n-1-i$ of the row; the base case is that $C_{i,d}$ is
+$\mathcal{D}_d$-measurable.
+\end{proof}
+
+\begin{theorem}[Merz-Wüthrich 2008: the true CDR as a one-step residual]\label{thm:cdr_closed}\lean{VerifiedReserving.trueCDR_eq}\leanok
+\uses{def:trueCDR, lem:C_at}
+Under (M1), for $k < n-1$ and integrable claims,
+\[
+  \mathrm{CDR}_i(k) = \Big(\prod_{j=k+1}^{n-2} f_j\Big)\,\big(f_k C_{i,k} - C_{i,k+1}\big)
+\]
+almost surely: everything the next year of experience does to the predicted ultimate is carried
+by the single deviation of the new observation from its (M1) prediction.
+\end{theorem}
+\begin{proof}\leanok
+Both predicted ultimates are given by Lemma~\ref{lem:C_at}; splitting
+$\prod_{j=k}^{n-2} f_j = f_k \prod_{j=k+1}^{n-2} f_j$ at the bottom index leaves the common
+factor $\prod_{j>k} f_j$ times $f_k C_{i,k} - C_{i,k+1}$.
+\end{proof}
+
+\begin{definition}[Observable one-year claims development result]\label{def:obsCDR}\lean{VerifiedReserving.obsCDR, VerifiedReserving.RandomTriangle.obsCDRRv}\leanok
+\uses{def:Chat, def:reserve}
+The difference of the two chain-ladder predictions an actuary computes: the ultimate estimated
+from the triangle with $n$ diagonals minus the ultimate estimated a year later, with every
+development factor re-estimated, from the triangle with $n+1$ diagonals,
+$\widehat{\mathrm{CDR}}_i = \hat C^{(n)}_{i,n-1} - \hat C^{(n+1)}_{i,n-1}$, together with its
+value along a random triangle outcome by outcome.
+\end{definition}
+
+\begin{lemma}[The displayed form]\label{lem:obsCDR_reserve}\lean{VerifiedReserving.obsCDR_eq_reserve_sub}\leanok
+\uses{def:obsCDR}
+$\widehat{\mathrm{CDR}}_i = \hat R^{(n)}_i - \big((C_{i,n-i} - C_{i,n-1-i}) + \hat R^{(n+1)}_i\big)$:
+opening reserve minus the payments of the year and the closing reserve, the form Merz and
+Wüthrich display. Algebra on the definitions.
+\end{lemma}
+\begin{proof}\leanok Expand both reserves; the two claim entries cancel. \end{proof}
+
+Nothing is proved here about the distribution of the observable CDR. The conditional mean squared
+error of prediction of $\widehat{\mathrm{CDR}}_i$, which is what a Solvency II one-year reserve
+risk figure reports, rests in Merz and Wüthrich on an approximation of the same kind as Mack's:
+the estimated development factors are treated as resampled ones and terms of second order in the
+residuals are dropped. That step is not formalized, so the true-CDR statements above are exact
+and the observable-CDR statements of the paper are not yet available here.

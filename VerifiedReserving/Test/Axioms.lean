@@ -39,6 +39,13 @@ set_option format.width 400
 #print axioms condExp_C_of_Mack1
 #print axioms condExp_ChatRv
 #print axioms condExp_ultimate_eq
+#print axioms RandomTriangle.trueCDR_apply
+#print axioms condExp_trueCDR_eq_zero
+#print axioms condExp_C_of_Mack1_at
+#print axioms condExp_C_ultimate_of_Mack1
+#print axioms trueCDR_eq
+#print axioms obsCDR_eq_reserve_sub
+#print axioms RandomTriangle.obsCDRRv_apply
 #print axioms RandomTriangle.fhatRv_sub_eq
 #print axioms RandomTriangle.sq_fhatRv_sub
 #print axioms condExp_sq_fhatRv_sub

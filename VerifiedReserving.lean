@@ -3,6 +3,7 @@ import VerifiedReserving.Recursion
 import VerifiedReserving.BornhuetterFerguson
 import VerifiedReserving.Stochastic
 import VerifiedReserving.Ultimate
+import VerifiedReserving.CDR
 import VerifiedReserving.Variance
 import VerifiedReserving.Independence
 import VerifiedReserving.SigmaUnbiased
