@@ -6,6 +6,9 @@ import VerifiedReserving
 
 open VerifiedReserving
 
+-- keep each audit line on one line so CI can grep it
+set_option format.width 400
+
 #print axioms fhat_eq_weighted_average
 #print axioms T_eq_sum_weighted_F
 #print axioms weighted_sq_dev
