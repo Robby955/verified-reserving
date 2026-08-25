@@ -41,7 +41,7 @@ jobs:
         run: |
           lake env lean VerifiedReserving/Test/Axioms.lean | tee axioms_raw.txt
           # Join continuation lines (the pretty-printer wraps long axiom lists).
-          sed -e ':a' -e 'N' -e '$!ba' -e 's/\n[[:space:]]\+/ /g' axioms_raw.txt > axioms.txt
+          sed -e ':a' -e 'N' -e '$!ba' -e 's/\n[[:space:]][[:space:]]*/ /g' axioms_raw.txt > axioms.txt
           # Every audited line must be either the standard three axioms or axiom-free.
           if grep "^'VerifiedReserving" axioms.txt \
              | grep -v -E "depends on axioms: \[propext, Classical.choice, Quot.sound\]$" \
