@@ -28,7 +28,7 @@ hypotheses, nonnegativity. **Gap** says plainly how far apart they are.
    `Classical.choice` and `Quot.sound`, or on no axiom at all.
 5. **CI audit.** `VerifiedReserving/Test/Axioms.lean` runs `#print axioms` on every name in this
    document. CI rejects a nonstandard axiom, rejects any `sorry`, `admit` or `axiom` declaration,
-   requires at least 265 audited lines, and runs the non-vacuity witness.
+   requires at least 268 audited lines, and runs the non-vacuity witness.
 
 Conventions: accident years `i` and development years `k` are zero-based, `C i k` is observed when
 `i + k <= n - 1`, `d = n - 1 - i` is the latest observed development year of accident year `i`, and
@@ -40,6 +40,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 |---|---|---|
 | Mack 1993, eq. (2): `f̂_k` is the `C`-weighted mean of the `F_{i,k}` | `fhat_eq_weighted_average` | identical, with a nonvanishing hypothesis on the individual denominators only |
 | Mack 1993, degrees of freedom of `σ̂²_k` | `weighted_sq_dev`, `weighted_sq_dev_at_fhat` | identical |
+| Quarg-Mack 2004, Section 1.1.2: normalized paid/incurred gap under separate chain ladder | `sclColumnTotal_succ`, `sclColumnTotal_eq_mul_prod`, `quargMack_gap_identity` | identical after converting the source's one-based indices to zero-based indices; Lean states every nonzero denominator |
 | Mack 1993, Theorem 1 | `condExp_ultimate_eq`, `condExp_ChatRv`, `condExp_C_of_Mack1` | Lean stronger hypotheses: integrability, a.s. nonvanishing column sums, finite measure |
 | Mack 1993, Theorem 2 | `condExp_fhatRv`, `condExp_fhatRv_mul`, `integral_fhatRv`, `integral_fhatRv_mul` | Lean stronger hypotheses: integrability, a.s. nonvanishing `S_k` |
 | Mack 1993, proof of Theorem 3: estimation variance of `f̂_k` | `condExp_sq_fhatRv_sub` | identical up to integrability and a.s. nonvanishing `S_k` |
@@ -78,7 +79,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack1_from_rows`, `IndependenceWitness.mack2'_from_rows` | not in any source; realizes Mack 1993 eq. (1)-(2) and the `B_k` filtration on eight outcomes |
 | Non-vacuity: the cross-term condition of the total | `NontrivialModel.crossFree_ultimates`, `NontrivialModel.exists_crossFree_nondegenerate` | not in any source; three genuinely random ultimates, conditionally uncorrelated |
 
-Thirty-seven rows.
+Thirty-eight rows.
 
 ## The deterministic layer
 
@@ -109,6 +110,30 @@ estimating `f̂_k`.
 
 **Gap.** Identical. These are the algebraic identities the source uses; the statistical claim they
 support is `condExp_sigma2Rv` below.
+
+### Quarg-Mack 2004, Section 1.1.2: the separate-chain-ladder P/I gap
+
+**Source.** Quarg and Mack, *Munich chain ladder: a reserving method that reduces the gap between
+IBNR projections based on paid losses and IBNR projections based on incurred losses*, Blätter der
+DGVFM 26 (2004) 597-630, Section 1.1.2, pp. 271-272 of the authorized English reprint. They first
+complete the paid and incurred cumulative triangles separately. For accident year `i`, with current
+development year `c_i`, and a later year `t`, the boxed display states
+`((P/I)_{i,t}) / ((P/I)_t) = ((P/I)_{i,c_i}) / ((P/I)_{c_i})`. The portfolio ratio `(P/I)_t`
+uses all rows of the completed quadrangles, including projected cells.
+
+**Lean.** `sclQuadrangle C n i k` keeps an observed cell and otherwise uses `Chat C n i k`;
+`sclColumnTotal C n k` sums all `n` rows. `sclColumnTotal_succ` assumes `k < n-1` and
+`S C n k ≠ 0`, and proves that the next completed column total is the current total times
+`fhat C n k`. `sclColumnTotal_eq_mul_prod` iterates this from `d` to `t`, assuming `d ≤ t < n`
+and every intervening `S C n k` is nonzero. `quargMack_gap_identity` applies those facts to paid and
+incurred triangles. It assumes `i < n`, `n-1-i < t < n`, nonzero paid and incurred factors on the
+row, a nonzero incurred row value at `n-1-i`, and nonzero paid and incurred completed column totals
+there. Its conclusion is the source's boxed ratio identity on the two completed quadrangles.
+
+**Gap.** Identical after the one-based source indices are translated to the repository's zero-based
+indices. Lean states the nonzero denominators and factors needed for cancellation. The result is
+only the deterministic gap left by two separate projections; it does not formalize the later
+Munich residual-correlation assumptions or adjusted factors, and it is not a convergence claim.
 
 ## Mack's three theorems
 

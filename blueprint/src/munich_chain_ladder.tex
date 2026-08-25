@@ -1,0 +1,49 @@
+\chapter{Munich chain ladder: the separate-chain-ladder gap}
+
+Quarg and Mack's Section 1.1.2 identifies the paid/incurred-ratio gap left when
+the two triangles are completed separately \cite{QuargMack2004}.
+
+\begin{definition}[Separate-chain-ladder quadrangle]\label{def:sclQuadrangle}\lean{VerifiedReserving.sclQuadrangle, VerifiedReserving.sclColumnTotal}\leanok
+\uses{def:Chat}
+The completed quadrangle keeps $C_{i,k}$ when $i+k\le n-1$ and uses
+$\hat C_{i,k}$ otherwise.  Its column total includes all $n$ rows.
+\end{definition}
+
+\begin{definition}[Paid/incurred ratios]\label{def:paidIncurredRatio}\lean{VerifiedReserving.paidIncurredRatio, VerifiedReserving.averagePaidIncurredRatio}\leanok
+For completed quadrangles $P$ and $I$, $(P/I)_{i,k}=P_{i,k}/I_{i,k}$ and
+$(P/I)_k=(\sum_i P_{i,k})/(\sum_i I_{i,k})$.
+\end{definition}
+
+\begin{lemma}[Completed-column step]\label{lem:sclColumnTotal_succ}\lean{VerifiedReserving.sclColumnTotal_succ}\leanok
+\uses{def:sclQuadrangle, def:fhat}
+If $k<n-1$ and $S_k\ne0$, the completed column total evolves by the original
+chain-ladder factor:
+\[
+  \sum_i \hat C_{i,k+1}=\left(\sum_i \hat C_{i,k}\right)\hat f_k.
+\]
+\end{lemma}
+\begin{proof}\leanok Split the observed prefix from the projected tail; use $T_k=\hat f_kS_k$ on the first and the projection step on the second. \end{proof}
+
+\begin{lemma}[Completed-column product]\label{lem:sclColumnTotal_eq_mul_prod}\lean{VerifiedReserving.sclColumnTotal_eq_mul_prod}\leanok
+\uses{lem:sclColumnTotal_succ}
+For $d\le t<n$, if the intervening factor denominators $S_k$ are nonzero, then
+\[
+  \sum_i \hat C_{i,t}=\left(\sum_i \hat C_{i,d}\right)
+    \prod_{k=d}^{t-1}\hat f_k.
+\]
+\end{lemma}
+\begin{proof}\leanok Induction on $t-d$ using Lemma~\ref{lem:sclColumnTotal_succ}. \end{proof}
+
+\begin{theorem}[Quarg--Mack gap identity]\label{thm:quargMackGap}\lean{VerifiedReserving.quargMack_gap_identity}\leanok
+\uses{def:paidIncurredRatio, lem:sclColumnTotal_eq_mul_prod, def:Chat}
+For $i<n$ and $d=n-1-i<t<n$, assume the paid and incurred factors on
+$[d,t)$, $I_{i,d}$, and both completed column totals at $d$ are nonzero.  Then
+\[
+  \frac{(P/I)_{i,t}}{(P/I)_t}
+  =
+  \frac{(P/I)_{i,d}}{(P/I)_d}.
+\]
+Here $(P/I)_k$ uses every completed row.  This is not a convergence claim and
+does not include the later Munich correlation adjustment.
+\end{theorem}
+\begin{proof}\leanok Both the row values and the completed column totals acquire the same paid and incurred factor products; cancel them in the ratio of ratios. \end{proof}

@@ -15,6 +15,8 @@ Everything below is in the repository, builds against mathlib, contains no `sorr
 
 Deterministic layer (`VerifiedReserving/ChainLadder.lean`). A run-off triangle is a function `C : ℕ → ℕ → ℝ`. The chain-ladder development factor, the individual factors, Mack's variance estimator, the projected ultimate, the reserve, and Mack's mean squared error of prediction (MSEP) are definitions. Proved: the development factor is the weighted mean of the individual factors; the weighted sum-of-squares decomposition that gives the `n-k-2` degrees of freedom of the variance estimator; the projection identities.
 
+Munich chain ladder, separate-projection gap (`VerifiedReserving/MunichChainLadder.lean`). Paid and incurred cumulative triangles are completed separately with their own chain-ladder factors. `sclColumnTotal_succ` proves that a completed column total evolves by the original factor, and `sclColumnTotal_eq_mul_prod` iterates that step. `quargMack_gap_identity` then proves Quarg and Mack's boxed Section 1.1.2 identity: separate chain ladder preserves each row's paid/incurred ratio relative to the completed portfolio ratio. This is the systematic gap that motivates the later Munich correlation adjustment; the module does not yet formalize that stochastic adjustment.
+
 Published numerical example (`VerifiedReserving/Mack1993Table1.lean`). The Taylor-Ashe cumulative triangle from Mack (1993), Table 1 is an exact Lean definition. `taylorAshe_fhat_0` through `_8` and `taylorAshe_sigma2_0` through `_7` prove the rational estimator values corresponding to Mack's printed development factors and the eight variances supplied by the estimator. `taylorAshe_total_reserve_rounds` proves that the summed reserve lies in the nearest-thousand interval printed as 18,681 in Table 2. The ninth printed variance is excluded because Mack specifies it by extrapolation.
 Model diagnostics (`VerifiedReserving/Mack1994Tests.lean`). Mack's 1994 Appendix G test ranks adjacent factor columns on their common accident years; Appendix H splits each factor column around its median and counts small and large factors along calendar diagonals. The exact uniform-permutation moments for one Spearman coefficient and the fair-label binomial formulas (H1)-(H2) are proved combinatorially. Mack's aggregate variance formulas and Normal cutoffs remain nominal definitions because they add cross-statistic uncorrelatedness and approximate Normality.
 
@@ -64,7 +66,7 @@ Merz-Wüthrich one-year uncertainty (`VerifiedReserving/CDRMsep.lean`). What a S
 
 Mack's 1993 example as kernel-checked arithmetic (`VerifiedReserving/Mack1993Table1.lean`). The Taylor and Ashe triangle is a Lean definition; the nine development factors and the eight estimable variance parameters of Mack (1993) are proved equal to exact rationals from `fhat` and `sigma2` by `norm_num`, and the total reserve is proved to round to Mack's 18,681 thousand. The extrapolated last variance parameter is a convention and is not asserted (Mack's printed value for it, 0.477, is a misprint; his rule and his printed standard errors give 0.447).
 
-Two hundred and sixty-five declarations are audited as of 2026-08-25. The core Mack results and their independence-to-observed-data chain are complete. The bounded extensions in [ROADMAP.md](ROADMAP.md) include active-contributor weighted estimators, stronger stochastic witnesses, the observable-CDR approximation layer, and ODP prediction error.
+Two hundred and sixty-eight declarations are audited as of 2026-08-25. The core Mack results, their independence-to-observed-data chain, and the deterministic Quarg-Mack gap identity are complete. The bounded extensions in [ROADMAP.md](ROADMAP.md) include the ODP stochastic layer, active-contributor weighted estimators, stronger stochastic witnesses and the calendar-year CDR layer.
 
 ## Theorem map
 
@@ -86,6 +88,7 @@ For each headline result, [docs/STATEMENT_FIDELITY.md](docs/STATEMENT_FIDELITY.m
 | Mack 1999 recursion equals Mack 1993 closed form | `se2rec_eq_msep` | theorem |
 | Mack 1999 weighted estimation variance | `condExp_sq_fhatWrv_sub`, `condVar_fhatWrv` | theorem |
 | Mack 1999 weighted variance estimator is unbiased | `condExp_sigma2Wrv` | theorem |
+| Quarg-Mack normalized paid/incurred gap under separate chain ladder | `quargMack_gap_identity` | theorem |
 | Röhr 2016 linearized (error-propagation) form equals Mack 1993 | `rohrMsep_eq_msep`, `rohrProcess_eq_mackProcess`, `rohrParameter_eq_mackEstimation` | theorem |
 | BBMW 2006 / Murphy 1994 conditional-resampling term | `bbmwEstimation`, `bbmwTotalEstimation` | definition |
 | Mack ≤ BBMW, exact difference, second-order bound | `mackEstimation_le_bbmwEstimation`, `bbmwEstimation_sub_mackEstimation`, `bbmwEstimation_sub_mackEstimation_le` | theorem |

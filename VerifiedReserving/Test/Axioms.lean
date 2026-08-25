@@ -280,3 +280,6 @@ set_option format.width 400
 #print axioms buhlmannStraubEstimate_minimizes
 #print axioms buhlmannStraubEstimate_eq_credibility
 #print axioms buhlmannStraubCredibility_mem_Icc
+#print axioms sclColumnTotal_succ
+#print axioms sclColumnTotal_eq_mul_prod
+#print axioms quargMack_gap_identity

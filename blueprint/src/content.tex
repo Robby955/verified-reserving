@@ -89,7 +89,7 @@ $\sum_i C_{i,k}(F_{i,k}-f)^2 = \sum_i C_{i,k}F_{i,k}^2 - 2 f T_k + f^2 S_k$.
 
 \begin{lemma}[Collapse at the chain-ladder centre]\label{lem:sq_fhat}\lean{VerifiedReserving.weighted_sq_dev_at_fhat}\leanok
 \uses{lem:sq, def:fhat}
-If moreover $S_k \neq 0$, then
+If also $S_k \neq 0$, then
 $\sum_i C_{i,k}(F_{i,k}-\hat f_k)^2 = \sum_i C_{i,k}F_{i,k}^2 - S_k \hat f_k^2$.
 This is the identity behind the $n-k-2$ degrees of freedom in $\hat\sigma_k^2$.
 \end{lemma}
@@ -529,6 +529,7 @@ resampling total, by the same row-wise second-order remainder as in the single-y
 \input{lognormal_ci}
 \input{bf_prior_uncertainty}
 \input{buhlmann_straub}
+\input{munich_chain_ladder}
 
 \chapter{Non-vacuity: a nondegenerate model}
 
@@ -560,4 +561,5 @@ $\mathbb{R}$ and noncomputable; the script is the reference computation, not the
 \begin{thebibliography}{9}
 \bibitem{Mack1993} T. Mack, Distribution-free calculation of the standard error of chain ladder reserve estimates, ASTIN Bulletin 23 (1993) 213-225.
 \bibitem{Mack1999} T. Mack, The standard error of chain ladder reserve estimates: recursive calculation and inclusion of a tail factor, ASTIN Bulletin 29 (1999) 361-366.
+\bibitem{QuargMack2004} G. Quarg and T. Mack, Munich chain ladder: a reserving method that reduces the gap between IBNR projections based on paid losses and IBNR projections based on incurred losses, Blätter der DGVFM 26 (2004) 597-630; authorized English reprint in Variance 2 (2008) 266-299.
 \end{thebibliography}
