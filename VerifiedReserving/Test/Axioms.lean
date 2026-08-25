@@ -193,3 +193,22 @@ set_option format.width 400
 #print axioms IndependenceWitness.mack2'_from_rows
 #print axioms IndependenceWitness.nontrivial
 #print axioms IndependenceWitness.exists_independence_witness
+
+#print axioms taylorAshe_fhat_0
+#print axioms taylorAshe_fhat_1
+#print axioms taylorAshe_fhat_2
+#print axioms taylorAshe_fhat_3
+#print axioms taylorAshe_fhat_4
+#print axioms taylorAshe_fhat_5
+#print axioms taylorAshe_fhat_6
+#print axioms taylorAshe_fhat_7
+#print axioms taylorAshe_fhat_8
+#print axioms taylorAshe_sigma2_0
+#print axioms taylorAshe_sigma2_1
+#print axioms taylorAshe_sigma2_2
+#print axioms taylorAshe_sigma2_3
+#print axioms taylorAshe_sigma2_4
+#print axioms taylorAshe_sigma2_5
+#print axioms taylorAshe_sigma2_6
+#print axioms taylorAshe_sigma2_7
+#print axioms taylorAshe_total_reserve_rounds

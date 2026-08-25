@@ -16,5 +16,6 @@ import VerifiedReserving.Rohr
 import VerifiedReserving.TotalMsep
 import VerifiedReserving.Mack1999
 import VerifiedReserving.ODP
+import VerifiedReserving.Mack1993Table1
 import VerifiedReserving.Test.NontrivialModel
 import VerifiedReserving.Test.IndependenceWitness
