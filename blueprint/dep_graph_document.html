@@ -272,6 +272,49 @@
 
 
     
+    <div class="dep-modal-container" id="def:CLfit_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:CLfit" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">10.3</span><span class="definition_thmtitle">Chain-ladder fit on the observed triangle</span></div>
+    <div class="thm_thmcontent"><p> The fitted cumulative on an observed cell is the latest observed entry of the row divided back by the development factors, </p>
+<div class="displaymath" id="a0000000126">
+  \[  \hat C_{i,k} = \frac{C_{i,\, n-1-i}}{\prod _{j=k}^{n-2-i} \hat f_j},  \]
+</div>
+<p> and the fitted incremental is \(\hat X_{i,k} = \hat C_{i,k} - \hat C_{i,k-1}\) with \(\hat X_{i,0} = \hat C_{i,0}\). These are the \(\hat C\) projections of Definition&#160;<a href="sect0002.html#def:Chat">2.6</a> read backwards from the latest diagonal: equivalently \(\hat C_{i,k} = \hat C_{i,n-1} / \prod _{j=k}^{n-2}\hat f_j\), the chain-ladder ultimate times the cumulative development pattern up to \(k\) (<span class="ttfamily">CLcum_eq_ultimate_div</span>). </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#def:CLfit">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.CLcum" class="lean_decl">VerifiedReserving.CLcum</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.CLincr" class="lean_decl">VerifiedReserving.CLincr</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="def:contributors_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -315,7 +358,7 @@
       </span>
       <span class="definition_thmlabel">8.12</span><span class="definition_thmtitle">Cross-term condition</span></div>
     <div class="thm_thmcontent"><p>For a finite set \(s\) of accident years and targets \(Y_i\), </p>
-<div class="displaymath" id="a0000000091">
+<div class="displaymath" id="a0000000096">
   \[  E\big[(Y_i - E[Y_i \mid \mathcal{D}])(Y_j - E[Y_j \mid \mathcal{D}]) \; \big|\;  \mathcal{D}\big] = 0 \qquad \text{for } i \ne j \text{ in } s .  \]
 </div>
 <p> This is what independence across accident years supplies, in the same way that the \(\mathcal{D}_k\)-conditioned form of (M1) (Definition&#160;<a href="sect0005.html#def:Mack1">5.2</a>) is what it supplies for a single row. Like (M1), (M3) and the “no extra information” hypotheses of Theorem&#160;<a href="sect0005.html#thm:msep">5.23</a>, it is carried as a hypothesis; the passage from independence of the rows to it is not formalized. </p>
@@ -385,6 +428,36 @@
     
     
   <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.fhat">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:incr_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:incr" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">10.1</span><span class="definition_thmtitle">Incremental claims</span></div>
+    <div class="thm_thmcontent"><p>\(X_{i,k} = C_{i,k} - C_{i,k-1}\) for \(k \ge 1\) and \(X_{i,0} = C_{i,0}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#def:incr">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.incr">Lean</a>
     
     
   
@@ -549,7 +622,7 @@
       </span>
       <span class="definition_thmlabel">2.8</span><span class="definition_thmtitle">Mack’s MSEP estimator</span></div>
     <div class="thm_thmcontent"><p> Mack (1993), Theorem 3: </p>
-<div class="displaymath" id="a0000000034">
+<div class="displaymath" id="a0000000039">
   \[  \widehat{\mathrm{msep}}(\hat R_i) = \hat C_{i,n-1}^2 \sum _{k=n-1-i}^{n-2} \frac{\hat\sigma _k^2}{\hat f_k^2} \Big(\frac{1}{\hat C_{i,k}} + \frac{1}{S_k}\Big).  \]
 </div>
 </div>
@@ -558,6 +631,47 @@
     
     
   <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msep">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:mult_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:mult" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">10.4</span><span class="definition_thmtitle">Multiplicative model and its pattern</span></div>
+    <div class="thm_thmcontent"><p>\(m_{i,k} = a_i b_k\); the identifiability constraint \(\sum _{k{\lt}n} b_k = 1\); and the cumulative pattern \(B_k = \sum _{j \le k} b_j\). </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#def:mult">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.multFit" class="lean_decl">VerifiedReserving.multFit</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.PatternNormalized" class="lean_decl">VerifiedReserving.PatternNormalized</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.patternCum" class="lean_decl">VerifiedReserving.patternCum</a></li>
+        
+      </ul>
+  </div>
     
     
   
@@ -660,7 +774,7 @@
       </span>
       <span class="definition_thmlabel">9.4</span><span class="definition_thmtitle">Mack 1999, equation \((*)\)</span></div>
     <div class="thm_thmcontent">
-<div class="displaymath" id="a0000000107">
+<div class="displaymath" id="a0000000112">
   \[  \mathrm{msepW}_i = \hat C_{i,n-1}^2 \sum _{k=n-1-i}^{n-2} \frac{\hat\sigma _k^2}{\hat f_k^2} \Big( \frac{1}{w_{ik}\hat C_{ik}^{\alpha }} + \frac{1}{S_k^{w,\alpha }} \Big).  \]
 </div>
 </div>
@@ -840,6 +954,45 @@
 
 
     
+    <div class="dep-modal-container" id="def:obs_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:obs" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">10.2</span><span class="definition_thmtitle">Observed row and column</span></div>
+    <div class="thm_thmcontent"><p>The cell \((i,k)\) is observed when \(i + k \le n-1\). The observed development years of accident year \(i\) are \(\mathrm{obsRow}(n,i) = \{ 0,\dots ,n-1-i\} \) and the observed accident years of development year \(k\) are \(\mathrm{obsCol}(n,k) = \{ 0,\dots ,n-1-k\} \). The second one at \(k+1\) is the contributor set of \(\hat f_k\) (<span class="ttfamily">obsCol_succ</span>). </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#def:obs">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.obsRow" class="lean_decl">VerifiedReserving.obsRow</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.obsCol" class="lean_decl">VerifiedReserving.obsCol</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="def:obsCDR_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -904,6 +1057,45 @@
            <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.procVar" class="lean_decl">VerifiedReserving.procVar</a></li>
         
            <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.procVar_eq_sum" class="lean_decl">VerifiedReserving.procVar_eq_sum</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:qll_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:qll" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">10.6</span><span class="definition_thmtitle">Quasi-Poisson log-likelihood</span></div>
+    <div class="thm_thmcontent"><p> \(\sum _{k} \big(X_{i,k}\log (t\, b_k) - t\, b_k\big)\) as a function of the row parameter \(t\), and \(\sum _{i} \big(X_{i,k}\log (a_i\, t) - a_i\, t\big)\) as a function of the column parameter \(t\) (dispersion \(\varphi = 1\), which only scales the expression). </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#def:qll">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rowQuasiLogLik" class="lean_decl">VerifiedReserving.rowQuasiLogLik</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.colQuasiLogLik" class="lean_decl">VerifiedReserving.colQuasiLogLik</a></li>
         
       </ul>
   </div>
@@ -1263,6 +1455,47 @@
 
 
     
+    <div class="dep-modal-container" id="def:score_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:score" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">10.5</span><span class="definition_thmtitle">Score (marginal-sum) equations</span></div>
+    <div class="thm_thmcontent"><p> The row marginal sums, the column marginal sums, and their conjunction: the fitted values reproduce the observed row and column totals of incrementals on the observed triangle. </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#def:score">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RowTotals" class="lean_decl">VerifiedReserving.RowTotals</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ColumnTotals" class="lean_decl">VerifiedReserving.ColumnTotals</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ScoreEquations" class="lean_decl">VerifiedReserving.ScoreEquations</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="def:se2rec_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -1277,10 +1510,10 @@
       <span class="definition_thmlabel">3.1</span><span class="definition_thmtitle">Mack’s 1999 recursion</span></div>
     <div class="thm_thmcontent"><p> For \(\alpha = 1\) and unit weights <span class="cite">
 	[
-	<a href="sect0011.html#Mack1999" >2</a>
+	<a href="sect0012.html#Mack1999" >2</a>
 	]
 </span>, starting from \(\mathrm{se}^2 = 0\) on the latest diagonal \(d = n-1-i\) and stepping \(m\) times, </p>
-<div class="displaymath" id="a0000000042">
+<div class="displaymath" id="a0000000047">
   \[  \mathrm{se}^2_{m+1} = \hat C_{i,d+m}^2\Big(\frac{\hat\sigma _{d+m}^2}{\hat C_{i,d+m}} + \frac{\hat\sigma _{d+m}^2}{S_{d+m}}\Big) + \mathrm{se}^2_m\, \hat f_{d+m}^2 .  \]
 </div>
 </div>
@@ -1314,7 +1547,7 @@
       <span class="definition_thmlabel">2.5</span><span class="definition_thmtitle">Mack’s variance estimator</span></div>
     <div class="thm_thmcontent"><p> \(\hat\sigma _k^2 = \frac{1}{n-k-2}\sum _{i=0}^{n-k-2} C_{i,k}\, (F_{i,k} - \hat f_k)^2\). The value for \(k = n-2\) (a single contributor) is an extrapolation convention in <span class="cite">
 	[
-	<a href="sect0011.html#Mack1993" >1</a>
+	<a href="sect0012.html#Mack1993" >1</a>
 	]
 </span>, not an estimator; no theorem here uses it. </p>
 </div>
@@ -1431,7 +1664,7 @@
       </span>
       <span class="definition_thmlabel">7.1</span><span class="definition_thmtitle">True one-year claims development result</span></div>
     <div class="thm_thmcontent"><p> For accident year \(i\) and development year \(k\), </p>
-<div class="displaymath" id="a0000000075">
+<div class="displaymath" id="a0000000080">
   \[  \mathrm{CDR}_i(k) = E[C_{i,n-1} \mid \mathcal{D}_k] - E[C_{i,n-1} \mid \mathcal{D}_{k+1}],  \]
 </div>
 <p> the change in the predicted ultimate claim when the information grows by one year. </p>
@@ -1769,6 +2002,51 @@
 
 
     
+    <div class="dep-modal-container" id="lem:colCum_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:colCum" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">10.11</span><span class="lemma_thmtitle">Fitted column sums of cumulatives</span></div>
+    <div class="thm_thmcontent"><p> If every development factor \(\hat f_j\), \(j {\lt} n-1\), is nonzero, then for every \(k \le n-1\) </p>
+<div class="displaymath" id="a0000000132">
+  \[  \sum _{i \le n-1-k} \hat C_{i,k} = \sum _{i \le n-1-k} C_{i,k},  \]
+</div>
+<p> and, one year earlier over the same accident years, \(\sum _{i \le n-2-k} \hat C_{i,k} = S_k\). </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#lem:colCum">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_CLcum_obsCol_aux" class="lean_decl">VerifiedReserving.sum_CLcum_obsCol_aux</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_CLcum_obsCol" class="lean_decl">VerifiedReserving.sum_CLcum_obsCol</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_CLcum_contributors" class="lean_decl">VerifiedReserving.sum_CLcum_contributors</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="lem:fhat_meas_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -1928,6 +2206,45 @@
     
     
   <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msep_eq_sum_mackTerm">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:multCum_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:multCum" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">10.15</span><span class="lemma_thmtitle">Fitted cumulatives agree</span></div>
+    <div class="thm_thmcontent"><p> Under the hypotheses of Lemma&#160;<a href="sect0010.html#lem:patternFhat">10.14</a>, \(a_i B_k = \hat C_{i,k}\) on every observed cell. </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#lem:multCum">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.patternCum_mul_prod" class="lean_decl">VerifiedReserving.patternCum_mul_prod</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mult_cum_eq_CLcum" class="lean_decl">VerifiedReserving.mult_cum_eq_CLcum</a></li>
+        
+      </ul>
+  </div>
     
     
   
@@ -2105,7 +2422,7 @@
       </span>
       <span class="lemma_thmlabel">9.10</span><span class="lemma_thmtitle">One recursion step</span></div>
     <div class="thm_thmcontent"><p>For reals \(A, B, P, S, f, X\) with \(f \neq 0\), </p>
-<div class="displaymath" id="a0000000112">
+<div class="displaymath" id="a0000000117">
   \[  A^2\Big(\frac{B}{P} + \frac{B}{S}\Big) + A^2 X f^2 = (Af)^2\Big(X + \frac{B}{f^2}\Big(\frac{1}{P} + \frac{1}{S}\Big)\Big).  \]
 </div>
 <p> With \(A = \hat C_{ik}\), \(f = \hat f_k\), \(B = \hat\sigma _k^2\), \(P = w_{ik}\hat C_{ik}^{\alpha }\) and \(S = S_k^{w,\alpha }\): one step of the recursion adds exactly the \(k\)-th summand of \((*)\), scaled by the next projection. Only \(\hat f_k \neq 0\) is used. </p>
@@ -2265,6 +2582,53 @@
 
 
     
+    <div class="dep-modal-container" id="lem:patternFhat_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:patternFhat" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">10.14</span><span class="lemma_thmtitle">The pattern ratios are the development factors</span></div>
+    <div class="thm_thmcontent"><p> Let \(a_i, b_k {\gt} 0\) with \(\sum _{k{\lt}n} b_k = 1\) satisfy the score equations. Then for every \(k \le n-1\) </p>
+<div class="displaymath" id="a0000000137">
+  \[  \Big(\sum _{i \le n-1-k} a_i\Big) B_k \text{ splits as } \sum _{i \le n-1-k} C_{i,k}, \qquad \text{and}\qquad B_k \hat f_k = B_{k+1} \  (k {\lt} n-1),  \]
+</div>
+<p> so every \(\hat f_k\) is positive. </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#lem:patternFhat">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_mult_patternCum_aux" class="lean_decl">VerifiedReserving.sum_mult_patternCum_aux</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_mult_patternCum" class="lean_decl">VerifiedReserving.sum_mult_patternCum</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.patternCum_mul_fhat" class="lean_decl">VerifiedReserving.patternCum_mul_fhat</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.fhat_pos_of_mult" class="lean_decl">VerifiedReserving.fhat_pos_of_mult</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="lem:rect_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -2398,6 +2762,84 @@
     
     
   <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrMsep_eq_rohrProcess_add_rohrParameter">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:score_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:score" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">10.7</span><span class="lemma_thmtitle">Row and column scores</span></div>
+    <div class="thm_thmcontent"><p> The derivative of the quasi-Poisson log-likelihood in a row parameter is \(\big(\sum _k X_{i,k} - \sum _k t\, b_k\big)/t\), and in a column parameter \(\big(\sum _i X_{i,k} - \sum _i a_i\, t\big)/t\). </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#lem:score">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.hasDerivAt_rowQuasiLogLik" class="lean_decl">VerifiedReserving.hasDerivAt_rowQuasiLogLik</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.hasDerivAt_colQuasiLogLik" class="lean_decl">VerifiedReserving.hasDerivAt_colQuasiLogLik</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:scoreZero_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:scoreZero" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">10.8</span><span class="lemma_thmtitle">Stationarity is the marginal-sum equation</span></div>
+    <div class="thm_thmcontent"><p> For nonzero parameters, the row score vanishes exactly at the row marginal-sum equation and the column score exactly at the column one. This is what licenses the name "score equations" for Definition&#160;<a href="sect0010.html#def:score">10.5</a>, and it is where the dispersion \(\varphi \) drops out. </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#lem:scoreZero">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.deriv_rowQuasiLogLik_eq_zero_iff" class="lean_decl">VerifiedReserving.deriv_rowQuasiLogLik_eq_zero_iff</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.deriv_colQuasiLogLik_eq_zero_iff" class="lean_decl">VerifiedReserving.deriv_colQuasiLogLik_eq_zero_iff</a></li>
+        
+      </ul>
+  </div>
     
     
   
@@ -2630,6 +3072,47 @@
 
 
     
+    <div class="dep-modal-container" id="lem:telescope_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:telescope" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">10.9</span><span class="lemma_thmtitle">Telescoping</span></div>
+    <div class="thm_thmcontent"><p> \(\sum _{k \le m} X_{i,k} = C_{i,m}\) and \(\sum _{k \le m} \hat X_{i,k} = \hat C_{i,m}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#lem:telescope">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_incr" class="lean_decl">VerifiedReserving.sum_incr</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_incr_obsRow" class="lean_decl">VerifiedReserving.sum_incr_obsRow</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_CLincr" class="lean_decl">VerifiedReserving.sum_CLincr</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="lem:ultimateD_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -2643,7 +3126,7 @@
       </span>
       <span class="lemma_thmlabel">8.16</span><span class="lemma_thmtitle">Theorem&#160;1 and the process variance at the ultimate</span></div>
     <div class="thm_thmcontent"><p> Under (M1), (M3) and the hypotheses of Theorem&#160;<a href="sect0005.html#thm:msep">5.23</a> that \(\mathcal{D}\) carries no information about row \(i\)’s future beyond \(\mathcal{D}_{n-1-i}\), </p>
-<div class="displaymath" id="a0000000097">
+<div class="displaymath" id="a0000000102">
   \[  M_i = C_{i,n-1-i} \prod _{l=n-1-i}^{n-2} f_l, \qquad E[C_i^2 \mid \mathcal{D}] - M_i^2 = \mathrm{procVar}\big(C_{i,n-1-i}, f, \sigma ^2, n-1-i\big)_i .  \]
 </div>
 </div>
@@ -2829,7 +3312,7 @@
       </span>
       <span class="theorem_thmlabel">7.4</span><span class="theorem_thmtitle">Merz-Wüthrich 2008: the true CDR as a one-step residual</span></div>
     <div class="thm_thmcontent"><p> Under (M1), for \(k {\lt} n-1\) and integrable claims, </p>
-<div class="displaymath" id="a0000000079">
+<div class="displaymath" id="a0000000084">
   \[  \mathrm{CDR}_i(k) = \Big(\prod _{j=k+1}^{n-2} f_j\Big)\, \big(f_k C_{i,k} - C_{i,k+1}\big)  \]
 </div>
 <p> almost surely: everything the next year of experience does to the predicted ultimate is carried by the single deviation of the new observation from its (M1) prediction. </p>
@@ -2963,7 +3446,7 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">8.20</span><span class="theorem_thmtitle">The cross-term condition is not vacuous</span></div>
-    <div class="thm_thmcontent"><p> On the nondegenerate model of Theorem&#160;<a href="sect0010.html#thm:nontrivial">10.1</a> the three true ultimates are genuinely random and their centred versions are conditionally uncorrelated given the trivial \(\sigma \)-algebra: Definition&#160;<a href="sect0008.html#def:crossFree">8.12</a> holds for \(s = \{ 0,1,2\} \) without holding for want of randomness. </p>
+    <div class="thm_thmcontent"><p> On the nondegenerate model of Theorem&#160;<a href="sect0011.html#thm:nontrivial">11.1</a> the three true ultimates are genuinely random and their centred versions are conditionally uncorrelated given the trivial \(\sigma \)-algebra: Definition&#160;<a href="sect0008.html#def:crossFree">8.12</a> holds for \(s = \{ 0,1,2\} \) without holding for want of randomness. </p>
 </div>
 
     <a class="latex_link" href="sect0008.html#thm:crossFreeWitness">LaTeX</a>
@@ -3005,11 +3488,11 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">10.2</span><span class="theorem_thmtitle">Headline theorems instantiated</span></div>
+      <span class="theorem_thmlabel">11.2</span><span class="theorem_thmtitle">Headline theorems instantiated</span></div>
     <div class="thm_thmcontent"><p> On that model, \(E[\hat f_0 \mid \mathcal{D}_0] = 2\) although \(\hat f_0\) is random; \(E[\hat C_{2,2} \mid \mathcal{D}_0] = E[C_{2,2} \mid \mathcal{D}_0]\); \(E[(\hat f_0 - 2)^2 \mid \mathcal{D}_0] = \sigma _0^2 / S_0\); and \(E[\hat\sigma _0^2 \mid \mathcal{D}_0] = \sigma _0^2 = 4\). </p>
 </div>
 
-    <a class="latex_link" href="sect0010.html#thm:instantiated">LaTeX</a>
+    <a class="latex_link" href="sect0011.html#thm:instantiated">LaTeX</a>
     
     
   <div class="tooltip">
@@ -3167,7 +3650,7 @@
       </span>
       <span class="theorem_thmlabel">5.23</span><span class="theorem_thmtitle">Mack’s Theorem 3, exact form</span></div>
     <div class="thm_thmcontent"><p> Let \(\mathcal{D}\) be the observed data. Assume \(\hat C_{i,d+m}\) is \(\mathcal{D}\)-measurable and that \(\mathcal{D}\) adds nothing to \(\mathcal{D}_d\) about row \(i\)’s future (the conditional mean and second moment of \(C_{i,d+m}\) given \(\mathcal{D}\) agree with those given \(\mathcal{D}_d\); this is what independence across accident years supplies). Then under (M1) and (M3) </p>
-<div class="displaymath" id="a0000000065">
+<div class="displaymath" id="a0000000070">
   \[  E\big[(\hat C_{i,d+m} - C_{i,d+m})^2 \mid \mathcal{D}\big] = V_m + \big(\hat C_{i,d+m} - C_{i,d}\textstyle \prod _{l{\lt}m} f_{d+l}\big)^2 .  \]
 </div>
 </div>
@@ -3200,7 +3683,7 @@
       </span>
       <span class="theorem_thmlabel">8.15</span><span class="theorem_thmtitle">Conditional MSEP of a sum</span></div>
     <div class="thm_thmcontent"><p> For \(\mathcal{D}\)-measurable predictors \(P_i\) of square-integrable targets \(Y_i\) whose centred versions satisfy Definition&#160;<a href="sect0008.html#def:crossFree">8.12</a>, </p>
-<div class="displaymath" id="a0000000095">
+<div class="displaymath" id="a0000000100">
   \[  E\Big[\Big(\sum _i P_i - \sum _i Y_i\Big)^2 \; \Big|\;  \mathcal{D}\Big] = \sum _i \big(E[Y_i^2 \mid \mathcal{D}] - E[Y_i \mid \mathcal{D}]^2\big) + \Big(\sum _i \big(P_i - E[Y_i \mid \mathcal{D}]\big)\Big)^2 .  \]
 </div>
 <p> The conditional variances add; the estimation errors add <em>before</em> they are squared. </p>
@@ -3234,7 +3717,7 @@
       </span>
       <span class="theorem_thmlabel">8.17</span><span class="theorem_thmtitle">Mack’s Corollary, exact form</span></div>
     <div class="thm_thmcontent"><p> Under (M1), (M3), square integrability of the claims and of the chain-ladder predictions, the “no extra information” hypotheses of Theorem&#160;<a href="sect0005.html#thm:msep">5.23</a> for each accident year, and Definition&#160;<a href="sect0008.html#def:crossFree">8.12</a> for the true ultimates, </p>
-<div class="displaymath" id="a0000000099">
+<div class="displaymath" id="a0000000104">
   \[  E\Big[\Big(\sum _i \hat C_i - \sum _i C_i\Big)^2 \; \Big|\;  \mathcal{D}\Big] = \sum _i \mathrm{procVar}_i + \Big(\sum _i \big(\hat C_i - M_i\big)\Big)^2 .  \]
 </div>
 <p> The process variances add; the estimation errors add before being squared, and expanding that square is the exact origin of the cross terms of Definition&#160;<a href="sect0006.html#def:total">6.5</a>. </p>
@@ -3367,11 +3850,11 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">10.1</span><span class="theorem_thmtitle">A nondegenerate Mack model exists</span></div>
+      <span class="theorem_thmlabel">11.1</span><span class="theorem_thmtitle">A nondegenerate Mack model exists</span></div>
     <div class="thm_thmcontent"><p> There is a probability space, a random triangle with three accident years, and constants \(f_k\), \(\sigma _k^2\) with \(\sigma _0^2 {\gt} 0\), satisfying (M1), (M3) and (M2’), in which the first development step is genuinely random. The model: eight equally likely outcomes, an independent \(\pm 1\) shock per accident year, \(C_{i,0} = c\) and \(C_{i,k} = c f^k (1 + s\, \xi _i)\) for \(k \ge 1\), with \(\mathcal{D}_0\) trivial and \(\mathcal{D}_k\) everything for \(k \ge 1\). </p>
 </div>
 
-    <a class="latex_link" href="sect0010.html#thm:nontrivial">LaTeX</a>
+    <a class="latex_link" href="sect0011.html#thm:nontrivial">LaTeX</a>
     
     
   <div class="tooltip">
@@ -3384,6 +3867,139 @@
         
       </ul>
   </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:odpCol_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:odpCol" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">10.12</span><span class="theorem_thmtitle">Column totals</span></div>
+    <div class="thm_thmcontent"><p> If every development factor \(\hat f_j\), \(j {\lt} n-1\), is nonzero, then for every development year \(k\) </p>
+<div class="displaymath" id="a0000000134">
+  \[  \sum _{i \le n-1-k} \hat X_{i,k} = \sum _{i \le n-1-k} X_{i,k}:  \]
+</div>
+<p> the chain-ladder fit reproduces every observed column total. This is the second marginal-sum family of Mack (1991), Section 2, and the column score equation of Renshaw and Verrall (1998), Section 3. </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#thm:odpCol">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.chainLadder_fitted_column_totals">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:odpRow_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:odpRow" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">10.10</span><span class="theorem_thmtitle">Row totals</span></div>
+    <div class="thm_thmcontent"><p> For every accident year \(i\), \(\sum _{k \le n-1-i} \hat X_{i,k} = C_{i,\, n-1-i} = \sum _{k \le n-1-i} X_{i,k}\): the chain-ladder fit reproduces every observed row total. This is the first marginal-sum family of Mack (1991), Section 2, and the row score equation of Renshaw and Verrall (1998), Section 3. No hypothesis is needed. </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#thm:odpRow">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.chainLadder_fitted_row_totals" class="lean_decl">VerifiedReserving.chainLadder_fitted_row_totals</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.chainLadder_fitted_row_totals_eq" class="lean_decl">VerifiedReserving.chainLadder_fitted_row_totals_eq</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:odpScore_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:odpScore" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">10.13</span><span class="theorem_thmtitle">Chain ladder solves the ODP score equations</span></div>
+    <div class="thm_thmcontent"><p> Under the same hypothesis, the chain-ladder fitted incrementals satisfy the whole system of Definition&#160;<a href="sect0010.html#def:score">10.5</a>. </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#thm:odpScore">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.chainLadder_scoreEquations">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:odpUnique_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:odpUnique" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">10.16</span><span class="theorem_thmtitle">Mack’s uniqueness result</span></div>
+    <div class="thm_thmcontent"><p> A multiplicative model \(m_{i,k} = a_i b_k\) with \(a_i, b_k {\gt} 0\) and \(\sum _{k{\lt}n} b_k = 1\) that satisfies the marginal-sum equations coincides with the chain-ladder fit cell by cell on the observed triangle: \(a_i b_k = \hat X_{i,k}\). With Theorem&#160;<a href="sect0010.html#thm:odpScore">10.13</a> this is the classical equivalence: the over-dispersed Poisson generalized linear model and the chain-ladder method give the same fitted values, hence the same development pattern and the same reserves. </p>
+</div>
+
+    <a class="latex_link" href="sect0010.html#thm:odpUnique">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.multFit_eq_CLincr">Lean</a>
     
     
   
@@ -3855,7 +4471,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:se2rec"	[color=green,		fillcolor="#B0ECA3",		label=se2rec,		shape=box,		style=filled];	"lem:se2rec_closed"	[color=green,		fillcolor="#1CAC78",		label=se2rec_closed,		shape=ellipse,		style=filled];	"def:se2rec" -> "lem:se2rec_closed"	[style=dashed];	"thm:recursion"	[color=green,		fillcolor="#1CAC78",		label=recursion,		shape=ellipse,		style=filled];	"lem:se2rec_closed" -> "thm:recursion"	[style=dashed];	"thm:mwUnit"	[color=green,		fillcolor="#1CAC78",		label=mwUnit,		shape=ellipse,		style=filled];	"thm:recursion" -> "thm:mwUnit"	[style=dashed];	"def:mwMsep"	[color=green,		fillcolor="#B0ECA3",		label=mwMsep,		shape=box,		style=filled];	"lem:mwChat"	[color=green,		fillcolor="#1CAC78",		label=mwChat,		shape=ellipse,		style=filled];	"def:mwMsep" -> "lem:mwChat"	[style=dashed];	"lem:mwClosed"	[color=green,		fillcolor="#1CAC78",		label=mwClosed,		shape=ellipse,		style=filled];	"lem:mwChat" -> "lem:mwClosed"	[style=dashed];	"thm:mwRecursion"	[color=green,		fillcolor="#1CAC78",		label=mwRecursion,		shape=ellipse,		style=filled];	"lem:mwClosed" -> "thm:mwRecursion"	[style=dashed];	"thm:mwRecursion" -> "thm:mwUnit"	[style=dashed];	"lem:rect"	[color=green,		fillcolor="#1CAC78",		label=rect,		shape=ellipse,		style=filled];	"thm:condExp_sup"	[color=green,		fillcolor="#1CAC78",		label=condExp_sup,		shape=ellipse,		style=filled];	"lem:rect" -> "thm:condExp_sup"	[style=dashed];	"thm:mack2prime"	[color=green,		fillcolor="#1CAC78",		label=mack2prime,		shape=ellipse,		style=filled];	"thm:condExp_sup" -> "thm:mack2prime"	[style=dashed];	"thm:passage"	[color=green,		fillcolor="#1CAC78",		label=passage,		shape=ellipse,		style=filled];	"thm:condExp_sup" -> "thm:passage"	[style=dashed];	"lem:C_at"	[color=green,		fillcolor="#1CAC78",		label=C_at,		shape=ellipse,		style=filled];	"thm:cdr_closed"	[color=green,		fillcolor="#1CAC78",		label=cdr_closed,		shape=ellipse,		style=filled];	"lem:C_at" -> "thm:cdr_closed"	[style=dashed];	"lem:mwUnit"	[color=green,		fillcolor="#1CAC78",		label=mwUnit,		shape=ellipse,		style=filled];	"lem:mwUnit" -> "thm:mwUnit"	[style=dashed];	"def:procVar"	[color=green,		fillcolor="#B0ECA3",		label=procVar,		shape=box,		style=filled];	"def:mackEst"	[color=green,		fillcolor="#B0ECA3",		label=mackEst,		shape=box,		style=filled];	"def:procVar" -> "def:mackEst"	[style=dashed];	"thm:procVar"	[color=green,		fillcolor="#1CAC78",		label=procVar,		shape=ellipse,		style=filled];	"def:procVar" -> "thm:procVar"	[style=dashed];	"thm:rohrProcess"	[color=green,		fillcolor="#1CAC78",		label=rohrProcess,		shape=ellipse,		style=filled];	"def:mackEst" -> "thm:rohrProcess"	[style=dashed];	"def:bbmw"	[color=green,		fillcolor="#B0ECA3",		label=bbmw,		shape=box,		style=filled];	"def:mackEst" -> "def:bbmw"	[style=dashed];	"lem:ultimateD"	[color=green,		fillcolor="#1CAC78",		label=ultimateD,		shape=ellipse,		style=filled];	"thm:procVar" -> "lem:ultimateD"	[style=dashed];	"thm:msep"	[color=green,		fillcolor="#1CAC78",		label=msep,		shape=ellipse,		style=filled];	"thm:procVar" -> "thm:msep"	[style=dashed];	"cor:msepSplit"	[color=green,		fillcolor="#1CAC78",		label=msepSplit,		shape=ellipse,		style=filled];	"thm:rohrProcess" -> "cor:msepSplit"	[style=dashed];	"lem:rohrParam"	[color=green,		fillcolor="#1CAC78",		label=rohrParam,		shape=ellipse,		style=filled];	"def:bbmw" -> "lem:rohrParam"	[style=dashed];	"def:total"	[color=green,		fillcolor="#B0ECA3",		label=total,		shape=box,		style=filled];	"def:bbmw" -> "def:total"	[style=dashed];	"thm:catalogue"	[color=green,		fillcolor="#1CAC78",		label=catalogue,		shape=ellipse,		style=filled];	"def:bbmw" -> "thm:catalogue"	[style=dashed];	"thm:msepTotalExact"	[color=green,		fillcolor="#1CAC78",		label=msepTotalExact,		shape=ellipse,		style=filled];	"lem:ultimateD" -> "thm:msepTotalExact"	[style=dashed];	"def:obsCDR"	[color=green,		fillcolor="#B0ECA3",		label=obsCDR,		shape=box,		style=filled];	"lem:obsCDR_reserve"	[color=green,		fillcolor="#1CAC78",		label=obsCDR_reserve,		shape=ellipse,		style=filled];	"def:obsCDR" -> "lem:obsCDR_reserve"	[style=dashed];	"def:rohrMsep"	[color=green,		fillcolor="#B0ECA3",		label=rohrMsep,		shape=box,		style=filled];	"def:rohrMsep" -> "thm:rohrProcess"	[style=dashed];	"lem:rohrSplit"	[color=green,		fillcolor="#1CAC78",		label=rohrSplit,		shape=ellipse,		style=filled];	"def:rohrMsep" -> "lem:rohrSplit"	[style=dashed];	"thm:rohrMsep"	[color=green,		fillcolor="#1CAC78",		label=rohrMsep,		shape=ellipse,		style=filled];	"def:rohrMsep" -> "thm:rohrMsep"	[style=dashed];	"def:rohrMsep" -> "lem:rohrParam"	[style=dashed];	"def:rohrTotal"	[color=green,		fillcolor="#B0ECA3",		label=rohrTotal,		shape=box,		style=filled];	"def:rohrMsep" -> "def:rohrTotal"	[style=dashed];	"lem:rohrSplit" -> "cor:msepSplit"	[style=dashed];	"thm:rohrMsep" -> "cor:msepSplit"	[style=dashed];	"thm:rohrTotal"	[color=green,		fillcolor="#1CAC78",		label=rohrTotal,		shape=ellipse,		style=filled];	"thm:rohrMsep" -> "thm:rohrTotal"	[style=dashed];	"lem:rohrParam" -> "cor:msepSplit"	[style=dashed];	"thm:rohrVsBbmw"	[color=green,		fillcolor="#1CAC78",		label=rohrVsBbmw,		shape=ellipse,		style=filled];	"lem:rohrParam" -> "thm:rohrVsBbmw"	[style=dashed];	"def:rohrTotal" -> "thm:rohrTotal"	[style=dashed];	"lem:T"	[color=green,		fillcolor="#1CAC78",		label=T,		shape=ellipse,		style=filled];	"lem:sq"	[color=green,		fillcolor="#1CAC78",		label=sq,		shape=ellipse,		style=filled];	"lem:T" -> "lem:sq"	[style=dashed];	"lem:sq_fhat"	[color=green,		fillcolor="#1CAC78",		label=sq_fhat,		shape=ellipse,		style=filled];	"lem:sq" -> "lem:sq_fhat"	[style=dashed];	"lem:sq_eps"	[color=green,		fillcolor="#1CAC78",		label=sq_eps,		shape=ellipse,		style=filled];	"lem:sq" -> "lem:sq_eps"	[style=dashed];	"thm:sigma2"	[color=green,		fillcolor="#1CAC78",		label=sigma2,		shape=ellipse,		style=filled];	"lem:sq_eps" -> "thm:sigma2"	[style=dashed];	"thm:plugin"	[color=green,		fillcolor="#1CAC78",		label=plugin,		shape=ellipse,		style=filled];	"thm:msepTotalExact" -> "thm:plugin"	[style=dashed];	"cor:msepTotalLower"	[color=green,		fillcolor="#1CAC78",		label=msepTotalLower,		shape=ellipse,		style=filled];	"thm:msepTotalExact" -> "cor:msepTotalLower"	[style=dashed];	"thm:mwUnbiased"	[color=green,		fillcolor="#1CAC78",		label=mwUnbiased,		shape=ellipse,		style=filled];	"def:total" -> "def:rohrTotal"	[style=dashed];	"def:total" -> "thm:msepTotalExact"	[style=dashed];	"thm:total"	[color=green,		fillcolor="#1CAC78",		label=total,		shape=ellipse,		style=filled];	"def:total" -> "thm:total"	[style=dashed];	"thm:catalogue" -> "thm:rohrVsBbmw"	[style=dashed];	"thm:counterexample"	[color=green,		fillcolor="#1CAC78",		label=counterexample,		shape=ellipse,		style=filled];	"thm:catalogue" -> "thm:counterexample"	[style=dashed];	"lem:Chat_succ"	[color=green,		fillcolor="#1CAC78",		label=Chat_succ,		shape=ellipse,		style=filled];	"lem:Chat_succ" -> "lem:se2rec_closed"	[style=dashed];	"lem:centred"	[color=green,		fillcolor="#1CAC78",		label=centred,		shape=ellipse,		style=filled];	"thm:msepSum"	[color=green,		fillcolor="#1CAC78",		label=msepSum,		shape=ellipse,		style=filled];	"lem:centred" -> "thm:msepSum"	[style=dashed];	"thm:msepSum" -> "thm:msepTotalExact"	[style=dashed];	"def:mackTerm"	[color=green,		fillcolor="#B0ECA3",		label=mackTerm,		shape=box,		style=filled];	"def:mackTerm" -> "lem:se2rec_closed"	[style=dashed];	"lem:msep_sum"	[color=green,		fillcolor="#1CAC78",		label=msep_sum,		shape=ellipse,		style=filled];	"def:mackTerm" -> "lem:msep_sum"	[style=dashed];	"lem:msep_sum" -> "thm:recursion"	[style=dashed];	"lem:mwWeighted"	[color=green,		fillcolor="#1CAC78",		label=mwWeighted,		shape=ellipse,		style=filled];	"thm:bf_cl"	[color=green,		fillcolor="#1CAC78",		label=bf_cl,		shape=ellipse,		style=filled];	"def:rv"	[color=green,		fillcolor="#B0ECA3",		label=rv,		shape=box,		style=filled];	"def:ChatRv"	[color=green,		fillcolor="#B0ECA3",		label=ChatRv,		shape=box,		style=filled];	"def:rv" -> "def:ChatRv"	[style=dashed];	"def:sigma2Rv"	[color=green,		fillcolor="#B0ECA3",		label=sigma2Rv,		shape=box,		style=filled];	"def:rv" -> "def:sigma2Rv"	[style=dashed];	"lem:fhat_sub"	[color=green,		fillcolor="#1CAC78",		label=fhat_sub,		shape=ellipse,		style=filled];	"def:rv" -> "lem:fhat_sub"	[style=dashed];	"def:trueCDR"	[color=green,		fillcolor="#B0ECA3",		label=trueCDR,		shape=box,		style=filled];	"def:rv" -> "def:trueCDR"	[style=dashed];	"lem:Srv_meas"	[color=green,		fillcolor="#1CAC78",		label=Srv_meas,		shape=ellipse,		style=filled];	"def:rv" -> "lem:Srv_meas"	[style=dashed];	"lem:ChatRv_meas"	[color=green,		fillcolor="#1CAC78",		label=ChatRv_meas,		shape=ellipse,		style=filled];	"def:ChatRv" -> "lem:ChatRv_meas"	[style=dashed];	"def:sigma2Rv" -> "thm:sigma2"	[style=dashed];	"thm:var_fhat"	[color=green,		fillcolor="#1CAC78",		label=var_fhat,		shape=ellipse,		style=filled];	"lem:fhat_sub" -> "thm:var_fhat"	[style=dashed];	"def:trueCDR" -> "thm:cdr_closed"	[style=dashed];	"thm:cdr_martingale"	[color=green,		fillcolor="#1CAC78",		label=cdr_martingale,		shape=ellipse,		style=filled];	"def:trueCDR" -> "thm:cdr_martingale"	[style=dashed];	"thm:unbiased"	[color=green,		fillcolor="#1CAC78",		label=unbiased,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "thm:unbiased"	[style=dashed];	"lem:fhat_meas"	[color=green,		fillcolor="#1CAC78",		label=fhat_meas,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "lem:fhat_meas"	[style=dashed];	"lem:Srv_meas" -> "thm:var_fhat"	[style=dashed];	"thm:mack1"	[color=green,		fillcolor="#1CAC78",		label=mack1,		shape=ellipse,		style=filled];	"lem:ChatRv_meas" -> "thm:mack1"	[style=dashed];	"thm:unbiased" -> "thm:mwUnbiased"	[style=dashed];	"thm:uncorrelated"	[color=green,		fillcolor="#1CAC78",		label=uncorrelated,		shape=ellipse,		style=filled];	"thm:unbiased" -> "thm:uncorrelated"	[style=dashed];	"thm:unbiased" -> "thm:mack1"	[style=dashed];	"thm:mack2"	[color=green,		fillcolor="#1CAC78",		label=mack2,		shape=ellipse,		style=filled];	"thm:uncorrelated" -> "thm:mack2"	[style=dashed];	"thm:mack1" -> "thm:msep"	[style=dashed];	"thm:instantiated"	[color=green,		fillcolor="#1CAC78",		label=instantiated,		shape=ellipse,		style=filled];	"thm:mack1" -> "thm:instantiated"	[style=dashed];	"thm:sigma2" -> "thm:instantiated"	[style=dashed];	"lem:fhat_meas" -> "lem:ChatRv_meas"	[style=dashed];	"lem:fhat_meas" -> "thm:uncorrelated"	[style=dashed];	"thm:var_fhat" -> "thm:sigma2"	[style=dashed];	"def:RandomTriangle"	[color=green,		fillcolor="#B0ECA3",		label=RandomTriangle,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:rv"	[style=dashed];	"def:mwRv"	[color=green,		fillcolor="#B0ECA3",		label=mwRv,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:mwRv"	[style=dashed];	"def:rowSigma"	[color=green,		fillcolor="#B0ECA3",		label=rowSigma,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:rowSigma"	[style=dashed];	"def:Mack1"	[color=green,		fillcolor="#B0ECA3",		label=Mack1,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:Mack1"	[style=dashed];	"def:Mack3"	[color=green,		fillcolor="#B0ECA3",		label=Mack3,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:Mack3"	[style=dashed];	"lem:mwMeas"	[color=green,		fillcolor="#1CAC78",		label=mwMeas,		shape=ellipse,		style=filled];	"def:mwRv" -> "lem:mwMeas"	[style=dashed];	"def:rowAssumptions"	[color=green,		fillcolor="#B0ECA3",		label=rowAssumptions,		shape=box,		style=filled];	"def:rowSigma" -> "def:rowAssumptions"	[style=dashed];	"def:Mack1" -> "thm:passage"	[style=dashed];	"def:Mack1" -> "thm:unbiased"	[style=dashed];	"lem:second_moment"	[color=green,		fillcolor="#1CAC78",		label=second_moment,		shape=ellipse,		style=filled];	"def:Mack1" -> "lem:second_moment"	[style=dashed];	"lem:C_succ"	[color=green,		fillcolor="#1CAC78",		label=C_succ,		shape=ellipse,		style=filled];	"def:Mack1" -> "lem:C_succ"	[style=dashed];	"thm:nontrivial"	[color=green,		fillcolor="#1CAC78",		label=nontrivial,		shape=ellipse,		style=filled];	"def:Mack1" -> "thm:nontrivial"	[style=dashed];	"def:Mack3" -> "thm:mack2prime"	[style=dashed];	"def:Mack3" -> "thm:passage"	[style=dashed];	"def:Mack3" -> "lem:fhat_sub"	[style=dashed];	"def:Mack3" -> "lem:second_moment"	[style=dashed];	"def:Mack3" -> "thm:nontrivial"	[style=dashed];	"lem:mwMeas" -> "thm:mwUnbiased"	[style=dashed];	"lem:indep_rows"	[color=green,		fillcolor="#1CAC78",		label=indep_rows,		shape=ellipse,		style=filled];	"def:rowAssumptions" -> "lem:indep_rows"	[style=dashed];	"lem:second_moment" -> "thm:procVar"	[style=dashed];	"lem:C_succ" -> "lem:C_at"	[style=dashed];	"lem:C_succ" -> "thm:procVar"	[style=dashed];	"lem:C_succ" -> "thm:mack1"	[style=dashed];	"thm:crossFreeWitness"	[color=green,		fillcolor="#1CAC78",		label=crossFreeWitness,		shape=ellipse,		style=filled];	"thm:nontrivial" -> "thm:crossFreeWitness"	[style=dashed];	"thm:nontrivial" -> "thm:instantiated"	[style=dashed];	"lem:weighted"	[color=green,		fillcolor="#1CAC78",		label=weighted,		shape=ellipse,		style=filled];	"def:crossFree"	[color=green,		fillcolor="#B0ECA3",		label=crossFree,		shape=box,		style=filled];	"lem:varAdd"	[color=green,		fillcolor="#1CAC78",		label=varAdd,		shape=ellipse,		style=filled];	"def:crossFree" -> "lem:varAdd"	[style=dashed];	"def:crossFree" -> "thm:crossFreeWitness"	[style=dashed];	"lem:varAdd" -> "thm:msepSum"	[style=dashed];	"lem:msep_decomp"	[color=green,		fillcolor="#1CAC78",		label=msep_decomp,		shape=ellipse,		style=filled];	"lem:msep_decomp" -> "thm:msep"	[style=dashed];	"lem:msep_decomp" -> "lem:centred"	[style=dashed];	"def:mwRec"	[color=green,		fillcolor="#B0ECA3",		label=mwRec,		shape=box,		style=filled];	"def:mwRec" -> "lem:mwClosed"	[style=dashed];	"def:mwTail"	[color=green,		fillcolor="#B0ECA3",		label=mwTail,		shape=box,		style=filled];	"def:mwRec" -> "def:mwTail"	[style=dashed];	"lem:remainder"	[color=green,		fillcolor="#1CAC78",		label=remainder,		shape=ellipse,		style=filled];	"lem:remainder" -> "thm:catalogue"	[style=dashed];	"lem:remainder" -> "thm:total"	[style=dashed];	"def:mwFhat"	[color=green,		fillcolor="#B0ECA3",		label=mwFhat,		shape=box,		style=filled];	"def:mwFhat" -> "lem:mwWeighted"	[style=dashed];	"def:mwFhat" -> "def:mwRv"	[style=dashed];	"def:mwChat"	[color=green,		fillcolor="#B0ECA3",		label=mwChat,		shape=box,		style=filled];	"def:mwFhat" -> "def:mwChat"	[style=dashed];	"lem:mwSq"	[color=green,		fillcolor="#1CAC78",		label=mwSq,		shape=ellipse,		style=filled];	"def:mwFhat" -> "lem:mwSq"	[style=dashed];	"def:mwChat" -> "def:mwMsep"	[style=dashed];	"def:mwChat" -> "lem:mwUnit"	[style=dashed];	"def:mwChat" -> "def:mwRec"	[style=dashed];	"def:F"	[color=green,		fillcolor="#B0ECA3",		label=F,		shape=box,		style=filled];	"def:F" -> "lem:T"	[style=dashed];	"def:F" -> "lem:weighted"	[style=dashed];	"def:mwSums"	[color=green,		fillcolor="#B0ECA3",		label=mwSums,		shape=box,		style=filled];	"def:F" -> "def:mwSums"	[style=dashed];	"def:sigma2"	[color=green,		fillcolor="#B0ECA3",		label=sigma2,		shape=box,		style=filled];	"def:F" -> "def:sigma2"	[style=dashed];	"def:mwSums" -> "def:mwFhat"	[style=dashed];	"def:sigma2" -> "def:se2rec"	[style=dashed];	"def:sigma2" -> "lem:mwUnit"	[style=dashed];	"def:sigma2" -> "def:mackEst"	[style=dashed];	"def:sigma2" -> "def:mackTerm"	[style=dashed];	"def:sigma2" -> "def:sigma2Rv"	[style=dashed];	"def:rohrRel"	[color=green,		fillcolor="#B0ECA3",		label=rohrRel,		shape=box,		style=filled];	"def:sigma2" -> "def:rohrRel"	[style=dashed];	"def:msep"	[color=green,		fillcolor="#B0ECA3",		label=msep,		shape=box,		style=filled];	"def:sigma2" -> "def:msep"	[style=dashed];	"def:rohrRel" -> "def:rohrMsep"	[style=dashed];	"def:msep" -> "thm:rohrMsep"	[style=dashed];	"def:msep" -> "def:total"	[style=dashed];	"def:msep" -> "lem:msep_sum"	[style=dashed];	"def:contributors"	[color=green,		fillcolor="#B0ECA3",		label=contributors,		shape=box,		style=filled];	"def:contributors" -> "def:mwSums"	[style=dashed];	"def:S"	[color=green,		fillcolor="#B0ECA3",		label=S,		shape=box,		style=filled];	"def:contributors" -> "def:S"	[style=dashed];	"def:S" -> "lem:T"	[style=dashed];	"def:fhat"	[color=green,		fillcolor="#B0ECA3",		label=fhat,		shape=box,		style=filled];	"def:S" -> "def:fhat"	[style=dashed];	"def:fhat" -> "lem:sq_fhat"	[style=dashed];	"def:fhat" -> "lem:sq_eps"	[style=dashed];	"def:fhat" -> "def:rv"	[style=dashed];	"def:fhat" -> "lem:weighted"	[style=dashed];	"def:fhat" -> "def:sigma2"	[style=dashed];	"def:Chat"	[color=green,		fillcolor="#B0ECA3",		label=Chat,		shape=box,		style=filled];	"def:fhat" -> "def:Chat"	[style=dashed];	"def:Chat" -> "def:se2rec"	[style=dashed];	"def:Chat" -> "lem:mwUnit"	[style=dashed];	"def:Chat" -> "lem:Chat_succ"	[style=dashed];	"def:Chat" -> "def:mackTerm"	[style=dashed];	"def:Chat" -> "def:rohrRel"	[style=dashed];	"def:bf"	[color=green,		fillcolor="#B0ECA3",		label=bf,		shape=box,		style=filled];	"def:Chat" -> "def:bf"	[style=dashed];	"def:reserve"	[color=green,		fillcolor="#B0ECA3",		label=reserve,		shape=box,		style=filled];	"def:Chat" -> "def:reserve"	[style=dashed];	"lem:Chat_diag"	[color=green,		fillcolor="#1CAC78",		label=Chat_diag,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:Chat_diag"	[style=dashed];	"lem:ChatSplit"	[color=green,		fillcolor="#1CAC78",		label=ChatSplit,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:ChatSplit"	[style=dashed];	"lem:indep_rows" -> "thm:mack2prime"	[style=dashed];	"lem:indep_rows" -> "thm:passage"	[style=dashed];	"lem:bf_linear"	[color=green,		fillcolor="#1CAC78",		label=bf_linear,		shape=ellipse,		style=filled];	"def:bf" -> "thm:bf_cl"	[style=dashed];	"def:bf" -> "lem:bf_linear"	[style=dashed];	"lem:bf_frac"	[color=green,		fillcolor="#1CAC78",		label=bf_frac,		shape=ellipse,		style=filled];	"def:bf" -> "lem:bf_frac"	[style=dashed];	"def:reserve" -> "def:obsCDR"	[style=dashed];	"def:reserve" -> "def:rohrMsep"	[style=dashed];	"def:reserve" -> "thm:bf_cl"	[style=dashed];	"def:reserve" -> "def:msep"	[style=dashed];	"lem:oldest"	[color=green,		fillcolor="#1CAC78",		label=oldest,		shape=ellipse,		style=filled];	"def:reserve" -> "lem:oldest"	[style=dashed];	"lem:ChatSplit" -> "thm:rohrProcess"	[style=dashed];	"lem:mwStep"	[color=green,		fillcolor="#1CAC78",		label=mwStep,		shape=ellipse,		style=filled];	"lem:mwStep" -> "lem:mwClosed"	[style=dashed];}`)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:fhat"	[color=green,		fillcolor="#B0ECA3",		label=fhat,		shape=box,		style=filled];	"lem:patternFhat"	[color=green,		fillcolor="#1CAC78",		label=patternFhat,		shape=ellipse,		style=filled];	"def:fhat" -> "lem:patternFhat"	[style=dashed];	"lem:sq_eps"	[color=green,		fillcolor="#1CAC78",		label=sq_eps,		shape=ellipse,		style=filled];	"def:fhat" -> "lem:sq_eps"	[style=dashed];	"def:rv"	[color=green,		fillcolor="#B0ECA3",		label=rv,		shape=box,		style=filled];	"def:fhat" -> "def:rv"	[style=dashed];	"def:Chat"	[color=green,		fillcolor="#B0ECA3",		label=Chat,		shape=box,		style=filled];	"def:fhat" -> "def:Chat"	[style=dashed];	"lem:sq_fhat"	[color=green,		fillcolor="#1CAC78",		label=sq_fhat,		shape=ellipse,		style=filled];	"def:fhat" -> "lem:sq_fhat"	[style=dashed];	"def:sigma2"	[color=green,		fillcolor="#B0ECA3",		label=sigma2,		shape=box,		style=filled];	"def:fhat" -> "def:sigma2"	[style=dashed];	"lem:weighted"	[color=green,		fillcolor="#1CAC78",		label=weighted,		shape=ellipse,		style=filled];	"def:fhat" -> "lem:weighted"	[style=dashed];	"lem:multCum"	[color=green,		fillcolor="#1CAC78",		label=multCum,		shape=ellipse,		style=filled];	"lem:patternFhat" -> "lem:multCum"	[style=dashed];	"thm:sigma2"	[color=green,		fillcolor="#1CAC78",		label=sigma2,		shape=ellipse,		style=filled];	"lem:sq_eps" -> "thm:sigma2"	[style=dashed];	"lem:Srv_meas"	[color=green,		fillcolor="#1CAC78",		label=Srv_meas,		shape=ellipse,		style=filled];	"def:rv" -> "lem:Srv_meas"	[style=dashed];	"def:ChatRv"	[color=green,		fillcolor="#B0ECA3",		label=ChatRv,		shape=box,		style=filled];	"def:rv" -> "def:ChatRv"	[style=dashed];	"lem:fhat_sub"	[color=green,		fillcolor="#1CAC78",		label=fhat_sub,		shape=ellipse,		style=filled];	"def:rv" -> "lem:fhat_sub"	[style=dashed];	"def:sigma2Rv"	[color=green,		fillcolor="#B0ECA3",		label=sigma2Rv,		shape=box,		style=filled];	"def:rv" -> "def:sigma2Rv"	[style=dashed];	"def:trueCDR"	[color=green,		fillcolor="#B0ECA3",		label=trueCDR,		shape=box,		style=filled];	"def:rv" -> "def:trueCDR"	[style=dashed];	"lem:mwUnit"	[color=green,		fillcolor="#1CAC78",		label=mwUnit,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:mwUnit"	[style=dashed];	"def:CLfit"	[color=green,		fillcolor="#B0ECA3",		label=CLfit,		shape=box,		style=filled];	"def:Chat" -> "def:CLfit"	[style=dashed];	"def:bf"	[color=green,		fillcolor="#B0ECA3",		label=bf,		shape=box,		style=filled];	"def:Chat" -> "def:bf"	[style=dashed];	"def:rohrRel"	[color=green,		fillcolor="#B0ECA3",		label=rohrRel,		shape=box,		style=filled];	"def:Chat" -> "def:rohrRel"	[style=dashed];	"def:mackTerm"	[color=green,		fillcolor="#B0ECA3",		label=mackTerm,		shape=box,		style=filled];	"def:Chat" -> "def:mackTerm"	[style=dashed];	"def:se2rec"	[color=green,		fillcolor="#B0ECA3",		label=se2rec,		shape=box,		style=filled];	"def:Chat" -> "def:se2rec"	[style=dashed];	"def:reserve"	[color=green,		fillcolor="#B0ECA3",		label=reserve,		shape=box,		style=filled];	"def:Chat" -> "def:reserve"	[style=dashed];	"lem:Chat_succ"	[color=green,		fillcolor="#1CAC78",		label=Chat_succ,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:Chat_succ"	[style=dashed];	"lem:Chat_diag"	[color=green,		fillcolor="#1CAC78",		label=Chat_diag,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:Chat_diag"	[style=dashed];	"lem:ChatSplit"	[color=green,		fillcolor="#1CAC78",		label=ChatSplit,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:ChatSplit"	[style=dashed];	"def:sigma2" -> "lem:mwUnit"	[style=dashed];	"def:sigma2" -> "def:sigma2Rv"	[style=dashed];	"def:sigma2" -> "def:rohrRel"	[style=dashed];	"def:sigma2" -> "def:mackTerm"	[style=dashed];	"def:sigma2" -> "def:se2rec"	[style=dashed];	"def:mackEst"	[color=green,		fillcolor="#B0ECA3",		label=mackEst,		shape=box,		style=filled];	"def:sigma2" -> "def:mackEst"	[style=dashed];	"def:msep"	[color=green,		fillcolor="#B0ECA3",		label=msep,		shape=box,		style=filled];	"def:sigma2" -> "def:msep"	[style=dashed];	"thm:mwUnit"	[color=green,		fillcolor="#1CAC78",		label=mwUnit,		shape=ellipse,		style=filled];	"lem:mwUnit" -> "thm:mwUnit"	[style=dashed];	"thm:odpUnique"	[color=green,		fillcolor="#1CAC78",		label=odpUnique,		shape=ellipse,		style=filled];	"lem:multCum" -> "thm:odpUnique"	[style=dashed];	"thm:instantiated"	[color=green,		fillcolor="#1CAC78",		label=instantiated,		shape=ellipse,		style=filled];	"thm:sigma2" -> "thm:instantiated"	[style=dashed];	"thm:unbiased"	[color=green,		fillcolor="#1CAC78",		label=unbiased,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "thm:unbiased"	[style=dashed];	"thm:var_fhat"	[color=green,		fillcolor="#1CAC78",		label=var_fhat,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "thm:var_fhat"	[style=dashed];	"lem:fhat_meas"	[color=green,		fillcolor="#1CAC78",		label=fhat_meas,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "lem:fhat_meas"	[style=dashed];	"lem:ChatRv_meas"	[color=green,		fillcolor="#1CAC78",		label=ChatRv_meas,		shape=ellipse,		style=filled];	"def:ChatRv" -> "lem:ChatRv_meas"	[style=dashed];	"lem:fhat_sub" -> "thm:var_fhat"	[style=dashed];	"def:sigma2Rv" -> "thm:sigma2"	[style=dashed];	"thm:cdr_closed"	[color=green,		fillcolor="#1CAC78",		label=cdr_closed,		shape=ellipse,		style=filled];	"def:trueCDR" -> "thm:cdr_closed"	[style=dashed];	"thm:cdr_martingale"	[color=green,		fillcolor="#1CAC78",		label=cdr_martingale,		shape=ellipse,		style=filled];	"def:trueCDR" -> "thm:cdr_martingale"	[style=dashed];	"def:CLfit" -> "lem:multCum"	[style=dashed];	"lem:telescope"	[color=green,		fillcolor="#1CAC78",		label=telescope,		shape=ellipse,		style=filled];	"def:CLfit" -> "lem:telescope"	[style=dashed];	"lem:colCum"	[color=green,		fillcolor="#1CAC78",		label=colCum,		shape=ellipse,		style=filled];	"def:CLfit" -> "lem:colCum"	[style=dashed];	"lem:bf_linear"	[color=green,		fillcolor="#1CAC78",		label=bf_linear,		shape=ellipse,		style=filled];	"def:bf" -> "lem:bf_linear"	[style=dashed];	"thm:bf_cl"	[color=green,		fillcolor="#1CAC78",		label=bf_cl,		shape=ellipse,		style=filled];	"def:bf" -> "thm:bf_cl"	[style=dashed];	"lem:bf_frac"	[color=green,		fillcolor="#1CAC78",		label=bf_frac,		shape=ellipse,		style=filled];	"def:bf" -> "lem:bf_frac"	[style=dashed];	"def:rohrMsep"	[color=green,		fillcolor="#B0ECA3",		label=rohrMsep,		shape=box,		style=filled];	"def:rohrRel" -> "def:rohrMsep"	[style=dashed];	"lem:se2rec_closed"	[color=green,		fillcolor="#1CAC78",		label=se2rec_closed,		shape=ellipse,		style=filled];	"def:mackTerm" -> "lem:se2rec_closed"	[style=dashed];	"lem:msep_sum"	[color=green,		fillcolor="#1CAC78",		label=msep_sum,		shape=ellipse,		style=filled];	"def:mackTerm" -> "lem:msep_sum"	[style=dashed];	"def:se2rec" -> "lem:se2rec_closed"	[style=dashed];	"def:reserve" -> "def:msep"	[style=dashed];	"def:reserve" -> "thm:bf_cl"	[style=dashed];	"def:reserve" -> "def:rohrMsep"	[style=dashed];	"def:obsCDR"	[color=green,		fillcolor="#B0ECA3",		label=obsCDR,		shape=box,		style=filled];	"def:reserve" -> "def:obsCDR"	[style=dashed];	"lem:oldest"	[color=green,		fillcolor="#1CAC78",		label=oldest,		shape=ellipse,		style=filled];	"def:reserve" -> "lem:oldest"	[style=dashed];	"lem:Chat_succ" -> "lem:se2rec_closed"	[style=dashed];	"thm:rohrProcess"	[color=green,		fillcolor="#1CAC78",		label=rohrProcess,		shape=ellipse,		style=filled];	"lem:ChatSplit" -> "thm:rohrProcess"	[style=dashed];	"def:mackEst" -> "thm:rohrProcess"	[style=dashed];	"def:bbmw"	[color=green,		fillcolor="#B0ECA3",		label=bbmw,		shape=box,		style=filled];	"def:mackEst" -> "def:bbmw"	[style=dashed];	"cor:msepSplit"	[color=green,		fillcolor="#1CAC78",		label=msepSplit,		shape=ellipse,		style=filled];	"thm:rohrProcess" -> "cor:msepSplit"	[style=dashed];	"lem:rohrParam"	[color=green,		fillcolor="#1CAC78",		label=rohrParam,		shape=ellipse,		style=filled];	"def:bbmw" -> "lem:rohrParam"	[style=dashed];	"def:total"	[color=green,		fillcolor="#B0ECA3",		label=total,		shape=box,		style=filled];	"def:bbmw" -> "def:total"	[style=dashed];	"thm:catalogue"	[color=green,		fillcolor="#1CAC78",		label=catalogue,		shape=ellipse,		style=filled];	"def:bbmw" -> "thm:catalogue"	[style=dashed];	"def:msep" -> "lem:msep_sum"	[style=dashed];	"thm:rohrMsep"	[color=green,		fillcolor="#1CAC78",		label=rohrMsep,		shape=ellipse,		style=filled];	"def:msep" -> "thm:rohrMsep"	[style=dashed];	"def:msep" -> "def:total"	[style=dashed];	"thm:odpRow"	[color=green,		fillcolor="#1CAC78",		label=odpRow,		shape=ellipse,		style=filled];	"lem:telescope" -> "thm:odpRow"	[style=dashed];	"thm:odpCol"	[color=green,		fillcolor="#1CAC78",		label=odpCol,		shape=ellipse,		style=filled];	"lem:colCum" -> "thm:odpCol"	[style=dashed];	"def:rohrMsep" -> "thm:rohrProcess"	[style=dashed];	"lem:rohrSplit"	[color=green,		fillcolor="#1CAC78",		label=rohrSplit,		shape=ellipse,		style=filled];	"def:rohrMsep" -> "lem:rohrSplit"	[style=dashed];	"def:rohrMsep" -> "thm:rohrMsep"	[style=dashed];	"def:rohrMsep" -> "lem:rohrParam"	[style=dashed];	"def:rohrTotal"	[color=green,		fillcolor="#B0ECA3",		label=rohrTotal,		shape=box,		style=filled];	"def:rohrMsep" -> "def:rohrTotal"	[style=dashed];	"thm:recursion"	[color=green,		fillcolor="#1CAC78",		label=recursion,		shape=ellipse,		style=filled];	"lem:se2rec_closed" -> "thm:recursion"	[style=dashed];	"lem:msep_sum" -> "thm:recursion"	[style=dashed];	"def:mwMsep"	[color=green,		fillcolor="#B0ECA3",		label=mwMsep,		shape=box,		style=filled];	"lem:mwChat"	[color=green,		fillcolor="#1CAC78",		label=mwChat,		shape=ellipse,		style=filled];	"def:mwMsep" -> "lem:mwChat"	[style=dashed];	"lem:mwClosed"	[color=green,		fillcolor="#1CAC78",		label=mwClosed,		shape=ellipse,		style=filled];	"lem:mwChat" -> "lem:mwClosed"	[style=dashed];	"thm:mwRecursion"	[color=green,		fillcolor="#1CAC78",		label=mwRecursion,		shape=ellipse,		style=filled];	"lem:mwClosed" -> "thm:mwRecursion"	[style=dashed];	"thm:mwRecursion" -> "thm:mwUnit"	[style=dashed];	"def:incr"	[color=green,		fillcolor="#B0ECA3",		label=incr,		shape=box,		style=filled];	"def:incr" -> "lem:telescope"	[style=dashed];	"def:qll"	[color=green,		fillcolor="#B0ECA3",		label=qll,		shape=box,		style=filled];	"def:incr" -> "def:qll"	[style=dashed];	"def:score"	[color=green,		fillcolor="#B0ECA3",		label=score,		shape=box,		style=filled];	"def:incr" -> "def:score"	[style=dashed];	"lem:score"	[color=green,		fillcolor="#1CAC78",		label=score,		shape=ellipse,		style=filled];	"def:qll" -> "lem:score"	[style=dashed];	"def:score" -> "lem:patternFhat"	[style=dashed];	"def:score" -> "thm:odpRow"	[style=dashed];	"lem:scoreZero"	[color=green,		fillcolor="#1CAC78",		label=scoreZero,		shape=ellipse,		style=filled];	"def:score" -> "lem:scoreZero"	[style=dashed];	"def:score" -> "thm:odpCol"	[style=dashed];	"lem:score" -> "lem:scoreZero"	[style=dashed];	"thm:odpScore"	[color=green,		fillcolor="#1CAC78",		label=odpScore,		shape=ellipse,		style=filled];	"thm:odpRow" -> "thm:odpScore"	[style=dashed];	"thm:odpCol" -> "thm:odpScore"	[style=dashed];	"thm:recursion" -> "thm:mwUnit"	[style=dashed];	"lem:rect"	[color=green,		fillcolor="#1CAC78",		label=rect,		shape=ellipse,		style=filled];	"thm:condExp_sup"	[color=green,		fillcolor="#1CAC78",		label=condExp_sup,		shape=ellipse,		style=filled];	"lem:rect" -> "thm:condExp_sup"	[style=dashed];	"thm:mack2prime"	[color=green,		fillcolor="#1CAC78",		label=mack2prime,		shape=ellipse,		style=filled];	"thm:condExp_sup" -> "thm:mack2prime"	[style=dashed];	"thm:passage"	[color=green,		fillcolor="#1CAC78",		label=passage,		shape=ellipse,		style=filled];	"thm:condExp_sup" -> "thm:passage"	[style=dashed];	"lem:C_at"	[color=green,		fillcolor="#1CAC78",		label=C_at,		shape=ellipse,		style=filled];	"lem:C_at" -> "thm:cdr_closed"	[style=dashed];	"lem:obsCDR_reserve"	[color=green,		fillcolor="#1CAC78",		label=obsCDR_reserve,		shape=ellipse,		style=filled];	"def:obsCDR" -> "lem:obsCDR_reserve"	[style=dashed];	"lem:rohrSplit" -> "cor:msepSplit"	[style=dashed];	"thm:rohrMsep" -> "cor:msepSplit"	[style=dashed];	"thm:rohrTotal"	[color=green,		fillcolor="#1CAC78",		label=rohrTotal,		shape=ellipse,		style=filled];	"thm:rohrMsep" -> "thm:rohrTotal"	[style=dashed];	"lem:rohrParam" -> "cor:msepSplit"	[style=dashed];	"thm:rohrVsBbmw"	[color=green,		fillcolor="#1CAC78",		label=rohrVsBbmw,		shape=ellipse,		style=filled];	"lem:rohrParam" -> "thm:rohrVsBbmw"	[style=dashed];	"def:rohrTotal" -> "thm:rohrTotal"	[style=dashed];	"lem:T"	[color=green,		fillcolor="#1CAC78",		label=T,		shape=ellipse,		style=filled];	"lem:sq"	[color=green,		fillcolor="#1CAC78",		label=sq,		shape=ellipse,		style=filled];	"lem:T" -> "lem:sq"	[style=dashed];	"lem:sq" -> "lem:sq_eps"	[style=dashed];	"lem:sq" -> "lem:sq_fhat"	[style=dashed];	"def:rowSigma"	[color=green,		fillcolor="#B0ECA3",		label=rowSigma,		shape=box,		style=filled];	"def:rowAssumptions"	[color=green,		fillcolor="#B0ECA3",		label=rowAssumptions,		shape=box,		style=filled];	"def:rowSigma" -> "def:rowAssumptions"	[style=dashed];	"lem:indep_rows"	[color=green,		fillcolor="#1CAC78",		label=indep_rows,		shape=ellipse,		style=filled];	"def:rowAssumptions" -> "lem:indep_rows"	[style=dashed];	"lem:indep_rows" -> "thm:mack2prime"	[style=dashed];	"lem:indep_rows" -> "thm:passage"	[style=dashed];	"lem:ultimateD"	[color=green,		fillcolor="#1CAC78",		label=ultimateD,		shape=ellipse,		style=filled];	"thm:msepTotalExact"	[color=green,		fillcolor="#1CAC78",		label=msepTotalExact,		shape=ellipse,		style=filled];	"lem:ultimateD" -> "thm:msepTotalExact"	[style=dashed];	"thm:plugin"	[color=green,		fillcolor="#1CAC78",		label=plugin,		shape=ellipse,		style=filled];	"thm:msepTotalExact" -> "thm:plugin"	[style=dashed];	"cor:msepTotalLower"	[color=green,		fillcolor="#1CAC78",		label=msepTotalLower,		shape=ellipse,		style=filled];	"thm:msepTotalExact" -> "cor:msepTotalLower"	[style=dashed];	"thm:mack1"	[color=green,		fillcolor="#1CAC78",		label=mack1,		shape=ellipse,		style=filled];	"thm:mack1" -> "thm:instantiated"	[style=dashed];	"thm:msep"	[color=green,		fillcolor="#1CAC78",		label=msep,		shape=ellipse,		style=filled];	"thm:mack1" -> "thm:msep"	[style=dashed];	"thm:mwUnbiased"	[color=green,		fillcolor="#1CAC78",		label=mwUnbiased,		shape=ellipse,		style=filled];	"def:total" -> "def:rohrTotal"	[style=dashed];	"def:total" -> "thm:msepTotalExact"	[style=dashed];	"thm:total"	[color=green,		fillcolor="#1CAC78",		label=total,		shape=ellipse,		style=filled];	"def:total" -> "thm:total"	[style=dashed];	"thm:catalogue" -> "thm:rohrVsBbmw"	[style=dashed];	"thm:counterexample"	[color=green,		fillcolor="#1CAC78",		label=counterexample,		shape=ellipse,		style=filled];	"thm:catalogue" -> "thm:counterexample"	[style=dashed];	"lem:centred"	[color=green,		fillcolor="#1CAC78",		label=centred,		shape=ellipse,		style=filled];	"thm:msepSum"	[color=green,		fillcolor="#1CAC78",		label=msepSum,		shape=ellipse,		style=filled];	"lem:centred" -> "thm:msepSum"	[style=dashed];	"thm:msepSum" -> "thm:msepTotalExact"	[style=dashed];	"def:contributors"	[color=green,		fillcolor="#B0ECA3",		label=contributors,		shape=box,		style=filled];	"def:S"	[color=green,		fillcolor="#B0ECA3",		label=S,		shape=box,		style=filled];	"def:contributors" -> "def:S"	[style=dashed];	"def:mwSums"	[color=green,		fillcolor="#B0ECA3",		label=mwSums,		shape=box,		style=filled];	"def:contributors" -> "def:mwSums"	[style=dashed];	"def:S" -> "def:fhat"	[style=dashed];	"def:S" -> "lem:T"	[style=dashed];	"def:mwFhat"	[color=green,		fillcolor="#B0ECA3",		label=mwFhat,		shape=box,		style=filled];	"def:mwSums" -> "def:mwFhat"	[style=dashed];	"lem:mwWeighted"	[color=green,		fillcolor="#1CAC78",		label=mwWeighted,		shape=ellipse,		style=filled];	"def:mwFhat" -> "lem:mwWeighted"	[style=dashed];	"def:mwRv"	[color=green,		fillcolor="#B0ECA3",		label=mwRv,		shape=box,		style=filled];	"def:mwFhat" -> "def:mwRv"	[style=dashed];	"def:mwChat"	[color=green,		fillcolor="#B0ECA3",		label=mwChat,		shape=box,		style=filled];	"def:mwFhat" -> "def:mwChat"	[style=dashed];	"lem:mwSq"	[color=green,		fillcolor="#1CAC78",		label=mwSq,		shape=ellipse,		style=filled];	"def:mwFhat" -> "lem:mwSq"	[style=dashed];	"def:procVar"	[color=green,		fillcolor="#B0ECA3",		label=procVar,		shape=box,		style=filled];	"def:procVar" -> "def:mackEst"	[style=dashed];	"thm:procVar"	[color=green,		fillcolor="#1CAC78",		label=procVar,		shape=ellipse,		style=filled];	"def:procVar" -> "thm:procVar"	[style=dashed];	"thm:procVar" -> "lem:ultimateD"	[style=dashed];	"thm:procVar" -> "thm:msep"	[style=dashed];	"def:Mack1"	[color=green,		fillcolor="#B0ECA3",		label=Mack1,		shape=box,		style=filled];	"def:Mack1" -> "thm:passage"	[style=dashed];	"thm:nontrivial"	[color=green,		fillcolor="#1CAC78",		label=nontrivial,		shape=ellipse,		style=filled];	"def:Mack1" -> "thm:nontrivial"	[style=dashed];	"def:Mack1" -> "thm:unbiased"	[style=dashed];	"lem:second_moment"	[color=green,		fillcolor="#1CAC78",		label=second_moment,		shape=ellipse,		style=filled];	"def:Mack1" -> "lem:second_moment"	[style=dashed];	"lem:C_succ"	[color=green,		fillcolor="#1CAC78",		label=C_succ,		shape=ellipse,		style=filled];	"def:Mack1" -> "lem:C_succ"	[style=dashed];	"thm:nontrivial" -> "thm:instantiated"	[style=dashed];	"thm:crossFreeWitness"	[color=green,		fillcolor="#1CAC78",		label=crossFreeWitness,		shape=ellipse,		style=filled];	"thm:nontrivial" -> "thm:crossFreeWitness"	[style=dashed];	"thm:unbiased" -> "thm:mack1"	[style=dashed];	"thm:unbiased" -> "thm:mwUnbiased"	[style=dashed];	"thm:uncorrelated"	[color=green,		fillcolor="#1CAC78",		label=uncorrelated,		shape=ellipse,		style=filled];	"thm:unbiased" -> "thm:uncorrelated"	[style=dashed];	"lem:second_moment" -> "thm:procVar"	[style=dashed];	"lem:C_succ" -> "lem:C_at"	[style=dashed];	"lem:C_succ" -> "thm:mack1"	[style=dashed];	"lem:C_succ" -> "thm:procVar"	[style=dashed];	"thm:mack2"	[color=green,		fillcolor="#1CAC78",		label=mack2,		shape=ellipse,		style=filled];	"thm:uncorrelated" -> "thm:mack2"	[style=dashed];	"thm:var_fhat" -> "thm:sigma2"	[style=dashed];	"lem:fhat_meas" -> "thm:uncorrelated"	[style=dashed];	"lem:fhat_meas" -> "lem:ChatRv_meas"	[style=dashed];	"lem:ChatRv_meas" -> "thm:mack1"	[style=dashed];	"lem:mwMeas"	[color=green,		fillcolor="#1CAC78",		label=mwMeas,		shape=ellipse,		style=filled];	"def:mwRv" -> "lem:mwMeas"	[style=dashed];	"lem:mwMeas" -> "thm:mwUnbiased"	[style=dashed];	"def:crossFree"	[color=green,		fillcolor="#B0ECA3",		label=crossFree,		shape=box,		style=filled];	"def:crossFree" -> "thm:crossFreeWitness"	[style=dashed];	"lem:varAdd"	[color=green,		fillcolor="#1CAC78",		label=varAdd,		shape=ellipse,		style=filled];	"def:crossFree" -> "lem:varAdd"	[style=dashed];	"lem:varAdd" -> "thm:msepSum"	[style=dashed];	"lem:msep_decomp"	[color=green,		fillcolor="#1CAC78",		label=msep_decomp,		shape=ellipse,		style=filled];	"lem:msep_decomp" -> "thm:msep"	[style=dashed];	"lem:msep_decomp" -> "lem:centred"	[style=dashed];	"def:mwRec"	[color=green,		fillcolor="#B0ECA3",		label=mwRec,		shape=box,		style=filled];	"def:mwRec" -> "lem:mwClosed"	[style=dashed];	"def:mwTail"	[color=green,		fillcolor="#B0ECA3",		label=mwTail,		shape=box,		style=filled];	"def:mwRec" -> "def:mwTail"	[style=dashed];	"def:mult"	[color=green,		fillcolor="#B0ECA3",		label=mult,		shape=box,		style=filled];	"def:mult" -> "lem:patternFhat"	[style=dashed];	"def:mult" -> "lem:scoreZero"	[style=dashed];	"lem:remainder"	[color=green,		fillcolor="#1CAC78",		label=remainder,		shape=ellipse,		style=filled];	"lem:remainder" -> "thm:catalogue"	[style=dashed];	"lem:remainder" -> "thm:total"	[style=dashed];	"def:mwChat" -> "lem:mwUnit"	[style=dashed];	"def:mwChat" -> "def:mwMsep"	[style=dashed];	"def:mwChat" -> "def:mwRec"	[style=dashed];	"def:obs"	[color=green,		fillcolor="#B0ECA3",		label=obs,		shape=box,		style=filled];	"def:obs" -> "def:CLfit"	[style=dashed];	"def:obs" -> "def:qll"	[style=dashed];	"def:obs" -> "def:score"	[style=dashed];	"def:RandomTriangle"	[color=green,		fillcolor="#B0ECA3",		label=RandomTriangle,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:rv"	[style=dashed];	"def:RandomTriangle" -> "def:rowSigma"	[style=dashed];	"def:RandomTriangle" -> "def:Mack1"	[style=dashed];	"def:RandomTriangle" -> "def:mwRv"	[style=dashed];	"def:Mack3"	[color=green,		fillcolor="#B0ECA3",		label=Mack3,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:Mack3"	[style=dashed];	"def:Mack3" -> "lem:fhat_sub"	[style=dashed];	"def:Mack3" -> "thm:mack2prime"	[style=dashed];	"def:Mack3" -> "thm:passage"	[style=dashed];	"def:Mack3" -> "thm:nontrivial"	[style=dashed];	"def:Mack3" -> "lem:second_moment"	[style=dashed];	"lem:mwStep"	[color=green,		fillcolor="#1CAC78",		label=mwStep,		shape=ellipse,		style=filled];	"lem:mwStep" -> "lem:mwClosed"	[style=dashed];	"def:F"	[color=green,		fillcolor="#B0ECA3",		label=F,		shape=box,		style=filled];	"def:F" -> "def:sigma2"	[style=dashed];	"def:F" -> "lem:weighted"	[style=dashed];	"def:F" -> "lem:T"	[style=dashed];	"def:F" -> "def:mwSums"	[style=dashed];}`)
     .on("end", interactive);
 
 latexLabelEscaper = function(label) {

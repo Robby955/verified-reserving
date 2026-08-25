@@ -12,8 +12,8 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Non-vacuity: a nondegenerate model</title>
-<link rel="next" href="sect0011.html" title="Reference computation" />
+<title>The over-dispersed Poisson model</title>
+<link rel="next" href="sect0011.html" title="Non-vacuity: a nondegenerate model" />
 <link rel="prev" href="sect0009.html" title="Mack 1999: general weights and exponent" />
 <link rel="up" href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
@@ -40,10 +40,10 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0002.html#a0000000013"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0002.html#a0000000014"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000014"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
+  <a href="sect0002.html#a0000000015"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
  </li>
 
   </ul>
@@ -59,25 +59,25 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0005.html#a0000000015"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
+  <a href="sect0005.html#a0000000016"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000016"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
+  <a href="sect0005.html#a0000000017"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000017"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
+  <a href="sect0005.html#a0000000018"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000018"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
+  <a href="sect0005.html#a0000000019"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000019"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
+  <a href="sect0005.html#a0000000020"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000020"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
+  <a href="sect0005.html#a0000000021"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000021"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
+  <a href="sect0005.html#a0000000022"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
  </li>
 
   </ul>
@@ -87,7 +87,7 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0006.html#a0000000022"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
+  <a href="sect0006.html#a0000000023"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
  </li>
 
   </ul>
@@ -97,7 +97,7 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0007.html#a0000000023"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
+  <a href="sect0007.html#a0000000024"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
  </li>
 
   </ul>
@@ -107,19 +107,19 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0008.html#a0000000024"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0008.html#a0000000025"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000025"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
+  <a href="sect0008.html#a0000000026"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000026"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
+  <a href="sect0008.html#a0000000027"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000027"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
+  <a href="sect0008.html#a0000000028"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000028"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
+  <a href="sect0008.html#a0000000029"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
  </li>
 
   </ul>
@@ -129,28 +129,47 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0009.html#a0000000029"><span class="toc_ref">9.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0009.html#a0000000030"><span class="toc_ref">9.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000030"><span class="toc_ref">9.2</span> <span class="toc_entry">Deterministic identities</span></a>
+  <a href="sect0009.html#a0000000031"><span class="toc_ref">9.2</span> <span class="toc_entry">Deterministic identities</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000031"><span class="toc_ref">9.3</span> <span class="toc_entry">The recursion equals \((*)\)</span></a>
+  <a href="sect0009.html#a0000000032"><span class="toc_ref">9.3</span> <span class="toc_entry">The recursion equals \((*)\)</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000032"><span class="toc_ref">9.4</span> <span class="toc_entry">The 1993 case</span></a>
+  <a href="sect0009.html#a0000000033"><span class="toc_ref">9.4</span> <span class="toc_entry">The 1993 case</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000033"><span class="toc_ref">9.5</span> <span class="toc_entry">Conditional unbiasedness of the weighted estimator</span></a>
+  <a href="sect0009.html#a0000000034"><span class="toc_ref">9.5</span> <span class="toc_entry">Conditional unbiasedness of the weighted estimator</span></a>
  </li>
 
   </ul>
  </li>
 <li class=" active current">
-  <a href="sect0010.html"><span class="toc_ref">10</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+  <a href="sect0010.html"><span class="toc_ref">10</span> <span class="toc_entry">The over-dispersed Poisson model</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0010.html#a0000000035"><span class="toc_ref">10.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0011.html"><span class="toc_ref">11</span> <span class="toc_entry">Reference computation</span></a>
+  <a href="sect0010.html#a0000000036"><span class="toc_ref">10.2</span> <span class="toc_entry">The score equations are score equations</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000037"><span class="toc_ref">10.3</span> <span class="toc_entry">Chain ladder solves the score equations</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000038"><span class="toc_ref">10.4</span> <span class="toc_entry">Uniqueness: the marginal-sum solution is chain ladder</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0011.html"><span class="toc_ref">11</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html"><span class="toc_ref">12</span> <span class="toc_entry">Reference computation</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
@@ -161,14 +180,26 @@
 
 
 <div class="main-text">
-<h1 id="a0000000011">10 Non-vacuity: a nondegenerate model</h1>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:nontrivial">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<h1 id="a0000000011">10 The over-dispersed Poisson model</h1>
+<p>Renshaw and Verrall, <em>A stochastic model underlying the chain-ladder technique</em>, British Actuarial Journal 4 (1998) 903–923, put the run-off triangle in incremental form, \(X_{i,k} = C_{i,k} - C_{i,k-1}\) with \(X_{i,0} = C_{i,0}\), and model the incrementals as an over-dispersed Poisson (ODP) generalized linear model: independent, with mean \(m_{i,k}\) and variance \(\varphi \,  m_{i,k}\), and a log link carrying a row effect and a column effect, so the mean is multiplicative, </p>
+<div class="displaymath" id="a0000000124">
+  \[  m_{i,k} = a_i b_k , \qquad \sum _{k=0}^{n-1} b_k = 1 .  \]
+</div>
+<p> Mack, <em>A simple parametric model for rating automobile insurance or estimating IBNR claims reserves</em>, ASTIN Bulletin 21 (1991) 93–109, starts from the same multiplicative mean and estimates it from the <em>marginal sums</em>. Both papers arrive at the same system: for each accident year \(i\) and each development year \(k\), </p>
+<div class="displaymath" id="a0000000125">
+  \[  \sum _{k \, :\,  i+k \le n-1} m_{i,k} = \sum _{k \, :\,  i+k \le n-1} X_{i,k}, \qquad \sum _{i \, :\,  i+k \le n-1} m_{i,k} = \sum _{i \, :\,  i+k \le n-1} X_{i,k}.  \]
+</div>
+<p> These are the score equations of the quasi-Poisson log-likelihood \(\sum (X \log m - m)/\varphi \) in the row and column parameters; the dispersion \(\varphi \) multiplies the whole score and cancels, which is why the ODP fit is the Poisson fit and why the estimates do not depend on \(\varphi \). </p>
+<p>The chapter proves the two halves of the classical equivalence. Chain ladder <em>solves</em> the system (Theorems&#160;<a href="sect0010.html#thm:odpRow">10.10</a> and&#160;<a href="sect0010.html#thm:odpCol">10.12</a>), and a positive multiplicative solution of the system <em>is</em> chain ladder (Theorem&#160;<a href="sect0010.html#thm:odpUnique">10.16</a>). </p>
+<p><em>Source note.</em> Neither paper was available in full text for this formalization. What is formalized is the marginal-sum system as quoted above and as it is stated in the secondary literature (England and Verrall, <em>Stochastic claims reserving in general insurance</em>, British Actuarial Journal 8 (2002) 443–518, Section 2.3; Wüthrich and Merz, <em>Stochastic Claims Reserving Methods in Insurance</em> (2008), Section 2.3), in the two papers’ own terms. The displayed equations of Renshaw and Verrall (Section 3) and of Mack (Section 2) are therefore identified by section and by the display itself, not by an equation number. Nothing here is probabilistic: the ODP assumption enters only through the shape of the score equations, which are algebraic identities in the fitted values. </p>
+<h1 id="a0000000035">10.1 Definitions</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:incr">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
     </span>
-    <span class="theorem_thmlabel">10.1</span>
-    <span class="theorem_thmtitle">A nondegenerate Mack model exists</span>
+    <span class="definition_thmlabel">10.1</span>
+    <span class="definition_thmtitle">Incremental claims</span>
     <div class="thm_header_extras">
 
     
@@ -176,10 +207,97 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0010.html#thm:nontrivial">#</a>
+    <a class="icon proof" href="sect0010.html#def:incr">#</a>
     
-    <a class="icon proof" href="sect0010.html#a0000000119"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.incr" class="lean_decl">VerifiedReserving.incr</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>\(X_{i,k} = C_{i,k} - C_{i,k-1}\) for \(k \ge 1\) and \(X_{i,0} = C_{i,0}\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:obs">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">10.2</span>
+    <span class="definition_thmtitle">Observed row and column</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#def:obs">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.obsRow" class="lean_decl">VerifiedReserving.obsRow</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.obsCol" class="lean_decl">VerifiedReserving.obsCol</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>The cell \((i,k)\) is observed when \(i + k \le n-1\). The observed development years of accident year \(i\) are \(\mathrm{obsRow}(n,i) = \{ 0,\dots ,n-1-i\} \) and the observed accident years of development year \(k\) are \(\mathrm{obsCol}(n,k) = \{ 0,\dots ,n-1-k\} \). The second one at \(k+1\) is the contributor set of \(\hat f_k\) (<span class="ttfamily">obsCol_succ</span>). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:CLfit">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">10.3</span>
+    <span class="definition_thmtitle">Chain-ladder fit on the observed triangle</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#def:CLfit">#</a>
     
     
     <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
@@ -194,9 +312,11 @@
         
         <ul class="uses">
           
-          <li><a href="sect0005.html#def:Mack1">Definition 5.2</a></li>
+          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
           
-          <li><a href="sect0005.html#def:Mack3">Definition 5.13</a></li>
+          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
+          
+          <li><a href="sect0010.html#def:obs">Definition 10.2</a></li>
           
         </ul>
     
@@ -216,9 +336,9 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.X" class="lean_decl">VerifiedReserving.NontrivialModel.X</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.CLcum" class="lean_decl">VerifiedReserving.CLcum</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.exists_nontrivial_mack_model" class="lean_decl">VerifiedReserving.NontrivialModel.exists_nontrivial_mack_model</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.CLincr" class="lean_decl">VerifiedReserving.CLincr</a></li>
           
         </ul>
     
@@ -228,30 +348,22 @@
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p> There is a probability space, a random triangle with three accident years, and constants \(f_k\), \(\sigma _k^2\) with \(\sigma _0^2 {\gt} 0\), satisfying (M1), (M3) and (M2’), in which the first development step is genuinely random. The model: eight equally likely outcomes, an independent \(\pm 1\) shock per accident year, \(C_{i,0} = c\) and \(C_{i,k} = c f^k (1 + s\, \xi _i)\) for \(k \ge 1\), with \(\mathcal{D}_0\) trivial and \(\mathcal{D}_k\) everything for \(k \ge 1\). </p>
+  <div class="definition_thmcontent">
+  <p> The fitted cumulative on an observed cell is the latest observed entry of the row divided back by the development factors, </p>
+<div class="displaymath" id="a0000000126">
+  \[  \hat C_{i,k} = \frac{C_{i,\, n-1-i}}{\prod _{j=k}^{n-2-i} \hat f_j},  \]
+</div>
+<p> and the fitted incremental is \(\hat X_{i,k} = \hat C_{i,k} - \hat C_{i,k-1}\) with \(\hat X_{i,0} = \hat C_{i,0}\). These are the \(\hat C\) projections of Definition&#160;<a href="sect0002.html#def:Chat">2.6</a> read backwards from the latest diagonal: equivalently \(\hat C_{i,k} = \hat C_{i,n-1} / \prod _{j=k}^{n-2}\hat f_j\), the chain-ladder ultimate times the cumulative development pattern up to \(k\) (<span class="ttfamily">CLcum_eq_ultimate_div</span>). </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000119">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
+<div class="definition_thmwrapper theorem-style-definition" id="def:mult">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
     </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Conditional expectations given the trivial \(\sigma \)-algebra are eight-term averages; the shocks sum to zero, have unit square, and are orthogonal. </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:instantiated">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">10.2</span>
-    <span class="theorem_thmtitle">Headline theorems instantiated</span>
+    <span class="definition_thmlabel">10.4</span>
+    <span class="definition_thmtitle">Multiplicative model and its pattern</span>
     <div class="thm_header_extras">
 
     
@@ -259,10 +371,55 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0010.html#thm:instantiated">#</a>
+    <a class="icon proof" href="sect0010.html#def:mult">#</a>
     
-    <a class="icon proof" href="sect0010.html#a0000000120"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.multFit" class="lean_decl">VerifiedReserving.multFit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.PatternNormalized" class="lean_decl">VerifiedReserving.PatternNormalized</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.patternCum" class="lean_decl">VerifiedReserving.patternCum</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>\(m_{i,k} = a_i b_k\); the identifiability constraint \(\sum _{k{\lt}n} b_k = 1\); and the cumulative pattern \(B_k = \sum _{j \le k} b_j\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:score">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">10.5</span>
+    <span class="definition_thmtitle">Score (marginal-sum) equations</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#def:score">#</a>
     
     
     <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
@@ -277,15 +434,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0010.html#thm:nontrivial">Theorem 10.1</a></li>
+          <li><a href="sect0010.html#def:incr">Definition 10.1</a></li>
           
-          <li><a href="sect0005.html#thm:unbiased">Theorem 5.5</a></li>
-          
-          <li><a href="sect0005.html#thm:mack1">Theorem 5.12</a></li>
-          
-          <li><a href="sect0005.html#thm:var_fhat">Theorem 5.15</a></li>
-          
-          <li><a href="sect0005.html#thm:sigma2">Theorem 5.18</a></li>
+          <li><a href="sect0010.html#def:obs">Definition 10.2</a></li>
           
         </ul>
     
@@ -305,13 +456,403 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.fhat0_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.fhat0_unbiased</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RowTotals" class="lean_decl">VerifiedReserving.RowTotals</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.ultimate_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.ultimate_unbiased</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ColumnTotals" class="lean_decl">VerifiedReserving.ColumnTotals</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.var_fhat0" class="lean_decl">VerifiedReserving.NontrivialModel.var_fhat0</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ScoreEquations" class="lean_decl">VerifiedReserving.ScoreEquations</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.sigma2_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.sigma2_unbiased</a></li>
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> The row marginal sums, the column marginal sums, and their conjunction: the fitted values reproduce the observed row and column totals of incrementals on the observed triangle. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:qll">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">10.6</span>
+    <span class="definition_thmtitle">Quasi-Poisson log-likelihood</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#def:qll">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#def:incr">Definition 10.1</a></li>
+          
+          <li><a href="sect0010.html#def:obs">Definition 10.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rowQuasiLogLik" class="lean_decl">VerifiedReserving.rowQuasiLogLik</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.colQuasiLogLik" class="lean_decl">VerifiedReserving.colQuasiLogLik</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(\sum _{k} \big(X_{i,k}\log (t\, b_k) - t\, b_k\big)\) as a function of the row parameter \(t\), and \(\sum _{i} \big(X_{i,k}\log (a_i\, t) - a_i\, t\big)\) as a function of the column parameter \(t\) (dispersion \(\varphi = 1\), which only scales the expression). </p>
+
+  </div>
+</div>
+<h1 id="a0000000036">10.2 The score equations are score equations</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:score">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">10.7</span>
+    <span class="lemma_thmtitle">Row and column scores</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#lem:score">#</a>
+    
+    <a class="icon proof" href="sect0010.html#a0000000127"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#def:qll">Definition 10.6</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.hasDerivAt_rowQuasiLogLik" class="lean_decl">VerifiedReserving.hasDerivAt_rowQuasiLogLik</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.hasDerivAt_colQuasiLogLik" class="lean_decl">VerifiedReserving.hasDerivAt_colQuasiLogLik</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> The derivative of the quasi-Poisson log-likelihood in a row parameter is \(\big(\sum _k X_{i,k} - \sum _k t\, b_k\big)/t\), and in a column parameter \(\big(\sum _i X_{i,k} - \sum _i a_i\, t\big)/t\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000127">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Termwise: \(\frac{d}{dt}\big(X\log (tb) - tb\big) = X/t - b\), then sum over the observed cells. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:scoreZero">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">10.8</span>
+    <span class="lemma_thmtitle">Stationarity is the marginal-sum equation</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#lem:scoreZero">#</a>
+    
+    <a class="icon proof" href="sect0010.html#a0000000128"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#lem:score">Lemma 10.7</a></li>
+          
+          <li><a href="sect0010.html#def:score">Definition 10.5</a></li>
+          
+          <li><a href="sect0010.html#def:mult">Definition 10.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.deriv_rowQuasiLogLik_eq_zero_iff" class="lean_decl">VerifiedReserving.deriv_rowQuasiLogLik_eq_zero_iff</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.deriv_colQuasiLogLik_eq_zero_iff" class="lean_decl">VerifiedReserving.deriv_colQuasiLogLik_eq_zero_iff</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> For nonzero parameters, the row score vanishes exactly at the row marginal-sum equation and the column score exactly at the column one. This is what licenses the name "score equations" for Definition&#160;<a href="sect0010.html#def:score">10.5</a>, and it is where the dispersion \(\varphi \) drops out. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000128">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Lemma&#160;<a href="sect0010.html#lem:score">10.7</a> and \(a/b = 0 \iff a = 0\) for \(b \ne 0\). </p>
+
+  </div>
+</div>
+<h1 id="a0000000037">10.3 Chain ladder solves the score equations</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:telescope">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">10.9</span>
+    <span class="lemma_thmtitle">Telescoping</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#lem:telescope">#</a>
+    
+    <a class="icon proof" href="sect0010.html#a0000000129"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#def:incr">Definition 10.1</a></li>
+          
+          <li><a href="sect0010.html#def:CLfit">Definition 10.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_incr" class="lean_decl">VerifiedReserving.sum_incr</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_incr_obsRow" class="lean_decl">VerifiedReserving.sum_incr_obsRow</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_CLincr" class="lean_decl">VerifiedReserving.sum_CLincr</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> \(\sum _{k \le m} X_{i,k} = C_{i,m}\) and \(\sum _{k \le m} \hat X_{i,k} = \hat C_{i,m}\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000129">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Induction on \(m\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:odpRow">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">10.10</span>
+    <span class="theorem_thmtitle">Row totals</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#thm:odpRow">#</a>
+    
+    <a class="icon proof" href="sect0010.html#a0000000130"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#lem:telescope">Lemma 10.9</a></li>
+          
+          <li><a href="sect0010.html#def:score">Definition 10.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.chainLadder_fitted_row_totals" class="lean_decl">VerifiedReserving.chainLadder_fitted_row_totals</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.chainLadder_fitted_row_totals_eq" class="lean_decl">VerifiedReserving.chainLadder_fitted_row_totals_eq</a></li>
           
         </ul>
     
@@ -322,11 +863,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> On that model, \(E[\hat f_0 \mid \mathcal{D}_0] = 2\) although \(\hat f_0\) is random; \(E[\hat C_{2,2} \mid \mathcal{D}_0] = E[C_{2,2} \mid \mathcal{D}_0]\); \(E[(\hat f_0 - 2)^2 \mid \mathcal{D}_0] = \sigma _0^2 / S_0\); and \(E[\hat\sigma _0^2 \mid \mathcal{D}_0] = \sigma _0^2 = 4\). </p>
+  <p> For every accident year \(i\), \(\sum _{k \le n-1-i} \hat X_{i,k} = C_{i,\, n-1-i} = \sum _{k \le n-1-i} X_{i,k}\): the chain-ladder fit reproduces every observed row total. This is the first marginal-sum family of Mack (1991), Section 2, and the row score equation of Renshaw and Verrall (1998), Section 3. No hypothesis is needed. </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000120">
+<div class="proof_wrapper" id="a0000000130">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -334,7 +875,519 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Direct instantiation of the general theorems; every hypothesis is discharged. </p>
+  <p>Both sides telescope to the latest observed entry, by Lemma&#160;<a href="sect0010.html#lem:telescope">10.9</a> and \(\hat C_{i,\, n-1-i} = C_{i,\, n-1-i}\) (the empty product). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:colCum">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">10.11</span>
+    <span class="lemma_thmtitle">Fitted column sums of cumulatives</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#lem:colCum">#</a>
+    
+    <a class="icon proof" href="sect0010.html#a0000000131"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#def:CLfit">Definition 10.3</a></li>
+          
+          <li><a href="sect0002.html#def:S">Definition 2.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_CLcum_obsCol_aux" class="lean_decl">VerifiedReserving.sum_CLcum_obsCol_aux</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_CLcum_obsCol" class="lean_decl">VerifiedReserving.sum_CLcum_obsCol</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_CLcum_contributors" class="lean_decl">VerifiedReserving.sum_CLcum_contributors</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> If every development factor \(\hat f_j\), \(j {\lt} n-1\), is nonzero, then for every \(k \le n-1\) </p>
+<div class="displaymath" id="a0000000132">
+  \[  \sum _{i \le n-1-k} \hat C_{i,k} = \sum _{i \le n-1-k} C_{i,k},  \]
+</div>
+<p> and, one year earlier over the same accident years, \(\sum _{i \le n-2-k} \hat C_{i,k} = S_k\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000131">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Downward induction on \(k\). At \(k = n-1\) the only observed cell is the corner, where the fit is the observation. For the step, the cells strictly above the diagonal satisfy \(\hat C_{i,k} = \hat C_{i,k+1}/\hat f_k\), so their sum is \(T_k/\hat f_k = S_k\) by the induction hypothesis and the definition \(\hat f_k = T_k/S_k\); adding the diagonal cell, where the fit is the observation, gives the claim. Nonvanishing of \(\hat f_k\) forces \(T_k \ne 0\) and \(S_k \ne 0\), which is the only place a hypothesis is used. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:odpCol">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">10.12</span>
+    <span class="theorem_thmtitle">Column totals</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#thm:odpCol">#</a>
+    
+    <a class="icon proof" href="sect0010.html#a0000000133"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#lem:colCum">Lemma 10.11</a></li>
+          
+          <li><a href="sect0010.html#def:score">Definition 10.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.chainLadder_fitted_column_totals" class="lean_decl">VerifiedReserving.chainLadder_fitted_column_totals</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> If every development factor \(\hat f_j\), \(j {\lt} n-1\), is nonzero, then for every development year \(k\) </p>
+<div class="displaymath" id="a0000000134">
+  \[  \sum _{i \le n-1-k} \hat X_{i,k} = \sum _{i \le n-1-k} X_{i,k}:  \]
+</div>
+<p> the chain-ladder fit reproduces every observed column total. This is the second marginal-sum family of Mack (1991), Section 2, and the column score equation of Renshaw and Verrall (1998), Section 3. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000133">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>For \(k = 0\) the incrementals are the cumulatives and this is Lemma&#160;<a href="sect0010.html#lem:colCum">10.11</a>. For \(k \ge 1\) subtract the two displays of Lemma&#160;<a href="sect0010.html#lem:colCum">10.11</a>: the first over the observed part of column \(k\), the second at \(k-1\) over the same accident years. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:odpScore">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">10.13</span>
+    <span class="theorem_thmtitle">Chain ladder solves the ODP score equations</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#thm:odpScore">#</a>
+    
+    <a class="icon proof" href="sect0010.html#a0000000135"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#thm:odpRow">Theorem 10.10</a></li>
+          
+          <li><a href="sect0010.html#thm:odpCol">Theorem 10.12</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.chainLadder_scoreEquations" class="lean_decl">VerifiedReserving.chainLadder_scoreEquations</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Under the same hypothesis, the chain-ladder fitted incrementals satisfy the whole system of Definition&#160;<a href="sect0010.html#def:score">10.5</a>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000135">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Theorems&#160;<a href="sect0010.html#thm:odpRow">10.10</a> and&#160;<a href="sect0010.html#thm:odpCol">10.12</a>. </p>
+
+  </div>
+</div>
+<h1 id="a0000000038">10.4 Uniqueness: the marginal-sum solution is chain ladder</h1>
+<p>Mack (1991), Section 2, states the converse: the marginal-sum estimates of the multiplicative model are the chain-ladder estimates. Positivity of the parameters replaces the informal assumption that the triangle is a real one. </p>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:patternFhat">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">10.14</span>
+    <span class="lemma_thmtitle">The pattern ratios are the development factors</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#lem:patternFhat">#</a>
+    
+    <a class="icon proof" href="sect0010.html#a0000000136"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#def:mult">Definition 10.4</a></li>
+          
+          <li><a href="sect0010.html#def:score">Definition 10.5</a></li>
+          
+          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_mult_patternCum_aux" class="lean_decl">VerifiedReserving.sum_mult_patternCum_aux</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sum_mult_patternCum" class="lean_decl">VerifiedReserving.sum_mult_patternCum</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.patternCum_mul_fhat" class="lean_decl">VerifiedReserving.patternCum_mul_fhat</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.fhat_pos_of_mult" class="lean_decl">VerifiedReserving.fhat_pos_of_mult</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Let \(a_i, b_k {\gt} 0\) with \(\sum _{k{\lt}n} b_k = 1\) satisfy the score equations. Then for every \(k \le n-1\) </p>
+<div class="displaymath" id="a0000000137">
+  \[  \Big(\sum _{i \le n-1-k} a_i\Big) B_k \text{ splits as } \sum _{i \le n-1-k} C_{i,k}, \qquad \text{and}\qquad B_k \hat f_k = B_{k+1} \  (k {\lt} n-1),  \]
+</div>
+<p> so every \(\hat f_k\) is positive. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000136">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Downward induction on \(k\), mirroring Lemma&#160;<a href="sect0010.html#lem:colCum">10.11</a>. The row equation for accident year \(i\) reads \(a_i B_{n-1-i} = C_{i,\, n-1-i}\); at \(i = 0\), with \(B_{n-1} = 1\), it starts the induction. In the step, write \(A = \sum _{i \le n-2-k} a_i\). The induction hypothesis gives \(A B_{k+1} = T_k\) and the column equation at \(k+1\) gives \(A b_{k+1} = T_k - S_k\), so \(A B_k = S_k\); adding the diagonal cell, whose row equation is \(a_{n-1-k} B_k = C_{n-1-k,k}\), closes the induction. Dividing the two displays, \(\hat f_k = T_k/S_k = B_{k+1}/B_k\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:multCum">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">10.15</span>
+    <span class="lemma_thmtitle">Fitted cumulatives agree</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#lem:multCum">#</a>
+    
+    <a class="icon proof" href="sect0010.html#a0000000138"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#lem:patternFhat">Lemma 10.14</a></li>
+          
+          <li><a href="sect0010.html#def:CLfit">Definition 10.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.patternCum_mul_prod" class="lean_decl">VerifiedReserving.patternCum_mul_prod</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mult_cum_eq_CLcum" class="lean_decl">VerifiedReserving.mult_cum_eq_CLcum</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Under the hypotheses of Lemma&#160;<a href="sect0010.html#lem:patternFhat">10.14</a>, \(a_i B_k = \hat C_{i,k}\) on every observed cell. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000138">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Telescoping \(B_k \prod _{j=k}^{d-1}\hat f_j = B_d\) with \(d = n-1-i\), and the row equation \(a_i B_d = C_{i,d}\); the product is nonzero because each factor is. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:odpUnique">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">10.16</span>
+    <span class="theorem_thmtitle">Mack’s uniqueness result</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0010.html#thm:odpUnique">#</a>
+    
+    <a class="icon proof" href="sect0010.html#a0000000139"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0010.html#lem:multCum">Lemma 10.15</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.multFit_eq_CLincr" class="lean_decl">VerifiedReserving.multFit_eq_CLincr</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> A multiplicative model \(m_{i,k} = a_i b_k\) with \(a_i, b_k {\gt} 0\) and \(\sum _{k{\lt}n} b_k = 1\) that satisfies the marginal-sum equations coincides with the chain-ladder fit cell by cell on the observed triangle: \(a_i b_k = \hat X_{i,k}\). With Theorem&#160;<a href="sect0010.html#thm:odpScore">10.13</a> this is the classical equivalence: the over-dispersed Poisson generalized linear model and the chain-ladder method give the same fitted values, hence the same development pattern and the same reserves. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000139">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Differencing Lemma&#160;<a href="sect0010.html#lem:multCum">10.15</a> at \(k\) and \(k-1\), since \(B_k - B_{k-1} = b_k\). </p>
 
   </div>
 </div>
@@ -353,7 +1406,7 @@
 </a>
   <a href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0011.html" title="Reference computation"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0011.html" title="Non-vacuity: a nondegenerate model"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 
