@@ -20,6 +20,16 @@ VerifiedReserving.mackTerm
 VerifiedReserving.msep_eq_sum_mackTerm
 VerifiedReserving.se2rec_eq_closed
 VerifiedReserving.se2rec_eq_msep
+VerifiedReserving.cdf
+VerifiedReserving.bfReserve
+VerifiedReserving.bfUltimate
+VerifiedReserving.bfReserve_smul
+VerifiedReserving.bfReserve_add
+VerifiedReserving.bfUltimate_of_ultimate
+VerifiedReserving.bfReserve_of_ultimate
+VerifiedReserving.one_le_cdf
+VerifiedReserving.bfReserve_nonneg
+VerifiedReserving.bfReserve_le
 VerifiedReserving.RandomTriangle
 VerifiedReserving.Mack1
 VerifiedReserving.RandomTriangle.Srv

@@ -150,6 +150,34 @@ exactly Mack's 1993 estimator: $\mathrm{se}^2_i = \widehat{\mathrm{msep}}(\hat R
 \end{theorem}
 \begin{proof}\leanok Lemma~\ref{lem:se2rec_closed} with $m = i$, since $d + i = n-1$. \end{proof}
 
+\chapter{Bornhuetter-Ferguson on the chain-ladder pattern}
+
+\begin{definition}[Cumulative development factor, BF reserve and ultimate]\label{def:bf}\lean{VerifiedReserving.cdf, VerifiedReserving.bfReserve, VerifiedReserving.bfUltimate}\leanok
+\uses{def:fhat, def:Chat}
+$\mathrm{cdf}_i = \prod_{k=d}^{n-2}\hat f_k$; for an a priori ultimate $U$,
+$R^{BF}_i = U\,(1 - 1/\mathrm{cdf}_i)$ and $\hat C^{BF}_{i,n-1} = C_{i,d} + R^{BF}_i$.
+\end{definition}
+
+\begin{lemma}[Linearity]\label{lem:bf_linear}\lean{VerifiedReserving.bfReserve_smul, VerifiedReserving.bfReserve_add}\leanok
+\uses{def:bf}
+$R^{BF}_i(aU) = a\,R^{BF}_i(U)$ and $R^{BF}_i(U+V) = R^{BF}_i(U) + R^{BF}_i(V)$.
+\end{lemma}
+\begin{proof}\leanok Ring identities. \end{proof}
+
+\begin{theorem}[BF with the chain-ladder prior is chain ladder]\label{thm:bf_cl}\lean{VerifiedReserving.bfUltimate_of_ultimate, VerifiedReserving.bfReserve_of_ultimate}\leanok
+\uses{def:bf, def:reserve}
+If $\mathrm{cdf}_i \neq 0$ and $U = \hat C_{i,n-1}$, then $\hat C^{BF}_{i,n-1} = \hat C_{i,n-1}$ and
+$R^{BF}_i = \hat R_i$.
+\end{theorem}
+\begin{proof}\leanok $\hat C_{i,n-1} = C_{i,d}\,\mathrm{cdf}_i$, so $U(1 - 1/\mathrm{cdf}_i) = C_{i,d}\mathrm{cdf}_i - C_{i,d}$. \end{proof}
+
+\begin{lemma}[The BF reserve is a fraction of the prior]\label{lem:bf_frac}\lean{VerifiedReserving.one_le_cdf, VerifiedReserving.bfReserve_nonneg, VerifiedReserving.bfReserve_le}\leanok
+\uses{def:bf}
+If every development factor along the row is at least $1$, then $\mathrm{cdf}_i \ge 1$ and, for
+$U \ge 0$, $0 \le R^{BF}_i(U) \le U$.
+\end{lemma}
+\begin{proof}\leanok A product of numbers at least $1$ is at least $1$; then $0 \le 1 - 1/\mathrm{cdf}_i \le 1$. \end{proof}
+
 \chapter{The stochastic layer}
 
 \section{Model}

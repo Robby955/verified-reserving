@@ -1,5 +1,6 @@
 import VerifiedReserving.ChainLadder
 import VerifiedReserving.Recursion
+import VerifiedReserving.BornhuetterFerguson
 import VerifiedReserving.Stochastic
 import VerifiedReserving.Ultimate
 
@@ -19,6 +20,14 @@ open VerifiedReserving
 #print axioms msep_eq_sum_mackTerm
 #print axioms se2rec_eq_closed
 #print axioms se2rec_eq_msep
+#print axioms ultimate_eq_mul_cdf
+#print axioms bfReserve_smul
+#print axioms bfReserve_add
+#print axioms bfUltimate_of_ultimate
+#print axioms bfReserve_of_ultimate
+#print axioms one_le_cdf
+#print axioms bfReserve_nonneg
+#print axioms bfReserve_le
 #print axioms RandomTriangle.stronglyMeasurable_Srv
 #print axioms condExp_fhatRv
 #print axioms RandomTriangle.stronglyMeasurable_fhatRv
