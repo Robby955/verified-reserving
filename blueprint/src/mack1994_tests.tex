@@ -1,0 +1,79 @@
+\chapter{Mack's model diagnostics}
+
+The source for this chapter is Thomas Mack, ``Measuring the Variability of
+Chain Ladder Reserve Estimates,'' Casualty Actuarial Society Forum, Spring
+1994, Appendices G and H, pages 157--166. The rank and label distributions
+used below are extra null models, not consequences of the chain-ladder moment
+assumptions.
+
+\section{Development-factor correlation}
+
+\begin{definition}[Adjacent-column rank statistic]\label{def:mack1994-spearman}\lean{VerifiedReserving.rankOn, VerifiedReserving.adjacentFactorRows, VerifiedReserving.factorRankOn, VerifiedReserving.spearmanAdjacent, VerifiedReserving.developmentCorrelationTest}\leanok
+For each adjacent pair of development-factor columns, restrict the earlier
+column to the accident years present in both columns, rerank both restricted
+columns, and compute Spearman's coefficient. Mack's triangle-wide statistic is
+the inverse-null-variance weighted average of these coefficients.
+\end{definition}
+
+\begin{definition}[Exact permutation null]\label{def:mack1994-permutation}\lean{VerifiedReserving.spearmanRho, VerifiedReserving.spearmanPermutationMean, VerifiedReserving.spearmanPermutationVariance}\leanok
+For two complete, tie-free rank permutations, $\rho$ is their centered-rank
+correlation. Its exact null fixes one rank vector and draws the other uniformly
+from all permutations.
+\end{definition}
+
+\begin{theorem}[Equation (G4) and its exact null moments]\label{thm:mack1994-spearman}\lean{VerifiedReserving.spearmanRho_eq_one_sub_six_mul_sum_sq_div, VerifiedReserving.spearmanPermutationMean_eq_zero, VerifiedReserving.spearmanPermutationVariance_eq}\leanok
+\uses{def:mack1994-permutation}
+For $q\ge2$, the centered-rank correlation is
+\[
+  1-\frac{6\sum_i(r_i-s_i)^2}{q^3-q}.
+\]
+Under the uniform-permutation null its mean is zero and its variance is
+$1/(q-1)$.
+\end{theorem}
+\begin{proof}\leanok Reindex finite sums by permutations, center the ranks,
+and evaluate the diagonal and off-diagonal second moments by exchangeability.
+\end{proof}
+
+\begin{definition}[Nominal aggregate calibration]\label{def:mack1994-development-nominal}\lean{VerifiedReserving.mackSpearmanNullMomentTargets, VerifiedReserving.developmentCorrelationNominalVariance, VerifiedReserving.developmentCorrelationAccepts}\leanok
+The inverse-variance aggregate has Mack's variance target only if its component
+coefficients are pairwise uncorrelated. The $0.67$ Normal cutoff is recorded as
+a definition, not as an exact rejection-probability theorem.
+\end{definition}
+
+\section{Calendar-year labels}
+
+\begin{definition}[Median split and diagonal score]\label{def:mack1994-calendar}\lean{VerifiedReserving.FactorBand, VerifiedReserving.factorBand, VerifiedReserving.calendarDiagonalRows, VerifiedReserving.calendarSmallCount, VerifiedReserving.calendarLargeCount, VerifiedReserving.calendarRetainedCount, VerifiedReserving.calendarYearScore, VerifiedReserving.calendarYearTest}\leanok
+Each development-factor column is split into small and large ranks around its
+median. A calendar diagonal scores the smaller of its two label counts, and
+the test statistic sums those scores.
+\end{definition}
+
+\begin{definition}[Exact fair-label null]\label{def:mack1994-calendar-null}\lean{VerifiedReserving.fairSignMass, VerifiedReserving.balancedLabelCount, VerifiedReserving.calendarNullMean, VerifiedReserving.calendarNullSecondMoment, VerifiedReserving.calendarNullVariance, VerifiedReserving.mackCalendarNullMean, VerifiedReserving.mackCalendarNullVariance}\leanok
+For $n$ retained labels, the exact null assigns binomial mass
+$\binom nl/2^n$ to $l$ large labels and scores $\min(l,n-l)$. The finite mean,
+second moment, and variance are defined before their closed forms.
+\end{definition}
+
+\begin{theorem}[Calendar equations (H1) and (H2)]\label{thm:mack1994-calendar-moments}\lean{VerifiedReserving.sum_fairSignMass, VerifiedReserving.calendarNullMean_eq_mackCalendarNullMean, VerifiedReserving.calendarNullSecondMoment_closed, VerifiedReserving.calendarNullVariance_eq_mackCalendarNullVariance}\leanok
+\uses{def:mack1994-calendar-null}
+The fair-label masses sum to one. For every $n$, the finite binomial sums equal
+Mack's closed mean and variance formulas (H1) and (H2); the second moment also
+has an explicit closed form.
+\end{theorem}
+\begin{proof}\leanok Pair symmetric binomial terms, telescope the signed
+half-sum, and evaluate the first two binomial factorial moments.
+\end{proof}
+
+\begin{theorem}[Five-label check]\label{thm:mack1994-five}\lean{VerifiedReserving.calendarNullMean_five, VerifiedReserving.calendarNullSecondMoment_five, VerifiedReserving.calendarNullVariance_five, VerifiedReserving.mackCalendarNullMoments_five}\leanok
+\uses{thm:mack1994-calendar-moments}
+For Mack's five-label example the exact mean, second moment, and variance are
+$50/32$, $90/32$, and $95/256$, and the closed formulas reproduce them.
+\end{theorem}
+\begin{proof}\leanok Normalize the finite binomial sums and evaluate them.
+\end{proof}
+
+\begin{definition}[Nominal calendar aggregation]\label{def:mack1994-calendar-nominal}\lean{VerifiedReserving.calendarYearNominalMean, VerifiedReserving.calendarYearNominalVariance, VerifiedReserving.calendarYearAccepts}\leanok
+Mack sums the component means and variances and applies a Normal cutoff. The
+variance sum and cutoff are nominal definitions because separate diagonal
+scores are described as almost uncorrelated rather than proved independent.
+\end{definition}

@@ -231,3 +231,15 @@ set_option format.width 400
 #print axioms IndependenceWitness.memLp_all
 #print axioms IndependenceWitness.condExp_obsSigma_eq_D_of_witness
 #print axioms IndependenceWitness.condCrossFree_obs_of_rows
+
+#print axioms spearmanRho_eq_one_sub_six_mul_sum_sq_div
+#print axioms spearmanPermutationMean_eq_zero
+#print axioms spearmanPermutationVariance_eq
+#print axioms calendarNullMean_eq_mackCalendarNullMean
+#print axioms calendarNullSecondMoment_closed
+#print axioms calendarNullVariance_eq_mackCalendarNullVariance
+#print axioms sum_fairSignMass
+#print axioms calendarNullMean_five
+#print axioms calendarNullSecondMoment_five
+#print axioms calendarNullVariance_five
+#print axioms mackCalendarNullMoments_five
