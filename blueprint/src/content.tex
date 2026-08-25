@@ -336,22 +336,56 @@ terms in all; $S_k$ is $\mathcal{D}_k$-measurable and Theorem~\ref{thm:var_fhat}
 $\sigma_k^2$ for the subtracted term.
 \end{proof}
 
-\section{Open: the MSEP theorem}
+\section{Process variance and the exact MSEP (Theorem 3)}
 
-\begin{theorem}[Mack's Theorem 3]\label{thm:msep}
-\uses{def:msep, thm:mack2, thm:sigma2}
-Under (M1)-(M3), Mack's estimator $\widehat{\mathrm{msep}}(\hat R_i)$ is the sum of the process
-variance $\hat C_{i,n-1}^2\sum_k \hat\sigma_k^2/(\hat f_k^2 \hat C_{i,k})$ and the estimation-error
-term $\hat C_{i,n-1}^2\sum_k \hat\sigma_k^2/(\hat f_k^2 S_k)$, where the estimation-error term is
-obtained by Mack's conditional-resampling step (replacing $(\hat f_k - f_k)^2$ by
-$\sigma_k^2/S_k$ and dropping cross terms by Theorem~\ref{thm:uncorrelated}). The statement to
-formalize is the estimator as Mack defines it; the exact conditional MSEP is a different object
-(Buchwalder, Bühlmann, Merz and Wüthrich 2006).
+\begin{lemma}[Conditional second moment]\label{lem:second_moment}\lean{VerifiedReserving.condExp_eps, VerifiedReserving.condExp_sq_C_succ, VerifiedReserving.condExp_sq_C_succ_tower}\leanok
+\uses{def:Mack1, def:Mack3}
+Under (M1) and (M3), $E[\varepsilon_{i,k} \mid \mathcal{D}_k] = 0$,
+$E[C_{i,k+1}^2 \mid \mathcal{D}_k] = f_k^2 C_{i,k}^2 + \sigma_k^2 C_{i,k}$, and for $d \le k$,
+$E[C_{i,k+1}^2 \mid \mathcal{D}_d] = f_k^2 E[C_{i,k}^2 \mid \mathcal{D}_d] + \sigma_k^2 E[C_{i,k} \mid \mathcal{D}_d]$.
+\end{lemma}
+\begin{proof}\leanok Expand $C_{i,k+1} = f_k C_{i,k} + \varepsilon_{i,k}$; the cross term vanishes; tower property. \end{proof}
+
+\begin{definition}[Process variance]\label{def:procVar}\lean{VerifiedReserving.procVar, VerifiedReserving.procVar_eq_sum}\leanok
+$V_0 = 0$, $V_{m+1} = f_{d+m}^2 V_m + \sigma_{d+m}^2\, c\prod_{l<m} f_{d+l}$; in closed form
+$V_m = \sum_{j<m}\big(\prod_{l=j+1}^{m-1} f_{d+l}\big)^2 \sigma_{d+j}^2\, c \prod_{l<j} f_{d+l}$.
+\end{definition}
+
+\begin{theorem}[Process variance along a row]\label{thm:procVar}\lean{VerifiedReserving.condVar_C_eq_procVar}\leanok
+\uses{lem:second_moment, lem:C_succ, def:procVar}
+Under (M1) and (M3), $E[C_{i,d+m}^2 \mid \mathcal{D}_d] - E[C_{i,d+m} \mid \mathcal{D}_d]^2 = V_m$
+with $c = C_{i,d}$.
 \end{theorem}
-\begin{proof}
-Iterated conditional variance along the row for the process part; Mack's approximation step for
-the estimation part.
-\end{proof}
+\begin{proof}\leanok Induction on $m$ with Lemma~\ref{lem:second_moment} and Lemma~\ref{lem:C_succ}. \end{proof}
+
+\begin{lemma}[Conditional MSEP decomposition]\label{lem:msep_decomp}\lean{VerifiedReserving.condExp_sq_sub_of_stronglyMeasurable}\leanok
+For a $\mathcal{D}$-measurable predictor $P$ of $Y$,
+$E[(P - Y)^2 \mid \mathcal{D}] = \big(E[Y^2 \mid \mathcal{D}] - E[Y \mid \mathcal{D}]^2\big) + (P - E[Y \mid \mathcal{D}])^2$.
+\end{lemma}
+\begin{proof}\leanok Expand the square; $P$ comes out of the conditional expectation. \end{proof}
+
+\begin{theorem}[Mack's Theorem 3, exact form]\label{thm:msep}\lean{VerifiedReserving.condMsep_eq}\leanok
+\uses{lem:msep_decomp, thm:procVar, lem:ChatRv_meas, thm:mack1}
+Let $\mathcal{D}$ be the observed data. Assume $\hat C_{i,d+m}$ is $\mathcal{D}$-measurable and
+that $\mathcal{D}$ adds nothing to $\mathcal{D}_d$ about row $i$'s future (the conditional mean and
+second moment of $C_{i,d+m}$ given $\mathcal{D}$ agree with those given $\mathcal{D}_d$; this is
+what independence across accident years supplies). Then under (M1) and (M3)
+\[
+E\big[(\hat C_{i,d+m} - C_{i,d+m})^2 \mid \mathcal{D}\big] = V_m + \big(\hat C_{i,d+m} - C_{i,d}\textstyle\prod_{l<m} f_{d+l}\big)^2 .
+\]
+\end{theorem}
+\begin{proof}\leanok Lemma~\ref{lem:msep_decomp} with $P = \hat C_{i,d+m}$, then Theorem~\ref{thm:procVar} and Lemma~\ref{lem:C_succ}. \end{proof}
+
+\begin{definition}[Mack's estimators of the two terms]\label{def:mackEst}\lean{VerifiedReserving.mackProcess, VerifiedReserving.mackEstimation}\leanok
+\uses{def:procVar, def:sigma2, def:fhat}
+$\widehat{V}$ is $V_m$ with $\hat f, \hat\sigma^2$ plugged in. The estimation-error term
+$\hat C_{i,n-1}^2 \sum_k \hat\sigma_k^2/(\hat f_k^2 S_k)$ is obtained from $(\hat C - M)^2$ by
+Mack's conditional-resampling step: replace $(\hat f_k - f_k)^2$ by $\sigma_k^2/S_k$
+(Theorem~\ref{thm:var_fhat}), drop the cross terms (Theorem~\ref{thm:uncorrelated}), and plug in
+$\hat f, \hat\sigma^2$. This is a definition, not a theorem: it is the approximation in Mack
+(1993), and the exact conditional MSEP above is the object it approximates (Buchwalder,
+Bühlmann, Merz and Wüthrich 2006 estimate the same object differently).
+\end{definition}
 
 \chapter{Reference computation}
 

@@ -22,7 +22,9 @@ Estimation variance (`VerifiedReserving/Variance.lean`). Assumptions (M3) (condi
 
 Unbiasedness of σ̂² (`VerifiedReserving/SigmaUnbiased.lean`). `weighted_sq_dev_eps` rewrites the weighted sum of squares around f̂_k as residual terms minus S_k(f̂_k − f_k)²; `condExp_sigma2Rv` then gives E[σ̂²_k | D_k] = σ²_k for k + 3 ≤ n, which is exactly why Mack divides by n − k − 2.
 
-Thirty-seven theorems as of 2026-08-25. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
+Process variance and Theorem 3 (`VerifiedReserving/ProcessVariance.lean`, `VerifiedReserving/Msep.lean`). Conditional second moments and their tower recursion; `procVar`, the process variance along a row, proved equal to the conditional variance of the true claims; the exact conditional-MSEP decomposition for any measurable predictor; and `condMsep_eq`, Mack's Theorem 3 in exact form conditioned on the observed data: process variance plus squared estimation error. Mack's plug-in estimators of the two terms, including the conditional-resampling approximation, are definitions (`mackProcess`, `mackEstimation`), so the exact statement and the approximation never get confused.
+
+Forty-four theorems as of 2026-08-25. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
 
 ## Why
 

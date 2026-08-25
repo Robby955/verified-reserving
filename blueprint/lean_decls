@@ -57,3 +57,13 @@ VerifiedReserving.RandomTriangle.sigma2Rv
 VerifiedReserving.RandomTriangle.wssRv
 VerifiedReserving.condExp_wssRv
 VerifiedReserving.condExp_sigma2Rv
+VerifiedReserving.condExp_eps
+VerifiedReserving.condExp_sq_C_succ
+VerifiedReserving.condExp_sq_C_succ_tower
+VerifiedReserving.procVar
+VerifiedReserving.procVar_eq_sum
+VerifiedReserving.condVar_C_eq_procVar
+VerifiedReserving.condExp_sq_sub_of_stronglyMeasurable
+VerifiedReserving.condMsep_eq
+VerifiedReserving.mackProcess
+VerifiedReserving.mackEstimation
