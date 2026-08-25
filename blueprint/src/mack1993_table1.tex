@@ -1,0 +1,34 @@
+\chapter{Mack's published numerical example}
+
+\begin{definition}[Taylor-Ashe cumulative triangle]\label{def:taylorAshe}\lean{VerifiedReserving.taylorAshe}\leanok
+The 55 observed cumulative claims in Mack's Table 1 are represented exactly as
+integers. Unobserved cells are zero and do not enter any estimator.
+\end{definition}
+
+\begin{theorem}[Published development factors]\label{thm:taylorAsheFhat}\lean{VerifiedReserving.taylorAshe_fhat_0, VerifiedReserving.taylorAshe_fhat_1, VerifiedReserving.taylorAshe_fhat_2, VerifiedReserving.taylorAshe_fhat_3, VerifiedReserving.taylorAshe_fhat_4, VerifiedReserving.taylorAshe_fhat_5, VerifiedReserving.taylorAshe_fhat_6, VerifiedReserving.taylorAshe_fhat_7, VerifiedReserving.taylorAshe_fhat_8}\leanok
+\uses{def:taylorAshe, def:fhat}
+The nine development factors computed from Table 1 equal exact rational
+numbers whose decimal roundings are the values printed by \cite{Mack1993}.
+\end{theorem}
+\begin{proof}\leanok Each equality follows by normalization of the finite sums and division. \end{proof}
+
+\begin{theorem}[Published estimable variances]\label{thm:taylorAsheSigma2}\lean{VerifiedReserving.taylorAshe_sigma2_0, VerifiedReserving.taylorAshe_sigma2_1, VerifiedReserving.taylorAshe_sigma2_2, VerifiedReserving.taylorAshe_sigma2_3, VerifiedReserving.taylorAshe_sigma2_4, VerifiedReserving.taylorAshe_sigma2_5, VerifiedReserving.taylorAshe_sigma2_6, VerifiedReserving.taylorAshe_sigma2_7}\leanok
+\uses{def:taylorAshe, def:sigma2, thm:taylorAsheFhat}
+The eight variance values supplied by Mack's variance estimator equal exact
+rationals with the printed decimal roundings. The ninth value is specified by
+an extrapolation convention and is not asserted here as an estimator value.
+\end{theorem}
+\begin{proof}\leanok Each equality follows by normalization of the weighted squared deviations. \end{proof}
+
+\begin{definition}[Total reserve for Table 1]\label{def:taylorAsheTotalReserve}\lean{VerifiedReserving.taylorAsheTotalReserve}\leanok
+\uses{def:taylorAshe, def:reserve}
+The total reserve is the sum of the ten chain-ladder reserves computed from
+the published triangle.
+\end{definition}
+
+\begin{theorem}[Published total reserve]\label{thm:taylorAsheReserve}\lean{VerifiedReserving.taylorAshe_total_reserve_rounds}\leanok
+\uses{def:taylorAsheTotalReserve, thm:taylorAsheFhat}
+The exact total reserve is strictly between 18,680.5 and 18,681.5 thousand,
+so it rounds to the 18,681 thousand printed in Mack's Table 2.
+\end{theorem}
+\begin{proof}\leanok Normalization of the ten reserve terms proves both strict inequalities. \end{proof}
