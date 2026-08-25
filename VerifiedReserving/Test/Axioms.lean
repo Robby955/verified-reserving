@@ -193,3 +193,17 @@ set_option format.width 400
 #print axioms IndependenceWitness.mack2'_from_rows
 #print axioms IndependenceWitness.nontrivial
 #print axioms IndependenceWitness.exists_independence_witness
+
+#print axioms condExp_sq_trueCDR
+#print axioms condVar_trueCDR
+#print axioms S_succ_eq
+#print axioms mwMsepCDR_eq_mwMsepObsCDR_add_mwVarCDR
+#print axioms mwMsepObsCDR_le_mwMsepCDR
+#print axioms mw_term_split
+#print axioms mwMsepCDR_eq_display
+#print axioms mwVarCDR_eq_plugin
+#print axioms mwProcessCDR_eq_plugin
+#print axioms sum_range_cdrProcVar_eq_procVar
+#print axioms sum_procVar_step_eq_procVar
+#print axioms condExp_sum_cdrProcVar_eq_procVar
+#print axioms mwMsepTotalCDR_sub_mwMsepTotalObsCDR

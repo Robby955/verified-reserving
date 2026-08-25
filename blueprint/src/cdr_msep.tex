@@ -1,0 +1,173 @@
+\chapter{Merz-Wüthrich: the MSEP of the one-year claims development result}
+
+Merz and Wüthrich (2008), \emph{Modelling the claims development result for solvency purposes},
+Casualty Actuarial Society E-Forum, Fall 2008, pages 542-568, quantify the uncertainty of the
+one-year move of the predicted ultimate. The previous chapter defined the true claims development
+result and proved that it has conditional mean zero; this chapter adds its second moment, which is
+the conditional mean squared error of predicting it by the budget value $0$, and records the
+estimator the paper displays for the observable claims development result.
+
+Index conventions. The paper writes $I$ for the last accident year, $J = I$ for the last
+development year, and $\mathcal{D}_I$ for the triangle after $I$ diagonals. Here $I = J = n-1$;
+$I - i$ is $n-1-i$, $C_{I-j,j}$ is $C_{n-1-j,\,j}$, $S^I_j$ is $S_j$ computed with $n$ accident
+years and $S^{I+1}_j$ is the same column sum computed with $n+1$, that is, with the next diagonal
+added. Both are functions of the triangle observed today, because
+$S^{I+1}_j = S^I_j + C_{I-j,j}$ and $C_{I-j,j}$ sits on the latest observed diagonal.
+
+The step formalized below is the development-year step $\mathcal{D}_k \to \mathcal{D}_{k+1}$ of
+this library's filtration, not the paper's calendar-year step; the caveat is the one recorded for
+Theorem~\ref{thm:cdr_closed}.
+
+\section{The exact one-year process variance}
+
+\begin{definition}[One-year process variance]\label{def:cdrProcVar}\lean{VerifiedReserving.cdrProcVar}\leanok
+\uses{def:Mack3}
+For claims $c$ at development year $k$ and ultimate development year $N$,
+\[
+  \mathrm{cdrProcVar}(c, f, \sigma^2, N, k) = \Big(\prod_{j=k+1}^{N-1} f_j\Big)^2 \sigma_k^2\, c .
+\]
+\end{definition}
+
+\begin{theorem}[Merz-Wüthrich 2008, display (2.18)]\label{thm:cdr_msep_exact}\lean{VerifiedReserving.condExp_sq_trueCDR, VerifiedReserving.condVar_trueCDR}\leanok
+\uses{def:cdrProcVar, def:trueCDR, thm:cdr_closed, thm:cdr_martingale, def:Mack1, def:Mack3}
+Under (M1) and (M3), for $i < n$ and $k < n-1$ and integrable claims,
+\[
+  E\big[\mathrm{CDR}_i(k)^2 \mid \mathcal{D}_k\big]
+   = \Big(\prod_{j=k+1}^{n-2} f_j\Big)^2 \sigma_k^2\, C_{i,k}
+\]
+almost surely. Since the true CDR has conditional mean zero, this is at once its conditional
+variance and the conditional mean squared error of predicting it by $0$, which is the budget value
+the paper enters in the income statement for prior accident years.
+\end{theorem}
+\begin{proof}\leanok
+By Theorem~\ref{thm:cdr_closed} the true CDR is $\big(\prod_{j>k} f_j\big)$ times the one-step
+residual $\varepsilon_{i,k} = C_{i,k+1} - f_k C_{i,k}$, up to sign. The constant comes out of the
+conditional expectation squared, and $E[\varepsilon_{i,k}^2 \mid \mathcal{D}_k] = \sigma_k^2 C_{i,k}$
+is assumption (M3). The conditional-variance form subtracts
+Theorem~\ref{thm:cdr_martingale} squared, which is $0$.
+\end{proof}
+
+\section{The estimator of Merz and Wüthrich}
+
+Definitions only. The derivation in the paper's appendix replaces the estimated development factors
+by resampled ones and drops terms of higher order in the residuals, so none of the objects below is
+upgraded to an identity.
+
+\begin{lemma}[The column sum one year later]\label{lem:S_succ}\lean{VerifiedReserving.S_succ_eq}\leanok
+\uses{def:S}
+For $j < n$, $S^{I+1}_j = S^I_j + C_{I-j,j}$.
+\end{lemma}
+\begin{proof}\leanok The index set gains exactly the row $I-j$. \end{proof}
+
+\begin{definition}[Displays (3.4)-(3.7)]\label{def:mw}\lean{VerifiedReserving.mwPsi, VerifiedReserving.mwPhi, VerifiedReserving.mwGamma, VerifiedReserving.mwDelta}\leanok
+\uses{def:sigma2, def:fhat, def:S, lem:S_succ}
+With $d = I - i$,
+\begin{align*}
+ \hat\Psi^I_i &= \frac{\hat\sigma^2_{d}/(\hat f^I_{d})^2}{C_{i,d}}, &
+ \hat\Phi^I_{i,J} &= \sum_{j=d+1}^{J-1}\Big(\frac{C_{I-j,j}}{S^{I+1}_j}\Big)^2
+   \frac{\hat\sigma^2_j/(\hat f^I_j)^2}{C_{I-j,j}}, \\
+ \hat\Gamma^I_{i,J} &= \hat\Phi^I_{i,J} + \hat\Psi^I_i, &
+ \hat\Delta^I_{i,J} &= \frac{\hat\sigma^2_{d}/(\hat f^I_{d})^2}{S^I_{d}}
+   + \sum_{j=d+1}^{J-1}\Big(\frac{C_{I-j,j}}{S^{I+1}_j}\Big)^2
+     \frac{\hat\sigma^2_j/(\hat f^I_j)^2}{S^I_j}.
+\end{align*}
+The later development steps enter the one-year figure only through the re-estimation of their
+development factors on the next diagonal, which is why each is scaled by
+$(C_{I-j,j}/S^{I+1}_j)^2 \le 1$.
+\end{definition}
+
+\begin{definition}[Displays (3.8)-(3.10)]\label{def:mwMsep}\lean{VerifiedReserving.mwVarCDR, VerifiedReserving.mwProcessCDR, VerifiedReserving.mwParamCDR, VerifiedReserving.mwMsepCDR, VerifiedReserving.mwMsepObsCDR}\leanok
+\uses{def:mw, def:reserve}
+$\widehat{\mathrm{Var}}(\mathrm{CDR}_i(I+1) \mid \mathcal{D}_I) = (\hat C^I_{i,J})^2 \hat\Psi^I_i$;
+the prospective estimator
+$\widehat{\mathrm{msep}}(0) = (\hat C^I_{i,J})^2(\hat\Gamma^I_{i,J} + \hat\Delta^I_{i,J})$ split
+into its process part $(\hat C^I_{i,J})^2\hat\Gamma^I_{i,J}$ and its parameter part
+$(\hat C^I_{i,J})^2\hat\Delta^I_{i,J}$; and the retrospective estimator
+$\widehat{\mathrm{msep}}(\widehat{\mathrm{CDR}}_i(I+1)) = (\hat C^I_{i,J})^2(\hat\Phi^I_{i,J} + \hat\Delta^I_{i,J})$.
+\end{definition}
+
+\begin{lemma}[Display (3.11)]\label{lem:mw_311}\lean{VerifiedReserving.mwMsepCDR_eq_mwMsepObsCDR_add_mwVarCDR, VerifiedReserving.mwMsepObsCDR_le_mwMsepCDR}\leanok
+\uses{def:mwMsep}
+$\widehat{\mathrm{msep}}(0) = \widehat{\mathrm{msep}}(\widehat{\mathrm{CDR}}_i(I+1))
+ + \widehat{\mathrm{Var}}(\mathrm{CDR}_i(I+1)\mid\mathcal{D}_I)$, and the second is at most the
+first when $\hat\Psi^I_i \ge 0$.
+\end{lemma}
+\begin{proof}\leanok $\hat\Gamma = \hat\Phi + \hat\Psi$. \end{proof}
+
+\begin{theorem}[Display (3.17)]\label{thm:mw_display}\lean{VerifiedReserving.mw_term_split, VerifiedReserving.mwMsepCDR_eq_display}\leanok
+\uses{def:mwMsep, lem:S_succ}
+If the column sums $S^I_j$ and $S^{I+1}_j$ along the row do not vanish, then
+\[
+ \widehat{\mathrm{msep}}(0) = (\hat C^I_{i,J})^2\Big(
+  \frac{\hat\sigma^2_{d}/(\hat f^I_{d})^2}{C_{i,d}}
+  + \frac{\hat\sigma^2_{d}/(\hat f^I_{d})^2}{S^I_{d}}
+  + \sum_{j=d+1}^{J-1}\frac{C_{I-j,j}}{S^{I+1}_j}\,
+     \frac{\hat\sigma^2_j/(\hat f^I_j)^2}{S^I_j}\Big).
+\]
+Read next to Mack's Theorem 3, the one-year figure keeps only the first term of the process
+variance, keeps the estimation error of the next diagonal in full, and scales every remaining
+run-off cell by $C_{I-j,j}/S^{I+1}_j \le 1$.
+\end{theorem}
+\begin{proof}\leanok
+The two sums combine term by term: with $s = S^I_j$, $c = C_{I-j,j}$ and $s + c = S^{I+1}_j$ by
+Lemma~\ref{lem:S_succ}, $(c/(s+c))^2 a/c + (c/(s+c))^2 a/s = (c/(s+c))\,a/s$.
+\end{proof}
+
+\section{The bridge to the exact statement}
+
+\begin{theorem}[The first development step is the plug-in]\label{thm:mw_plugin}\lean{VerifiedReserving.mwVarCDR_eq_plugin, VerifiedReserving.mwProcessCDR_eq_plugin}\leanok
+\uses{def:mwMsep, def:cdrProcVar, thm:cdr_msep_exact, def:Chat}
+If the row is not fully developed and $\hat f^I_{d} \neq 0$, $C_{i,d} \neq 0$, then
+$(\hat C^I_{i,J})^2\hat\Psi^I_i$ is exactly
+$\mathrm{cdrProcVar}(C_{i,d}, \hat f, \hat\sigma^2, n-1, d)$: display (3.8) is the plug-in of
+Theorem~\ref{thm:cdr_msep_exact} for the step the next calendar year observes. The process part of
+display (3.9) is that plug-in plus the correction $(\hat C^I_{i,J})^2\hat\Phi^I_{i,J}$ for the
+later steps.
+\end{theorem}
+\begin{proof}\leanok
+Split the ultimate at its bottom factor, $\hat C^I_{i,J} = C_{i,d}\,\hat f^I_d \prod_{j>d}\hat f^I_j$;
+the squares of $C_{i,d}$ and $\hat f^I_d$ cancel against the denominators of $\hat\Psi^I_i$.
+\end{proof}
+
+\begin{theorem}[The one-year process variances telescope]\label{thm:cdr_telescope}\lean{VerifiedReserving.sum_range_cdrProcVar_eq_procVar, VerifiedReserving.sum_procVar_step_eq_procVar, VerifiedReserving.condExp_sum_cdrProcVar_eq_procVar}\leanok
+\uses{def:cdrProcVar, def:procVar, lem:C_at}
+Summing the exact one-year process variance of Theorem~\ref{thm:cdr_msep_exact} over every
+remaining development step of the row, with $C_{i,k}$ replaced by its (M1) prediction
+$C_{i,d}\prod_{l=d}^{k-1} f_l$, gives Mack's multi-year process variance $V_m$ exactly, with no
+remainder. The stochastic form performs the replacement by a conditional expectation given
+$\mathcal{D}_d$ instead of by hand.
+\end{theorem}
+\begin{proof}\leanok
+Term by term this is the closed form of $V_m$ (Definition~\ref{def:procVar}): its $j$-th summand is
+the one-year process variance of step $d+j$. For the stochastic form, each summand is a constant
+times $C_{i,d+j}$, and Lemma~\ref{lem:C_at} evaluates its conditional expectation.
+\end{proof}
+
+\section{Aggregation over accident years}
+
+Accident year $0$ is fully developed, so the sums run over $i = 1, \dots, n-1$ and the cross terms
+over the pairs $k > i > 0$, the older year $i$ carrying the shared development factors.
+Definitions only.
+
+\begin{definition}[Displays (3.12)-(3.15)]\label{def:mw_total}\lean{VerifiedReserving.mwLambda, VerifiedReserving.mwXi, VerifiedReserving.mwCrossObs, VerifiedReserving.mwCross, VerifiedReserving.mwMsepTotalObsCDR, VerifiedReserving.mwMsepTotalCDR}\leanok
+\uses{def:mwMsep, def:total}
+\[
+ \hat\Lambda^I_{i,J} = \frac{C_{i,d}}{S^{I+1}_{d}}\,\frac{\hat\sigma^2_{d}/(\hat f^I_{d})^2}{S^I_{d}}
+  + \sum_{j=d+1}^{J-1}\Big(\frac{C_{I-j,j}}{S^{I+1}_j}\Big)^2\frac{\hat\sigma^2_j/(\hat f^I_j)^2}{S^I_j},
+ \qquad
+ \hat\Xi^I_{i,J} = \hat\Phi^I_{i,J} + \frac{\hat\sigma^2_{d}/(\hat f^I_{d})^2}{S^{I+1}_{d}},
+\]
+and the two aggregates
+$\sum_i \widehat{\mathrm{msep}}_i + 2\sum_{k>i>0}\hat C^I_{i,J}\hat C^I_{k,J}(\cdot_i + \hat\Lambda^I_{i,J})$
+with $\cdot_i = \hat\Phi^I_{i,J}$ for the retrospective view (3.12) and $\cdot_i = \hat\Xi^I_{i,J}$
+for the prospective view (3.15).
+\end{definition}
+
+\begin{theorem}[Display (3.16)]\label{thm:mw_total}\lean{VerifiedReserving.mwMsepTotalCDR_sub_mwMsepTotalObsCDR}\leanok
+\uses{def:mw_total, lem:mw_311}
+The aggregated prospective estimator exceeds the aggregated retrospective one by
+$\sum_i \widehat{\mathrm{Var}}(\mathrm{CDR}_i(I+1)\mid\mathcal{D}_I)
+ + 2\sum_{k>i>0}\hat C^I_{i,J}\hat C^I_{k,J}(\hat\Xi^I_{i,J} - \hat\Phi^I_{i,J})$: the same
+decoupling for aggregated accident years as for a single one.
+\end{theorem}
+\begin{proof}\leanok Termwise, Lemma~\ref{lem:mw_311} and ring algebra. \end{proof}
