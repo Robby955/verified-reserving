@@ -5,14 +5,19 @@ title: "verified-reserving: machine-checked claims reserving in Lean 4"
 authors:
   - family-names: Sneiderman
     given-names: Robert
-year: 2026
+    orcid: "https://orcid.org/0009-0002-4519-2846"
 url: "https://github.com/Robby955/verified-reserving"
 repository-code: "https://github.com/Robby955/verified-reserving"
 license: Apache-2.0
+keywords:
+  - actuarial science
+  - chain ladder
+  - claims reserving
+  - formal verification
+  - Lean 4
 abstract: >-
   Lean 4 formalization of Mack's distribution-free chain-ladder model for
-  claims reserving: the chain-ladder estimators and Mack's mean squared error
-  of prediction as definitions, the deterministic identities behind them, the
-  equality of Mack's 1999 recursive form with the 1993 closed form, and the
-  conditional unbiasedness of the development factor under Mack's first
-  assumption, proved with mathlib's conditional expectation.
+  claims reserving. The library separates exact conditional results from
+  plug-in estimators and conventions, derives the observed-data form of the
+  model from independent accident years, checks the published numerical
+  example, and audits every listed declaration for proof dependencies.

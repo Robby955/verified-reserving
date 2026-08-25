@@ -28,7 +28,7 @@ hypotheses, nonnegativity. **Gap** says plainly how far apart they are.
    `Classical.choice` and `Quot.sound`, or on no axiom at all.
 5. **CI audit.** `VerifiedReserving/Test/Axioms.lean` runs `#print axioms` on every name in this
    document. CI rejects a nonstandard axiom, rejects any `sorry`, `admit` or `axiom` declaration,
-   requires at least 180 audited lines, and runs the non-vacuity witness.
+   requires at least 265 audited lines, and runs the non-vacuity witness.
 
 Conventions: accident years `i` and development years `k` are zero-based, `C i k` is observed when
 `i + k <= n - 1`, `d = n - 1 - i` is the latest observed development year of accident year `i`, and

@@ -64,7 +64,8 @@ Merz-Wüthrich one-year uncertainty (`VerifiedReserving/CDRMsep.lean`). What a S
 
 Mack's 1993 example as kernel-checked arithmetic (`VerifiedReserving/Mack1993Table1.lean`). The Taylor and Ashe triangle is a Lean definition; the nine development factors and the eight estimable variance parameters of Mack (1993) are proved equal to exact rationals from `fhat` and `sigma2` by `norm_num`, and the total reserve is proved to round to Mack's 18,681 thousand. The extrapolated last variance parameter is a convention and is not asserted (Mack's printed value for it, 0.477, is a misprint; his rule and his printed standard errors give 0.447).
 
-Two hundred and sixty-five theorems as of 2026-08-25. What is left in [ROADMAP.md](ROADMAP.md) is no longer the core of the model: a witness satisfying the independence and generation hypotheses of `Independence.lean`, Röhr's 2016 linearized variant as a further catalogue row, and a tail factor. Each entry names the mathlib tools it needs and is a self-contained contribution.
+Two hundred and sixty-five declarations are audited as of 2026-08-25. The core Mack results and their independence-to-observed-data chain are complete. The bounded extensions in [ROADMAP.md](ROADMAP.md) include active-contributor weighted estimators, stronger stochastic witnesses, the observable-CDR approximation layer, and ODP prediction error.
+
 ## Theorem map
 
 Where each statement of Mack (1993, 1999) and its variants lives in the library. Every name below is audited by `VerifiedReserving/Test/Axioms.lean` on each push.
@@ -103,7 +104,7 @@ Mack's formula is quoted from secondary sources, circulates in several typograph
 
 ## Related work
 
-To our knowledge this is the first formalization of Mack's model, or of any claims-reserving method, in a proof assistant. Formalized actuarial mathematics does exist and this project builds beside it: Yosuke Ito's `Actuarial_Mathematics` in the Isabelle Archive of Formal Proofs and his `coq-actuary` package (interest theory, survival models, life tables, life reserves); Bjørn Kjos-Hanssen's `actlib` in Lean 4 (Cramér-Lundberg ruin, compound Poisson, interest theory, extreme value distributions); Raphael Coelho's `formal-mathfin` in Lean 4 (mathematical finance with an actuarial section). None covers chain ladder, development factors, or reserve prediction error, and the public archive of the Lean community Zulip has no thread on chain ladder or claims reserving (searched 2026-08-26). Corrections welcome: open an issue with a pointer.
+To our knowledge this is the first formalization of Mack's model, or of any claims-reserving method, in a proof assistant. Formalized actuarial mathematics does exist and this project builds beside it: Yosuke Ito's `Actuarial_Mathematics` in the Isabelle Archive of Formal Proofs and his `coq-actuary` package (interest theory, survival models, life tables, life reserves); Bjørn Kjos-Hanssen's `actlib` in Lean 4 (Cramér-Lundberg ruin, compound Poisson, interest theory, extreme value distributions); Raphael Coelho's `formal-mathfin` in Lean 4 (mathematical finance with an actuarial section). None covers chain ladder, development factors, or reserve prediction error, and the public archive of the Lean community Zulip has no thread on chain ladder or claims reserving (searched 2026-08-25). Corrections welcome: open an issue with a pointer.
 
 ## Build
 
@@ -126,7 +127,11 @@ leanblueprint web
 
 ## Reference computation
 
-Dependency-free Python in [`scripts/`](scripts/README.md) implements the formalized definitions with the same index conventions: `reproduce_mack1993.py` reproduces Mack's 1993 example to every printed digit, `case_study/` matches R's `ChainLadder` on the RAA triangle to printed precision, and `audit/` runs the theorem-aware audit of the CAS Schedule P database (779 company triangles: which data hypotheses of the theorems hold on each, where approximations and conventions enter, and how far the published variants of the prediction-error formula differ on real data). The Lean definitions are over `ℝ` and noncomputable; the scripts are the reference computation, not the Lean code, and their agreement with the definitions is checked numerically.
+Python in [`scripts/`](scripts/README.md) implements the formalized definitions with the same index conventions: `reproduce_mack1993.py` uses only the standard library, while the RAA case study and Schedule P audit use the pinned NumPy, Pandas, and SciPy versions in [`scripts/requirements.txt`](scripts/requirements.txt). The scripts reproduce Mack's 1993 example, match R's `ChainLadder` on the RAA triangle to printed precision, and audit 779 company triangles against the data hypotheses of the theorems. The Lean definitions are over `ℝ` and noncomputable; these scripts are reference computations, and their agreement with the definitions is checked numerically rather than proved.
+
+## Release status
+
+No versioned release has been published. [CHANGELOG.md](CHANGELOG.md) records the prospective v0.1.0 contents, and [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) records the checks required before tagging or archiving a release.
 
 ## Citation
 

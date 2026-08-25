@@ -2,11 +2,11 @@
 
 Verdict: the Python transcription of the formalized definitions reproduces `MackChainLadder(RAA, est.sigma = "Mack")` to printed precision in every cell (largest per-year gap 0.46 against integer-printed values, totals within 0.002 against two-decimal values), and with the last sigma swapped to the package's log-linear rule it also reproduces the package default total Mack S.E. 26,880.74. The conditional-resampling estimation-error term exceeds Mack's on RAA by 0.78 percent of the estimation-error part of the total MSEP and 0.11 percent of the total MSEP; the total standard error moves from 26,909 to 26,924.
 
-Data and sources: `raa_cumulative.csv` (built by `build_raa_csv.py`), `SOURCES.md`, `published_r_chainladder.json`. Script: `raa_case_study.py`. Full printed output: `run_output.txt`. Machine-readable results: `raa_case_study_results.json`.
+Tracked inputs: `raa_cumulative.csv` and `published_r_chainladder.json`. The reproduction script is `raa_case_study.py`; `--json` writes the generated, untracked `raa_case_study_results.json` beside it.
 
 ## 1. Inputs
 
-The RAA triangle (Reinsurance Association of America, Historical Loss Development Study 1991, Automatic Facultative General Liability, cumulative incurred in $1000, accident years 1981 to 1990). Three public copies (chainladder-python `raa.csv`, the R ChainLadder vignette, and Mack 1994 p. 126) agree on all 55 cells; the CSV in this directory is generated from the first and checked against the other two by `build_raa_csv.py`.
+The RAA triangle is the Reinsurance Association of America Historical Loss Development Study 1991 Automatic Facultative General Liability triangle, cumulative incurred in $1000 for accident years 1981 to 1990. The committed CSV was prepared in the paper lane from chainladder-python's `raa.csv` and checked there against the R `ChainLadder` vignette and Mack (1994), p. 126. That source-assembly helper is not included here, so reproduction from a clean checkout starts from the committed CSV.
 
 The published comparison column is the R ChainLadder vignette output of `MackChainLadder(RAA, est.sigma = "Mack")`. Mack (1994) p. 130 prints the same table digit for digit, so the R output and Mack's own 1994 calculation are one and the same target.
 
@@ -109,10 +109,11 @@ Reading. The resampling term is always at least Mack's (prod (1 + a_k) - 1 >= su
 
 ## 7. Reproduce
 
-    cd experiments/variance-mack-2027/case_study
-    python3 build_raa_csv.py             # rebuild raa_cumulative.csv and re-check the three sources (needs network once)
-    python3 raa_case_study.py            # prints all exhibits and LaTeX bodies, exit 0 iff R is reproduced
-    python3 raa_case_study.py --json     # also writes raa_case_study_results.json
-    python3 raa_case_study.py --json > run_output.txt
+    python3 -m venv .venv
+    . .venv/bin/activate
+    python3 -m pip install -r scripts/requirements.txt
+    python3 scripts/case_study/raa_case_study.py
+    python3 scripts/case_study/raa_case_study.py --json
+    python3 scripts/case_study/raa_case_study.py > /tmp/raa_case_study_output.txt
 
-Requirements: Python 3 with scipy (only `scipy.stats.linregress`, for the log-linear p-value). The script imports `mack` and `load_triangle` from `../reproduce_mack1993.py`.
+The committed `raa_cumulative.csv` is the reproduction input and its provenance is recorded above. Requirements: Python 3.10 or later with the packages pinned in `../requirements.txt`; this script uses only `scipy.stats.linregress`. It imports `mack` and `load_triangle` from `../reproduce_mack1993.py`.

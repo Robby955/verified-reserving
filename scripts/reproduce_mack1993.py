@@ -73,13 +73,18 @@ def mack(C):
     return f, sig2, res, msep, total
 
 
-def main():
+def main(published_results_path=None):
     C = load_triangle(os.path.join(HERE, "data", "taylor_ashe_cumulative.csv"))
-    pub = json.load(open(os.path.join(HERE, "data", "mack1993_published_results.json")))
+    published_results_path = published_results_path or os.path.join(
+        HERE, "data", "mack1993_published_results.json"
+    )
+    with open(published_results_path) as fh:
+        pub = json.load(fh)
     f, sig2, res, msep, total = mack(C)
     n = len(C)
     print("k   f_k       sigma_k^2/1000   published f   published sigma^2/1000")
     misprints = []
+    ok = True
     for k in range(n - 1):
         pf = pub['development_factors_fk_as_printed'][k]
         ps = pub['sigma_k_squared_over_1000_as_printed'][k]
@@ -89,16 +94,16 @@ def main():
         flag = ''
         if not f_ok:
             flag += '  <-- FACTOR MISMATCH'
+            ok = False
         if not s_ok:
-            if k == n - 2:
+            if k == n - 2 and ps == 0.477:
                 flag += f'  <-- MISPRINT in source: the extrapolation rule on the printed sigma_{k-1}^2, sigma_{k}^2 gives {sig2[k]/1000:.3f}, and the printed standard errors are reproduced with it'
                 misprints.append(k + 1)
             else:
                 flag += '  <-- SIGMA MISMATCH'
-                ok_sigma = False
+                ok = False
         print(f"{k+1:<3} {f[k]:<9.4f} {sig2[k]/1000:<16.4g} {pf:<13} {ps}{flag}")
     print("\ni   reserve(000)  published   s.e.%   published%")
-    ok = True
     for i in range(1, n):
         se = 100 * math.sqrt(msep[i]) / res[i]
         pr = pub["chain_ladder_reserves_in_thousands"][str(i + 1)]

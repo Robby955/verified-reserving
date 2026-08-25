@@ -7,16 +7,16 @@ Contributions are welcome, from a one-line lemma to a whole theorem of the roadm
 - [ROADMAP.md](ROADMAP.md) lists the open theorems in build order with the mathlib tools each needs. Pick one, open an issue with the "Theorem proposal" template saying you are on it, and go.
 - The [blueprint](https://robby955.github.io/verified-reserving/blueprint/) shows every statement and its dependency graph; nodes not yet green are the open work.
 
-## Good first theorems
+## Open contribution directions
 
-Each of these is self-contained, cites a specific source, and reuses lemmas already in the repository.
+The former good-first list is complete. Current work is narrower and varies in difficulty; check the matching `Still open` paragraph in [ROADMAP.md](ROADMAP.md) before starting.
 
-1. Mack (1999), general weights and exponent. The factor estimator with weights `w_{ik}` and exponent `α` on `C_{ik}` (`α = 1`, unit weights is the 1993 estimator). Prove the weighted-average form and, under (M1), conditional unbiasedness; then the recursion identity `se2rec_eq_msep` for general `α`. Deterministic part first (`ChainLadder.lean` style), stochastic part after (`Stochastic.lean` style).
-2. Bornhuetter-Ferguson with prior uncertainty. `BornhuetterFerguson.lean` has the deterministic identities; add a random a priori ultimate independent of the triangle and prove the conditional mean and variance of the BF reserve (Mack 2008, "The prediction error of Bornhuetter-Ferguson", ASTIN Bulletin 38).
-3. Bühlmann-Straub credibility. The credibility estimator as the minimizer of a weighted quadratic loss: the normal equations follow the pattern of `weighted_sq_dev_at_fhat`.
-4. A witness for the independence layer: a concrete `RandomTriangle` on a finite probability space satisfying `RowsIndep` and `RowsGenerateD` (see `Test/NontrivialModel.lean` for the style), instantiating `mack1_of_mack1Row`.
-5. Catalogue rows: any published form of the prediction-error formula not yet in `Catalogue.lean` or `Rohr.lean`, proved equal to Mack's or separated from it by an explicit term with a counterexample triangle.
-6. Deterministic identities and docstrings: the projection and weighted-sum lemmas in `ChainLadder.lean` are the entry point for anyone new to Lean.
+1. Give `Mack1999.lean` an active-contributor index set that omits zero-weight cells and uses active cardinality minus one for the variance estimator's degrees of freedom.
+2. Instantiate the weighted stochastic results at `α = 0` and `α = 2` on a finite witness triangle.
+3. Extend the independent-row witness with `Mack3Row`, then instantiate `condMsep_eq_of_rows` on that nondegenerate model.
+4. Add the calendar-year filtration and a witness for the exact CDR results before attempting the cited approximation for the observable CDR.
+5. Formalize a stochastic Bühlmann-Straub model that derives the quadratic loss from conditional moments; keep structural-parameter estimation separate.
+6. Add the ODP variance structure before the bootstrap or prediction-error layer. Do not treat the existing deterministic score equations as a stochastic GLM result.
 
 ## Rules
 
@@ -41,7 +41,8 @@ lake -Kenv=dev exe checkdecls blueprint/lean_decls
 Working on several theorems at once: give each its own worktree on its own branch and share the prebuilt mathlib,
 
 ```
-git worktree add ../vr-<topic> -b feat/<topic> main
+git fetch origin
+git worktree add ../vr-<topic> -b feat/<topic> origin/main
 cd ../vr-<topic> && mkdir -p .lake && ln -s "$(git rev-parse --show-toplevel)/../verified-reserving/.lake/packages" .lake/packages && lake build
 ```
 
