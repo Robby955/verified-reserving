@@ -1,0 +1,1478 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dependency graph</title>
+  <meta name="generator" content="plasTeX" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles/theme-white.css" />
+  <link rel="stylesheet" href="styles/dep_graph.css" />
+  
+  <script type="text/x-mathjax-config">
+  
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  
+  </script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">  </script>
+
+
+<link rel="stylesheet" href="styles/extra_styles.css" />
+
+</head>
+
+<body>
+<header>
+  <a class="toc" href="index.html">Home</a>
+  <h1 id="doc_title">Dependencies</h1>
+</header>
+<div class="wrapper">
+<div class="content">
+  <div id="Legend">
+    <span id="legend_title" class="title">Legend
+    <div class="btn">
+       <div class="bar"></div>
+       <div class="bar"></div>
+       <div class="bar"></div>
+    </div></span> 
+    <dl class="legend">
+      
+      <dt>Boxes</dt><dd>definitions</dd>
+      
+      <dt>Ellipses</dt><dd>theorems and lemmas</dd>
+      
+      <dt>Blue border</dt><dd>the <em>statement</em> of this result is ready to be formalized; all prerequisites are done</dd>
+      
+      <dt>Orange border</dt><dd>the <em>statement</em> of this result is not ready to be formalized; the blueprint needs more work</dd>
+      
+      <dt>Blue background</dt><dd>the <em>proof</em> of this result is ready to be formalized; all prerequisites are done</dd>
+      
+      <dt>Green border</dt><dd>the <em>statement</em> of this result is formalized</dd>
+      
+      <dt>Green background</dt><dd>the <em>proof</em> of this result is formalized</dd>
+      
+      <dt>Dark green background</dt><dd>the <em>proof</em> of this result and all its ancestors are formalized</dd>
+      
+      <dt>Dark green border</dt><dd>this is in Mathlib</dd>
+      
+    </dl>
+  </div>
+    <div id="graph"></div>
+<div id="statements">
+
+    
+    <div class="dep-modal-container" id="def:bf_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:bf" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">4.1</span><span class="definition_thmtitle">Cumulative development factor, BF reserve and ultimate</span></div>
+    <div class="thm_thmcontent"><p> \(\mathrm{cdf}_i = \prod _{k=d}^{n-2}\hat f_k\); for an a priori ultimate \(U\), \(R^{BF}_i = U\, (1 - 1/\mathrm{cdf}_i)\) and \(\hat C^{BF}_{i,n-1} = C_{i,d} + R^{BF}_i\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#def:bf">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.cdf" class="lean_decl">VerifiedReserving.cdf</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve" class="lean_decl">VerifiedReserving.bfReserve</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfUltimate" class="lean_decl">VerifiedReserving.bfUltimate</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:Chat_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:Chat" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.6</span><span class="definition_thmtitle">Projection</span></div>
+    <div class="thm_thmcontent"><p> \(\hat C_{i,k} = C_{i,n-1-i} \prod _{j=n-1-i}^{k-1} \hat f_j\) for \(k \ge n-1-i\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#def:Chat">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.Chat">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:ChatRv_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:ChatRv" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">5.9</span><span class="definition_thmtitle">Chain-ladder projection as a random variable</span></div>
+    <div class="thm_thmcontent"><p> \(\hat C_{i,d+m} = C_{i,d}\prod _{k=d}^{d+m-1}\hat f_k\) with \(d = n-1-i\). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:ChatRv">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.ChatRv">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:contributors_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:contributors" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.1</span><span class="definition_thmtitle">Contributors</span></div>
+    <div class="thm_thmcontent"><p>The accident years contributing to the development factor \(k \to k+1\) are \(i = 0, \dots , n-k-2\), those with \(C_{i,k+1}\) observed. </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#def:contributors">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.contributors">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:F_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:F" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.4</span><span class="definition_thmtitle">Individual factor</span></div>
+    <div class="thm_thmcontent"><p>\(F_{i,k} = C_{i,k+1} / C_{i,k}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#def:F">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.F">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:fhat_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:fhat" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.3</span><span class="definition_thmtitle">Development factor</span></div>
+    <div class="thm_thmcontent"><p> \(\hat f_k = T_k / S_k\). (In Lean, division by zero is zero.) </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#def:fhat">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.fhat">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:Mack1_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:Mack1" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">5.2</span><span class="definition_thmtitle">Assumption (M1)</span></div>
+    <div class="thm_thmcontent"><p> \(E[C_{i,k+1} \mid \mathcal{D}_k] = f_k\,  C_{i,k}\) almost surely, for all \(i\) and \(k\). This is Mack’s first assumption in the form conditioned on \(\mathcal{D}_k\); Mack states it conditioned on the row’s own history and obtains this form from independence across accident years (M2), a passage still to be formalized. </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:Mack1">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.Mack1">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:Mack3_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:Mack3" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">5.13</span><span class="definition_thmtitle">Residuals, (M3) and (M2’)</span></div>
+    <div class="thm_thmcontent"><p> With \(\varepsilon _{i,k} = C_{i,k+1} - f_k C_{i,k}\): (M3) \(E[\varepsilon _{i,k}^2 \mid \mathcal{D}_k] = \sigma _k^2 C_{i,k}\), and (M2’) \(E[\varepsilon _{i,k}\varepsilon _{j,k} \mid \mathcal{D}_k] = 0\) for \(i \neq j\), the conditional uncorrelatedness across accident years that independence of accident years supplies. </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:Mack3">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.eps" class="lean_decl">VerifiedReserving.RandomTriangle.eps</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.Mack3" class="lean_decl">VerifiedReserving.Mack3</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.Mack2'" class="lean_decl">VerifiedReserving.Mack2'</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:mackTerm_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:mackTerm" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">3.2</span></div>
+    <div class="thm_thmcontent"><p> The summand of the closed form: \(\mathrm{term}_{i,k} = \frac{\hat\sigma _k^2}{\hat f_k^2}\big(\frac{1}{\hat C_{i,k}} + \frac{1}{S_k}\big)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#def:mackTerm">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackTerm">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:msep_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:msep" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.8</span><span class="definition_thmtitle">Mack’s MSEP estimator</span></div>
+    <div class="thm_thmcontent"><p> Mack (1993), Theorem 3: </p>
+<div class="displaymath" id="a0000000015">
+  \[  \widehat{\mathrm{msep}}(\hat R_i) = \hat C_{i,n-1}^2 \sum _{k=n-1-i}^{n-2} \frac{\hat\sigma _k^2}{\hat f_k^2} \Big(\frac{1}{\hat C_{i,k}} + \frac{1}{S_k}\Big).  \]
+</div>
+</div>
+
+    <a class="latex_link" href="sect0002.html#def:msep">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msep">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:RandomTriangle_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:RandomTriangle" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">5.1</span><span class="definition_thmtitle">Random triangle</span></div>
+    <div class="thm_thmcontent"><p>A random run-off triangle on a measurable space \(\Omega \) is a family of random variables \(C_{i,k} : \Omega \to \mathbb {R}\) together with a filtration \(\mathcal{D}_k\) such that \(C_{i,j}\) is \(\mathcal{D}_k\)-measurable whenever \(j \le k\) ("everything observed up to development year \(k\)"). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:RandomTriangle">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:reserve_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:reserve" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.7</span><span class="definition_thmtitle">Ultimate and reserve</span></div>
+    <div class="thm_thmcontent"><p> \(\hat C_{i,n-1}\) is the chain-ladder ultimate and \(\hat R_i = \hat C_{i,n-1} - C_{i,n-1-i}\) the reserve. </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#def:reserve">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ultimate" class="lean_decl">VerifiedReserving.ultimate</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.reserve" class="lean_decl">VerifiedReserving.reserve</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:rv_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:rv" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">5.3</span><span class="definition_thmtitle">Estimators as random variables</span></div>
+    <div class="thm_thmcontent"><p> \(S_k(\omega )\) and \(\hat f_k(\omega )\) are the deterministic estimators applied to the triangle observed at \(\omega \). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:rv">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.Srv" class="lean_decl">VerifiedReserving.RandomTriangle.Srv</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.fhatRv" class="lean_decl">VerifiedReserving.RandomTriangle.fhatRv</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:S_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:S" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.2</span><span class="definition_thmtitle">Column sums</span></div>
+    <div class="thm_thmcontent"><p> \(S_k = \sum _{i=0}^{n-k-2} C_{i,k}\) and \(T_k = \sum _{i=0}^{n-k-2} C_{i,k+1}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#def:S">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.S" class="lean_decl">VerifiedReserving.S</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.T" class="lean_decl">VerifiedReserving.T</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:se2rec_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:se2rec" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">3.1</span><span class="definition_thmtitle">Mack’s 1999 recursion</span></div>
+    <div class="thm_thmcontent"><p> For \(\alpha = 1\) and unit weights <span class="cite">
+	[
+	<a href="sect0006.html#Mack1999" >2</a>
+	]
+</span>, starting from \(\mathrm{se}^2 = 0\) on the latest diagonal \(d = n-1-i\) and stepping \(m\) times, </p>
+<div class="displaymath" id="a0000000023">
+  \[  \mathrm{se}^2_{m+1} = \hat C_{i,d+m}^2\Big(\frac{\hat\sigma _{d+m}^2}{\hat C_{i,d+m}} + \frac{\hat\sigma _{d+m}^2}{S_{d+m}}\Big) + \mathrm{se}^2_m\, \hat f_{d+m}^2 .  \]
+</div>
+</div>
+
+    <a class="latex_link" href="sect0003.html#def:se2rec">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2rec">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:sigma2_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:sigma2" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.5</span><span class="definition_thmtitle">Mack’s variance estimator</span></div>
+    <div class="thm_thmcontent"><p> \(\hat\sigma _k^2 = \frac{1}{n-k-2}\sum _{i=0}^{n-k-2} C_{i,k}\, (F_{i,k} - \hat f_k)^2\). The value for \(k = n-2\) (a single contributor) is an extrapolation convention in <span class="cite">
+	[
+	<a href="sect0006.html#Mack1993" >1</a>
+	]
+</span>, not an estimator; no theorem here uses it. </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#def:sigma2">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sigma2">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:bf_frac_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:bf_frac" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">4.4</span><span class="lemma_thmtitle">The BF reserve is a fraction of the prior</span></div>
+    <div class="thm_thmcontent"><p> If every development factor along the row is at least \(1\), then \(\mathrm{cdf}_i \ge 1\) and, for \(U \ge 0\), \(0 \le R^{BF}_i(U) \le U\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:bf_frac">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.one_le_cdf" class="lean_decl">VerifiedReserving.one_le_cdf</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve_nonneg" class="lean_decl">VerifiedReserving.bfReserve_nonneg</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve_le" class="lean_decl">VerifiedReserving.bfReserve_le</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:bf_linear_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:bf_linear" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">4.2</span><span class="lemma_thmtitle">Linearity</span></div>
+    <div class="thm_thmcontent"><p> \(R^{BF}_i(aU) = a\, R^{BF}_i(U)\) and \(R^{BF}_i(U+V) = R^{BF}_i(U) + R^{BF}_i(V)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:bf_linear">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve_smul" class="lean_decl">VerifiedReserving.bfReserve_smul</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve_add" class="lean_decl">VerifiedReserving.bfReserve_add</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:C_succ_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:C_succ" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">5.11</span><span class="lemma_thmtitle">Iterating (M1)</span></div>
+    <div class="thm_thmcontent"><p> For \(d \le k\), \(E[C_{i,k+1} \mid \mathcal{D}_d] = f_k\, E[C_{i,k} \mid \mathcal{D}_d]\), hence \(E[C_{i,d+m} \mid \mathcal{D}_d] = C_{i,d}\prod _{k=d}^{d+m-1} f_k\). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#lem:C_succ">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_C_succ" class="lean_decl">VerifiedReserving.condExp_C_succ</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_C_of_Mack1" class="lean_decl">VerifiedReserving.condExp_C_of_Mack1</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:Chat_diag_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:Chat_diag" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">2.14</span></div>
+    <div class="thm_thmcontent"><p> \(\hat C_{i,n-1-i} = C_{i,n-1-i}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:Chat_diag">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.Chat_diag">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:Chat_succ_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:Chat_succ" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">2.13</span><span class="lemma_thmtitle">Projection step</span></div>
+    <div class="thm_thmcontent"><p> For \(k \ge n-1-i\), \(\hat C_{i,k+1} = \hat C_{i,k}\, \hat f_k\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:Chat_succ">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.Chat_succ">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:ChatRv_meas_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:ChatRv_meas" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">5.10</span></div>
+    <div class="thm_thmcontent"><p> \(\hat C_{i,d+m}\) is \(\mathcal{D}_{d+m}\)-measurable. </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#lem:ChatRv_meas">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.stronglyMeasurable_ChatRv">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:fhat_meas_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:fhat_meas" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">5.6</span></div>
+    <div class="thm_thmcontent"><p> \(\hat f_j\) is \(\mathcal{D}_k\)-measurable whenever \(j + 1 \le k\). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#lem:fhat_meas">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.stronglyMeasurable_fhatRv">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:fhat_sub_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:fhat_sub" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">5.14</span></div>
+    <div class="thm_thmcontent"><p> On \(\{ S_k \neq 0\} \), \(\hat f_k - f_k = S_k^{-1}\sum _i \varepsilon _{i,k}\) and \((\hat f_k - f_k)^2 = S_k^{-2}\sum _i\sum _j \varepsilon _{i,k}\varepsilon _{j,k}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#lem:fhat_sub">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.fhatRv_sub_eq" class="lean_decl">VerifiedReserving.RandomTriangle.fhatRv_sub_eq</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.sq_fhatRv_sub" class="lean_decl">VerifiedReserving.RandomTriangle.sq_fhatRv_sub</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:msep_sum_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:msep_sum" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">3.3</span></div>
+    <div class="thm_thmcontent"><p> \(\widehat{\mathrm{msep}}(\hat R_i) = \hat C_{i,n-1}^2 \sum _{k=n-1-i}^{n-2} \mathrm{term}_{i,k}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:msep_sum">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msep_eq_sum_mackTerm">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:oldest_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:oldest" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">2.15</span></div>
+    <div class="thm_thmcontent"><p> The oldest accident year is fully developed: \(\hat R_0 = 0\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:oldest">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.reserve_zero_of_oldest">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:se2rec_closed_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:se2rec_closed" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">3.4</span><span class="lemma_thmtitle">Truncated closed form</span></div>
+    <div class="thm_thmcontent"><p> If \(\hat f_k \neq 0\) for \(d \le k {\lt} d+m\), then \(\mathrm{se}^2_m = \hat C_{i,d+m}^2 \sum _{k=d}^{d+m-1} \mathrm{term}_{i,k}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:se2rec_closed">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2rec_eq_closed">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:sq_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:sq" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">2.11</span><span class="lemma_thmtitle">Sum-of-squares decomposition</span></div>
+    <div class="thm_thmcontent"><p> For any centre \(f\), with \(C_{i,k} \neq 0\) for every contributor, \(\sum _i C_{i,k}(F_{i,k}-f)^2 = \sum _i C_{i,k}F_{i,k}^2 - 2 f T_k + f^2 S_k\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:sq">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.weighted_sq_dev">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:sq_fhat_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:sq_fhat" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">2.12</span><span class="lemma_thmtitle">Collapse at the chain-ladder centre</span></div>
+    <div class="thm_thmcontent"><p> If moreover \(S_k \neq 0\), then \(\sum _i C_{i,k}(F_{i,k}-\hat f_k)^2 = \sum _i C_{i,k}F_{i,k}^2 - S_k \hat f_k^2\). This is the identity behind the \(n-k-2\) degrees of freedom in \(\hat\sigma _k^2\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:sq_fhat">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.weighted_sq_dev_at_fhat">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:Srv_meas_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:Srv_meas" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">5.4</span></div>
+    <div class="thm_thmcontent"><p> \(S_k\) is \(\mathcal{D}_k\)-measurable. </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#lem:Srv_meas">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.stronglyMeasurable_Srv">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:T_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:T" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">2.10</span></div>
+    <div class="thm_thmcontent"><p> If \(C_{i,k} \neq 0\) for every contributor, \(T_k = \sum _i C_{i,k} F_{i,k}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:T">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.T_eq_sum_weighted_F">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:weighted_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:weighted" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">2.9</span><span class="lemma_thmtitle">Weighted-average form</span></div>
+    <div class="thm_thmcontent"><p> If \(C_{i,k} \neq 0\) for every contributor \(i\), then \(\hat f_k = \sum _{i} \frac{C_{i,k}}{S_k} F_{i,k}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:weighted">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.fhat_eq_weighted_average">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:bf_cl_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:bf_cl" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.3</span><span class="theorem_thmtitle">BF with the chain-ladder prior is chain ladder</span></div>
+    <div class="thm_thmcontent"><p> If \(\mathrm{cdf}_i \neq 0\) and \(U = \hat C_{i,n-1}\), then \(\hat C^{BF}_{i,n-1} = \hat C_{i,n-1}\) and \(R^{BF}_i = \hat R_i\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#thm:bf_cl">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfUltimate_of_ultimate" class="lean_decl">VerifiedReserving.bfUltimate_of_ultimate</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfReserve_of_ultimate" class="lean_decl">VerifiedReserving.bfReserve_of_ultimate</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:mack1_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:mack1" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.12</span><span class="theorem_thmtitle">Mack 1993, Theorem 1</span></div>
+    <div class="thm_thmcontent"><p> Under (M1), with the partial products integrable and the column sums a.s. nonzero, \(E[\hat C_{i,d+m} \mid \mathcal{D}_d] = C_{i,d}\prod _{k=d}^{d+m-1} f_k\), and therefore \(E[\hat C_{i,n-1} \mid \mathcal{D}_d] = E[C_{i,n-1} \mid \mathcal{D}_d]\): the chain-ladder ultimate is a conditionally unbiased estimator of the true ultimate claims. </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:mack1">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_ChatRv" class="lean_decl">VerifiedReserving.condExp_ChatRv</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_ultimate_eq" class="lean_decl">VerifiedReserving.condExp_ultimate_eq</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:mack2_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:mack2" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.8</span><span class="theorem_thmtitle">Mack 1993, Theorem 2</span></div>
+    <div class="thm_thmcontent"><p> On a probability space, under the same hypotheses, \(E[\hat f_k] = f_k\) and \(E[\hat f_j \hat f_k] = f_j f_k\) for \(j {\lt} k\): the chain-ladder factors are unbiased and uncorrelated, which is what makes \(\prod _k \hat f_k\) an unbiased estimator of \(\prod _k f_k\). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:mack2">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_fhatRv_mul" class="lean_decl">VerifiedReserving.integral_fhatRv_mul</a></li>
+        
+           <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_fhatRv" class="lean_decl">VerifiedReserving.integral_fhatRv</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:msep_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:msep" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.17</span><span class="theorem_thmtitle">Mack’s Theorem 3</span></div>
+    <div class="thm_thmcontent"><p>  Under (M1)-(M3), Mack’s estimator \(\widehat{\mathrm{msep}}(\hat R_i)\) is the sum of the process variance \(\hat C_{i,n-1}^2\sum _k \hat\sigma _k^2/(\hat f_k^2 \hat C_{i,k})\) and the estimation-error term \(\hat C_{i,n-1}^2\sum _k \hat\sigma _k^2/(\hat f_k^2 S_k)\), where the estimation-error term is obtained by Mack’s conditional-resampling step (replacing \((\hat f_k - f_k)^2\) by \(\sigma _k^2/S_k\) and dropping cross terms by Theorem&#160;<a href="sect0005.html#thm:uncorrelated">5.7</a>). The statement to formalize is the estimator as Mack defines it; the exact conditional MSEP is a different object (Buchwalder, Bühlmann, Merz and Wüthrich 2006). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:msep">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:recursion_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:recursion" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.5</span><span class="theorem_thmtitle">Mack 1999 = Mack 1993</span></div>
+    <div class="thm_thmcontent"><p> For \(i \le n-1\) and \(\hat f_k \neq 0\) along the row, \(i\) steps of the 1999 recursion return exactly Mack’s 1993 estimator: \(\mathrm{se}^2_i = \widehat{\mathrm{msep}}(\hat R_i)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#thm:recursion">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2rec_eq_msep">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:sigma2_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:sigma2" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.16</span><span class="theorem_thmtitle">Unbiasedness of the variance estimator</span></div>
+    <div class="thm_thmcontent"><p>  Under (M1) and (M3), \(E[\hat\sigma _k^2 \mid \mathcal{D}_k] = \sigma _k^2\) for \(k \le n-3\). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:sigma2">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:unbiased_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:unbiased" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.5</span><span class="theorem_thmtitle">Conditional unbiasedness of the development factor</span></div>
+    <div class="thm_thmcontent"><p> Assume (M1), that \(S_k \neq 0\) almost surely, that each \(C_{i,k+1}\) and \(\hat f_k\) are integrable. Then \(E[\hat f_k \mid \mathcal{D}_k] = f_k\) almost surely. </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:unbiased">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_fhatRv">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:uncorrelated_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:uncorrelated" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.7</span><span class="theorem_thmtitle">Uncorrelated development factors, conditional form</span></div>
+    <div class="thm_thmcontent"><p> Under (M1), on a finite measure space, for \(j {\lt} k\) (with the integrability and \(S \neq 0\) hypotheses of Theorem&#160;<a href="sect0005.html#thm:unbiased">5.5</a> for both columns and \(\hat f_j \hat f_k\) integrable), \(E[\hat f_j \hat f_k \mid \mathcal{D}_j] = f_j f_k\) almost surely. </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:uncorrelated">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_fhatRv_mul">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:var_fhat_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:var_fhat" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.15</span><span class="theorem_thmtitle">Estimation variance of the development factor</span></div>
+    <div class="thm_thmcontent"><p> Under (M3) and (M2’), with the residual products integrable, on \(\{ S_k \neq 0\} \), \(E[(\hat f_k - f_k)^2 \mid \mathcal{D}_k] = \sigma _k^2 / S_k\) (Mack 1993, proof of Theorem 3; Mack 1999, \(\mathrm{s.e.}(\hat f_k)^2 = \hat\sigma _k^2/S_k\)). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:var_fhat">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_sq_fhatRv_sub">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+</div>
+</div> <!-- content -->
+</div> <!-- wrapper -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+
+<script src="js/d3.min.js"></script>
+<script src="js/hpcc.min.js"></script>
+<script src="js/d3-graphviz.js"></script>
+
+<script type="text/javascript">
+const graphContainer = d3.select("#graph");
+const width = graphContainer.node().clientWidth;
+const height = graphContainer.node().clientHeight;
+
+
+graphContainer.graphviz({useWorker: true})
+    .width(width)
+    .height(height)
+    .fit(true)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"lem:weighted"	[color=green,		fillcolor="#1CAC78",		label=weighted,		shape=ellipse,		style=filled];	"lem:Chat_diag"	[color=green,		fillcolor="#1CAC78",		label=Chat_diag,		shape=ellipse,		style=filled];	"lem:msep_sum"	[color=green,		fillcolor="#1CAC78",		label=msep_sum,		shape=ellipse,		style=filled];	"thm:recursion"	[color=green,		fillcolor="#1CAC78",		label=recursion,		shape=ellipse,		style=filled];	"lem:msep_sum" -> "thm:recursion"	[style=dashed];	"lem:Srv_meas"	[color=green,		fillcolor="#1CAC78",		label=Srv_meas,		shape=ellipse,		style=filled];	"thm:unbiased"	[color=green,		fillcolor="#1CAC78",		label=unbiased,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "thm:unbiased"	[style=dashed];	"thm:var_fhat"	[color=green,		fillcolor="#1CAC78",		label=var_fhat,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "thm:var_fhat"	[style=dashed];	"lem:fhat_meas"	[color=green,		fillcolor="#1CAC78",		label=fhat_meas,		shape=ellipse,		style=filled];	"lem:Srv_meas" -> "lem:fhat_meas"	[style=dashed];	"thm:mack1"	[color=green,		fillcolor="#1CAC78",		label=mack1,		shape=ellipse,		style=filled];	"thm:unbiased" -> "thm:mack1"	[style=dashed];	"thm:uncorrelated"	[color=green,		fillcolor="#1CAC78",		label=uncorrelated,		shape=ellipse,		style=filled];	"thm:unbiased" -> "thm:uncorrelated"	[style=dashed];	"thm:sigma2"	[color=blue,		fillcolor="#A3D6FF",		label=sigma2,		shape=ellipse,		style=filled];	"thm:var_fhat" -> "thm:sigma2"	[style=dashed];	"lem:fhat_meas" -> "thm:uncorrelated"	[style=dashed];	"lem:ChatRv_meas"	[color=green,		fillcolor="#1CAC78",		label=ChatRv_meas,		shape=ellipse,		style=filled];	"lem:fhat_meas" -> "lem:ChatRv_meas"	[style=dashed];	"thm:mack2"	[color=green,		fillcolor="#1CAC78",		label=mack2,		shape=ellipse,		style=filled];	"thm:uncorrelated" -> "thm:mack2"	[style=dashed];	"thm:msep"	[label=msep,		shape=ellipse];	"thm:sigma2" -> "thm:msep"	[style=dashed];	"lem:ChatRv_meas" -> "thm:mack1"	[style=dashed];	"lem:C_succ"	[color=green,		fillcolor="#1CAC78",		label=C_succ,		shape=ellipse,		style=filled];	"lem:C_succ" -> "thm:mack1"	[style=dashed];	"def:fhat"	[color=green,		fillcolor="#B0ECA3",		label=fhat,		shape=box,		style=filled];	"def:fhat" -> "lem:weighted"	[style=dashed];	"def:Chat"	[color=green,		fillcolor="#B0ECA3",		label=Chat,		shape=box,		style=filled];	"def:fhat" -> "def:Chat"	[style=dashed];	"def:sigma2"	[color=green,		fillcolor="#B0ECA3",		label=sigma2,		shape=box,		style=filled];	"def:fhat" -> "def:sigma2"	[style=dashed];	"def:rv"	[color=green,		fillcolor="#B0ECA3",		label=rv,		shape=box,		style=filled];	"def:fhat" -> "def:rv"	[style=dashed];	"lem:sq_fhat"	[color=green,		fillcolor="#1CAC78",		label=sq_fhat,		shape=ellipse,		style=filled];	"def:fhat" -> "lem:sq_fhat"	[style=dashed];	"def:Chat" -> "lem:Chat_diag"	[style=dashed];	"def:bf"	[color=green,		fillcolor="#B0ECA3",		label=bf,		shape=box,		style=filled];	"def:Chat" -> "def:bf"	[style=dashed];	"def:mackTerm"	[color=green,		fillcolor="#B0ECA3",		label=mackTerm,		shape=box,		style=filled];	"def:Chat" -> "def:mackTerm"	[style=dashed];	"def:se2rec"	[color=green,		fillcolor="#B0ECA3",		label=se2rec,		shape=box,		style=filled];	"def:Chat" -> "def:se2rec"	[style=dashed];	"def:reserve"	[color=green,		fillcolor="#B0ECA3",		label=reserve,		shape=box,		style=filled];	"def:Chat" -> "def:reserve"	[style=dashed];	"lem:Chat_succ"	[color=green,		fillcolor="#1CAC78",		label=Chat_succ,		shape=ellipse,		style=filled];	"def:Chat" -> "lem:Chat_succ"	[style=dashed];	"def:sigma2" -> "def:mackTerm"	[style=dashed];	"def:sigma2" -> "def:se2rec"	[style=dashed];	"def:msep"	[color=green,		fillcolor="#B0ECA3",		label=msep,		shape=box,		style=filled];	"def:sigma2" -> "def:msep"	[style=dashed];	"def:rv" -> "lem:Srv_meas"	[style=dashed];	"lem:fhat_sub"	[color=green,		fillcolor="#1CAC78",		label=fhat_sub,		shape=ellipse,		style=filled];	"def:rv" -> "lem:fhat_sub"	[style=dashed];	"def:ChatRv"	[color=green,		fillcolor="#B0ECA3",		label=ChatRv,		shape=box,		style=filled];	"def:rv" -> "def:ChatRv"	[style=dashed];	"lem:sq_fhat" -> "thm:sigma2"	[style=dashed];	"lem:bf_linear"	[color=green,		fillcolor="#1CAC78",		label=bf_linear,		shape=ellipse,		style=filled];	"def:bf" -> "lem:bf_linear"	[style=dashed];	"lem:bf_frac"	[color=green,		fillcolor="#1CAC78",		label=bf_frac,		shape=ellipse,		style=filled];	"def:bf" -> "lem:bf_frac"	[style=dashed];	"thm:bf_cl"	[color=green,		fillcolor="#1CAC78",		label=bf_cl,		shape=ellipse,		style=filled];	"def:bf" -> "thm:bf_cl"	[style=dashed];	"def:mackTerm" -> "lem:msep_sum"	[style=dashed];	"lem:se2rec_closed"	[color=green,		fillcolor="#1CAC78",		label=se2rec_closed,		shape=ellipse,		style=filled];	"def:mackTerm" -> "lem:se2rec_closed"	[style=dashed];	"def:se2rec" -> "lem:se2rec_closed"	[style=dashed];	"def:reserve" -> "thm:bf_cl"	[style=dashed];	"def:reserve" -> "def:msep"	[style=dashed];	"lem:oldest"	[color=green,		fillcolor="#1CAC78",		label=oldest,		shape=ellipse,		style=filled];	"def:reserve" -> "lem:oldest"	[style=dashed];	"lem:Chat_succ" -> "lem:se2rec_closed"	[style=dashed];	"def:msep" -> "lem:msep_sum"	[style=dashed];	"def:msep" -> "thm:msep"	[style=dashed];	"lem:se2rec_closed" -> "thm:recursion"	[style=dashed];	"lem:fhat_sub" -> "thm:var_fhat"	[style=dashed];	"def:ChatRv" -> "lem:ChatRv_meas"	[style=dashed];	"lem:T"	[color=green,		fillcolor="#1CAC78",		label=T,		shape=ellipse,		style=filled];	"lem:sq"	[color=green,		fillcolor="#1CAC78",		label=sq,		shape=ellipse,		style=filled];	"lem:T" -> "lem:sq"	[style=dashed];	"lem:sq" -> "lem:sq_fhat"	[style=dashed];	"def:RandomTriangle"	[color=green,		fillcolor="#B0ECA3",		label=RandomTriangle,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:rv"	[style=dashed];	"def:Mack1"	[color=green,		fillcolor="#B0ECA3",		label=Mack1,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:Mack1"	[style=dashed];	"def:Mack3"	[color=green,		fillcolor="#B0ECA3",		label=Mack3,		shape=box,		style=filled];	"def:RandomTriangle" -> "def:Mack3"	[style=dashed];	"def:Mack1" -> "thm:unbiased"	[style=dashed];	"def:Mack1" -> "lem:C_succ"	[style=dashed];	"def:Mack3" -> "lem:fhat_sub"	[style=dashed];	"thm:mack2" -> "thm:sigma2"	[style=dashed];	"def:contributors"	[color=green,		fillcolor="#B0ECA3",		label=contributors,		shape=box,		style=filled];	"def:S"	[color=green,		fillcolor="#B0ECA3",		label=S,		shape=box,		style=filled];	"def:contributors" -> "def:S"	[style=dashed];	"def:S" -> "def:fhat"	[style=dashed];	"def:S" -> "lem:T"	[style=dashed];	"def:F"	[color=green,		fillcolor="#B0ECA3",		label=F,		shape=box,		style=filled];	"def:F" -> "lem:weighted"	[style=dashed];	"def:F" -> "def:sigma2"	[style=dashed];	"def:F" -> "lem:T"	[style=dashed];}`)
+    .on("end", interactive);
+
+latexLabelEscaper = function(label) {
+  return label.replace(/\./g, '\\.').replace(/:/g, '\\:')
+}
+
+clickNode = function() {
+  $("#statements div").hide()
+  var node_id = $('text', this).text();
+  $('.thm').hide();
+  $('#'+latexLabelEscaper(node_id)).show().children().show();
+}
+function interactive() {
+    $("span#legend_title").on("click", function () {
+           $(this).siblings('dl').toggle();
+        })
+
+    d3.selectAll('.node')
+        .attr('pointer-events', 'fill')
+        .on('click', function () {
+           var title = d3.select(this).selectAll('title').text().trim();
+           $('#statements > div').hide()
+           $('.thm').hide();
+           $('#'+latexLabelEscaper(title)+'_modal').show().children().show().children().show();
+           $('#statements').show()
+        });
+
+    d3.selectAll('.dep-closebtn').on('click', function() {
+        var modal =
+            d3.select(this).node().parentNode.parentNode.parentNode ;
+        d3.select(modal).style('display', 'none');
+    });
+}
+
+</script>
+
+</body>
+</html>
