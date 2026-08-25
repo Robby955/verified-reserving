@@ -1,11 +1,12 @@
-% Printable version of the blueprint. Build with `leanblueprint pdf`.
+% Printable version of the blueprint. Build with `leanblueprint pdf` (pdflatex).
 \documentclass[a4paper]{report}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath, amssymb, amsthm}
 \usepackage{geometry}
-\usepackage{hyperref}
+\usepackage{expl3}
+\usepackage{amssymb, amsthm, mathtools}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=magenta,citecolor=blue]{hyperref}
 \usepackage{blueprint}
 
 \input{macros/common}
@@ -16,5 +17,6 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 \input{content}
 \end{document}
