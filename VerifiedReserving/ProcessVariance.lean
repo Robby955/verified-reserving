@@ -33,13 +33,13 @@ variable {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} {n : ℕ}
 
 /-- (M1) says the residual has conditional mean zero. -/
 theorem condExp_eps [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ → ℝ) (i k : ℕ)
-    (hM : Mack1 X μ f) (hC1 : Integrable (X.C i (k + 1)) μ) (hC0 : Integrable (X.C i k) μ) :
+    (hi : i < n) (hM : Mack1 X μ f) (hC1 : Integrable (X.C i (k + 1)) μ) (hC0 : Integrable (X.C i k) μ) :
     μ[X.eps f i k | X.D k] =ᵐ[μ] fun _ => 0 := by
   have heq : X.eps f i k = X.C i (k + 1) - (f k) • X.C i k := by
     ext ω; simp [RandomTriangle.eps, smul_eq_mul]
   rw [heq]
   refine (condExp_sub hC1 (hC0.smul (f k)) (X.D k)).trans ?_
-  have h1 := hM i k
+  have h1 := hM i hi k
   have h2 : μ[(f k) • X.C i k | X.D k] =ᵐ[μ] (f k) • μ[X.C i k | X.D k] :=
     condExp_smul (f k) (X.C i k) (X.D k)
   have h3 : μ[X.C i k | X.D k] =ᵐ[μ] X.C i k := by
@@ -51,7 +51,7 @@ theorem condExp_eps [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ → 
 /-- **Conditional second moment.** Under (M1) and (M3),
 `E[C_{i,k+1}² | D_k] = f_k² C_{i,k}² + σ_k² C_{i,k}`. -/
 theorem condExp_sq_C_succ [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ → ℝ) (σ2 : ℕ → ℝ)
-    (i k : ℕ) (hM : Mack1 X μ f) (h3 : Mack3 X μ f σ2)
+    (i k : ℕ) (hi : i < n) (hM : Mack1 X μ f) (h3 : Mack3 X μ f σ2)
     (hC1 : Integrable (X.C i (k + 1)) μ) (hC0 : Integrable (X.C i k) μ)
     (hε2 : Integrable (fun ω => (X.eps f i k ω) ^ 2) μ)
     (hCε : Integrable (fun ω => X.C i k ω * X.eps f i k ω) μ)
@@ -76,26 +76,26 @@ theorem condExp_sq_C_succ [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : �
   -- the cross term: C_{i,k} comes out, E[ε | D_k] = 0
   have hB' : μ[(2 * f k) • fun ω => X.C i k ω * X.eps f i k ω | X.D k] =ᵐ[μ] fun _ => 0 := by
     refine (condExp_smul _ _ _).trans ?_
-    have hε0 := condExp_eps X f i k hM hC1 hC0
+    have hε0 := condExp_eps X f i k hi hM hC1 hC0
     have hεint : Integrable (X.eps f i k) μ := hC1.sub (hC0.const_mul _)
     have hmul : μ[fun ω => X.C i k ω * X.eps f i k ω | X.D k] =ᵐ[μ] X.C i k * μ[X.eps f i k | X.D k] :=
       condExp_mul_of_stronglyMeasurable_left (X.meas i k k le_rfl) hCε hεint
     filter_upwards [hmul, hε0] with ω hω1 hω2
     simp [Pi.smul_apply, hω1, Pi.mul_apply, hω2]
-  filter_upwards [hAB, hA', hB', h3 i k] with ω h1 h2 h3' h4
+  filter_upwards [hAB, hA', hB', h3 i hi k] with ω h1 h2 h3' h4
   simp only [Pi.add_apply, h1, h2, h3', h4]
   ring
 
 /-- Iterated (M1) for the tower step used below: `E[C_{i,k+1} | D_d] = f_k E[C_{i,k} | D_d]`. -/
 theorem condExp_C_succ' [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ → ℝ) (i d k : ℕ)
-    (hdk : d ≤ k) (hM : Mack1 X μ f) :
+    (hi : i < n) (hdk : d ≤ k) (hM : Mack1 X μ f) :
     μ[X.C i (k + 1) | X.D d] =ᵐ[μ] fun ω => f k * (μ[X.C i k | X.D d]) ω :=
-  condExp_C_succ X f i d k hdk hM
+  condExp_C_succ X f i d k hi hdk hM
 
 /-- **Second-moment recursion down to `D_d`.** For `d ≤ k`, under (M1) and (M3),
 `E[C_{i,k+1}² | D_d] = f_k² E[C_{i,k}² | D_d] + σ_k² E[C_{i,k} | D_d]`. -/
 theorem condExp_sq_C_succ_tower [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ → ℝ)
-    (σ2 : ℕ → ℝ) (i d k : ℕ) (hdk : d ≤ k) (hM : Mack1 X μ f) (h3 : Mack3 X μ f σ2)
+    (σ2 : ℕ → ℝ) (i d k : ℕ) (hi : i < n) (hdk : d ≤ k) (hM : Mack1 X μ f) (h3 : Mack3 X μ f σ2)
     (hC1 : Integrable (X.C i (k + 1)) μ) (hC0 : Integrable (X.C i k) μ)
     (hε2 : Integrable (fun ω => (X.eps f i k ω) ^ 2) μ)
     (hCε : Integrable (fun ω => X.C i k ω * X.eps f i k ω) μ)
@@ -109,7 +109,7 @@ theorem condExp_sq_C_succ_tower [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (
     (condExp_condExp_of_le hle (X.D_le k)).symm
   have h2 : μ[μ[fun ω => (X.C i (k + 1) ω) ^ 2 | X.D k] | X.D d]
       =ᵐ[μ] μ[(fun ω => (f k) ^ 2 * (X.C i k ω) ^ 2) + (σ2 k) • X.C i k | X.D d] := by
-    refine condExp_congr_ae ((condExp_sq_C_succ X f σ2 i k hM h3 hC1 hC0 hε2 hCε hC0sq).trans ?_)
+    refine condExp_congr_ae ((condExp_sq_C_succ X f σ2 i k hi hM h3 hC1 hC0 hε2 hCε hC0sq).trans ?_)
     exact Eventually.of_forall fun ω => by simp [Pi.add_apply, Pi.smul_apply, smul_eq_mul]
   have hA : Integrable (fun ω => (f k) ^ 2 * (X.C i k ω) ^ 2) μ := hC0sq.const_mul _
   have h3' := condExp_add hA (hC0.smul (σ2 k)) (X.D d)

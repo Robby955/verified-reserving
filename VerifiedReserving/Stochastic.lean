@@ -52,7 +52,7 @@ def RandomTriangle.at (X : RandomTriangle Ω n) (ω : Ω) : ℕ → ℕ → ℝ 
 /-- Mack's first assumption in the `D_k`-conditioned form:
 `E[C_{i,k+1} | D_k] = f_k C_{i,k}` almost surely. -/
 def Mack1 (X : RandomTriangle Ω n) (μ : Measure Ω) (f : ℕ → ℝ) : Prop :=
-  ∀ i k, μ[X.C i (k + 1) | X.D k] =ᵐ[μ] fun ω => f k * X.C i k ω
+  ∀ i, i < n → ∀ k, μ[X.C i (k + 1) | X.D k] =ᵐ[μ] fun ω => f k * X.C i k ω
 
 /-- The column sum `S_k` as a random variable. -/
 def RandomTriangle.Srv (X : RandomTriangle Ω n) (k : ℕ) : Ω → ℝ :=
@@ -107,8 +107,8 @@ theorem condExp_fhatRv (X : RandomTriangle Ω n) (f : ℕ → ℝ) (k : ℕ)
     have hall : ∀ᵐ ω ∂μ, ∀ i ∈ contributors n k,
         μ[X.C i (k + 1) | X.D k] ω = f k * X.C i k ω := by
       rw [eventually_all_finset]
-      intro i _
-      exact hM i k
+      intro i hi
+      exact hM i (lt_of_mem_contributors hi) k
     refine hsum.trans ?_
     filter_upwards [hall] with ω hω
     rw [Finset.sum_apply, Finset.sum_congr rfl (fun i hi => hω i hi), X.Srv_eq_sum,

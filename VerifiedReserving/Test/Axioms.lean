@@ -65,3 +65,8 @@ set_option format.width 400
 #print axioms bbmwEstimation_sub_mackEstimation_le
 #print axioms mackEstimation_lt_bbmwEstimation_Cex
 #print axioms exists_mackEstimation_lt_bbmwEstimation
+#print axioms NontrivialModel.exists_nontrivial_mack_model
+#print axioms NontrivialModel.fhat0_unbiased
+#print axioms NontrivialModel.ultimate_unbiased
+#print axioms NontrivialModel.var_fhat0
+#print axioms NontrivialModel.sigma2_unbiased

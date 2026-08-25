@@ -427,6 +427,26 @@ is $\hat C^2 a_0 a_1 > 0$. Every number is checked by \texttt{norm\_num} from th
 \end{theorem}
 \begin{proof}\leanok Evaluate the definitions on the triangle; apply Theorem~\ref{thm:catalogue}(ii). \end{proof}
 
+\chapter{Non-vacuity: a nondegenerate model}
+
+\begin{theorem}[A nondegenerate Mack model exists]\label{thm:nontrivial}\lean{VerifiedReserving.NontrivialModel.X, VerifiedReserving.NontrivialModel.exists_nontrivial_mack_model}\leanok
+\uses{def:Mack1, def:Mack3}
+There is a probability space, a random triangle with three accident years, and constants
+$f_k$, $\sigma_k^2$ with $\sigma_0^2 > 0$, satisfying (M1), (M3) and (M2'), in which the first
+development step is genuinely random. The model: eight equally likely outcomes, an independent
+$\pm 1$ shock per accident year, $C_{i,0} = c$ and $C_{i,k} = c f^k (1 + s\,\xi_i)$ for $k \ge 1$,
+with $\mathcal{D}_0$ trivial and $\mathcal{D}_k$ everything for $k \ge 1$.
+\end{theorem}
+\begin{proof}\leanok Conditional expectations given the trivial $\sigma$-algebra are eight-term averages; the shocks sum to zero, have unit square, and are orthogonal. \end{proof}
+
+\begin{theorem}[Headline theorems instantiated]\label{thm:instantiated}\lean{VerifiedReserving.NontrivialModel.fhat0_unbiased, VerifiedReserving.NontrivialModel.ultimate_unbiased, VerifiedReserving.NontrivialModel.var_fhat0, VerifiedReserving.NontrivialModel.sigma2_unbiased}\leanok
+\uses{thm:nontrivial, thm:unbiased, thm:mack1, thm:var_fhat, thm:sigma2}
+On that model, $E[\hat f_0 \mid \mathcal{D}_0] = 2$ although $\hat f_0$ is random;
+$E[\hat C_{2,2} \mid \mathcal{D}_0] = E[C_{2,2} \mid \mathcal{D}_0]$;
+$E[(\hat f_0 - 2)^2 \mid \mathcal{D}_0] = \sigma_0^2 / S_0$; and $E[\hat\sigma_0^2 \mid \mathcal{D}_0] = \sigma_0^2 = 4$.
+\end{theorem}
+\begin{proof}\leanok Direct instantiation of the general theorems; every hypothesis is discharged. \end{proof}
+
 \chapter{Reference computation}
 
 Mack's 1993 example (the Taylor and Ashe 1983 triangle) is reproduced to every printed digit

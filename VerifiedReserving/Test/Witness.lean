@@ -53,7 +53,7 @@ theorem condExp_top (g : Ω → ℝ) : μ[g | (⊤ : MeasurableSpace Ω)] =ᵐ[�
   exact EventuallyEq.of_eq (condExp_of_stronglyMeasurable le_top hg (integrable_all g))
 
 theorem mack1 (n : ℕ) : Mack1 (X n) μ f := by
-  intro i k
+  intro i _ k
   refine (condExp_top _).trans (Eventually.of_forall fun ω => ?_)
   simp only [X, f]
   ring
@@ -62,12 +62,12 @@ theorem eps_zero (n : ℕ) (i k : ℕ) : (X n).eps f i k = fun _ => 0 := by
   ext ω; simp only [RandomTriangle.eps, X, f]; ring
 
 theorem mack3 (n : ℕ) : Mack3 (X n) μ f σ2 := by
-  intro i k
+  intro i _ k
   refine (condExp_top _).trans (Eventually.of_forall fun ω => ?_)
   simp [eps_zero, σ2]
 
 theorem mack2' (n : ℕ) : Mack2' (X n) μ f := by
-  intro i j k _
+  intro k i _ j _ _
   refine (condExp_top _).trans (Eventually.of_forall fun ω => ?_)
   simp [eps_zero]
 
@@ -88,7 +88,7 @@ theorem fhat_unbiased (n k : ℕ) (hk : k + 2 ≤ n) :
 
 /-- **Instantiated Theorem 1.** On the witness the chain-ladder ultimate is a
 conditionally unbiased predictor of the true ultimate. -/
-theorem ultimate_unbiased (n i : ℕ) (hi : i ≤ n - 1) :
+theorem ultimate_unbiased (n i : ℕ) (hi : i < n) :
     μ[(X n).ChatRv i i | (X n).D (n - 1 - i)] =ᵐ[μ] μ[(X n).C i (n - 1) | (X n).D (n - 1 - i)] :=
   condExp_ultimate_eq (X n) f i hi (mack1 n) (fun k hk => Srv_ne_zero n k hk)
     (fun _ _ => integrable_all _) (fun _ => integrable_all _) (fun _ => integrable_all _)

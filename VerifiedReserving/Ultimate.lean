@@ -59,12 +59,12 @@ theorem RandomTriangle.stronglyMeasurable_ChatRv (X : RandomTriangle Ω n) (i m 
 
 /-- Iterating (M1): `E[C_{i,k+1} | D_d] = f_k E[C_{i,k} | D_d]` for `d ≤ k`. -/
 theorem condExp_C_succ [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ → ℝ) (i d k : ℕ)
-    (hdk : d ≤ k) (hM : Mack1 X μ f) :
+    (hi : i < n) (hdk : d ≤ k) (hM : Mack1 X μ f) :
     μ[X.C i (k + 1) | X.D d] =ᵐ[μ] fun ω => f k * (μ[X.C i k | X.D d]) ω := by
   have h1 : μ[X.C i (k + 1) | X.D d] =ᵐ[μ] μ[μ[X.C i (k + 1) | X.D k] | X.D d] :=
     (condExp_condExp_of_le (X.D_mono hdk) (X.D_le k)).symm
   have h2 : μ[μ[X.C i (k + 1) | X.D k] | X.D d] =ᵐ[μ] μ[(f k) • X.C i k | X.D d] := by
-    refine condExp_congr_ae ((hM i k).trans ?_)
+    refine condExp_congr_ae ((hM i hi k).trans ?_)
     exact Eventually.of_forall fun ω => by simp [Pi.smul_apply, smul_eq_mul]
   have h3 : μ[(f k) • X.C i k | X.D d] =ᵐ[μ] (f k) • μ[X.C i k | X.D d] :=
     condExp_smul (f k) (X.C i k) (X.D d)
@@ -73,7 +73,7 @@ theorem condExp_C_succ [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ �
 
 /-- `E[C_{i,d+m} | D_d] = C_{i,d} ∏_{k ∈ [d,d+m)} f_k` under (M1). -/
 theorem condExp_C_of_Mack1 [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ → ℝ) (i : ℕ) (m : ℕ)
-    (hM : Mack1 X μ f)
+    (hi : i < n) (hM : Mack1 X μ f)
     (hint : ∀ j, Integrable (X.C i j) μ) :
     μ[X.C i (n - 1 - i + m) | X.D (n - 1 - i)]
       =ᵐ[μ] fun ω => X.C i (n - 1 - i) ω * ∏ k ∈ Ico (n - 1 - i) (n - 1 - i + m), f k := by
@@ -83,7 +83,7 @@ theorem condExp_C_of_Mack1 [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : �
     refine (condExp_of_stronglyMeasurable (X.D_le _) hmeas (hint _)).symm ▸ ?_
     exact Eventually.of_forall fun ω => by simp
   | succ m ih =>
-    have h := condExp_C_succ X f i (n - 1 - i) (n - 1 - i + m) (Nat.le_add_right _ _) hM
+    have h := condExp_C_succ X f i (n - 1 - i) (n - 1 - i + m) hi (Nat.le_add_right _ _) hM
     rw [show n - 1 - i + (m + 1) = n - 1 - i + m + 1 from rfl]
     refine h.trans ?_
     filter_upwards [ih] with ω hω
@@ -95,7 +95,7 @@ theorem condExp_C_of_Mack1 [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : �
 partial products are integrable and each column sum along the row is a.s.
 nonzero. -/
 theorem condExp_ChatRv [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ → ℝ) (i : ℕ) (m : ℕ)
-    (hi : i ≤ n - 1) (hm : m ≤ i) (hM : Mack1 X μ f)
+    (hi : i < n) (hm : m ≤ i) (hM : Mack1 X μ f)
     (hS : ∀ k, k + 2 ≤ n → ∀ᵐ ω ∂μ, X.Srv k ω ≠ 0)
     (hC : ∀ j k, Integrable (X.C j k) μ)
     (hf : ∀ k, Integrable (X.fhatRv k) μ)
@@ -138,15 +138,15 @@ theorem condExp_ChatRv [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ �
 `Ĉ_{i,n-1} = C_{i,d} ∏_{k=d}^{n-2} f̂_k` is a conditionally unbiased estimator of
 the true ultimate: `E[Ĉ_{i,n-1} | D_d] = E[C_{i,n-1} | D_d]`, for `i ≤ n-1`. -/
 theorem condExp_ultimate_eq [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ → ℝ) (i : ℕ)
-    (hi : i ≤ n - 1) (hM : Mack1 X μ f)
+    (hi : i < n) (hM : Mack1 X μ f)
     (hS : ∀ k, k + 2 ≤ n → ∀ᵐ ω ∂μ, X.Srv k ω ≠ 0)
     (hC : ∀ j k, Integrable (X.C j k) μ)
     (hf : ∀ k, Integrable (X.fhatRv k) μ)
     (hprod : ∀ m', Integrable (X.ChatRv i m') μ) :
     μ[X.ChatRv i i | X.D (n - 1 - i)] =ᵐ[μ] μ[X.C i (n - 1) | X.D (n - 1 - i)] := by
-  have hd : n - 1 - i + i = n - 1 := Nat.sub_add_cancel hi
+  have hd : n - 1 - i + i = n - 1 := by omega
   have h1 := condExp_ChatRv X f i i hi le_rfl hM hS hC hf hprod
-  have h2 := condExp_C_of_Mack1 X f i i hM (fun j => hC i j)
+  have h2 := condExp_C_of_Mack1 X f i i hi hM (fun j => hC i j)
   rw [hd] at h1 h2
   exact h1.trans h2.symm
 

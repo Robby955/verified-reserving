@@ -61,7 +61,7 @@ variable {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} {n : ℕ}
 claims, their squares, the residual squares and the cross terms,
 `E[C_{i,d+m}² | D_d] - (E[C_{i,d+m} | D_d])² = procVar C_{i,d} f σ² d m` for `d = n-1-i`. -/
 theorem condVar_C_eq_procVar [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ → ℝ) (σ2 : ℕ → ℝ)
-    (i m : ℕ) (hM : Mack1 X μ f) (h3 : Mack3 X μ f σ2)
+    (i m : ℕ) (hi : i < n) (hM : Mack1 X μ f) (h3 : Mack3 X μ f σ2)
     (hC : ∀ k, Integrable (X.C i k) μ)
     (hCsq : ∀ k, Integrable (fun ω => (X.C i k ω) ^ 2) μ)
     (hε2 : ∀ k, Integrable (fun ω => (X.eps f i k ω) ^ 2) μ)
@@ -84,10 +84,10 @@ theorem condVar_C_eq_procVar [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f :
     rw [hω1, hω2]
     ring
   | succ m ih =>
-    have hrec := condExp_sq_C_succ_tower X f σ2 i d (d + m) (Nat.le_add_right _ _) hM h3
+    have hrec := condExp_sq_C_succ_tower X f σ2 i d (d + m) hi (Nat.le_add_right _ _) hM h3
       (hC _) (hC _) (hε2 _) (hCε _) (hCsq _)
-    have hmean := condExp_C_succ X f i d (d + m) (Nat.le_add_right _ _) hM
-    have hM := condExp_C_of_Mack1 X f i m hM hC
+    have hmean := condExp_C_succ X f i d (d + m) hi (Nat.le_add_right _ _) hM
+    have hM := condExp_C_of_Mack1 X f i m hi hM hC
     rw [show d + (m + 1) = d + m + 1 from rfl]
     filter_upwards [hrec, hmean, ih, hM] with ω h1 h2 h3' h4
     rw [h1, h2, procVar]
@@ -166,7 +166,7 @@ theorem condMsep_eq [IsFiniteMeasure μ] (X : RandomTriangle Ω n)
     (hfut1 : μ[X.C i (n - 1 - i + m) | D] =ᵐ[μ] μ[X.C i (n - 1 - i + m) | X.D (n - 1 - i)])
     (hfut2 : μ[fun ω => (X.C i (n - 1 - i + m) ω) ^ 2 | D]
       =ᵐ[μ] μ[fun ω => (X.C i (n - 1 - i + m) ω) ^ 2 | X.D (n - 1 - i)])
-    (hM : Mack1 X μ f) (h3 : Mack3 X μ f σ2)
+    (hi : i < n) (hM : Mack1 X μ f) (h3 : Mack3 X μ f σ2)
     (hC : ∀ k, Integrable (X.C i k) μ)
     (hCsq : ∀ k, Integrable (fun ω => (X.C i k ω) ^ 2) μ)
     (hε2 : ∀ k, Integrable (fun ω => (X.eps f i k ω) ^ 2) μ)
@@ -178,8 +178,8 @@ theorem condMsep_eq [IsFiniteMeasure μ] (X : RandomTriangle Ω n)
           + (X.ChatRv i m ω - X.C i (n - 1 - i) ω * ∏ l ∈ Ico (n - 1 - i) (n - 1 - i + m), f l) ^ 2 := by
   have hdec := condExp_sq_sub_of_stronglyMeasurable hD (X.ChatRv i m)
     (X.C i (n - 1 - i + m)) hPmeas (hC _) (hCsq _) hP2 hPY
-  have hpv := condVar_C_eq_procVar X f σ2 i m hM h3 hC hCsq hε2 hCε
-  have hmean := condExp_C_of_Mack1 X f i m hM hC
+  have hpv := condVar_C_eq_procVar X f σ2 i m hi hM h3 hC hCsq hε2 hCε
+  have hmean := condExp_C_of_Mack1 X f i m hi hM hC
   refine hdec.trans ?_
   filter_upwards [hpv, hmean, hfut1, hfut2] with ω h1 h2 h3' h4
   rw [h3', h4, h1, h2]

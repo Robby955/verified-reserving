@@ -107,7 +107,7 @@ theorem condExp_wssRv [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f : ℕ �
         (hε i i).congr (Eventually.of_forall fun ω => by simp [sq])
       rw [heq]
       refine (condExp_mul_of_stronglyMeasurable_left hCmeas (by rw [← heq]; exact hεC i) hε2).trans ?_
-      filter_upwards [h3 i k, hC i hi] with ω hω hCω
+      filter_upwards [h3 i (lt_of_mem_contributors hi) k, hC i hi] with ω hω hCω
       simp only [Pi.mul_apply, hω]
       field_simp
     have hall' : ∀ᵐ ω ∂μ, ∀ i ∈ s,

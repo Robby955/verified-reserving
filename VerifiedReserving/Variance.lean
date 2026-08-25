@@ -36,12 +36,13 @@ def RandomTriangle.eps (X : RandomTriangle Ω n) (f : ℕ → ℝ) (i k : ℕ) :
 
 /-- Mack's third assumption, `D_k`-conditioned form. -/
 def Mack3 (X : RandomTriangle Ω n) (μ : Measure Ω) (f : ℕ → ℝ) (σ2 : ℕ → ℝ) : Prop :=
-  ∀ i k, μ[fun ω => (X.eps f i k ω) ^ 2 | X.D k] =ᵐ[μ] fun ω => σ2 k * X.C i k ω
+  ∀ i, i < n → ∀ k, μ[fun ω => (X.eps f i k ω) ^ 2 | X.D k] =ᵐ[μ] fun ω => σ2 k * X.C i k ω
 
 /-- Conditional uncorrelatedness of residuals across accident years (what
 independence across accident years contributes). -/
 def Mack2' (X : RandomTriangle Ω n) (μ : Measure Ω) (f : ℕ → ℝ) : Prop :=
-  ∀ i j k, i ≠ j → μ[fun ω => X.eps f i k ω * X.eps f j k ω | X.D k] =ᵐ[μ] fun _ => 0
+  ∀ k, ∀ i ∈ contributors n k, ∀ j ∈ contributors n k, i ≠ j →
+    μ[fun ω => X.eps f i k ω * X.eps f j k ω | X.D k] =ᵐ[μ] fun _ => 0
 
 /-- `f̂_k - f_k = S_k⁻¹ ∑_i ε_{i,k}` pointwise. -/
 theorem RandomTriangle.fhatRv_sub_eq (X : RandomTriangle Ω n) (f : ℕ → ℝ) (k : ℕ) (ω : Ω)
@@ -108,14 +109,14 @@ theorem condExp_sq_fhatRv_sub [IsFiniteMeasure μ] (X : RandomTriangle Ω n) (f 
       refine hs.trans ?_
       have hterm : ∀ j ∈ s, μ[fun ω => X.eps f i k ω * X.eps f j k ω | X.D k]
           =ᵐ[μ] fun ω => if j = i then σ2 k * X.C i k ω else 0 := by
-        intro j _
+        intro j hj
         by_cases hij : j = i
         · subst hij
           have e1 : (fun ω => X.eps f j k ω * X.eps f j k ω) = fun ω => (X.eps f j k ω) ^ 2 := by
             ext ω; ring
           rw [e1]
-          exact (h3 j k).trans (Eventually.of_forall fun ω => by simp)
-        · exact (h2 i j k (Ne.symm hij)).trans (Eventually.of_forall fun ω => by simp [hij])
+          exact (h3 j (lt_of_mem_contributors hi) k).trans (Eventually.of_forall fun ω => by simp)
+        · exact (h2 k i hi j hj (Ne.symm hij)).trans (Eventually.of_forall fun ω => by simp [hij])
       have hall : ∀ᵐ ω ∂μ, ∀ j ∈ s,
           (μ[fun ω => X.eps f i k ω * X.eps f j k ω | X.D k]) ω
             = if j = i then σ2 k * X.C i k ω else 0 := by

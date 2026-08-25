@@ -29,6 +29,11 @@ noncomputable section
 `i = 0, …, n-k-2`, i.e. those with `C i (k+1)` observed. -/
 def contributors (n k : ℕ) : Finset ℕ := range (n - k - 1)
 
+theorem lt_of_mem_contributors {n k i : ℕ} (h : i ∈ contributors n k) : i < n := by
+  unfold contributors at h
+  have := Finset.mem_range.mp h
+  omega
+
 /-- Column sum `S_k = ∑_{i ≤ n-k-2} C_{i,k}` (the denominator of `f̂_k`). -/
 def S (C : ℕ → ℕ → ℝ) (n k : ℕ) : ℝ := ∑ i ∈ contributors n k, C i k
 
