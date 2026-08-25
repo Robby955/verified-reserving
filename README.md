@@ -64,7 +64,7 @@ Merz-Wüthrich one-year uncertainty (`VerifiedReserving/CDRMsep.lean`). What a S
 
 Mack's 1993 example as kernel-checked arithmetic (`VerifiedReserving/Mack1993Table1.lean`). The Taylor and Ashe triangle is a Lean definition; the nine development factors and the eight estimable variance parameters of Mack (1993) are proved equal to exact rationals from `fhat` and `sigma2` by `norm_num`, and the total reserve is proved to round to Mack's 18,681 thousand. The extrapolated last variance parameter is a convention and is not asserted (Mack's printed value for it, 0.477, is a misprint; his rule and his printed standard errors give 0.447).
 
-Two hundred and fifty-six theorems as of 2026-08-25. What is left in [ROADMAP.md](ROADMAP.md) is no longer the core of the model: a witness satisfying the independence and generation hypotheses of `Independence.lean`, Röhr's 2016 linearized variant as a further catalogue row, and a tail factor. Each entry names the mathlib tools it needs and is a self-contained contribution.
+Two hundred and sixty-five theorems as of 2026-08-25. What is left in [ROADMAP.md](ROADMAP.md) is no longer the core of the model: a witness satisfying the independence and generation hypotheses of `Independence.lean`, Röhr's 2016 linearized variant as a further catalogue row, and a tail factor. Each entry names the mathlib tools it needs and is a self-contained contribution.
 ## Theorem map
 
 Where each statement of Mack (1993, 1999) and its variants lives in the library. Every name below is audited by `VerifiedReserving/Test/Axioms.lean` on each push.

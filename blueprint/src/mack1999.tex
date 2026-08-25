@@ -68,7 +68,7 @@ $\hat C_{ik} = C_{i,n-1-i}\prod_{j=n-1-i}^{k-1}\hat f_j$ and $\hat C_{i,n-1}$, b
 the weighted factors.
 \end{definition}
 
-\begin{definition}[Mack 1999, equation $(*)$]\label{def:mwMsep}\lean{VerifiedReserving.mackTermW, VerifiedReserving.msepW}\leanok
+\begin{definition}[Mack 1999, equation $(*)$]\label{def:msepW}\lean{VerifiedReserving.mackTermW, VerifiedReserving.msepW}\leanok
 \uses{def:mwChat, def:mwFhat}
 \[
   \mathrm{msepW}_i
@@ -115,7 +115,7 @@ Lemmas~\ref{lem:sq} and~\ref{lem:sq_fhat}, the identity behind the $n-k-2$ degre
 \begin{proof}\leanok Expand termwise; substitute $\hat f_k = T_k^{w,\alpha}/S_k^{w,\alpha}$. \end{proof}
 
 \begin{lemma}[Weighted projection identities]\label{lem:mwChat}\lean{VerifiedReserving.ChatW_succ, VerifiedReserving.ChatW_diag, VerifiedReserving.msepW_eq_sum_mackTermW}\leanok
-\uses{def:mwChat, def:mwMsep}
+\uses{def:mwChat, def:msepW}
 $\hat C_{i,k+1} = \hat C_{ik}\hat f_k$ for $k \ge n-1-i$, $\hat C_{i,n-1-i} = C_{i,n-1-i}$, and
 $(*)$ is the ultimate squared times the sum of its summands.
 \end{lemma}
@@ -136,7 +136,7 @@ scaled by the next projection. Only $\hat f_k \neq 0$ is used.
 \begin{proof}\leanok Clear the $f^2$ and expand. \end{proof}
 
 \begin{lemma}[Truncated form]\label{lem:mwClosed}\lean{VerifiedReserving.se2recW_eq_closed}\leanok
-\uses{def:mwRec, def:mwMsep, lem:mwStep, lem:mwChat}
+\uses{def:mwRec, def:msepW, lem:mwStep, lem:mwChat}
 If $\hat f_k \neq 0$ for $k = n-1-i, \dots, n-2-i+m$, then $m$ steps of the recursion equal
 $\hat C_{i,n-1-i+m}^2 \sum_{k=n-1-i}^{n-2-i+m}$ of the summands of $(*)$.
 \end{lemma}
