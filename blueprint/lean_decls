@@ -52,3 +52,8 @@ VerifiedReserving.Mack2'
 VerifiedReserving.RandomTriangle.fhatRv_sub_eq
 VerifiedReserving.RandomTriangle.sq_fhatRv_sub
 VerifiedReserving.condExp_sq_fhatRv_sub
+VerifiedReserving.weighted_sq_dev_eps
+VerifiedReserving.RandomTriangle.sigma2Rv
+VerifiedReserving.RandomTriangle.wssRv
+VerifiedReserving.condExp_wssRv
+VerifiedReserving.condExp_sigma2Rv

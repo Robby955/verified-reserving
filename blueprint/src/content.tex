@@ -307,17 +307,36 @@ $S_k^{-2}$ is $\mathcal{D}_k$-measurable and comes out; conditional expectation 
 double sum; cross terms vanish by (M2'); diagonal terms give $\sigma_k^2\sum_i C_{i,k} = \sigma_k^2 S_k$.
 \end{proof}
 
-\section{Open: variance estimator and the MSEP theorem}
+\section{Unbiasedness of the variance estimator}
 
-\begin{theorem}[Unbiasedness of the variance estimator]\label{thm:sigma2}
-\uses{def:Mack3, thm:mack2, thm:var_fhat, lem:sq_fhat}
-Under (M1) and (M3), $E[\hat\sigma_k^2 \mid \mathcal{D}_k] = \sigma_k^2$ for $k \le n-3$.
+\begin{lemma}[Sum of squares around $\hat f_k$ via residuals]\label{lem:sq_eps}\lean{VerifiedReserving.weighted_sq_dev_eps}\leanok
+\uses{lem:sq, def:fhat}
+With all contributing $C_{i,k} \neq 0$ and $S_k \neq 0$, for any $f$,
+$\sum_i C_{i,k}(F_{i,k} - \hat f_k)^2 = \sum_i \varepsilon_{i}^2 / C_{i,k} - S_k(\hat f_k - f)^2$
+where $\varepsilon_i = C_{i,k+1} - f C_{i,k}$.
+\end{lemma}
+\begin{proof}\leanok Two instances of Lemma~\ref{lem:sq} (centres $\hat f_k$ and $f$) and $T_k = \hat f_k S_k$. \end{proof}
+
+\begin{definition}\label{def:sigma2Rv}\lean{VerifiedReserving.RandomTriangle.sigma2Rv, VerifiedReserving.RandomTriangle.wssRv}\leanok
+\uses{def:sigma2, def:rv}
+$\hat\sigma_k^2$ and the weighted sum of squares $W_k = \sum_i C_{i,k}(F_{i,k} - \hat f_k)^2$ as
+random variables; $\hat\sigma_k^2 = W_k/(n-k-2)$.
+\end{definition}
+
+\begin{theorem}[Unbiasedness of the variance estimator]\label{thm:sigma2}\lean{VerifiedReserving.condExp_wssRv, VerifiedReserving.condExp_sigma2Rv}\leanok
+\uses{def:sigma2Rv, lem:sq_eps, thm:var_fhat, def:Mack3}
+Under (M3) and (M2'), with all contributing $C_{i,k}$ and $S_k$ a.s. nonzero and the stated
+integrability, $E[W_k \mid \mathcal{D}_k] = (n-k-2)\,\sigma_k^2$ for $k+2 \le n$, and hence
+$E[\hat\sigma_k^2 \mid \mathcal{D}_k] = \sigma_k^2$ for $k + 3 \le n$.
 \end{theorem}
-\begin{proof}
-Lemma~\ref{lem:sq_fhat} reduces the sum of squares to $\sum_i C_{i,k}F_{i,k}^2 - S_k\hat f_k^2$;
-take conditional expectations using (M3) and the conditional variance of $\hat f_k$, which is
-$\sigma_k^2 / S_k$.
+\begin{proof}\leanok
+By Lemma~\ref{lem:sq_eps}, $W_k = \sum_i \varepsilon_i^2/C_{i,k} - S_k(\hat f_k - f_k)^2$.
+Each $C_{i,k}^{-1}$ is $\mathcal{D}_k$-measurable, so (M3) gives $\sigma_k^2$ per term, $n-k-1$
+terms in all; $S_k$ is $\mathcal{D}_k$-measurable and Theorem~\ref{thm:var_fhat} gives
+$\sigma_k^2$ for the subtracted term.
 \end{proof}
+
+\section{Open: the MSEP theorem}
 
 \begin{theorem}[Mack's Theorem 3]\label{thm:msep}
 \uses{def:msep, thm:mack2, thm:sigma2}

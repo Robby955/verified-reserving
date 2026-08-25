@@ -20,7 +20,9 @@ Mack's Theorem 1 (`VerifiedReserving/Ultimate.lean`). `condExp_C_of_Mack1` itera
 
 Estimation variance (`VerifiedReserving/Variance.lean`). Assumptions (M3) (conditional variance) and (M2') (conditional uncorrelatedness of residuals across accident years) as definitions; `condExp_sq_fhatRv_sub` proves E[(f̂_k − f_k)² | D_k] = σ²_k / S_k, the estimation-variance term of Mack's formula.
 
-Thirty-three theorems as of 2026-08-25. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
+Unbiasedness of σ̂² (`VerifiedReserving/SigmaUnbiased.lean`). `weighted_sq_dev_eps` rewrites the weighted sum of squares around f̂_k as residual terms minus S_k(f̂_k − f_k)²; `condExp_sigma2Rv` then gives E[σ̂²_k | D_k] = σ²_k for k + 3 ≤ n, which is exactly why Mack divides by n − k − 2.
+
+Thirty-seven theorems as of 2026-08-25. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
 
 ## Why
 

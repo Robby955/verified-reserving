@@ -4,6 +4,7 @@ import VerifiedReserving.BornhuetterFerguson
 import VerifiedReserving.Stochastic
 import VerifiedReserving.Ultimate
 import VerifiedReserving.Variance
+import VerifiedReserving.SigmaUnbiased
 
 /-! Axiom audit: every theorem in the development must depend only on
 `propext`, `Classical.choice`, `Quot.sound`. Run with
@@ -44,3 +45,7 @@ open VerifiedReserving
 #print axioms RandomTriangle.fhatRv_sub_eq
 #print axioms RandomTriangle.sq_fhatRv_sub
 #print axioms condExp_sq_fhatRv_sub
+#print axioms weighted_sq_dev_eps
+#print axioms RandomTriangle.sigma2Rv_eq
+#print axioms condExp_wssRv
+#print axioms condExp_sigma2Rv
