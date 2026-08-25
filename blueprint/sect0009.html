@@ -12,8 +12,8 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Non-vacuity: a nondegenerate model</title>
-<link rel="next" href="sect0010.html" title="Reference computation" />
+<title>Mack 1999: general weights and exponent</title>
+<link rel="next" href="sect0010.html" title="Non-vacuity: a nondegenerate model" />
 <link rel="prev" href="sect0008.html" title="Röhr 2016: the error-propagation form" />
 <link rel="up" href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
@@ -40,10 +40,10 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0002.html#a0000000012"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0002.html#a0000000013"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000013"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
+  <a href="sect0002.html#a0000000014"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
  </li>
 
   </ul>
@@ -59,25 +59,25 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0005.html#a0000000014"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
+  <a href="sect0005.html#a0000000015"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000015"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
+  <a href="sect0005.html#a0000000016"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000016"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
+  <a href="sect0005.html#a0000000017"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000017"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
+  <a href="sect0005.html#a0000000018"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000018"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
+  <a href="sect0005.html#a0000000019"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000019"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
+  <a href="sect0005.html#a0000000020"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000020"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
+  <a href="sect0005.html#a0000000021"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
  </li>
 
   </ul>
@@ -87,7 +87,7 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0006.html#a0000000021"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
+  <a href="sect0006.html#a0000000022"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
  </li>
 
   </ul>
@@ -97,7 +97,7 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0007.html#a0000000022"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
+  <a href="sect0007.html#a0000000023"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
  </li>
 
   </ul>
@@ -107,28 +107,50 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0008.html#a0000000023"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0008.html#a0000000024"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000024"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
+  <a href="sect0008.html#a0000000025"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000025"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
+  <a href="sect0008.html#a0000000026"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000026"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
+  <a href="sect0008.html#a0000000027"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000027"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
+  <a href="sect0008.html#a0000000028"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
  </li>
 
   </ul>
  </li>
 <li class=" active current">
-  <a href="sect0009.html"><span class="toc_ref">9</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+  <a href="sect0009.html"><span class="toc_ref">9</span> <span class="toc_entry">Mack 1999: general weights and exponent</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0009.html#a0000000029"><span class="toc_ref">9.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0010.html"><span class="toc_ref">10</span> <span class="toc_entry">Reference computation</span></a>
+  <a href="sect0009.html#a0000000030"><span class="toc_ref">9.2</span> <span class="toc_entry">Deterministic identities</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000031"><span class="toc_ref">9.3</span> <span class="toc_entry">The recursion equals \((*)\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000032"><span class="toc_ref">9.4</span> <span class="toc_entry">The 1993 case</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000033"><span class="toc_ref">9.5</span> <span class="toc_entry">Conditional unbiasedness of the weighted estimator</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0010.html"><span class="toc_ref">10</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html"><span class="toc_ref">11</span> <span class="toc_entry">Reference computation</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
@@ -139,14 +161,40 @@
 
 
 <div class="main-text">
-<h1 id="a0000000010">9 Non-vacuity: a nondegenerate model</h1>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:nontrivial">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<h1 id="a0000000010">9 Mack 1999: general weights and exponent</h1>
+<p><span class="cite">
+	[
+	<a href="sect0011.html#Mack1999" >2</a>
+	]
+</span> generalizes the development factor of <span class="cite">
+	[
+	<a href="sect0011.html#Mack1993" >1</a>
+	]
+</span> to </p>
+<div class="displaymath" id="a0000000103">
+  \[  \hat f_k = \frac{\sum _i w_{ik} C_{ik}^{\alpha } F_{ik}}{\sum _i w_{ik} C_{ik}^{\alpha }}, \qquad F_{ik} = \frac{C_{i,k+1}}{C_{ik}},  \]
+</div>
+<p> with weights \(w_{ik} \in [0,1]\) and an exponent \(\alpha \). The three cases the paper names are \(\alpha = 1\) with unit weights (the 1993 estimator), \(\alpha = 0\) (the simple average of the individual factors) and \(\alpha = 2\) (the ordinary regression of \(C_{i,k+1}\) on \(C_{ik}\) through the origin). The variance assumption becomes \(\mathrm{Var}(F_{ik} \mid \cdot ) = \sigma _k^2/(w_{ik} C_{ik}^{\alpha })\) and the variance estimator </p>
+<div class="displaymath" id="a0000000104">
+  \[  \hat\sigma _k^2 = \frac{1}{n-k-2}\sum _i w_{ik} C_{ik}^{\alpha }\, (F_{ik} - \hat f_k)^2 .  \]
+</div>
+<p>Two displays of that paper are formalized here. The first is its equation&#160;\((*)\), </p>
+<div class="displaymath" id="a0000000105">
+  \[  \mathrm{s.e.}(\hat C_{in})^2 = \hat C_{in}^2 \sum _{k} \frac{\hat\sigma _k^2}{\hat f_k^2} \Big( \frac{1}{w_{ik}\hat C_{ik}^{\alpha }} + \frac{1}{\sum _j w_{jk} C_{jk}^{\alpha }} \Big),  \]
+</div>
+<p> the second is the recursion displayed immediately below it, </p>
+<div class="displaymath" id="a0000000106">
+  \[  \mathrm{s.e.}(\hat C_{i,k+1})^2 = \hat C_{ik}^2\big(\mathrm{s.e.}(F_{ik})^2 + \mathrm{s.e.}(\hat f_k)^2\big) + \mathrm{s.e.}(\hat C_{ik})^2 \hat f_k^2, \qquad \mathrm{s.e.}(F_{ik})^2 = \frac{\hat\sigma _k^2}{w_{ik}\hat C_{ik}^{\alpha }}, \quad \mathrm{s.e.}(\hat f_k)^2 = \frac{\hat\sigma _k^2}{\sum _j w_{jk} C_{jk}^{\alpha }} .  \]
+</div>
+<p> Theorem&#160;<a href="sect0003.html#thm:recursion">3.5</a> proves the two agree for \(\alpha = 1\) and unit weights; the theorem below carries the weights and the exponent through, and the unit case recovers the earlier statement. Mack’s restriction \(w_{ik} \in [0,1]\) and \(\alpha \in \{ 0,1,2\} \) is a modelling choice and no identity here uses it, so it is not imposed. Section&#160;3 of the paper, the tail factor, is a convention: the tail factor and the variance parameters attached to it are supplied by the actuary, so they are definitions with no theorem attached. </p>
+<h1 id="a0000000029">9.1 Definitions</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:mwSums">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
     </span>
-    <span class="theorem_thmlabel">9.1</span>
-    <span class="theorem_thmtitle">A nondegenerate Mack model exists</span>
+    <span class="definition_thmlabel">9.1</span>
+    <span class="definition_thmtitle">Weighted column sums</span>
     <div class="thm_header_extras">
 
     
@@ -154,9 +202,415 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0009.html#thm:nontrivial">#</a>
+    <a class="icon proof" href="sect0009.html#def:mwSums">#</a>
     
-    <a class="icon proof" href="sect0009.html#a0000000097"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:contributors">Definition 2.1</a></li>
+          
+          <li><a href="sect0002.html#def:F">Definition 2.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.unitWeights" class="lean_decl">VerifiedReserving.unitWeights</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.SW" class="lean_decl">VerifiedReserving.SW</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.TW" class="lean_decl">VerifiedReserving.TW</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(S_k^{w,\alpha } = \sum _{i=0}^{n-k-2} w_{ik} C_{ik}^{\alpha }\) and \(T_k^{w,\alpha } = \sum _{i=0}^{n-k-2} w_{ik} C_{ik}^{\alpha } F_{ik}\); <span class="ttfamily">unitWeights</span> is \(w_{ik} = 1\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:mwFhat">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9.2</span>
+    <span class="definition_thmtitle">Weighted development factor and variance estimator</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#def:mwFhat">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwSums">Definition 9.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.fhatW" class="lean_decl">VerifiedReserving.fhatW</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sigma2W" class="lean_decl">VerifiedReserving.sigma2W</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(\hat f_k = T_k^{w,\alpha }/S_k^{w,\alpha }\) and \(\hat\sigma _k^2 = \frac{1}{n-k-2}\sum _i w_{ik} C_{ik}^{\alpha }(F_{ik} - \hat f_k)^2\). As in the 1993 case, division by zero is zero, and the value at \(k = n-2\) is an extrapolation convention rather than an estimator. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:mwChat">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9.3</span>
+    <span class="definition_thmtitle">Weighted projection and ultimate</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#def:mwChat">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwFhat">Definition 9.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ChatW" class="lean_decl">VerifiedReserving.ChatW</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ultimateW" class="lean_decl">VerifiedReserving.ultimateW</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(\hat C_{ik} = C_{i,n-1-i}\prod _{j=n-1-i}^{k-1}\hat f_j\) and \(\hat C_{i,n-1}\), both built from the weighted factors. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:mwMsep">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9.4</span>
+    <span class="definition_thmtitle">Mack 1999, equation \((*)\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#def:mwMsep">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwChat">Definition 9.3</a></li>
+          
+          <li><a href="sect0009.html#def:mwFhat">Definition 9.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackTermW" class="lean_decl">VerifiedReserving.mackTermW</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msepW" class="lean_decl">VerifiedReserving.msepW</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  
+<div class="displaymath" id="a0000000107">
+  \[  \mathrm{msepW}_i = \hat C_{i,n-1}^2 \sum _{k=n-1-i}^{n-2} \frac{\hat\sigma _k^2}{\hat f_k^2} \Big( \frac{1}{w_{ik}\hat C_{ik}^{\alpha }} + \frac{1}{S_k^{w,\alpha }} \Big).  \]
+</div>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:mwRec">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9.5</span>
+    <span class="definition_thmtitle">Mack 1999, the recursion below \((*)\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#def:mwRec">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwChat">Definition 9.3</a></li>
+          
+          <li><a href="sect0009.html#def:mwFhat">Definition 9.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2recW" class="lean_decl">VerifiedReserving.se2recW</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(m\) steps of \(V_{m+1} = \hat C_{ik}^2\big(\hat\sigma _k^2/(w_{ik}\hat C_{ik}^{\alpha }) + \hat\sigma _k^2/S_k^{w,\alpha }\big) + V_m \hat f_k^2\) with \(k = n-1-i+m\), started at \(V_0 = 0\) on the latest observed diagonal. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:mwTail">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9.6</span>
+    <span class="definition_thmtitle">Tail factor, Section 3</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#def:mwTail">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwRec">Definition 9.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.tailUltimate" class="lean_decl">VerifiedReserving.tailUltimate</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.tailSe2Step" class="lean_decl">VerifiedReserving.tailSe2Step</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> The ultimate extended by a tail factor, \(\hat C_{i,\infty } = \hat C_{i,n-1} f_{\mathrm{tail}}\), and one further step of the recursion with actuary-supplied \(f_{\mathrm{tail}}, \sigma ^2_{\mathrm{tail}}, S_{\mathrm{tail}}\). The paper gives no estimator for these, only the arithmetic of carrying them through; they are conventions and no theorem here uses them. </p>
+
+  </div>
+</div>
+<h1 id="a0000000030">9.2 Deterministic identities</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:mwWeighted">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">9.7</span>
+    <span class="lemma_thmtitle">Weighted-average form</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#lem:mwWeighted">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000108"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -171,100 +625,835 @@
         </header>
         
         <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwFhat">Definition 9.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.fhatW_eq_weighted_average" class="lean_decl">VerifiedReserving.fhatW_eq_weighted_average</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> \(\hat f_k = \sum _i \big(w_{ik} C_{ik}^{\alpha }/S_k^{w,\alpha }\big) F_{ik}\): the generalized factor is the \(w_{ik}C_{ik}^{\alpha }\)-weighted mean of the individual factors. This is Lemma&#160;<a href="sect0002.html#lem:weighted">2.9</a> with the weights carried through; because the numerator is written with the individual factors, no nonvanishing hypothesis is needed. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000108">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Divide the numerator termwise by \(S_k^{w,\alpha }\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:mwSq">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">9.8</span>
+    <span class="lemma_thmtitle">Weighted sum of squares</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#lem:mwSq">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000109"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwFhat">Definition 9.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.weighted_sq_devW" class="lean_decl">VerifiedReserving.weighted_sq_devW</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.weighted_sq_devW_at_fhatW" class="lean_decl">VerifiedReserving.weighted_sq_devW_at_fhatW</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> For any centre \(f\), \(\sum _i w_{ik}C_{ik}^{\alpha }(F_{ik}-f)^2 = \sum _i w_{ik}C_{ik}^{\alpha }F_{ik}^2 - 2fT_k^{w,\alpha } + f^2 S_k^{w,\alpha }\); at \(f = \hat f_k\), and provided \(S_k^{w,\alpha }\neq 0\), the cross term collapses to \(\sum _i w_{ik}C_{ik}^{\alpha }F_{ik}^2 - S_k^{w,\alpha }\hat f_k^2\). These generalize Lemmas&#160;<a href="sect0002.html#lem:sq">2.11</a> and&#160;<a href="sect0002.html#lem:sq_fhat">2.12</a>, the identity behind the \(n-k-2\) degrees of freedom. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000109">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Expand termwise; substitute \(\hat f_k = T_k^{w,\alpha }/S_k^{w,\alpha }\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:mwChat">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">9.9</span>
+    <span class="lemma_thmtitle">Weighted projection identities</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#lem:mwChat">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000110"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwChat">Definition 9.3</a></li>
+          
+          <li><a href="sect0009.html#def:mwMsep">Definition 9.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ChatW_succ" class="lean_decl">VerifiedReserving.ChatW_succ</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ChatW_diag" class="lean_decl">VerifiedReserving.ChatW_diag</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msepW_eq_sum_mackTermW" class="lean_decl">VerifiedReserving.msepW_eq_sum_mackTermW</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> \(\hat C_{i,k+1} = \hat C_{ik}\hat f_k\) for \(k \ge n-1-i\), \(\hat C_{i,n-1-i} = C_{i,n-1-i}\), and \((*)\) is the ultimate squared times the sum of its summands. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000110">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Split the product at the top; the empty product is one. </p>
+
+  </div>
+</div>
+<h1 id="a0000000031">9.3 The recursion equals \((*)\)</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:mwStep">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">9.10</span>
+    <span class="lemma_thmtitle">One recursion step</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#lem:mwStep">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000111"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2recW_step" class="lean_decl">VerifiedReserving.se2recW_step</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>For reals \(A, B, P, S, f, X\) with \(f \neq 0\), </p>
+<div class="displaymath" id="a0000000112">
+  \[  A^2\Big(\frac{B}{P} + \frac{B}{S}\Big) + A^2 X f^2 = (Af)^2\Big(X + \frac{B}{f^2}\Big(\frac{1}{P} + \frac{1}{S}\Big)\Big).  \]
+</div>
+<p> With \(A = \hat C_{ik}\), \(f = \hat f_k\), \(B = \hat\sigma _k^2\), \(P = w_{ik}\hat C_{ik}^{\alpha }\) and \(S = S_k^{w,\alpha }\): one step of the recursion adds exactly the \(k\)-th summand of \((*)\), scaled by the next projection. Only \(\hat f_k \neq 0\) is used. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000111">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Clear the \(f^2\) and expand. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:mwClosed">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">9.11</span>
+    <span class="lemma_thmtitle">Truncated form</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#lem:mwClosed">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000113"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwRec">Definition 9.5</a></li>
+          
+          <li><a href="sect0009.html#def:mwMsep">Definition 9.4</a></li>
+          
+          <li><a href="sect0009.html#lem:mwStep">Lemma 9.10</a></li>
+          
+          <li><a href="sect0009.html#lem:mwChat">Lemma 9.9</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2recW_eq_closed" class="lean_decl">VerifiedReserving.se2recW_eq_closed</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> If \(\hat f_k \neq 0\) for \(k = n-1-i, \dots , n-2-i+m\), then \(m\) steps of the recursion equal \(\hat C_{i,n-1-i+m}^2 \sum _{k=n-1-i}^{n-2-i+m}\) of the summands of \((*)\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000113">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Induction on \(m\), using Lemma&#160;<a href="sect0009.html#lem:mwStep">9.10</a> at each step. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:mwRecursion">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">9.12</span>
+    <span class="theorem_thmtitle">Mack 1999: the recursion is \((*)\), for general \(w\) and \(\alpha \)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#thm:mwRecursion">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000114"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#lem:mwClosed">Lemma 9.11</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2recW_eq_msepW" class="lean_decl">VerifiedReserving.se2recW_eq_msepW</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Let \(i \le n-1\) and suppose \(\hat f_k \neq 0\) for \(k = n-1-i, \dots , n-2\). Then \(i\) steps of the recursion displayed below Mack’s \((*)\) return \((*)\) itself, for every weight function and every exponent. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000114">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Lemma&#160;<a href="sect0009.html#lem:mwClosed">9.11</a> at \(m = i\), where \(n-1-i+i = n-1\). </p>
+
+  </div>
+</div>
+<h1 id="a0000000032">9.4 The 1993 case</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:mwUnit">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">9.13</span>
+    <span class="lemma_thmtitle">Unit weights, \(\alpha = 1\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#lem:mwUnit">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000115"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwSums">Definition 9.1</a></li>
+          
+          <li><a href="sect0009.html#def:mwFhat">Definition 9.2</a></li>
+          
+          <li><a href="sect0009.html#def:mwChat">Definition 9.3</a></li>
+          
+          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
+          
+          <li><a href="sect0002.html#def:sigma2">Definition 2.5</a></li>
+          
+          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.SW_unit" class="lean_decl">VerifiedReserving.SW_unit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.TW_unit" class="lean_decl">VerifiedReserving.TW_unit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.fhatW_unit" class="lean_decl">VerifiedReserving.fhatW_unit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sigma2W_unit" class="lean_decl">VerifiedReserving.sigma2W_unit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ChatW_unit" class="lean_decl">VerifiedReserving.ChatW_unit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ultimateW_unit" class="lean_decl">VerifiedReserving.ultimateW_unit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackTermW_unit" class="lean_decl">VerifiedReserving.mackTermW_unit</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> At \(\alpha = 1\) with \(w \equiv 1\), and provided the contributing entries \(C_{ik}\) do not vanish, \(S_k^{w,\alpha } = S_k\), \(T_k^{w,\alpha } = T_k\), \(\hat f_k\) is the 1993 factor, \(\hat\sigma _k^2\) is Mack’s 1993 variance estimator, and the projection, the ultimate and the summands of \((*)\) are the 1993 ones. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000115">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Termwise; \(C_{ik} F_{ik} = C_{i,k+1}\) needs \(C_{ik} \neq 0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:mwUnit">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">9.14</span>
+    <span class="theorem_thmtitle">Specialization to Mack 1993</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#thm:mwUnit">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000116"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#lem:mwUnit">Lemma 9.13</a></li>
+          
+          <li><a href="sect0009.html#thm:mwRecursion">Theorem 9.12</a></li>
+          
+          <li><a href="sect0002.html#def:msep">Definition 2.8</a></li>
+          
+          <li><a href="sect0003.html#def:se2rec">Definition 3.1</a></li>
+          
+          <li><a href="sect0003.html#thm:recursion">Theorem 3.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msepW_unit" class="lean_decl">VerifiedReserving.msepW_unit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2recW_unit" class="lean_decl">VerifiedReserving.se2recW_unit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2recW_eq_msep_unit" class="lean_decl">VerifiedReserving.se2recW_eq_msep_unit</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> At \(\alpha = 1\) with unit weights, \((*)\) is \(\widehat{\mathrm{msep}}(\hat R_i)\) and the generalized recursion is the recursion of Theorem&#160;<a href="sect0003.html#thm:recursion">3.5</a>; consequently \(i\) steps of it return Mack’s 1993 estimator, which is the statement of Theorem&#160;<a href="sect0003.html#thm:recursion">3.5</a>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000116">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Rewrite with Lemma&#160;<a href="sect0009.html#lem:mwUnit">9.13</a> and apply Theorem&#160;<a href="sect0009.html#thm:mwRecursion">9.12</a>. </p>
+
+  </div>
+</div>
+<h1 id="a0000000033">9.5 Conditional unbiasedness of the weighted estimator</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:mwRv">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9.15</span>
+    <span class="definition_thmtitle">The weighted estimator as a random variable</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#def:mwRv">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#def:RandomTriangle">Definition 5.1</a></li>
+          
+          <li><a href="sect0009.html#def:mwFhat">Definition 9.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.SWrv" class="lean_decl">VerifiedReserving.RandomTriangle.SWrv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.fhatWrv" class="lean_decl">VerifiedReserving.RandomTriangle.fhatWrv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.gW" class="lean_decl">VerifiedReserving.RandomTriangle.gW</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(S_k^{w,\alpha }\) and \(\hat f_k\) evaluated at the random triangle, with weights \(w_{ik} : \Omega \to \mathbb {R}\), together with the multiplier \(g_{ik} = w_{ik} C_{ik}^{\alpha }/C_{ik}\) of \(C_{i,k+1}\) inside \(\hat f_k\). For \(\alpha = 1\) and unit weights \(g_{ik} = 1\); writing the multiplier this way keeps \(\alpha = 0\), where it is \(1/C_{ik}\), in range. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:mwMeas">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">9.16</span>
+    <span class="lemma_thmtitle">Measurability and the linear form</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#lem:mwMeas">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000117"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#def:mwRv">Definition 9.15</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.SWrv_eq_sum" class="lean_decl">VerifiedReserving.RandomTriangle.SWrv_eq_sum</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.stronglyMeasurable_SWrv" class="lean_decl">VerifiedReserving.RandomTriangle.stronglyMeasurable_SWrv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.stronglyMeasurable_gW" class="lean_decl">VerifiedReserving.RandomTriangle.stronglyMeasurable_gW</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.fhatWrv_eq" class="lean_decl">VerifiedReserving.RandomTriangle.fhatWrv_eq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> If every \(w_{ik}\) is \(\mathcal{D}_k\)-measurable then so are \(S_k^{w,\alpha }\) and \(g_{ik}\) (for \(\alpha = 2\) this uses only measurability of \(C_{ik}\), since \(C_{ik}^2\) is then measurable), and \(\hat f_k = (S_k^{w,\alpha })^{-1}\sum _i g_{ik} C_{i,k+1}\): the weighted estimator is a \(\mathcal{D}_k\)-measurable linear combination of the next column. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000117">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Sums, products, powers and quotients of measurable functions; the linear form is \(w_{ik}C_{ik}^{\alpha }F_{ik} = (w_{ik}C_{ik}^{\alpha }/C_{ik})C_{i,k+1}\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:mwUnbiased">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">9.17</span>
+    <span class="theorem_thmtitle">The weighted estimator is conditionally unbiased</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#thm:mwUnbiased">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000118"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0009.html#lem:mwMeas">Lemma 9.16</a></li>
           
           <li><a href="sect0005.html#def:Mack1">Definition 5.2</a></li>
           
-          <li><a href="sect0005.html#def:Mack3">Definition 5.13</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.X" class="lean_decl">VerifiedReserving.NontrivialModel.X</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.exists_nontrivial_mack_model" class="lean_decl">VerifiedReserving.NontrivialModel.exists_nontrivial_mack_model</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p> There is a probability space, a random triangle with three accident years, and constants \(f_k\), \(\sigma _k^2\) with \(\sigma _0^2 {\gt} 0\), satisfying (M1), (M3) and (M2’), in which the first development step is genuinely random. The model: eight equally likely outcomes, an independent \(\pm 1\) shock per accident year, \(C_{i,0} = c\) and \(C_{i,k} = c f^k (1 + s\, \xi _i)\) for \(k \ge 1\), with \(\mathcal{D}_0\) trivial and \(\mathcal{D}_k\) everything for \(k \ge 1\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000097">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Conditional expectations given the trivial \(\sigma \)-algebra are eight-term averages; the shocks sum to zero, have unit square, and are orthogonal. </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:instantiated">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">9.2</span>
-    <span class="theorem_thmtitle">Headline theorems instantiated</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0009.html#thm:instantiated">#</a>
-    
-    <a class="icon proof" href="sect0009.html#a0000000098"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0009.html#thm:nontrivial">Theorem 9.1</a></li>
-          
           <li><a href="sect0005.html#thm:unbiased">Theorem 5.5</a></li>
           
-          <li><a href="sect0005.html#thm:mack1">Theorem 5.12</a></li>
-          
-          <li><a href="sect0005.html#thm:var_fhat">Theorem 5.15</a></li>
-          
-          <li><a href="sect0005.html#thm:sigma2">Theorem 5.18</a></li>
-          
         </ul>
     
       </div>
@@ -283,13 +1472,7 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.fhat0_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.fhat0_unbiased</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.ultimate_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.ultimate_unbiased</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.var_fhat0" class="lean_decl">VerifiedReserving.NontrivialModel.var_fhat0</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.sigma2_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.sigma2_unbiased</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_fhatWrv" class="lean_decl">VerifiedReserving.condExp_fhatWrv</a></li>
           
         </ul>
     
@@ -300,11 +1483,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> On that model, \(E[\hat f_0 \mid \mathcal{D}_0] = 2\) although \(\hat f_0\) is random; \(E[\hat C_{2,2} \mid \mathcal{D}_0] = E[C_{2,2} \mid \mathcal{D}_0]\); \(E[(\hat f_0 - 2)^2 \mid \mathcal{D}_0] = \sigma _0^2 / S_0\); and \(E[\hat\sigma _0^2 \mid \mathcal{D}_0] = \sigma _0^2 = 4\). </p>
+  <p> Under (M1) in the \(\mathcal{D}_k\) form, with \(\mathcal{D}_k\)-measurable weights, on the event that the weighted column sum is nonzero and where the contributing entries \(C_{ik}\) do not vanish, \(E[\hat f_k \mid \mathcal{D}_k] = f_k\) for every exponent \(\alpha \). This is Theorem&#160;<a href="sect0005.html#thm:unbiased">5.5</a> with the weights and the exponent carried through. </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000098">
+<div class="proof_wrapper" id="a0000000118">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -312,7 +1495,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Direct instantiation of the general theorems; every hypothesis is discharged. </p>
+  <p>By Lemma&#160;<a href="sect0009.html#lem:mwMeas">9.16</a> the factor \((S_k^{w,\alpha })^{-1}\) is \(\mathcal{D}_k\)-measurable and comes out of the conditional expectation, and so does each \(g_{ik}\). (M1) turns \(E[C_{i,k+1}\mid \mathcal{D}_k]\) into \(f_k C_{ik}\), and \(g_{ik}C_{ik} = w_{ik}C_{ik}^{\alpha }\) when \(C_{ik} \neq 0\), so the sum is \(f_k S_k^{w,\alpha }\). The hypothesis \(C_{ik}\neq 0\) is what the individual factors need in any case and cannot be dropped at \(\alpha = 0\). </p>
 
   </div>
 </div>
@@ -331,7 +1514,7 @@
 </a>
   <a href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0010.html" title="Reference computation"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0010.html" title="Non-vacuity: a nondegenerate model"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 
