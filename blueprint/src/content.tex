@@ -193,14 +193,31 @@ comes out of the conditional expectation; by (M1) the conditional expectation of
 $f_k \sum_i C_{i,k} = f_k S_k$; cancel $S_k$ where it is nonzero.
 \end{proof}
 
-\begin{theorem}[Uncorrelated development factors]\label{thm:uncorrelated}
-\uses{thm:unbiased}
-Under (M1), for $j < k$, $E[\hat f_j \hat f_k \mid \mathcal{D}_j] = \hat f_j f_k$, so $\hat f_j$ and
-$\hat f_k$ are uncorrelated (Mack 1993, Theorem 2, second part).
+\begin{lemma}\label{lem:fhat_meas}\lean{VerifiedReserving.RandomTriangle.stronglyMeasurable_fhatRv}\leanok
+\uses{def:rv, lem:Srv_meas}
+$\hat f_j$ is $\mathcal{D}_k$-measurable whenever $j + 1 \le k$.
+\end{lemma}
+\begin{proof}\leanok $S_j$ is $\mathcal{D}_j \subseteq \mathcal{D}_k$-measurable and each $C_{i,j+1}$ is $\mathcal{D}_k$-measurable. \end{proof}
+
+\begin{theorem}[Uncorrelated development factors, conditional form]\label{thm:uncorrelated}\lean{VerifiedReserving.condExp_fhatRv_mul}\leanok
+\uses{thm:unbiased, lem:fhat_meas}
+Under (M1), on a finite measure space, for $j < k$ (with the integrability and $S \neq 0$
+hypotheses of Theorem~\ref{thm:unbiased} for both columns and $\hat f_j \hat f_k$ integrable),
+$E[\hat f_j \hat f_k \mid \mathcal{D}_j] = f_j f_k$ almost surely.
 \end{theorem}
-\begin{proof}
-Tower property with $\mathcal{D}_k \supseteq \mathcal{D}_j$ and Theorem~\ref{thm:unbiased}.
+\begin{proof}\leanok
+Condition on $\mathcal{D}_k$ first: $\hat f_j$ is $\mathcal{D}_k$-measurable and comes out, and
+$E[\hat f_k \mid \mathcal{D}_k] = f_k$ by Theorem~\ref{thm:unbiased}. Then the tower property
+down to $\mathcal{D}_j$ and Theorem~\ref{thm:unbiased} again for column $j$.
 \end{proof}
+
+\begin{theorem}[Mack 1993, Theorem 2]\label{thm:mack2}\lean{VerifiedReserving.integral_fhatRv_mul, VerifiedReserving.integral_fhatRv}\leanok
+\uses{thm:uncorrelated, thm:unbiased}
+On a probability space, under the same hypotheses, $E[\hat f_k] = f_k$ and
+$E[\hat f_j \hat f_k] = f_j f_k$ for $j < k$: the chain-ladder factors are unbiased and
+uncorrelated, which is what makes $\prod_k \hat f_k$ an unbiased estimator of $\prod_k f_k$.
+\end{theorem}
+\begin{proof}\leanok Integrate the conditional statements. \end{proof}
 
 \section{Open: variance estimator and the MSEP theorem}
 
@@ -210,7 +227,7 @@ $\mathrm{Var}(C_{i,k+1} \mid \mathcal{D}_k) = \sigma_k^2\, C_{i,k}$ almost surel
 \end{definition}
 
 \begin{theorem}[Unbiasedness of the variance estimator]\label{thm:sigma2}
-\uses{def:Mack3, thm:unbiased, lem:sq_fhat}
+\uses{def:Mack3, thm:mack2, lem:sq_fhat}
 Under (M1) and (M3), $E[\hat\sigma_k^2 \mid \mathcal{D}_k] = \sigma_k^2$ for $k \le n-3$.
 \end{theorem}
 \begin{proof}
@@ -220,7 +237,7 @@ $\sigma_k^2 / S_k$.
 \end{proof}
 
 \begin{theorem}[Mack's Theorem 3]\label{thm:msep}
-\uses{def:msep, thm:unbiased, thm:uncorrelated, thm:sigma2}
+\uses{def:msep, thm:mack2, thm:sigma2}
 Under (M1)-(M3), Mack's estimator $\widehat{\mathrm{msep}}(\hat R_i)$ is the sum of the process
 variance $\hat C_{i,n-1}^2\sum_k \hat\sigma_k^2/(\hat f_k^2 \hat C_{i,k})$ and the estimation-error
 term $\hat C_{i,n-1}^2\sum_k \hat\sigma_k^2/(\hat f_k^2 S_k)$, where the estimation-error term is

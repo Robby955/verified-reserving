@@ -12,9 +12,9 @@ Deterministic layer (`VerifiedReserving/ChainLadder.lean`). A run-off triangle i
 
 Mack 1999 equals Mack 1993 (`VerifiedReserving/Recursion.lean`). Mack's 1999 paper restates the 1993 MSEP as a recursion along each accident year and says the recursion leads to the closed form. `se2rec_eq_msep` proves the two are the same estimator (for the unit-weight, `α = 1` case) whenever the development factors along the row are nonzero.
 
-Stochastic layer (`VerifiedReserving/Stochastic.lean`). A `RandomTriangle` carries random cumulative claims and the filtration `D k` of everything observed up to development year `k`. Assumption (M1), `E[C_{i,k+1} | D_k] = f_k C_{i,k}`, is a definition. `condExp_fhatRv` proves the first part of Mack's Theorem 2: the chain-ladder factor is conditionally unbiased, `E[f̂_k | D_k] = f_k`, on the event `S_k ≠ 0`.
+Stochastic layer (`VerifiedReserving/Stochastic.lean`). A `RandomTriangle` carries random cumulative claims and the filtration `D k` of everything observed up to development year `k`. Assumption (M1), `E[C_{i,k+1} | D_k] = f_k C_{i,k}`, is a definition. Mack's Theorem 2 is proved in full: `condExp_fhatRv` gives `E[f̂_k | D_k] = f_k` on `{S_k ≠ 0}`, `condExp_fhatRv_mul` gives `E[f̂_j f̂_k | D_j] = f_j f_k` for `j < k` by the tower property, and `integral_fhatRv`, `integral_fhatRv_mul` are the unconditional forms: the chain-ladder factors are unbiased and uncorrelated.
 
-Twelve theorems as of 2026-08-24. The remaining stochastic layer (independence across accident years, uncorrelated factors, unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
+Sixteen theorems as of 2026-08-24. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
 
 ## Why
 

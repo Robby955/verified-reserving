@@ -20,3 +20,7 @@ open VerifiedReserving
 #print axioms se2rec_eq_msep
 #print axioms RandomTriangle.stronglyMeasurable_Srv
 #print axioms condExp_fhatRv
+#print axioms RandomTriangle.stronglyMeasurable_fhatRv
+#print axioms condExp_fhatRv_mul
+#print axioms integral_fhatRv_mul
+#print axioms integral_fhatRv

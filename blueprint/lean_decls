@@ -26,3 +26,7 @@ VerifiedReserving.RandomTriangle.Srv
 VerifiedReserving.RandomTriangle.fhatRv
 VerifiedReserving.RandomTriangle.stronglyMeasurable_Srv
 VerifiedReserving.condExp_fhatRv
+VerifiedReserving.RandomTriangle.stronglyMeasurable_fhatRv
+VerifiedReserving.condExp_fhatRv_mul
+VerifiedReserving.integral_fhatRv_mul
+VerifiedReserving.integral_fhatRv
