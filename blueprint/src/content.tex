@@ -280,15 +280,37 @@ conditional expectation $f_{d+m}$ (Theorem~\ref{thm:unbiased}); tower down to $\
 and induct. Compare with Lemma~\ref{lem:C_succ}.
 \end{proof}
 
-\section{Open: variance estimator and the MSEP theorem}
+\section{The variance assumptions and the estimation variance of $\hat f_k$}
 
-\begin{definition}[Assumption (M3)]\label{def:Mack3}
+\begin{definition}[Residuals, (M3) and (M2')]\label{def:Mack3}\lean{VerifiedReserving.RandomTriangle.eps, VerifiedReserving.Mack3, VerifiedReserving.Mack2'}\leanok
 \uses{def:RandomTriangle}
-$\mathrm{Var}(C_{i,k+1} \mid \mathcal{D}_k) = \sigma_k^2\, C_{i,k}$ almost surely.
+With $\varepsilon_{i,k} = C_{i,k+1} - f_k C_{i,k}$: (M3) $E[\varepsilon_{i,k}^2 \mid \mathcal{D}_k] = \sigma_k^2 C_{i,k}$,
+and (M2') $E[\varepsilon_{i,k}\varepsilon_{j,k} \mid \mathcal{D}_k] = 0$ for $i \neq j$, the
+conditional uncorrelatedness across accident years that independence of accident years supplies.
 \end{definition}
 
+\begin{lemma}\label{lem:fhat_sub}\lean{VerifiedReserving.RandomTriangle.fhatRv_sub_eq, VerifiedReserving.RandomTriangle.sq_fhatRv_sub}\leanok
+\uses{def:rv, def:Mack3}
+On $\{S_k \neq 0\}$, $\hat f_k - f_k = S_k^{-1}\sum_i \varepsilon_{i,k}$ and
+$(\hat f_k - f_k)^2 = S_k^{-2}\sum_i\sum_j \varepsilon_{i,k}\varepsilon_{j,k}$.
+\end{lemma}
+\begin{proof}\leanok $T_k - f_k S_k = \sum_i \varepsilon_{i,k}$; expand the square of the sum. \end{proof}
+
+\begin{theorem}[Estimation variance of the development factor]\label{thm:var_fhat}\lean{VerifiedReserving.condExp_sq_fhatRv_sub}\leanok
+\uses{lem:fhat_sub, lem:Srv_meas}
+Under (M3) and (M2'), with the residual products integrable, on $\{S_k \neq 0\}$,
+$E[(\hat f_k - f_k)^2 \mid \mathcal{D}_k] = \sigma_k^2 / S_k$
+(Mack 1993, proof of Theorem 3; Mack 1999, $\mathrm{s.e.}(\hat f_k)^2 = \hat\sigma_k^2/S_k$).
+\end{theorem}
+\begin{proof}\leanok
+$S_k^{-2}$ is $\mathcal{D}_k$-measurable and comes out; conditional expectation is linear over the
+double sum; cross terms vanish by (M2'); diagonal terms give $\sigma_k^2\sum_i C_{i,k} = \sigma_k^2 S_k$.
+\end{proof}
+
+\section{Open: variance estimator and the MSEP theorem}
+
 \begin{theorem}[Unbiasedness of the variance estimator]\label{thm:sigma2}
-\uses{def:Mack3, thm:mack2, lem:sq_fhat}
+\uses{def:Mack3, thm:mack2, thm:var_fhat, lem:sq_fhat}
 Under (M1) and (M3), $E[\hat\sigma_k^2 \mid \mathcal{D}_k] = \sigma_k^2$ for $k \le n-3$.
 \end{theorem}
 \begin{proof}
