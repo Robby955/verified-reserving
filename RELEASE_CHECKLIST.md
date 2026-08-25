@@ -1,6 +1,6 @@
-# Prospective v0.1.0 release checklist
+# Release checklist
 
-Do not call v0.1.0 published until every applicable item is checked against the exact release commit.
+Apply this checklist to each versioned release. Do not call a release published until every applicable item is checked against the exact release commit.
 
 ## Source and proofs
 

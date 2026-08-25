@@ -45,11 +45,11 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Mack 1993, proof of Theorem 3: estimation variance of `f̂_k` | `condExp_sq_fhatRv_sub` | identical up to integrability and a.s. nonvanishing `S_k` |
 | Mack 1993, proof of Theorem 3: `σ̂²_k` unbiased | `condExp_sigma2Rv`, `condExp_wssRv`, `weighted_sq_dev_eps` | Lean stronger hypotheses: `k + 3 <= n`, every contributing `C_{i,k}` a.s. nonzero |
 | Mack 1993, process variance along a row | `condVar_C_eq_procVar`, `procVar`, `procVar_eq_sum` | identical |
-| Mack 1993, Theorem 3, exact conditional form | `condMsep_eq`, `condExp_sq_sub_of_stronglyMeasurable` | Lean weaker: the "no further information" hypotheses `hfut1`, `hfut2` are assumed, not derived |
+| Mack 1993, Theorem 3, exact conditional form | `condMsep_eq`, `condExp_sq_sub_of_stronglyMeasurable`, `condMsep_eq_of_rows` | `condMsep_eq` exposes the "no further information" hypotheses; `condMsep_eq_of_rows` derives them from the row assumptions, `RowsGenerateD`, accident-year independence and square integrability |
 | Mack 1993, Theorem 3, plug-in estimator | `msep`, `mackProcess`, `mackEstimation` | source statement is an estimator; Lean has it as a definition and proves identities about it |
 | Mack 1993, closed form as process plus estimation | `msep_eq_mackProcess_add_mackEstimation`, `msep_eq_mackProcess_add_mackEstimation_of_lt` | identical, with nonvanishing factors and projections along the row |
 | Mack 1993, Corollary (total reserve), plug-in | `msepTotal`, `mackCross`, `mackTotalEstimation` | source statement is an estimator; Lean has it as a definition |
-| Mack 1993, Corollary, exact form | `condMsepTotal_eq`, `sum_procVar_le_condMsepTotal`, `CondCrossFree` | Lean weaker: `CondCrossFree` and the per-row `hfut` hypotheses are assumed, not derived |
+| Mack 1993, Corollary, exact form | `condMsepTotal_eq`, `sum_procVar_le_condMsepTotal`, `condMsepTotal_eq_of_rows` | the base theorem exposes `CondCrossFree` and the per-row `hfut` hypotheses; `condMsepTotal_eq_of_rows` derives them from the row assumptions, `RowsGenerateD`, accident-year independence and square integrability |
 | Mack 1993, Corollary: plug-in has the exact shape | `msepTotal_eq_sum_mackProcess_add_mackTotalEstimation` | identical, with nonvanishing factors and projections on every row |
 | Mack 1993, eq. (1) and (2), pp. 214-215: (M1), (M3) row-conditioned and `D_k` forms | `Mack1Row`, `Mack3Row`, `Mack1`, `Mack3`, `mack1_of_mack1Row`, `mack3_of_mack3Row` | Lean stronger hypotheses: `RowsGenerateD`, integrability; the source's one-sentence passage is proved |
 | The general fact behind the passage | `condExp_sup_of_indep`, `setIntegral_inter_of_indep` | not in the source; mathlib has only the case `m₁ = ⊥` |
@@ -224,11 +224,13 @@ integrability of every `C i k`, `(C i k)²`, `(eps f i k)²` and `C i k * eps f 
 integrability of `(ChatRv i m)²` and of `ChatRv i m * C_{i,d+m}`. The conclusion is
 `μ[(ChatRv i m - C_{i,d+m})² | D] =ᵐ procVar (C i d ω) f σ2 d m + (ChatRv i m ω - C i d ω * ∏ l ∈ Ico d (d+m), f l)²`.
 
-**Gap.** Lean is weaker on the point that matters. The source obtains "the observed data tells you
-nothing more about row `i`'s future than row `i`'s own history does" from independence across
-accident years; `condMsep_eq` takes it as the two hypotheses `hfut1` and `hfut2` and does not
-derive them, even though `condExp_sup_of_indep` is available in the library. The conclusion is an
-exact identity about the true conditional MSEP, not the plug-in formula of the source's display.
+**Closure.** The base theorem `condMsep_eq` exposes "the observed data tells you nothing more about
+row `i`'s future than row `i`'s own history does" as `hfut1` and `hfut2`.
+`condExp_C_obsSigma_eq_D` and `condExp_sq_C_obsSigma_eq_D` derive both on `obsSigma` from
+`RowsGenerateD`, `RowsIndep` and the corresponding integrability hypotheses.
+`condMsep_eq_of_rows` packages the exact result from `Mack1Row`, `Mack3Row`, `RowsIndep`,
+`RowsGenerateD` and square integrability. The conclusion is an exact identity about the true
+conditional MSEP, not the plug-in formula of the source's display.
 
 ### Mack 1993, Theorem 3, plug-in estimator
 
@@ -285,12 +287,14 @@ information" hypotheses `hfut1` and `hfut2` for each `i` in `s`; `Mack1`; and `M
 `μ[(∑_i Ĉ_i - ∑_i C_i)² | D] =ᵐ (∑_i procVar (C i d_i ω) f σ2 d_i i) + (∑_i (Ĉ_i - C_{i,d_i} ∏ f))²`.
 `sum_procVar_le_condMsepTotal` is the corollary that the left side dominates `∑_i procVar_i`.
 
-**Gap.** Lean is weaker in the same way as `condMsep_eq`, and in one more. `CondCrossFree` is what
-independence across accident years supplies, and the docstring says so, but the passage from
-`RowsIndep` to `CondCrossFree` is not formalized: it is a hypothesis, witnessed on the
-nondegenerate model by `crossFree_ultimates` rather than derived. Square integrability is carried
-as `MemLp _ 2 μ` so that Hölder supplies the product integrability, which is a convenience, not a
-weakening.
+**Closure.** The base theorem `condMsepTotal_eq` exposes `CondCrossFree` and the per-row `hfut`
+conditions. `condCrossFree_of_rows` derives the former from `RowsIndep` and square integrability,
+while `condExp_obsSigma_eq_D` supplies the latter from `RowsGenerateD`, `RowsIndep` and
+integrability. `condMsepTotal_eq_of_rows` packages the exact total result from the row-conditioned
+assumptions, `RowsGenerateD`, independence and square integrability. The eight-outcome
+independent-row witness checks both derived conditions, but does not yet instantiate this packaged
+theorem because it does not supply `Mack3Row`. Square integrability is carried as `MemLp _ 2 μ` so
+that Hölder supplies the product integrability, which is a convenience, not a weakening.
 
 ### Mack 1993, Corollary: the plug-in has the exact shape
 

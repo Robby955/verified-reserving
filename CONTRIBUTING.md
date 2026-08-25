@@ -4,19 +4,21 @@ Contributions are welcome, from a one-line lemma to a whole theorem of the roadm
 
 ## Where to start
 
-- [ROADMAP.md](ROADMAP.md) lists the open theorems in build order with the mathlib tools each needs. Pick one, open an issue with the "Theorem proposal" template saying you are on it, and go.
-- The [blueprint](https://robby955.github.io/verified-reserving/blueprint/) shows every statement and its dependency graph; nodes not yet green are the open work.
+- [ROADMAP.md](ROADMAP.md) lists current priorities, completed modules and their remaining gaps. Pick one bounded item, open an issue with the "Theorem proposal" template saying you are on it, and go.
+- The [blueprint](https://robby955.github.io/verified-reserving/blueprint/) is the proved-statement catalogue and dependency graph. Open work is tracked in the roadmap rather than represented by placeholder nodes.
 
 ## Open contribution directions
 
 The former good-first list is complete. Current work is narrower and varies in difficulty; check the matching `Still open` paragraph in [ROADMAP.md](ROADMAP.md) before starting.
 
-1. Give `Mack1999.lean` an active-contributor index set that omits zero-weight cells and uses active cardinality minus one for the variance estimator's degrees of freedom.
-2. Instantiate the weighted stochastic results at `α = 0` and `α = 2` on a finite witness triangle.
-3. Extend the independent-row witness with `Mack3Row`, then instantiate `condMsep_eq_of_rows` on that nondegenerate model.
-4. Add the calendar-year filtration and a witness for the exact CDR results before attempting the cited approximation for the observable CDR.
-5. Formalize a stochastic Bühlmann-Straub model that derives the quadratic loss from conditional moments; keep structural-parameter estimation separate.
-6. Add the ODP variance structure before the bootstrap or prediction-error layer. Do not treat the existing deterministic score equations as a stochastic GLM result.
+1. Formalize the Munich chain ladder paid/incurred definitions and the Quarg-Mack gap identity.
+2. Add the ODP variance structure before the GLM prediction-error and bootstrap layers. Do not treat the existing deterministic score equations as a stochastic GLM result.
+3. Add a row-conditioned CL2 predicate and its row-to-`D_k` theorem for `Mack3W` under explicit measurability, `RowsGenerateD` and `RowsIndep` hypotheses; add the corresponding independence derivation for `Mack2Factor'`.
+4. Give `Mack1999.lean` an active-contributor index set that omits zero-weight cells and uses active cardinality minus one for the variance estimator's degrees of freedom.
+5. Instantiate the weighted stochastic results at `α = 0` and `α = 2` on a finite witness triangle.
+6. Extend the independent-row witness with `Mack3Row`, then instantiate `condMsep_eq_of_rows` on that nondegenerate model.
+7. Add the calendar-year filtration and a witness for the exact CDR results before attempting the cited approximation for the observable CDR.
+8. Formalize a stochastic Bühlmann-Straub model that derives the quadratic loss from conditional moments; keep structural-parameter estimation separate.
 
 ## Rules
 
@@ -50,4 +52,4 @@ Open a pull request against `main`. CI runs the build, the sorry and axiom check
 
 ## Scope
 
-Mack's model first, then the neighbours that practising actuaries use with it: the Merz-Wüthrich one-year uncertainty, Bornhuetter-Ferguson, Panjer's recursion for compound distributions, Bühlmann-Straub credibility. Life contingencies are covered elsewhere (see the related work in the README); we do not duplicate them.
+Mack's model first, then the neighbours that practising actuaries use with it: Munich chain ladder, the Merz-Wüthrich one-year uncertainty, the ODP stochastic layer, Bornhuetter-Ferguson, Bühlmann-Straub credibility and, later, Panjer's recursion for compound distributions. Life contingencies are covered elsewhere (see the related work in the README); we do not duplicate them.

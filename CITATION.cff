@@ -2,6 +2,8 @@ cff-version: 1.2.0
 message: "If you use verified-reserving, please cite it as below."
 type: software
 title: "verified-reserving: machine-checked claims reserving in Lean 4"
+version: "0.1.0"
+date-released: 2026-08-25
 authors:
   - family-names: Sneiderman
     given-names: Robert
