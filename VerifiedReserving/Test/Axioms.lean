@@ -179,3 +179,17 @@ set_option format.width 400
 #print axioms fhat_pos_of_mult
 #print axioms mult_cum_eq_CLcum
 #print axioms multFit_eq_CLincr
+
+#print axioms IndependenceWitness.rowsGenerateD
+#print axioms IndependenceWitness.measurableSet_shockEvent
+#print axioms IndependenceWitness.measure_shockEvent
+#print axioms IndependenceWitness.iIndepSet_shockEvent_fin
+#print axioms IndependenceWitness.iIndepSet_shockEvent
+#print axioms IndependenceWitness.stronglyMeasurable_Cw_xi
+#print axioms IndependenceWitness.rowsIndep
+#print axioms IndependenceWitness.rowSigma_zero
+#print axioms IndependenceWitness.mack1Row
+#print axioms IndependenceWitness.mack1_from_rows
+#print axioms IndependenceWitness.mack2'_from_rows
+#print axioms IndependenceWitness.nontrivial
+#print axioms IndependenceWitness.exists_independence_witness
