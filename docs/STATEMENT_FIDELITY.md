@@ -708,14 +708,18 @@ than derives, is satisfiable by genuinely random ultimates.
 
 Ordered roughly by how much they matter.
 
-1. **`hfut1` and `hfut2`, "the observed data adds nothing about this row's future".** Assumed in
-   `condMsep_eq`, `condVar_ultimate_eq_procVar`, `condExp_ultimate_of_Mack1`, `condMsepTotal_eq`
-   and `sum_procVar_le_condMsepTotal`. Mack obtains this from independence across accident years.
-   `condExp_sup_of_indep` is the tool that would discharge it and it is in the library, but the
-   passage is not made.
-2. **`CondCrossFree`, the cross-term condition across accident years.** Assumed in
-   `condMsepTotal_eq` and `sum_procVar_le_condMsepTotal`. Witnessed by
-   `NontrivialModel.crossFree_ultimates`, not derived from `RowsIndep`.
+1. **`hfut1` and `hfut2`, "the observed data adds nothing about this row's future".** Taken as
+   hypotheses by `condMsep_eq`, `condVar_ultimate_eq_procVar`, `condExp_ultimate_of_Mack1`,
+   `condMsepTotal_eq` and `sum_procVar_le_condMsepTotal`, and DERIVED from independence in
+   `ObservedData.lean`: `condExp_obsSigma_eq_D` supplies them on the observed-data σ-algebra
+   `obsSigma`, and `condMsep_eq_of_rows` states Theorem 3 in exact form from `Mack1Row`,
+   `Mack3Row`, `RowsIndep`, `RowsGenerateD` and square integrability alone. What remains
+   assumed is only the modelling input (`RowsGenerateD`, item 4) and integrability (item 6).
+2. **`CondCrossFree`, the cross-term condition across accident years.** Taken as a hypothesis by
+   `condMsepTotal_eq` and `sum_procVar_le_condMsepTotal`, and DERIVED from `RowsIndep` by
+   `condCrossFree_of_rows`; `condMsepTotal_eq_of_rows` is the total-reserve form from the
+   row-conditioned assumptions and independence. Also witnessed by
+   `NontrivialModel.crossFree_ultimates` and `IndependenceWitness.condCrossFree_obs_of_rows`.
 3. **`Mack2'`.** Assumed in `condExp_sq_fhatRv_sub`, `condExp_wssRv` and `condExp_sigma2Rv`, even
    though `mack2'_of_rows` derives it from `RowsIndep`, `RowsGenerateD` and `Mack1Row`. A caller
    must apply the derivation explicitly.
