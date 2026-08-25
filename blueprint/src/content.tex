@@ -219,6 +219,39 @@ uncorrelated, which is what makes $\prod_k \hat f_k$ an unbiased estimator of $\
 \end{theorem}
 \begin{proof}\leanok Integrate the conditional statements. \end{proof}
 
+\section{Mack's Theorem 1}
+
+\begin{definition}[Chain-ladder projection as a random variable]\label{def:ChatRv}\lean{VerifiedReserving.RandomTriangle.ChatRv}\leanok
+\uses{def:rv}
+$\hat C_{i,d+m} = C_{i,d}\prod_{k=d}^{d+m-1}\hat f_k$ with $d = n-1-i$.
+\end{definition}
+
+\begin{lemma}\label{lem:ChatRv_meas}\lean{VerifiedReserving.RandomTriangle.stronglyMeasurable_ChatRv}\leanok
+\uses{def:ChatRv, lem:fhat_meas}
+$\hat C_{i,d+m}$ is $\mathcal{D}_{d+m}$-measurable.
+\end{lemma}
+\begin{proof}\leanok Induction on $m$; each new factor $\hat f_{d+m}$ is $\mathcal{D}_{d+m+1}$-measurable. \end{proof}
+
+\begin{lemma}[Iterating (M1)]\label{lem:C_succ}\lean{VerifiedReserving.condExp_C_succ, VerifiedReserving.condExp_C_of_Mack1}\leanok
+\uses{def:Mack1}
+For $d \le k$, $E[C_{i,k+1} \mid \mathcal{D}_d] = f_k\,E[C_{i,k} \mid \mathcal{D}_d]$, hence
+$E[C_{i,d+m} \mid \mathcal{D}_d] = C_{i,d}\prod_{k=d}^{d+m-1} f_k$.
+\end{lemma}
+\begin{proof}\leanok Tower property through $\mathcal{D}_k$, then (M1); induction on $m$. \end{proof}
+
+\begin{theorem}[Mack 1993, Theorem 1]\label{thm:mack1}\lean{VerifiedReserving.condExp_ChatRv, VerifiedReserving.condExp_ultimate_eq}\leanok
+\uses{lem:ChatRv_meas, thm:unbiased, lem:C_succ}
+Under (M1), with the partial products integrable and the column sums a.s. nonzero,
+$E[\hat C_{i,d+m} \mid \mathcal{D}_d] = C_{i,d}\prod_{k=d}^{d+m-1} f_k$, and therefore
+$E[\hat C_{i,n-1} \mid \mathcal{D}_d] = E[C_{i,n-1} \mid \mathcal{D}_d]$: the chain-ladder
+ultimate is a conditionally unbiased estimator of the true ultimate claims.
+\end{theorem}
+\begin{proof}\leanok
+Condition on $\mathcal{D}_{d+m}$: the partial product comes out and the last factor has
+conditional expectation $f_{d+m}$ (Theorem~\ref{thm:unbiased}); tower down to $\mathcal{D}_d$
+and induct. Compare with Lemma~\ref{lem:C_succ}.
+\end{proof}
+
 \section{Open: variance estimator and the MSEP theorem}
 
 \begin{definition}[Assumption (M3)]\label{def:Mack3}

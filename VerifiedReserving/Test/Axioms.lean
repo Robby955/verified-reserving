@@ -1,6 +1,7 @@
 import VerifiedReserving.ChainLadder
 import VerifiedReserving.Recursion
 import VerifiedReserving.Stochastic
+import VerifiedReserving.Ultimate
 
 /-! Axiom audit: every theorem in the development must depend only on
 `propext`, `Classical.choice`, `Quot.sound`. Run with
@@ -24,3 +25,9 @@ open VerifiedReserving
 #print axioms condExp_fhatRv_mul
 #print axioms integral_fhatRv_mul
 #print axioms integral_fhatRv
+#print axioms RandomTriangle.ChatRv_succ
+#print axioms RandomTriangle.stronglyMeasurable_ChatRv
+#print axioms condExp_C_succ
+#print axioms condExp_C_of_Mack1
+#print axioms condExp_ChatRv
+#print axioms condExp_ultimate_eq

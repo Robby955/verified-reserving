@@ -30,3 +30,9 @@ VerifiedReserving.RandomTriangle.stronglyMeasurable_fhatRv
 VerifiedReserving.condExp_fhatRv_mul
 VerifiedReserving.integral_fhatRv_mul
 VerifiedReserving.integral_fhatRv
+VerifiedReserving.RandomTriangle.ChatRv
+VerifiedReserving.RandomTriangle.stronglyMeasurable_ChatRv
+VerifiedReserving.condExp_C_succ
+VerifiedReserving.condExp_C_of_Mack1
+VerifiedReserving.condExp_ChatRv
+VerifiedReserving.condExp_ultimate_eq

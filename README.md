@@ -14,7 +14,9 @@ Mack 1999 equals Mack 1993 (`VerifiedReserving/Recursion.lean`). Mack's 1999 pap
 
 Stochastic layer (`VerifiedReserving/Stochastic.lean`). A `RandomTriangle` carries random cumulative claims and the filtration `D k` of everything observed up to development year `k`. Assumption (M1), `E[C_{i,k+1} | D_k] = f_k C_{i,k}`, is a definition. Mack's Theorem 2 is proved in full: `condExp_fhatRv` gives `E[f̂_k | D_k] = f_k` on `{S_k ≠ 0}`, `condExp_fhatRv_mul` gives `E[f̂_j f̂_k | D_j] = f_j f_k` for `j < k` by the tower property, and `integral_fhatRv`, `integral_fhatRv_mul` are the unconditional forms: the chain-ladder factors are unbiased and uncorrelated.
 
-Sixteen theorems as of 2026-08-24. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
+Mack's Theorem 1 (`VerifiedReserving/Ultimate.lean`). `condExp_C_of_Mack1` iterates (M1) to `E[C_{i,d+m} | D_d] = C_{i,d} ∏ f_k`; `condExp_ChatRv` shows the chain-ladder projection has the same conditional expectation; `condExp_ultimate_eq` is the statement actuaries quote: the chain-ladder ultimate is a conditionally unbiased estimator of the true ultimate claims, `E[Ĉ_{i,n-1} | D_d] = E[C_{i,n-1} | D_d]`.
+
+Twenty-two theorems as of 2026-08-25. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
 
 ## Why
 
