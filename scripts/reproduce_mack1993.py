@@ -79,8 +79,24 @@ def main():
     f, sig2, res, msep, total = mack(C)
     n = len(C)
     print("k   f_k       sigma_k^2/1000   published f   published sigma^2/1000")
+    misprints = []
     for k in range(n - 1):
-        print(f"{k+1:<3} {f[k]:<9.4f} {sig2[k]/1000:<16.4g} {pub['development_factors_fk_as_printed'][k]:<13} {pub['sigma_k_squared_over_1000_as_printed'][k]}")
+        pf = pub['development_factors_fk_as_printed'][k]
+        ps = pub['sigma_k_squared_over_1000_as_printed'][k]
+        f_dec = len(str(pf).split(".")[-1]) if "." in str(pf) else 0
+        f_ok = abs(f[k] - pf) <= 0.5 * 10 ** (-f_dec)
+        s_ok = abs(sig2[k] / 1000 - ps) <= 0.5 * 10 ** (-len(str(ps).split('.')[-1])) if '.' in str(ps) else abs(sig2[k] / 1000 - ps) <= 0.5
+        flag = ''
+        if not f_ok:
+            flag += '  <-- FACTOR MISMATCH'
+        if not s_ok:
+            if k == n - 2:
+                flag += f'  <-- MISPRINT in source: the extrapolation rule on the printed sigma_{k-1}^2, sigma_{k}^2 gives {sig2[k]/1000:.3f}, and the printed standard errors are reproduced with it'
+                misprints.append(k + 1)
+            else:
+                flag += '  <-- SIGMA MISMATCH'
+                ok_sigma = False
+        print(f"{k+1:<3} {f[k]:<9.4f} {sig2[k]/1000:<16.4g} {pf:<13} {ps}{flag}")
     print("\ni   reserve(000)  published   s.e.%   published%")
     ok = True
     for i in range(1, n):
@@ -97,8 +113,44 @@ def main():
     flag = "" if round(tot_res / 1000) == pr and round(tot_se) == pse else "  <-- MISMATCH"
     ok &= flag == ""
     print(f"all {tot_res/1000:<13.0f} {pr:<11} {tot_se:<7.0f} {pse}{flag}")
-    print("\nRESULT:", "all printed values reproduced" if ok else "discrepancies found (see MISMATCH rows)")
+    if ok and misprints:
+        print(f"\nRESULT: all printed reserves and standard errors reproduced; the printed sigma_{misprints[0]}^2 is a misprint in the source (see the MISPRINT row)")
+    else:
+        print("\nRESULT:", "all printed values reproduced" if ok else "discrepancies found (see MISMATCH rows)")
+    if "--catalogue" in sys.argv:
+        catalogue(C, f, sig2, res)
     return 0 if ok else 1
+
+
+def catalogue(C, f, sig2, res):
+    """Mack's estimation-error term versus the conditional-resampling (BBMW) term,
+    per accident year, on the same triangle. Prints a LaTeX table body."""
+    n = len(C)
+    S = []
+    for k in range(n - 1):
+        S.append(sum(C[i][k] for i in range(n - k - 1)))
+    Chat = [[None] * n for _ in range(n)]
+    for i in range(n):
+        d = n - 1 - i
+        Chat[i][d] = C[i][d]
+        for k in range(d, n - 1):
+            Chat[i][k + 1] = Chat[i][k] * f[k]
+    print("\nAY & reserve & Mack est. s.e. & BBMW est. s.e. & difference of squares & rel. diff \\\\")
+    tot_m = tot_b = 0.0
+    for i in range(1, n):
+        d = n - 1 - i
+        a = [sig2[k] / f[k] ** 2 / S[k] for k in range(d, n - 1)]
+        ult = Chat[i][n - 1]
+        mack = ult ** 2 * sum(a)
+        prod = 1.0
+        for x in a:
+            prod *= 1 + x
+        bbmw = ult ** 2 * (prod - 1)
+        tot_m += mack
+        tot_b += bbmw
+        print(f"{i+1} & {res[i]/1000:,.0f} & {math.sqrt(mack)/1000:,.1f} & {math.sqrt(bbmw)/1000:,.1f} & {(bbmw-mack)/1e6:,.3f} & {100*(bbmw-mack)/mack:.2f}\\% \\\\")
+    print(f"sum of single-year terms & & {math.sqrt(tot_m)/1000:,.1f} & {math.sqrt(tot_b)/1000:,.1f} & {(tot_b-tot_m)/1e6:,.3f} & {100*(tot_b-tot_m)/tot_m:.2f}\\% \\\\")
+    print("(reserves and s.e. in thousands; difference of squared terms in 10^6 thousands^2)")
 
 
 if __name__ == "__main__":
