@@ -249,3 +249,15 @@ set_option format.width 400
 #print axioms taylorAshe_sigma2_6
 #print axioms taylorAshe_sigma2_7
 #print axioms taylorAshe_total_reserve_rounds
+
+#print axioms spearmanRho_eq_one_sub_six_mul_sum_sq_div
+#print axioms spearmanPermutationMean_eq_zero
+#print axioms spearmanPermutationVariance_eq
+#print axioms calendarNullMean_eq_mackCalendarNullMean
+#print axioms calendarNullSecondMoment_closed
+#print axioms calendarNullVariance_eq_mackCalendarNullVariance
+#print axioms sum_fairSignMass
+#print axioms calendarNullMean_five
+#print axioms calendarNullSecondMoment_five
+#print axioms calendarNullVariance_five
+#print axioms mackCalendarNullMoments_five

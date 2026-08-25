@@ -19,5 +19,6 @@ import VerifiedReserving.ODP
 import VerifiedReserving.CDRMsep
 import VerifiedReserving.ObservedData
 import VerifiedReserving.Mack1993Table1
+import VerifiedReserving.Mack1994Tests
 import VerifiedReserving.Test.NontrivialModel
 import VerifiedReserving.Test.IndependenceWitness
