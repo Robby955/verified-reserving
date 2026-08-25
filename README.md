@@ -33,7 +33,9 @@ The variant catalogue (`VerifiedReserving/Catalogue.lean`). With `a_k = σ̂²_k
 
 Non-vacuity (`VerifiedReserving/Test/NontrivialModel.lean`, `Test/Witness.lean`). `exists_nontrivial_mack_model` constructs a genuinely stochastic Mack model (three accident years, eight equally likely outcomes, an independent ±1 shock per accident year, σ₀² = 4 > 0) satisfying (M1), (M3) and (M2'), and instantiates Theorems 1 and 2, the estimation variance and σ̂² unbiasedness on it. A degenerate witness is kept alongside. Writing the witnesses caught a hypothesis no real triangle could satisfy (a nonvanishing column sum demanded for columns with no contributors); the theorems now ask for it only where the row uses it, and the model assumptions are quantified over the triangle's rows rather than over all natural numbers.
 
-Sixty-one theorems as of 2026-08-25. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
+Total reserve (`VerifiedReserving/TotalReserve.lean`). Mack's Corollary (the aggregate MSEP with cross terms between accident years) and the aggregated conditional-resampling counterpart as definitions; the difference of the aggregated estimation-error terms is the row-wise product-minus-sum remainder weighted by the ultimates, so Mack's total is at most the resampling total under nonnegativity.
+
+Sixty-six theorems as of 2026-08-26. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
 
 ## Why
 

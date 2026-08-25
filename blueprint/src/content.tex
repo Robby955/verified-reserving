@@ -427,6 +427,24 @@ is $\hat C^2 a_0 a_1 > 0$. Every number is checked by \texttt{norm\_num} from th
 \end{theorem}
 \begin{proof}\leanok Evaluate the definitions on the triangle; apply Theorem~\ref{thm:catalogue}(ii). \end{proof}
 
+\section{The total reserve: Mack's Corollary}
+
+\begin{definition}[Total-reserve estimators]\label{def:total}\lean{VerifiedReserving.msepTotal, VerifiedReserving.mackCross, VerifiedReserving.bbmwCross, VerifiedReserving.mackTotalEstimation, VerifiedReserving.bbmwTotalEstimation}\leanok
+\uses{def:msep, def:bbmw}
+Mack's Corollary: $\widehat{\mathrm{msep}}(\hat R) = \sum_i \widehat{\mathrm{msep}}_i + \sum_i \hat C_i \big(\sum_{j>i}\hat C_j\big)\, 2\sum_{k \in \mathrm{row}\,i} a_k$,
+the cross terms running over the older year's remaining factors. The conditional-resampling
+aggregate replaces $2\sum_k a_k$ by $2(\prod_k (1+a_k) - 1)$ (Buchwalder et al. 2006, Section 4.3).
+\end{definition}
+
+\begin{theorem}[Aggregated catalogue row]\label{thm:total}\lean{VerifiedReserving.bbmwTotalEstimation_sub_mackTotalEstimation, VerifiedReserving.mackTotalEstimation_le_bbmwTotalEstimation}\leanok
+\uses{def:total, lem:remainder}
+The aggregated estimation-error terms differ by
+$\sum_i \big(\hat C_i^2 + 2\hat C_i \sum_{j>i}\hat C_j\big)\big(\prod_{k \in \mathrm{row}\,i}(1+a_k) - 1 - \sum_{k \in \mathrm{row}\,i} a_k\big)$,
+which is nonnegative when the ultimates and the $a_k$ are: Mack's total is at most the
+resampling total, by the same row-wise second-order remainder as in the single-year case.
+\end{theorem}
+\begin{proof}\leanok Termwise algebra and Lemma~\ref{lem:remainder}. \end{proof}
+
 \chapter{Non-vacuity: a nondegenerate model}
 
 \begin{theorem}[A nondegenerate Mack model exists]\label{thm:nontrivial}\lean{VerifiedReserving.NontrivialModel.X, VerifiedReserving.NontrivialModel.exists_nontrivial_mack_model}\leanok
