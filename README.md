@@ -54,6 +54,8 @@ One hundred and eighty theorems as of 2026-08-25. What is left in [ROADMAP.md](R
 
 Where each statement of Mack (1993, 1999) and its variants lives in the library. Every name below is audited by `VerifiedReserving/Test/Axioms.lean` on each push.
 
+For each headline result, [docs/STATEMENT_FIDELITY.md](docs/STATEMENT_FIDELITY.md) sets the published statement beside the Lean statement with every hypothesis listed, says where the two differ, and lists the hypotheses still assumed rather than derived.
+
 | Paper statement | Lean name | Status |
 |---|---|---|
 | f̂_k is the C-weighted mean of the individual factors | `fhat_eq_weighted_average` | theorem |
