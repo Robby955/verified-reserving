@@ -37,6 +37,31 @@ Total reserve (`VerifiedReserving/TotalReserve.lean`). Mack's Corollary (the agg
 
 Sixty-six theorems as of 2026-08-26. The remaining stochastic layer (independence across accident years as the source of the `D_k` form of (M1), assumption (M3), unbiasedness of the variance estimator, the MSEP theorem) is listed in [ROADMAP.md](ROADMAP.md) in build order; each entry names the mathlib tools it needs and is a self-contained contribution.
 
+## Theorem map
+
+Where each statement of Mack (1993, 1999) and its variants lives in the library. Every name below is audited by `VerifiedReserving/Test/Axioms.lean` on each push.
+
+| Paper statement | Lean name | Status |
+|---|---|---|
+| f̂_k is the C-weighted mean of the individual factors | `fhat_eq_weighted_average` | theorem |
+| Mack 1993 Theorem 1: Ĉ_{i,n-1} conditionally unbiased for C_{i,n-1} | `condExp_ultimate_eq` | theorem |
+| Mack 1993 Theorem 2: f̂_k unbiased, f̂_j f̂_k uncorrelated | `condExp_fhatRv`, `condExp_fhatRv_mul`, `integral_fhatRv`, `integral_fhatRv_mul` | theorem |
+| σ̂²_k unbiased (why n-k-2 degrees of freedom) | `condExp_sigma2Rv` | theorem |
+| Estimation variance E[(f̂_k - f_k)² given D_k] = σ²_k/S_k | `condExp_sq_fhatRv_sub` | theorem |
+| Process variance along a row | `condVar_C_eq_procVar` | theorem |
+| Mack 1993 Theorem 3, exact conditional form | `condMsep_eq` | theorem |
+| Mack 1993 Theorem 3, plug-in estimator (2.2) | `msep`, `mackProcess`, `mackEstimation` | definition |
+| Mack 1993 Corollary (total reserve) | `msepTotal`, `mackTotalEstimation` | definition |
+| Mack 1999 recursion equals Mack 1993 closed form | `se2rec_eq_msep` | theorem |
+| BBMW 2006 / Murphy 1994 conditional-resampling term | `bbmwEstimation`, `bbmwTotalEstimation` | definition |
+| Mack ≤ BBMW, exact difference, second-order bound | `mackEstimation_le_bbmwEstimation`, `bbmwEstimation_sub_mackEstimation`, `bbmwEstimation_sub_mackEstimation_le` | theorem |
+| Same for the total reserve | `mackTotalEstimation_le_bbmwTotalEstimation`, `bbmwTotalEstimation_sub_mackTotalEstimation` | theorem |
+| The two terms differ strictly on a concrete triangle | `exists_mackEstimation_lt_bbmwEstimation` | theorem |
+| Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve_of_ultimate`, `one_le_cdf`, `bfReserve_le` | theorem |
+| A nondegenerate model satisfying every hypothesis | `NontrivialModel.exists_nontrivial_mack_model` | theorem |
+| Last-period σ² extrapolation (Mack's minimum rule) | not formalized: a convention, kept outside the theorems | convention |
+| Passage from independence across accident years to the D_k form of (M1) | hypothesis of the stochastic theorems | future work |
+
 ## Why
 
 Mack's formula is quoted from secondary sources, circulates in several typographic variants (Mack 1993 closed form, Mack 1999 recursion, Murphy 1994 and Buchwalder-Bühlmann-Merz-Wüthrich 2006 with extra cross terms, Röhr 2016 linearized form), and two widely used implementations disagree on it (R `ChainLadder` versus `chainladder-python`, issue #234 there). A machine-checked development settles which variants are equal, records exactly which assumption each line consumes, and separates the last-period variance extrapolation, a convention, from the theorems.
