@@ -1,0 +1,233 @@
+% Blueprint chapter for VerifiedReserving/ODP.lean.
+% Renshaw and Verrall, A stochastic model underlying the chain-ladder technique,
+% British Actuarial Journal 4 (1998) 903-923.
+% Mack, A simple parametric model for rating automobile insurance or estimating
+% IBNR claims reserves, ASTIN Bulletin 21 (1991) 93-109.
+% Same zero-based conventions as content.tex; the cell (i,k) is observed when
+% i + k <= n-1, and d = n-1-i is the latest observed development year of row i.
+
+\chapter{The over-dispersed Poisson model}
+
+Renshaw and Verrall, \emph{A stochastic model underlying the chain-ladder technique},
+British Actuarial Journal 4 (1998) 903--923, put the run-off triangle in incremental
+form, $X_{i,k} = C_{i,k} - C_{i,k-1}$ with $X_{i,0} = C_{i,0}$, and model the
+incrementals as an over-dispersed Poisson (ODP) generalized linear model: independent,
+with mean $m_{i,k}$ and variance $\varphi\, m_{i,k}$, and a log link carrying a row
+effect and a column effect, so the mean is multiplicative,
+\[
+  m_{i,k} = a_i b_k , \qquad \sum_{k=0}^{n-1} b_k = 1 .
+\]
+Mack, \emph{A simple parametric model for rating automobile insurance or estimating
+IBNR claims reserves}, ASTIN Bulletin 21 (1991) 93--109, starts from the same
+multiplicative mean and estimates it from the \emph{marginal sums}. Both papers arrive
+at the same system: for each accident year $i$ and each development year $k$,
+\[
+  \sum_{k \,:\, i+k \le n-1} m_{i,k} = \sum_{k \,:\, i+k \le n-1} X_{i,k},
+  \qquad
+  \sum_{i \,:\, i+k \le n-1} m_{i,k} = \sum_{i \,:\, i+k \le n-1} X_{i,k}.
+\]
+These are the score equations of the quasi-Poisson log-likelihood
+$\sum (X \log m - m)/\varphi$ in the row and column parameters; the dispersion
+$\varphi$ multiplies the whole score and cancels, which is why the ODP fit is the
+Poisson fit and why the estimates do not depend on $\varphi$.
+
+The chapter proves the two halves of the classical equivalence. Chain ladder
+\emph{solves} the system (Theorems~\ref{thm:odpRow} and~\ref{thm:odpCol}), and a
+positive multiplicative solution of the system \emph{is} chain ladder
+(Theorem~\ref{thm:odpUnique}).
+
+\emph{Source note.} Neither paper was available in full text for this formalization.
+What is formalized is the marginal-sum system as quoted above and as it is stated in
+the secondary literature (England and Verrall, \emph{Stochastic claims reserving in
+general insurance}, British Actuarial Journal 8 (2002) 443--518, Section 2.3;
+W\"uthrich and Merz, \emph{Stochastic Claims Reserving Methods in Insurance} (2008),
+Section 2.3), in the two papers' own terms. The displayed equations of Renshaw and
+Verrall (Section 3) and of Mack (Section 2) are therefore identified by section and by
+the display itself, not by an equation number. Nothing here is probabilistic: the ODP
+assumption enters only through the shape of the score equations, which are algebraic
+identities in the fitted values.
+
+\section{Definitions}
+
+\begin{definition}[Incremental claims]\label{def:incr}\lean{VerifiedReserving.incr}\leanok
+$X_{i,k} = C_{i,k} - C_{i,k-1}$ for $k \ge 1$ and $X_{i,0} = C_{i,0}$.
+\end{definition}
+
+\begin{definition}[Observed row and column]\label{def:obs}\lean{VerifiedReserving.obsRow, VerifiedReserving.obsCol}\leanok
+The cell $(i,k)$ is observed when $i + k \le n-1$. The observed development years of
+accident year $i$ are $\mathrm{obsRow}(n,i) = \{0,\dots,n-1-i\}$ and the observed
+accident years of development year $k$ are $\mathrm{obsCol}(n,k) = \{0,\dots,n-1-k\}$.
+The second one at $k+1$ is the contributor set of $\hat f_k$
+(\texttt{obsCol\_succ}).
+\end{definition}
+
+\begin{definition}[Chain-ladder fit on the observed triangle]\label{def:CLfit}\lean{VerifiedReserving.CLcum, VerifiedReserving.CLincr}\leanok
+\uses{def:fhat, def:Chat, def:obs}
+The fitted cumulative on an observed cell is the latest observed entry of the row
+divided back by the development factors,
+\[
+  \hat C_{i,k} = \frac{C_{i,\,n-1-i}}{\prod_{j=k}^{n-2-i} \hat f_j},
+\]
+and the fitted incremental is $\hat X_{i,k} = \hat C_{i,k} - \hat C_{i,k-1}$ with
+$\hat X_{i,0} = \hat C_{i,0}$. These are the $\hat C$ projections of
+Definition~\ref{def:Chat} read backwards from the latest diagonal: equivalently
+$\hat C_{i,k} = \hat C_{i,n-1} / \prod_{j=k}^{n-2}\hat f_j$, the chain-ladder ultimate
+times the cumulative development pattern up to $k$
+(\texttt{CLcum\_eq\_ultimate\_div}).
+\end{definition}
+
+\begin{definition}[Multiplicative model and its pattern]\label{def:mult}\lean{VerifiedReserving.multFit, VerifiedReserving.PatternNormalized, VerifiedReserving.patternCum}\leanok
+$m_{i,k} = a_i b_k$; the identifiability constraint $\sum_{k<n} b_k = 1$; and the
+cumulative pattern $B_k = \sum_{j \le k} b_j$.
+\end{definition}
+
+\begin{definition}[Score (marginal-sum) equations]\label{def:score}\lean{VerifiedReserving.RowTotals, VerifiedReserving.ColumnTotals, VerifiedReserving.ScoreEquations}\leanok
+\uses{def:incr, def:obs}
+The row marginal sums, the column marginal sums, and their conjunction: the fitted
+values reproduce the observed row and column totals of incrementals on the observed
+triangle.
+\end{definition}
+
+\begin{definition}[Quasi-Poisson log-likelihood]\label{def:qll}\lean{VerifiedReserving.rowQuasiLogLik, VerifiedReserving.colQuasiLogLik}\leanok
+\uses{def:incr, def:obs}
+$\sum_{k} \big(X_{i,k}\log(t\,b_k) - t\,b_k\big)$ as a function of the row parameter
+$t$, and $\sum_{i} \big(X_{i,k}\log(a_i\,t) - a_i\,t\big)$ as a function of the column
+parameter $t$ (dispersion $\varphi = 1$, which only scales the expression).
+\end{definition}
+
+\section{The score equations are score equations}
+
+\begin{lemma}[Row and column scores]\label{lem:score}\lean{VerifiedReserving.hasDerivAt_rowQuasiLogLik, VerifiedReserving.hasDerivAt_colQuasiLogLik}\leanok
+\uses{def:qll}
+The derivative of the quasi-Poisson log-likelihood in a row parameter is
+$\big(\sum_k X_{i,k} - \sum_k t\,b_k\big)/t$, and in a column parameter
+$\big(\sum_i X_{i,k} - \sum_i a_i\,t\big)/t$.
+\end{lemma}
+\begin{proof}\leanok
+Termwise: $\frac{d}{dt}\big(X\log(tb) - tb\big) = X/t - b$, then sum over the observed
+cells.
+\end{proof}
+
+\begin{lemma}[Stationarity is the marginal-sum equation]\label{lem:scoreZero}\lean{VerifiedReserving.deriv_rowQuasiLogLik_eq_zero_iff, VerifiedReserving.deriv_colQuasiLogLik_eq_zero_iff}\leanok
+\uses{lem:score, def:score, def:mult}
+For nonzero parameters, the row score vanishes exactly at the row marginal-sum equation
+and the column score exactly at the column one. This is what licenses the name "score
+equations" for Definition~\ref{def:score}, and it is where the dispersion $\varphi$
+drops out.
+\end{lemma}
+\begin{proof}\leanok
+Lemma~\ref{lem:score} and $a/b = 0 \iff a = 0$ for $b \ne 0$.
+\end{proof}
+
+\section{Chain ladder solves the score equations}
+
+\begin{lemma}[Telescoping]\label{lem:telescope}\lean{VerifiedReserving.sum_incr, VerifiedReserving.sum_incr_obsRow, VerifiedReserving.sum_CLincr}\leanok
+\uses{def:incr, def:CLfit}
+$\sum_{k \le m} X_{i,k} = C_{i,m}$ and $\sum_{k \le m} \hat X_{i,k} = \hat C_{i,m}$.
+\end{lemma}
+\begin{proof}\leanok Induction on $m$. \end{proof}
+
+\begin{theorem}[Row totals]\label{thm:odpRow}\lean{VerifiedReserving.chainLadder_fitted_row_totals, VerifiedReserving.chainLadder_fitted_row_totals_eq}\leanok
+\uses{lem:telescope, def:score}
+For every accident year $i$,
+$\sum_{k \le n-1-i} \hat X_{i,k} = C_{i,\,n-1-i} = \sum_{k \le n-1-i} X_{i,k}$: the
+chain-ladder fit reproduces every observed row total. This is the first marginal-sum
+family of Mack (1991), Section 2, and the row score equation of Renshaw and Verrall
+(1998), Section 3. No hypothesis is needed.
+\end{theorem}
+\begin{proof}\leanok
+Both sides telescope to the latest observed entry, by Lemma~\ref{lem:telescope} and
+$\hat C_{i,\,n-1-i} = C_{i,\,n-1-i}$ (the empty product).
+\end{proof}
+
+\begin{lemma}[Fitted column sums of cumulatives]\label{lem:colCum}\lean{VerifiedReserving.sum_CLcum_obsCol_aux, VerifiedReserving.sum_CLcum_obsCol, VerifiedReserving.sum_CLcum_contributors}\leanok
+\uses{def:CLfit, def:S}
+If every development factor $\hat f_j$, $j < n-1$, is nonzero, then for every $k \le n-1$
+\[
+  \sum_{i \le n-1-k} \hat C_{i,k} = \sum_{i \le n-1-k} C_{i,k},
+\]
+and, one year earlier over the same accident years,
+$\sum_{i \le n-2-k} \hat C_{i,k} = S_k$.
+\end{lemma}
+\begin{proof}\leanok
+Downward induction on $k$. At $k = n-1$ the only observed cell is the corner, where the
+fit is the observation. For the step, the cells strictly above the diagonal satisfy
+$\hat C_{i,k} = \hat C_{i,k+1}/\hat f_k$, so their sum is $T_k/\hat f_k = S_k$ by the
+induction hypothesis and the definition $\hat f_k = T_k/S_k$; adding the diagonal cell,
+where the fit is the observation, gives the claim. Nonvanishing of $\hat f_k$ forces
+$T_k \ne 0$ and $S_k \ne 0$, which is the only place a hypothesis is used.
+\end{proof}
+
+\begin{theorem}[Column totals]\label{thm:odpCol}\lean{VerifiedReserving.chainLadder_fitted_column_totals}\leanok
+\uses{lem:colCum, def:score}
+If every development factor $\hat f_j$, $j < n-1$, is nonzero, then for every
+development year $k$
+\[
+  \sum_{i \le n-1-k} \hat X_{i,k} = \sum_{i \le n-1-k} X_{i,k}:
+\]
+the chain-ladder fit reproduces every observed column total. This is the second
+marginal-sum family of Mack (1991), Section 2, and the column score equation of Renshaw
+and Verrall (1998), Section 3.
+\end{theorem}
+\begin{proof}\leanok
+For $k = 0$ the incrementals are the cumulatives and this is Lemma~\ref{lem:colCum}. For
+$k \ge 1$ subtract the two displays of Lemma~\ref{lem:colCum}: the first over the
+observed part of column $k$, the second at $k-1$ over the same accident years.
+\end{proof}
+
+\begin{theorem}[Chain ladder solves the ODP score equations]\label{thm:odpScore}\lean{VerifiedReserving.chainLadder_scoreEquations}\leanok
+\uses{thm:odpRow, thm:odpCol}
+Under the same hypothesis, the chain-ladder fitted incrementals satisfy the whole
+system of Definition~\ref{def:score}.
+\end{theorem}
+\begin{proof}\leanok Theorems~\ref{thm:odpRow} and~\ref{thm:odpCol}. \end{proof}
+
+\section{Uniqueness: the marginal-sum solution is chain ladder}
+
+Mack (1991), Section 2, states the converse: the marginal-sum estimates of the
+multiplicative model are the chain-ladder estimates. Positivity of the parameters
+replaces the informal assumption that the triangle is a real one.
+
+\begin{lemma}[The pattern ratios are the development factors]\label{lem:patternFhat}\lean{VerifiedReserving.sum_mult_patternCum_aux, VerifiedReserving.sum_mult_patternCum, VerifiedReserving.patternCum_mul_fhat, VerifiedReserving.fhat_pos_of_mult}\leanok
+\uses{def:mult, def:score, def:fhat}
+Let $a_i, b_k > 0$ with $\sum_{k<n} b_k = 1$ satisfy the score equations. Then for every
+$k \le n-1$
+\[
+  \Big(\sum_{i \le n-1-k} a_i\Big) B_k \text{ splits as } \sum_{i \le n-1-k} C_{i,k},
+  \qquad\text{and}\qquad B_k \hat f_k = B_{k+1} \ (k < n-1),
+\]
+so every $\hat f_k$ is positive.
+\end{lemma}
+\begin{proof}\leanok
+Downward induction on $k$, mirroring Lemma~\ref{lem:colCum}. The row equation for
+accident year $i$ reads $a_i B_{n-1-i} = C_{i,\,n-1-i}$; at $i = 0$, with $B_{n-1} = 1$,
+it starts the induction. In the step, write $A = \sum_{i \le n-2-k} a_i$. The induction
+hypothesis gives $A B_{k+1} = T_k$ and the column equation at $k+1$ gives
+$A b_{k+1} = T_k - S_k$, so $A B_k = S_k$; adding the diagonal cell, whose row equation
+is $a_{n-1-k} B_k = C_{n-1-k,k}$, closes the induction. Dividing the two displays,
+$\hat f_k = T_k/S_k = B_{k+1}/B_k$.
+\end{proof}
+
+\begin{lemma}[Fitted cumulatives agree]\label{lem:multCum}\lean{VerifiedReserving.patternCum_mul_prod, VerifiedReserving.mult_cum_eq_CLcum}\leanok
+\uses{lem:patternFhat, def:CLfit}
+Under the hypotheses of Lemma~\ref{lem:patternFhat}, $a_i B_k = \hat C_{i,k}$ on every
+observed cell.
+\end{lemma}
+\begin{proof}\leanok
+Telescoping $B_k \prod_{j=k}^{d-1}\hat f_j = B_d$ with $d = n-1-i$, and the row equation
+$a_i B_d = C_{i,d}$; the product is nonzero because each factor is.
+\end{proof}
+
+\begin{theorem}[Mack's uniqueness result]\label{thm:odpUnique}\lean{VerifiedReserving.multFit_eq_CLincr}\leanok
+\uses{lem:multCum}
+A multiplicative model $m_{i,k} = a_i b_k$ with $a_i, b_k > 0$ and $\sum_{k<n} b_k = 1$
+that satisfies the marginal-sum equations coincides with the chain-ladder fit cell by
+cell on the observed triangle: $a_i b_k = \hat X_{i,k}$. With
+Theorem~\ref{thm:odpScore} this is the classical equivalence: the over-dispersed
+Poisson generalized linear model and the chain-ladder method give the same fitted
+values, hence the same development pattern and the same reserves.
+\end{theorem}
+\begin{proof}\leanok
+Differencing Lemma~\ref{lem:multCum} at $k$ and $k-1$, since
+$B_k - B_{k-1} = b_k$.
+\end{proof}
