@@ -1,5 +1,10 @@
 # verified-reserving
 
+[![CI](https://github.com/Robby955/verified-reserving/actions/workflows/ci.yml/badge.svg)](https://github.com/Robby955/verified-reserving/actions/workflows/ci.yml)
+[![Blueprint](https://github.com/Robby955/verified-reserving/actions/workflows/blueprint.yml/badge.svg)](https://robby955.github.io/verified-reserving/blueprint/)
+[![Lean 4](https://img.shields.io/badge/Lean-4.32.2-blue)](https://leanprover.github.io/)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-green.svg)](LICENSE)
+
 Machine-checked claims reserving in Lean 4. The first target is Mack's distribution-free chain-ladder model (Mack, ASTIN Bulletin 1993), the standard method behind reserve-uncertainty calculations in property and casualty insurance.
 
 [Blueprint](https://robby955.github.io/verified-reserving/blueprint/) (statements, dependency graph, what is proved) | [API docs](https://robby955.github.io/verified-reserving/docs/) | [Roadmap](ROADMAP.md) | [Contributing](CONTRIBUTING.md)
@@ -24,7 +29,7 @@ Unbiasedness of σ̂² (`VerifiedReserving/SigmaUnbiased.lean`). `weighted_sq_de
 
 Process variance and Theorem 3 (`VerifiedReserving/ProcessVariance.lean`, `VerifiedReserving/Msep.lean`). Conditional second moments and their tower recursion; `procVar`, the process variance along a row, proved equal to the conditional variance of the true claims; the exact conditional-MSEP decomposition for any measurable predictor; and `condMsep_eq`, Mack's Theorem 3 in exact form conditioned on the observed data: process variance plus squared estimation error. Mack's plug-in estimators of the two terms, including the conditional-resampling approximation, are definitions (`mackProcess`, `mackEstimation`), so the exact statement and the approximation never get confused.
 
-The variant catalogue (`VerifiedReserving/Catalogue.lean`). With `a_k = σ̂²_k/(f̂²_k S_k)`, Mack's estimation-error term `Ĉ² Σ a_k` is proved to be the first-order part of the conditional-resampling term `Ĉ² (∏(1 + a_k) − 1)` of Buchwalder, Bühlmann, Merz and Wüthrich (2006): Mack ≤ BBMW, the difference is exactly `Ĉ² (∏(1+a_k) − 1 − Σ a_k)`, the two coincide when a single development factor is involved, and the difference is second order (at most `Ĉ² (e^{Σ a} − 1 − Σ a)`). That is the algebraic content of a twenty-year discussion, settled by the kernel; which estimator has better statistical properties remains a statistical question (Gisler 2019, Siegenthaler 2023).
+The variant catalogue (`VerifiedReserving/Catalogue.lean`). With `a_k = σ̂²_k/(f̂²_k S_k)`, Mack's estimation-error term `Ĉ² Σ a_k` is proved to be the first-order part of the conditional-resampling term `Ĉ² (∏(1 + a_k) − 1)` of Buchwalder, Bühlmann, Merz and Wüthrich (2006): Mack ≤ BBMW, the difference is exactly `Ĉ² (∏(1+a_k) − 1 − Σ a_k)`, the two coincide when a single development factor is involved, and the difference is second order (at most `Ĉ² (e^{Σ a} − 1 − Σ a)`). That is the algebraic content of a twenty-year discussion, settled by the kernel; which estimator has better statistical properties remains a statistical question (Gisler 2019, Siegenthaler 2023). `Counterexample.lean` exhibits a concrete four-by-four triangle on which the two estimators differ strictly (`exists_mackEstimation_lt_bbmwEstimation`), every number checked by `norm_num`. In R's `ChainLadder`, `mse.method = "Mack"` computes the sum and `mse.method = "Independence"` the product, so the identity is also the exact difference between those two options.
 
 A non-vacuity witness (`VerifiedReserving/Test/Witness.lean`, run in CI) exhibits a concrete random triangle satisfying every hypothesis of the stochastic theorems and instantiates Theorems 1 and 2 on it. Writing it caught a hypothesis that no real triangle could satisfy (a nonvanishing column sum demanded for columns with no contributors); the theorems now ask for it only where the row uses it.
 

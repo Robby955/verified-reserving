@@ -21,10 +21,15 @@ Facts proved here, all deterministic:
    `(1+a)(1+b) - 1 - (a+b) = a b`.
 3. `R = 0` when at most one `a_k` is nonzero: the two estimators coincide
    exactly when there is at most one uncertain development factor.
-4. Upper bound `R ≤ (∑ a_k)²/2 · exp(∑ a_k)`: the disagreement is second order
+4. Upper bound `∏ (1 + a_k) ≤ exp(∑ a_k)`: the disagreement is second order
    in the relative estimation variances, which is why the two estimators are
-   numerically close on typical triangles and why Mack calls his the
-   linear approximation.
+   numerically close on typical triangles (Buchwalder et al. 2006, Table 5)
+   and why Buchwalder et al. and Wüthrich and Merz (2008, Remark 3.13)
+   describe Mack's term as the linear approximation from below of theirs.
+   For two development factors the remainder `a_1 a_2` appears in Mack,
+   Quarg and Braun (2006, p. 552); the general closed form is proved here.
+   In R's `ChainLadder`, `mse.method = "Mack"` implements the sum and
+   `mse.method = "Independence"` the product.
 
 `a_k ≥ 0` holds whenever the triangle entries are nonnegative, since `σ̂_k²`
 is then a nonnegative weighted sum of squares and `S_k ≥ 0`.

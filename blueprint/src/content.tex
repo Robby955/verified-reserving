@@ -417,6 +417,16 @@ variances.
 \end{theorem}
 \begin{proof}\leanok Lemma~\ref{lem:remainder} scaled by $\hat C_{i,n-1}^2$. \end{proof}
 
+\begin{theorem}[Strict counterexample]\label{thm:counterexample}\lean{VerifiedReserving.Cex, VerifiedReserving.mackEstimation_lt_bbmwEstimation_Cex, VerifiedReserving.exists_mackEstimation_lt_bbmwEstimation}\leanok
+\uses{thm:catalogue}
+There is a run-off triangle (four accident years, four development years, with unequal individual
+factors in the first two columns) and an accident year on which Mack's estimation-error term is
+strictly smaller than the conditional-resampling term: the two are different estimators, not two
+presentations of one. On the exhibited triangle $a_0 = 1/297$, $a_1 = 1/2809$, and the remainder
+is $\hat C^2 a_0 a_1 > 0$. Every number is checked by \texttt{norm\_num} from the definitions.
+\end{theorem}
+\begin{proof}\leanok Evaluate the definitions on the triangle; apply Theorem~\ref{thm:catalogue}(ii). \end{proof}
+
 \chapter{Reference computation}
 
 Mack's 1993 example (the Taylor and Ashe 1983 triangle) is reproduced to every printed digit

@@ -63,3 +63,5 @@ set_option format.width 400
 #print axioms bbmwEstimation_sub_mackEstimation
 #print axioms bbmwEstimation_eq_mackEstimation_of_one_factor
 #print axioms bbmwEstimation_sub_mackEstimation_le
+#print axioms mackEstimation_lt_bbmwEstimation_Cex
+#print axioms exists_mackEstimation_lt_bbmwEstimation
