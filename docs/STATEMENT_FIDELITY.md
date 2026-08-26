@@ -712,7 +712,7 @@ mean `x_i(1-z_d)` and variance `x_i ∑_{d≤k<m} σ_k²` under integrability or
 `variance_bfStochasticReserveEstimate` specializes it to `U(1-z)`. The latter explicitly assumes
 that `U` and `z` are independent and that their product is square-integrable.
 
-`meanSquaredPredictionError_eq_variance_add` proves that independent, equal-mean prediction and
+`bfMeanSquaredPredictionError_eq_variance_add` proves that independent, equal-mean prediction and
 target variables have MSEP equal to the sum of their variances.
 `bfMeanSquaredPredictionError_eq` substitutes BF3. `BFObservedPredictionIndependence` is the
 source's common-independence condition for the pair consisting of estimate and future reserve.

@@ -192,19 +192,19 @@ theorem variance_bfStochasticReserveEstimate [IsProbabilityMeasure mu]
 /-- Unconditional mean squared prediction error. Mack's displayed MSEP is
 conditional on the observed increments; common independence from those data
 reduces it to this unconditional quantity. -/
-def meanSquaredPredictionError (mu : Measure Omega)
+def bfMeanSquaredPredictionError (mu : Measure Omega)
     (prediction target : Omega -> Real) : Real :=
   integral mu fun omega => (prediction omega - target omega) ^ 2
 
 /-- Exact single-row MSEP decomposition. If prediction and target are
 independent and unbiased for the same mean, MSEP is estimation variance plus
 process variance. -/
-theorem meanSquaredPredictionError_eq_variance_add [IsProbabilityMeasure mu]
+theorem bfMeanSquaredPredictionError_eq_variance_add [IsProbabilityMeasure mu]
     (prediction target : Omega -> Real)
     (hprediction : MemLp prediction 2 mu) (htarget : MemLp target 2 mu)
     (hindep : prediction ⟂ᵢ[mu] target)
     (hunbiased : integral mu prediction = integral mu target) :
-    meanSquaredPredictionError mu prediction target =
+    bfMeanSquaredPredictionError mu prediction target =
       variance prediction mu + variance target mu := by
   have hmean : integral mu (prediction - target) = 0 := by
     change (integral mu fun omega => prediction omega - target omega) = 0
@@ -213,7 +213,7 @@ theorem meanSquaredPredictionError_eq_variance_add [IsProbabilityMeasure mu]
   have hcenter := variance_eq_integral (hprediction.sub htarget).aemeasurable
   have hvar := variance_sub hprediction htarget
   rw [hindep.covariance_eq_zero hprediction htarget] at hvar
-  unfold meanSquaredPredictionError
+  unfold bfMeanSquaredPredictionError
   have hfun : (fun omega => (prediction omega - target omega) ^ 2) =
       fun omega => ((prediction - target) omega - integral mu (prediction - target)) ^ 2 := by
     funext omega
@@ -234,12 +234,12 @@ theorem bfMeanSquaredPredictionError_eq [IsProbabilityMeasure mu]
     (hvar : BFIncrementVariance X mu x sigma2 m)
     (hindepPrediction : prediction ⟂ᵢ[mu] X.bfFutureReserveRv i d m)
     (hunbiased : integral mu prediction = integral mu (X.bfFutureReserveRv i d m)) :
-    meanSquaredPredictionError mu prediction (X.bfFutureReserveRv i d m) =
+    bfMeanSquaredPredictionError mu prediction (X.bfFutureReserveRv i d m) =
       variance prediction mu + x i * Finset.sum (Ico d m) sigma2 := by
   have hfuture : MemLp (X.bfFutureReserveRv i d m) 2 mu := by
     rw [RandomTriangle.bfFutureReserveRv]
     exact memLp_finsetSum' (Ico d m) hinc
-  rw [meanSquaredPredictionError_eq_variance_add prediction
+  rw [bfMeanSquaredPredictionError_eq_variance_add prediction
     (X.bfFutureReserveRv i d m) hprediction hfuture hindepPrediction hunbiased]
   rw [variance_bfFutureReserveRv X x sigma2 i d m hi hindepIncrements hvar hinc]
 
@@ -285,7 +285,7 @@ theorem condExp_sq_bfPredictionError_eq [IsProbabilityMeasure mu]
     hprediction hinc hindepIncrements hvar hindepPrediction hunbiased
   rw [show integral mu (fun omega =>
       (prediction omega - X.bfFutureReserveRv i d m omega) ^ 2) =
-      meanSquaredPredictionError mu prediction (X.bfFutureReserveRv i d m) by rfl,
+      bfMeanSquaredPredictionError mu prediction (X.bfFutureReserveRv i d m) by rfl,
     hvalue] at hcond
   exact hcond
 

@@ -31,7 +31,7 @@ Under BF1, BF3, and square integrability,
 \begin{proof}\leanok The integral commutes with the finite sum. Pairwise
 independence supplied by BF1 makes the finite-sum variance additive. \end{proof}
 
-\begin{definition}[Random BF estimate and MSEP]\label{def:bfRandomEstimate}\lean{VerifiedReserving.bfStochasticReserveEstimate, VerifiedReserving.meanSquaredPredictionError, VerifiedReserving.BFObservedPredictionIndependence}\leanok
+\begin{definition}[Random BF estimate and MSEP]\label{def:bfRandomEstimate}\lean{VerifiedReserving.bfStochasticReserveEstimate, VerifiedReserving.bfMeanSquaredPredictionError, VerifiedReserving.BFObservedPredictionIndependence}\leanok
 For a random initial ultimate $U$ and a random selected cumulative pattern $z$,
 the BF estimate is $\widehat R^{BF}=U(1-z)$. The unconditional MSEP is
 $E[(\widehat R^{BF}-R)^2]$. Mack's source conditions on the observed increments;
@@ -39,7 +39,7 @@ common independence means that the pair consisting of estimate and future
 reserve is independent of the observed-data sigma-algebra.
 \end{definition}
 
-\begin{theorem}[Product variance and the single-row MSEP]\label{thm:bfPredictionError}\lean{VerifiedReserving.variance_mul_of_indepFun, VerifiedReserving.variance_bfStochasticReserveEstimate, VerifiedReserving.meanSquaredPredictionError_eq_variance_add, VerifiedReserving.bfMeanSquaredPredictionError_eq, VerifiedReserving.condExp_sq_bfPredictionError_eq}\leanok
+\begin{theorem}[Product variance and the single-row MSEP]\label{thm:bfPredictionError}\lean{VerifiedReserving.variance_mul_of_indepFun, VerifiedReserving.variance_bfStochasticReserveEstimate, VerifiedReserving.bfMeanSquaredPredictionError_eq_variance_add, VerifiedReserving.bfMeanSquaredPredictionError_eq, VerifiedReserving.condExp_sq_bfPredictionError_eq}\leanok
 \uses{def:bfModel, thm:bfModelMoments, def:bfRandomEstimate}
 If $U$ and $z$ are independent and the displayed products are
 square-integrable, then

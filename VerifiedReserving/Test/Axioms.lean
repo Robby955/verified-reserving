@@ -279,7 +279,7 @@ set_option format.width 400
 #print axioms variance_bfFutureReserveRv
 #print axioms variance_mul_of_indepFun
 #print axioms variance_bfStochasticReserveEstimate
-#print axioms meanSquaredPredictionError_eq_variance_add
+#print axioms bfMeanSquaredPredictionError_eq_variance_add
 #print axioms bfMeanSquaredPredictionError_eq
 #print axioms condExp_sq_bfPredictionError_eq
 #print axioms integral_bfYRawRv
