@@ -12,9 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Munich residual correlations and adjusted factors</title>
-<link rel="next" href="sect0021.html" title="The stochastic ODP layer" />
-<link rel="prev" href="sect0019.html" title="Munich chain ladder: the separate-chain-ladder gap" />
+<title>Röhr: arbitrary-horizon approximations</title>
+<link rel="next" href="sect0025.html" title="R ChainLadder option semantics" />
+<link rel="prev" href="sect0023.html" title="Calendar-year claims development results" />
 <link rel="up" href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -228,7 +228,7 @@
 <li class="">
   <a href="sect0019.html"><span class="toc_ref">19</span> <span class="toc_entry">Munich chain ladder: the separate-chain-ladder gap</span></a>
  </li>
-<li class=" active current">
+<li class="">
   <a href="sect0020.html"><span class="toc_ref">20</span> <span class="toc_entry">Munich residual correlations and adjusted factors</span></a>
  </li>
 <li class="">
@@ -259,10 +259,10 @@
 <li class="">
   <a href="sect0023.html"><span class="toc_ref">23</span> <span class="toc_entry">Calendar-year claims development results</span></a>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0024.html"><span class="toc_ref">24</span> <span class="toc_entry">Röhr: arbitrary-horizon approximations</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
      <li class="">
   <a href="sect0024.html#a0000000070"><span class="toc_ref">24.1</span> <span class="toc_entry">Source formulas</span></a>
  </li>
@@ -302,19 +302,29 @@
 
 
 <div class="main-text">
-<h1 id="a0000000021">20 Munich residual correlations and adjusted factors</h1>
-<p>Quarg and Mack’s Sections 2.2 and 3.1.2 add the stochastic link between paid and incurred development <span class="cite">
+<h1 id="a0000000025">24 Röhr: arbitrary-horizon approximations</h1>
+<p>The primary-author presentation <em>Chain Ladder and Error Propagation</em>, given by Ancus Röhr at the CAE Fall 2014 meeting <span class="cite">
 	[
-	<a href="sect0030.html#QuargMack2004" >3</a>
+	<a href="sect0030.html#Rohr2014" >11</a>
 	]
-</span>. The model assumptions and the raw practical estimators are kept separate here. </p>
-<div class="definition_thmwrapper theorem-style-definition" id="def:munichResidual">
+</span>, states two relative-MSEP approximations on slide 13. If \(\hat u_j^2\) is the squared relative uncertainty of factor \(j\) and \(\hat q_j\) is its influence on the predicted ultimate \(\hat X\), they are </p>
+<div class="displaymath" id="a0000000265">
+  \[  \frac{\operatorname {MSEP}}{\hat X^2} \approx \sum _{j\in S}\hat u_j^2\hat q_j  \]
+</div>
+<p> for ultimate development and </p>
+<div class="displaymath" id="a0000000266">
+  \[  \frac{\operatorname {MSEP}(\operatorname {CDR}_k)}{\hat X^2} \approx \sum _{j\in S}\hat u_j^2 \frac{\hat q_j-\hat q_{j-k}}{1-\hat q_{j-k}}  \]
+</div>
+<p> for the claims development result over the next \(k\) years. The source sets \(\hat q_j=0\) below the active index range. Slide 17 labels an exact algebraic decomposition of each approximation as process and parameter error, and slide 20 shows the \(k=1\) form. </p>
+<p>The formulas below are definitions because the source marks both MSEP statements with \(\approx \). The Lean results prove algebra about those definitions. They do not construct \(\hat q_j\) from its logarithmic derivative or identify an approximation with a stochastic MSEP theorem. The formulas are attributed to the 2014 slides, not to an inaccessible display of the 2016 paper. </p>
+<h1 id="a0000000070">24.1 Source formulas</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rohrHorizonUltimate">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">20.1</span>
-    <span class="definition_thmtitle">Joint row history and conditional residual</span>
+    <span class="definition_thmlabel">24.1</span>
+    <span class="definition_thmtitle">Slide 13, ultimate approximation</span>
     <div class="thm_header_extras">
 
     
@@ -322,7 +332,7 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0020.html#def:munichResidual">#</a>
+    <a class="icon proof" href="sect0024.html#def:rohrHorizonUltimate">#</a>
     
     
     
@@ -337,15 +347,11 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichTriangle" class="lean_decl">VerifiedReserving.MunichTriangle</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrUltimateRelMsepApprox" class="lean_decl">VerifiedReserving.rohrUltimateRelMsepApprox</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichTriangle.jointRowSigma" class="lean_decl">VerifiedReserving.MunichTriangle.jointRowSigma</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrUltimateProcessRelApprox" class="lean_decl">VerifiedReserving.rohrUltimateProcessRelApprox</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichRowsIndep" class="lean_decl">VerifiedReserving.MunichRowsIndep</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.conditionalStdDev" class="lean_decl">VerifiedReserving.conditionalStdDev</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.conditionalResidual" class="lean_decl">VerifiedReserving.conditionalResidual</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrUltimateParameterRelApprox" class="lean_decl">VerifiedReserving.rohrUltimateParameterRelApprox</a></li>
           
         </ul>
     
@@ -356,21 +362,17 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p>For paid and incurred random triangles on one probability space, \(\mathcal B_i(k)\) is the join of their row histories through \(k\). For a random variable \(Y\) and a smaller history \(\mathcal A\) its residual is </p>
-<div class="displaymath" id="a0000000235">
-  \[  \operatorname {Res}(Y\mid \mathcal A) =\frac{Y-E[Y\mid \mathcal A]}{\sqrt{\operatorname {Var}(Y\mid \mathcal A)}}.  \]
-</div>
-<p> The PIU predicate states independence of the finite \(n\) accident years after grouping each year’s paid and incurred histories through the final modeled period \(n-1\). </p>
+  <p>For a finite index set \(S\), define the ultimate relative-MSEP approximation by \(\sum _{j\in S}\hat u_j^2\hat q_j\). Its slide-17 process and parameter components are \(\sum _j\hat u_j^2(1-\hat q_j)\hat q_j\) and \(\sum _j\hat u_j^2\hat q_j^2\). </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:munichRegression">
+<div class="definition_thmwrapper theorem-style-definition" id="def:rohrHorizon">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">20.2</span>
-    <span class="definition_thmtitle">PQ and IQ</span>
+    <span class="definition_thmlabel">24.2</span>
+    <span class="definition_thmtitle">Slide 13, arbitrary-horizon approximation</span>
     <div class="thm_header_extras">
 
     
@@ -378,28 +380,8 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0020.html#def:munichRegression">#</a>
+    <a class="icon proof" href="sect0024.html#def:rohrHorizon">#</a>
     
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0020.html#def:munichResidual">Definition 20.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
     
     
     <button class="modal lean">L∃∀N</button>
@@ -413,9 +395,19 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichPaidRegression" class="lean_decl">VerifiedReserving.MunichPaidRegression</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonWeight" class="lean_decl">VerifiedReserving.rohrHorizonWeight</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichIncurredRegression" class="lean_decl">VerifiedReserving.MunichIncurredRegression</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonTerm" class="lean_decl">VerifiedReserving.rohrHorizonTerm</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonProcessTerm" class="lean_decl">VerifiedReserving.rohrHorizonProcessTerm</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonParameterTerm" class="lean_decl">VerifiedReserving.rohrHorizonParameterTerm</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonRelMsepApprox" class="lean_decl">VerifiedReserving.rohrHorizonRelMsepApprox</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonProcessRelApprox" class="lean_decl">VerifiedReserving.rohrHorizonProcessRelApprox</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonParameterRelApprox" class="lean_decl">VerifiedReserving.rohrHorizonParameterRelApprox</a></li>
           
         </ul>
     
@@ -426,17 +418,71 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> PQ regresses the paid development residual, conditioned on \(\mathcal B_i(k)\), on the reciprocal-ratio residual with one common slope \(\lambda ^P\). IQ uses the incurred development residual and the paid/incurred-ratio residual with slope \(\lambda ^I\). Both predicates range over adjacent periods satisfying \(k+1{\lt}n\). </p>
+  <p>For current and earlier influences \(q\) and \(q^-\), put </p>
+<div class="displaymath" id="a0000000267">
+  \[  w(q,q^-)=\frac{q-q^-}{1-q^-}.  \]
+</div>
+<p> The horizon approximation is \(\sum _j\hat u_j^2w(\hat q_j,\hat q_{j-k})\). Its displayed process and parameter terms are </p>
+<div class="displaymath" id="a0000000268">
+  \[  \hat u_j^2\frac{(1-\hat q_j)(\hat q_j-\hat q_{j-k})}{(1-\hat q_{j-k})^2} \quad \text{and}\quad \hat u_j^2\left(\frac{\hat q_j-\hat q_{j-k}}{1-\hat q_{j-k}}\right)^2.  \]
+</div>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:munichCorrelation">
+<div class="definition_thmwrapper theorem-style-definition" id="def:rohrKYear">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">24.3</span>
+    <span class="definition_thmtitle">\(k\)-year and one-year forms</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0024.html#def:rohrKYear">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrKYearRelMsepApprox" class="lean_decl">VerifiedReserving.rohrKYearRelMsepApprox</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrOneYearRelMsepApprox" class="lean_decl">VerifiedReserving.rohrOneYearRelMsepApprox</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>The \(k\)-year definition substitutes \(q^-_j=q_{j-k}\) when \(k\le j\) and sets \(q^-_j=0\) when \(j{\lt}k\). The one-year definition uses \(q_{j-1}\) when \(1\le j\) and zero at the earlier index. </p>
+
+  </div>
+</div>
+<h1 id="a0000000071">24.2 Exact splits</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rohrHorizonUltimateSplit">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">20.3</span>
-    <span class="theorem_thmtitle">Residual slope is the standardized cross-moment</span>
+    <span class="theorem_thmlabel">24.4</span>
+    <span class="theorem_thmtitle">Slide 17, ultimate split</span>
     <div class="thm_header_extras">
 
     
@@ -444,31 +490,11 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0020.html#thm:munichCorrelation">#</a>
+    <a class="icon proof" href="sect0024.html#thm:rohrHorizonUltimateSplit">#</a>
     
-    <a class="icon proof" href="sect0020.html#a0000000236"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0024.html#a0000000269"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0020.html#def:munichRegression">Definition 20.2</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
     
     
     <button class="modal lean">L∃∀N</button>
@@ -482,11 +508,9 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_mul_eq_slope_of_residual_regression" class="lean_decl">VerifiedReserving.condExp_mul_eq_slope_of_residual_regression</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrUltimateTerm_split" class="lean_decl">VerifiedReserving.rohrUltimateTerm_split</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichPaid_residualCorrelation_eq" class="lean_decl">VerifiedReserving.munichPaid_residualCorrelation_eq</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichIncurred_residualCorrelation_eq" class="lean_decl">VerifiedReserving.munichIncurred_residualCorrelation_eq</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrUltimateRelMsepApprox_split" class="lean_decl">VerifiedReserving.rohrUltimateRelMsepApprox_split</a></li>
           
         </ul>
     
@@ -497,15 +521,14 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> Let \(\mathcal A\le \mathcal B\). If \(A\) is \(\mathcal B\)-measurable, \(E[Z\mid \mathcal B]=\lambda A\), and \(E[A^2\mid \mathcal A]=1\), then </p>
-<div class="displaymath" id="a0000000237">
-  \[  E[AZ\mid \mathcal A]=\lambda .  \]
+  <p>The ultimate approximation splits exactly: </p>
+<div class="displaymath" id="a0000000270">
+  \[  \sum _j\hat u_j^2\hat q_j =\sum _j\hat u_j^2(1-\hat q_j)\hat q_j +\sum _j\hat u_j^2\hat q_j^2.  \]
 </div>
-<p> Applying this to PQ and IQ proves the paid and incurred residual cross-moments equal \(\lambda ^P\) and \(\lambda ^I\), under the stated integrability and standardization hypotheses. </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000236">
+<div class="proof_wrapper" id="a0000000269">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -513,109 +536,17 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Pull \(A\) out after conditioning on \(\mathcal B\), substitute the regression, use the tower property, and use \(E[A^2\mid \mathcal A]=1\). </p>
+  <p>Expand the right side and collect terms. </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:munichProjection">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">20.4</span>
-    <span class="definition_thmtitle">Raw Munich estimators and recursion</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0020.html#def:munichProjection">#</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0020.html#def:munichRegression">Definition 20.2</a></li>
-          
-          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclRatioMean" class="lean_decl">VerifiedReserving.mclRatioMean</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclRatioScaleSqIncurred" class="lean_decl">VerifiedReserving.mclRatioScaleSqIncurred</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclRatioScaleSqPaid" class="lean_decl">VerifiedReserving.mclRatioScaleSqPaid</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclPaidResidual" class="lean_decl">VerifiedReserving.mclPaidResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclIncurredResidual" class="lean_decl">VerifiedReserving.mclIncurredResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclPaidRatioResidual" class="lean_decl">VerifiedReserving.mclPaidRatioResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclIncurredRatioResidual" class="lean_decl">VerifiedReserving.mclIncurredRatioResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclLambdaPaid" class="lean_decl">VerifiedReserving.mclLambdaPaid</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclLambdaIncurred" class="lean_decl">VerifiedReserving.mclLambdaIncurred</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedPaidFactor" class="lean_decl">VerifiedReserving.mclAdjustedPaidFactor</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedIncurredFactor" class="lean_decl">VerifiedReserving.mclAdjustedIncurredFactor</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichProjection" class="lean_decl">VerifiedReserving.munichProjection</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p> The raw pattern and dispersion estimators on pp.&#160;290–291 define the four residual arrays. The pooled least-squares slopes through the origin are \(\widehat\lambda ^P\) and \(\widehat\lambda ^I\). At a projected pair \((p,i)\) the paid factor is </p>
-<div class="displaymath" id="a0000000238">
-  \[  \widehat f^P_k+\widehat\lambda ^P \frac{\widehat\sigma ^P_k}{\widehat\rho ^P_k} \left(\frac{i}{p}-\widehat q_k^{-1}\right),  \]
-</div>
-<p> with the symmetric paid/incurred formula for the incurred factor. The coupled recursion applies both factors to the preceding pair. </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:munichZero">
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rohrHorizonSplit">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">20.5</span>
-    <span class="theorem_thmtitle">Zero residual slopes recover separate chain ladder</span>
+    <span class="theorem_thmlabel">24.5</span>
+    <span class="theorem_thmtitle">Slide 17, arbitrary-horizon split</span>
     <div class="thm_header_extras">
 
     
@@ -623,33 +554,11 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0020.html#thm:munichZero">#</a>
+    <a class="icon proof" href="sect0024.html#thm:rohrHorizonSplit">#</a>
     
-    <a class="icon proof" href="sect0020.html#a0000000239"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0024.html#a0000000271"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0020.html#def:munichProjection">Definition 20.4</a></li>
-          
-          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
     
     
     <button class="modal lean">L∃∀N</button>
@@ -663,11 +572,13 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedPaidFactor_zero" class="lean_decl">VerifiedReserving.mclAdjustedPaidFactor_zero</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonWeight_split" class="lean_decl">VerifiedReserving.rohrHorizonWeight_split</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedIncurredFactor_zero" class="lean_decl">VerifiedReserving.mclAdjustedIncurredFactor_zero</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonTerm_split" class="lean_decl">VerifiedReserving.rohrHorizonTerm_split</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichProjection_zero" class="lean_decl">VerifiedReserving.munichProjection_zero</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonRelMsepApprox_split" class="lean_decl">VerifiedReserving.rohrHorizonRelMsepApprox_split</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrKYearRelMsepApprox_split" class="lean_decl">VerifiedReserving.rohrKYearRelMsepApprox_split</a></li>
           
         </ul>
     
@@ -678,11 +589,14 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> When both slopes are zero, every adjusted factor is its usual chain-ladder factor and the coupled recursion is exactly \((\widehat P_{i,d+m},\widehat I_{i,d+m})\) from the two separate projections. </p>
+  <p>If \(q^-_j\ne 1\) on \(S\), then </p>
+<div class="displaymath" id="a0000000272">
+  \[  \sum _j\hat u_j^2\frac{q_j-q^-_j}{1-q^-_j} =\sum _j\hat u_j^2\frac{(1-q_j)(q_j-q^-_j)}{(1-q^-_j)^2} +\sum _j\hat u_j^2\left(\frac{q_j-q^-_j}{1-q^-_j}\right)^2.  \]
+</div>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000239">
+<div class="proof_wrapper" id="a0000000271">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -690,7 +604,158 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Induction on \(m\), using the chain-ladder projection step for each component. </p>
+  <p>Put the two right-hand numerators over the common denominator \((1-q^-_j)^2\) and sum the termwise identity. </p>
+
+  </div>
+</div>
+<h1 id="a0000000072">24.3 Endpoints and bounds</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rohrHorizonEndpoints">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">24.6</span>
+    <span class="theorem_thmtitle">Horizon specializations</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0024.html#thm:rohrHorizonEndpoints">#</a>
+    
+    <a class="icon proof" href="sect0024.html#a0000000273"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonWeight_zero_past" class="lean_decl">VerifiedReserving.rohrHorizonWeight_zero_past</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonRelMsepApprox_zero_past" class="lean_decl">VerifiedReserving.rohrHorizonRelMsepApprox_zero_past</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonProcessRelApprox_zero_past" class="lean_decl">VerifiedReserving.rohrHorizonProcessRelApprox_zero_past</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonParameterRelApprox_zero_past" class="lean_decl">VerifiedReserving.rohrHorizonParameterRelApprox_zero_past</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrKYearRelMsepApprox_one" class="lean_decl">VerifiedReserving.rohrKYearRelMsepApprox_one</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrKYearRelMsepApprox_zero" class="lean_decl">VerifiedReserving.rohrKYearRelMsepApprox_zero</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrKYearRelMsepApprox_eq_ultimate" class="lean_decl">VerifiedReserving.rohrKYearRelMsepApprox_eq_ultimate</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>Zero earlier influence reduces the horizon approximation and both split components to their ultimate forms. The \(k=1\) definition is the one-year formula. If \(q_j\ne 1\) on \(S\), the algebraic \(k=0\) endpoint is zero. More generally, if \(q_{j-k}=0\) for every active \(j\in S\), the \(k\)-year formula is the ultimate formula. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000273">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Substitute the indicated earlier influence in each definition. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rohrHorizonBounds">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">24.7</span>
+    <span class="theorem_thmtitle">Influence bounds</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0024.html#thm:rohrHorizonBounds">#</a>
+    
+    <a class="icon proof" href="sect0024.html#a0000000274"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonWeight_nonneg" class="lean_decl">VerifiedReserving.rohrHorizonWeight_nonneg</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonWeight_le_one" class="lean_decl">VerifiedReserving.rohrHorizonWeight_le_one</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonWeight_le_current" class="lean_decl">VerifiedReserving.rohrHorizonWeight_le_current</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonWeight_mem_Icc" class="lean_decl">VerifiedReserving.rohrHorizonWeight_mem_Icc</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonTerm_nonneg" class="lean_decl">VerifiedReserving.rohrHorizonTerm_nonneg</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonProcessTerm_nonneg" class="lean_decl">VerifiedReserving.rohrHorizonProcessTerm_nonneg</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonParameterTerm_nonneg" class="lean_decl">VerifiedReserving.rohrHorizonParameterTerm_nonneg</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonRelMsepApprox_nonneg" class="lean_decl">VerifiedReserving.rohrHorizonRelMsepApprox_nonneg</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonProcessRelApprox_nonneg" class="lean_decl">VerifiedReserving.rohrHorizonProcessRelApprox_nonneg</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonParameterRelApprox_nonneg" class="lean_decl">VerifiedReserving.rohrHorizonParameterRelApprox_nonneg</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.rohrHorizonRelMsepApprox_le_ultimate" class="lean_decl">VerifiedReserving.rohrHorizonRelMsepApprox_le_ultimate</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>Suppose \(0\le q^-_j\le q_j\le 1\) and \(q^-_j{\lt}1\). Then each horizon weight lies in \([0,1]\). With \(\hat u_j^2\ge 0\), every horizon, process, and parameter term is nonnegative. The horizon approximation is at most the ultimate approximation when \(q^-_j\ge 0\), \(q_j\le 1\), and \(q^-_j{\lt}1\) pointwise. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000274">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>The denominator \(1-q^-_j\) is positive. Division preserves the pointwise inequalities, squares are nonnegative, and finite sums preserve them. </p>
 
   </div>
 </div>
@@ -705,11 +770,11 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0019.html" title="Munich chain ladder: the separate-chain-ladder gap"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0023.html" title="Calendar-year claims development results"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0021.html" title="The stochastic ODP layer"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0025.html" title="R ChainLadder option semantics"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

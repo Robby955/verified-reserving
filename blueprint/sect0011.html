@@ -15,7 +15,7 @@
 <title>A finite independent-row witness</title>
 <link rel="next" href="sect0012.html" title="Merz-Wüthrich: the MSEP of the one-year claims development result" />
 <link rel="prev" href="sect0010.html" title="The over-dispersed Poisson model" />
-<link rel="up" href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint" />
+<link rel="up" href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
 <link rel="stylesheet" href="styles/showmore.css" />
@@ -26,7 +26,7 @@
 <body>
 <header>
 <svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
-<h1 id="doc_title"><a href="index.html">Mack’s chain-ladder model in Lean 4: blueprint</a></h1>
+<h1 id="doc_title"><a href="index.html">Machine-checked claims reserving in Lean 4: blueprint</a></h1>
 </header>
 
 <div class="wrapper">
@@ -40,10 +40,10 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0002.html#a0000000022"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0002.html#a0000000032"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000023"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
+  <a href="sect0002.html#a0000000033"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
  </li>
 
   </ul>
@@ -59,25 +59,25 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0005.html#a0000000024"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
+  <a href="sect0005.html#a0000000034"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000025"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
+  <a href="sect0005.html#a0000000035"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000026"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
+  <a href="sect0005.html#a0000000036"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000027"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
+  <a href="sect0005.html#a0000000037"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000028"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
+  <a href="sect0005.html#a0000000038"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000029"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
+  <a href="sect0005.html#a0000000039"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000030"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
+  <a href="sect0005.html#a0000000040"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
  </li>
 
   </ul>
@@ -87,7 +87,7 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0006.html#a0000000031"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
+  <a href="sect0006.html#a0000000041"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
  </li>
 
   </ul>
@@ -97,7 +97,7 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0007.html#a0000000032"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
+  <a href="sect0007.html#a0000000042"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
  </li>
 
   </ul>
@@ -107,19 +107,19 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0008.html#a0000000033"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0008.html#a0000000043"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000034"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
+  <a href="sect0008.html#a0000000044"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000035"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
+  <a href="sect0008.html#a0000000045"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000036"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
+  <a href="sect0008.html#a0000000046"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000037"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
+  <a href="sect0008.html#a0000000047"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
  </li>
 
   </ul>
@@ -129,22 +129,22 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0009.html#a0000000038"><span class="toc_ref">9.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0009.html#a0000000048"><span class="toc_ref">9.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000039"><span class="toc_ref">9.2</span> <span class="toc_entry">Deterministic identities</span></a>
+  <a href="sect0009.html#a0000000049"><span class="toc_ref">9.2</span> <span class="toc_entry">Deterministic identities</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000040"><span class="toc_ref">9.3</span> <span class="toc_entry">The recursion equals \((*)\)</span></a>
+  <a href="sect0009.html#a0000000050"><span class="toc_ref">9.3</span> <span class="toc_entry">The recursion equals \((*)\)</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000041"><span class="toc_ref">9.4</span> <span class="toc_entry">The 1993 case</span></a>
+  <a href="sect0009.html#a0000000051"><span class="toc_ref">9.4</span> <span class="toc_entry">The 1993 case</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000042"><span class="toc_ref">9.5</span> <span class="toc_entry">Conditional unbiasedness of the weighted estimator</span></a>
+  <a href="sect0009.html#a0000000052"><span class="toc_ref">9.5</span> <span class="toc_entry">Conditional unbiasedness of the weighted estimator</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000043"><span class="toc_ref">9.6</span> <span class="toc_entry">Weighted variance and estimator unbiasedness</span></a>
+  <a href="sect0009.html#a0000000053"><span class="toc_ref">9.6</span> <span class="toc_entry">Weighted variance and estimator unbiasedness</span></a>
  </li>
 
   </ul>
@@ -154,16 +154,16 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0010.html#a0000000044"><span class="toc_ref">10.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0010.html#a0000000054"><span class="toc_ref">10.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0010.html#a0000000045"><span class="toc_ref">10.2</span> <span class="toc_entry">The score equations are score equations</span></a>
+  <a href="sect0010.html#a0000000055"><span class="toc_ref">10.2</span> <span class="toc_entry">The score equations are score equations</span></a>
  </li>
 <li class="">
-  <a href="sect0010.html#a0000000046"><span class="toc_ref">10.3</span> <span class="toc_entry">Chain ladder solves the score equations</span></a>
+  <a href="sect0010.html#a0000000056"><span class="toc_ref">10.3</span> <span class="toc_entry">Chain ladder solves the score equations</span></a>
  </li>
 <li class="">
-  <a href="sect0010.html#a0000000047"><span class="toc_ref">10.4</span> <span class="toc_entry">Uniqueness: the marginal-sum solution is chain ladder</span></a>
+  <a href="sect0010.html#a0000000057"><span class="toc_ref">10.4</span> <span class="toc_entry">Uniqueness: the marginal-sum solution is chain ladder</span></a>
  </li>
 
   </ul>
@@ -176,16 +176,16 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0012.html#a0000000048"><span class="toc_ref">12.1</span> <span class="toc_entry">The exact one-year process variance</span></a>
+  <a href="sect0012.html#a0000000058"><span class="toc_ref">12.1</span> <span class="toc_entry">The exact one-year process variance</span></a>
  </li>
 <li class="">
-  <a href="sect0012.html#a0000000049"><span class="toc_ref">12.2</span> <span class="toc_entry">The estimator of Merz and Wüthrich</span></a>
+  <a href="sect0012.html#a0000000059"><span class="toc_ref">12.2</span> <span class="toc_entry">The estimator of Merz and Wüthrich</span></a>
  </li>
 <li class="">
-  <a href="sect0012.html#a0000000050"><span class="toc_ref">12.3</span> <span class="toc_entry">The bridge to the exact statement</span></a>
+  <a href="sect0012.html#a0000000060"><span class="toc_ref">12.3</span> <span class="toc_entry">The bridge to the exact statement</span></a>
  </li>
 <li class="">
-  <a href="sect0012.html#a0000000051"><span class="toc_ref">12.4</span> <span class="toc_entry">Aggregation over accident years</span></a>
+  <a href="sect0012.html#a0000000061"><span class="toc_ref">12.4</span> <span class="toc_entry">Aggregation over accident years</span></a>
  </li>
 
   </ul>
@@ -195,7 +195,7 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0013.html#a0000000052"><span class="toc_ref">13.1</span> <span class="toc_entry">From independence across accident years to the hypotheses</span></a>
+  <a href="sect0013.html#a0000000062"><span class="toc_ref">13.1</span> <span class="toc_entry">From independence across accident years to the hypotheses</span></a>
  </li>
 
   </ul>
@@ -208,10 +208,10 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0015.html#a0000000053"><span class="toc_ref">15.1</span> <span class="toc_entry">Development-factor correlation</span></a>
+  <a href="sect0015.html#a0000000063"><span class="toc_ref">15.1</span> <span class="toc_entry">Development-factor correlation</span></a>
  </li>
 <li class="">
-  <a href="sect0015.html#a0000000054"><span class="toc_ref">15.2</span> <span class="toc_entry">Calendar-year labels</span></a>
+  <a href="sect0015.html#a0000000064"><span class="toc_ref">15.2</span> <span class="toc_entry">Calendar-year labels</span></a>
  </li>
 
   </ul>
@@ -226,10 +226,72 @@
   <a href="sect0018.html"><span class="toc_ref">18</span> <span class="toc_entry">Bühlmann-Straub credibility</span></a>
  </li>
 <li class="">
-  <a href="sect0019.html"><span class="toc_ref">19</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+  <a href="sect0019.html"><span class="toc_ref">19</span> <span class="toc_entry">Munich chain ladder: the separate-chain-ladder gap</span></a>
  </li>
 <li class="">
-  <a href="sect0020.html"><span class="toc_ref">20</span> <span class="toc_entry">Reference computation</span></a>
+  <a href="sect0020.html"><span class="toc_ref">20</span> <span class="toc_entry">Munich residual correlations and adjusted factors</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html"><span class="toc_ref">21</span> <span class="toc_entry">The stochastic ODP layer</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0021.html#a0000000065"><span class="toc_ref">21.1</span> <span class="toc_entry">Model and conditional moments</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000066"><span class="toc_ref">21.2</span> <span class="toc_entry">Prediction error</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000067"><span class="toc_ref">21.3</span> <span class="toc_entry">Log-link and corner constraints</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000068"><span class="toc_ref">21.4</span> <span class="toc_entry">Residual bootstrap definitions</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000069"><span class="toc_ref">21.5</span> <span class="toc_entry">Finite non-vacuity witness</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0022.html"><span class="toc_ref">22</span> <span class="toc_entry">Mack 1999: row assumptions and active weights</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html"><span class="toc_ref">23</span> <span class="toc_entry">Calendar-year claims development results</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html"><span class="toc_ref">24</span> <span class="toc_entry">Röhr: arbitrary-horizon approximations</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0024.html#a0000000070"><span class="toc_ref">24.1</span> <span class="toc_entry">Source formulas</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html#a0000000071"><span class="toc_ref">24.2</span> <span class="toc_entry">Exact splits</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html#a0000000072"><span class="toc_ref">24.3</span> <span class="toc_entry">Endpoints and bounds</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0025.html"><span class="toc_ref">25</span> <span class="toc_entry">R <span class="ttfamily">ChainLadder</span> option semantics</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html"><span class="toc_ref">26</span> <span class="toc_entry">Stochastic Bühlmann-Straub credibility</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html"><span class="toc_ref">27</span> <span class="toc_entry">The stochastic Bornhuetter-Ferguson model</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html"><span class="toc_ref">28</span> <span class="toc_entry">Panjer recursion</span></a>
+ </li>
+<li class="">
+  <a href="sect0029.html"><span class="toc_ref">29</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+ </li>
+<li class="">
+  <a href="sect0030.html"><span class="toc_ref">30</span> <span class="toc_entry">Reference computation</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
@@ -243,7 +305,7 @@
 <h1 id="a0000000012">11 A finite independent-row witness</h1>
 <p>The passage from Mack’s row-conditioned assumptions to the observed-data filtration is realized by a concrete model. This section supplies one finite probability space satisfying every hypothesis used by Theorems&#160;<a href="sect0005.html#thm:passage">5.30</a> and&#160;<a href="sect0005.html#thm:mack2prime">5.31</a>. The model is a repository witness, while the assumptions it realizes are Mack’s equations (1) and (2) and the filtration \(B_k\) used in the proof of Theorem 2 <span class="cite">
 	[
-	<a href="sect0020.html#Mack1993" >1</a>
+	<a href="sect0030.html#Mack1993" >1</a>
 	]
 </span>. </p>
 <div class="definition_thmwrapper theorem-style-definition" id="def:independenceWitness">
@@ -332,7 +394,7 @@
 
     <a class="icon proof" href="sect0011.html#thm:independenceWitnessRows">#</a>
     
-    <a class="icon proof" href="sect0011.html#a0000000164"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0011.html#a0000000182"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -387,7 +449,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000164">
+<div class="proof_wrapper" id="a0000000182">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -415,7 +477,7 @@
 
     <a class="icon proof" href="sect0011.html#thm:independenceWitnessPassage">#</a>
     
-    <a class="icon proof" href="sect0011.html#a0000000165"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0011.html#a0000000183"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -478,7 +540,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000165">
+<div class="proof_wrapper" id="a0000000183">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -503,7 +565,7 @@
 
   <a href="sect0010.html" title="The over-dispersed Poisson model"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
-  <a href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+  <a href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
   <a href="sect0012.html" title="Merz-Wüthrich: the MSEP of the one-year claims development result"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>

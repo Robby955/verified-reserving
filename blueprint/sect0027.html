@@ -12,9 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The chain-ladder estimators</title>
-<link rel="next" href="sect0003.html" title="Mack 1999 equals Mack 1993" />
-<link rel="prev" href="sect0001.html" title="Introduction" />
+<title>The stochastic Bornhuetter-Ferguson model</title>
+<link rel="next" href="sect0028.html" title="Panjer recursion" />
+<link rel="prev" href="sect0026.html" title="Stochastic Bühlmann-Straub credibility" />
 <link rel="up" href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -35,10 +35,10 @@
 <li class="">
   <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
  </li>
-<li class=" active current">
+<li class="">
   <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">The chain-ladder estimators</span></a>
-  <span class="expand-toc">▼</span>
-  <ul class="sub-toc-1 active">
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
      <li class="">
   <a href="sect0002.html#a0000000032"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
@@ -281,7 +281,7 @@
 <li class="">
   <a href="sect0026.html"><span class="toc_ref">26</span> <span class="toc_entry">Stochastic Bühlmann-Straub credibility</span></a>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0027.html"><span class="toc_ref">27</span> <span class="toc_entry">The stochastic Bornhuetter-Ferguson model</span></a>
  </li>
 <li class="">
@@ -302,305 +302,19 @@
 
 
 <div class="main-text">
-<h1 id="a0000000003">2 The chain-ladder estimators</h1>
-<h1 id="a0000000032">2.1 Definitions</h1>
-<div class="definition_thmwrapper theorem-style-definition" id="def:contributors">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">2.1</span>
-    <span class="definition_thmtitle">Contributors</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0002.html#def:contributors">#</a>
-    
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.contributors" class="lean_decl">VerifiedReserving.contributors</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p>The accident years contributing to the development factor \(k \to k+1\) are \(i = 0, \dots , n-k-2\), those with \(C_{i,k+1}\) observed. </p>
-
-  </div>
-</div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:S">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">2.2</span>
-    <span class="definition_thmtitle">Column sums</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0002.html#def:S">#</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:contributors">Definition 2.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.S" class="lean_decl">VerifiedReserving.S</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.T" class="lean_decl">VerifiedReserving.T</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p> \(S_k = \sum _{i=0}^{n-k-2} C_{i,k}\) and \(T_k = \sum _{i=0}^{n-k-2} C_{i,k+1}\). </p>
-
-  </div>
-</div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:fhat">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">2.3</span>
-    <span class="definition_thmtitle">Development factor</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0002.html#def:fhat">#</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:S">Definition 2.2</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.fhat" class="lean_decl">VerifiedReserving.fhat</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p> \(\hat f_k = T_k / S_k\). (In Lean, division by zero is zero.) </p>
-
-  </div>
-</div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:F">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">2.4</span>
-    <span class="definition_thmtitle">Individual factor</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0002.html#def:F">#</a>
-    
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.F" class="lean_decl">VerifiedReserving.F</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p>\(F_{i,k} = C_{i,k+1} / C_{i,k}\). </p>
-
-  </div>
-</div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:sigma2">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">2.5</span>
-    <span class="definition_thmtitle">Mack’s variance estimator</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0002.html#def:sigma2">#</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
-          
-          <li><a href="sect0002.html#def:F">Definition 2.4</a></li>
-          
-          <li><a href="sect0002.html#def:contributors">Definition 2.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.sigma2" class="lean_decl">VerifiedReserving.sigma2</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p> \(\hat\sigma _k^2 = \frac{1}{n-k-2}\sum _{i=0}^{n-k-2} C_{i,k}\, (F_{i,k} - \hat f_k)^2\). The value for \(k = n-2\) (a single contributor) is an extrapolation convention in <span class="cite">
+<h1 id="a0000000028">27 The stochastic Bornhuetter-Ferguson model</h1>
+<p>Mack, <em>The Prediction Error of Bornhuetter/Ferguson</em> <span class="cite">
 	[
-	<a href="sect0030.html#Mack1993" >1</a>
+	<a href="sect0030.html#Mack2008BF" >9</a>
 	]
-</span>, not an estimator; no theorem here uses it. </p>
-
-  </div>
-</div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:Chat">
+</span>, states the increment model on page 91 and derives the prediction-error calculation on pages 95–99. The exact probability statements and the practical assessments are separated below. </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:bfModel">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">2.6</span>
-    <span class="definition_thmtitle">Projection</span>
+    <span class="definition_thmlabel">27.1</span>
+    <span class="definition_thmtitle">BF1–BF3 and the future reserve</span>
     <div class="thm_header_extras">
 
     
@@ -608,28 +322,8 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#def:Chat">#</a>
+    <a class="icon proof" href="sect0027.html#def:bfModel">#</a>
     
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
     
     
     <button class="modal lean">L∃∀N</button>
@@ -643,7 +337,19 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.Chat" class="lean_decl">VerifiedReserving.Chat</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.bfIncrementRv" class="lean_decl">VerifiedReserving.RandomTriangle.bfIncrementRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFFullIncrementIndependence" class="lean_decl">VerifiedReserving.BFFullIncrementIndependence</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFIncrementMean" class="lean_decl">VerifiedReserving.BFIncrementMean</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFIncrementVariance" class="lean_decl">VerifiedReserving.BFIncrementVariance</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFPatternNormalized" class="lean_decl">VerifiedReserving.BFPatternNormalized</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfCumulativePattern" class="lean_decl">VerifiedReserving.bfCumulativePattern</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.bfFutureReserveRv" class="lean_decl">VerifiedReserving.RandomTriangle.bfFutureReserveRv</a></li>
           
         </ul>
     
@@ -654,17 +360,21 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> \(\hat C_{i,k} = C_{i,n-1-i} \prod _{j=n-1-i}^{k-1} \hat f_j\) for \(k \ge n-1-i\). </p>
+  <p>For zero-based increments \(S_{ik}\), BF1 says that the full family is independent. On a finite horizon \(m\), BF2 and BF3 say </p>
+<div class="displaymath" id="a0000000291">
+  \[  E[S_{ik}]=x_i y_k,\qquad \operatorname {Var}(S_{ik})=x_i\sigma _k^2, \qquad \sum _{k{\lt}m}y_k=1.  \]
+</div>
+<p> The true reserve after the first \(d\) periods is \(R_i=\sum _{d\leq k{\lt}m}S_{ik}\), and \(z_d=\sum _{k{\lt}d}y_k\) is the expected reported proportion. </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:reserve">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:bfModelMoments">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
     </span>
-    <span class="definition_thmlabel">2.7</span>
-    <span class="definition_thmtitle">Ultimate and reserve</span>
+    <span class="theorem_thmlabel">27.2</span>
+    <span class="theorem_thmtitle">Mean and process variance of a BF reserve</span>
     <div class="thm_header_extras">
 
     
@@ -672,7 +382,10 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#def:reserve">#</a>
+    <a class="icon proof" href="sect0027.html#thm:bfModelMoments">#</a>
+    
+    <a class="icon proof" href="sect0027.html#a0000000292"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
     
     
     <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
@@ -687,7 +400,7 @@
         
         <ul class="uses">
           
-          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
+          <li><a href="sect0027.html#def:bfModel">Definition 27.1</a></li>
           
         </ul>
     
@@ -707,9 +420,78 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ultimate" class="lean_decl">VerifiedReserving.ultimate</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_bfFutureReserveRv_eq_tail" class="lean_decl">VerifiedReserving.integral_bfFutureReserveRv_eq_tail</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.reserve" class="lean_decl">VerifiedReserving.reserve</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_bfFutureReserveRv" class="lean_decl">VerifiedReserving.integral_bfFutureReserveRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.variance_bfFutureReserveRv" class="lean_decl">VerifiedReserving.variance_bfFutureReserveRv</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Under BF2 and integrability, </p>
+<div class="displaymath" id="a0000000293">
+  \[  E[R_i]=x_i\sum _{d\leq k{\lt}m}y_k.  \]
+</div>
+<p> If also \(d\leq m\), this equals \(x_i(1-z_d)\). Under BF1, BF3, and square integrability, </p>
+<div class="displaymath" id="a0000000294">
+  \[  \operatorname {Var}(R_i)=x_i\sum _{d\leq k{\lt}m}\sigma _k^2.  \]
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000292">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>The integral commutes with the finite sum. Pairwise independence supplied by BF1 makes the finite-sum variance additive. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:bfRandomEstimate">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">27.3</span>
+    <span class="definition_thmtitle">Random BF estimate and MSEP</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0027.html#def:bfRandomEstimate">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfStochasticReserveEstimate" class="lean_decl">VerifiedReserving.bfStochasticReserveEstimate</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfMeanSquaredPredictionError" class="lean_decl">VerifiedReserving.bfMeanSquaredPredictionError</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFObservedPredictionIndependence" class="lean_decl">VerifiedReserving.BFObservedPredictionIndependence</a></li>
           
         </ul>
     
@@ -720,17 +502,17 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> \(\hat C_{i,n-1}\) is the chain-ladder ultimate and \(\hat R_i = \hat C_{i,n-1} - C_{i,n-1-i}\) the reserve. </p>
+  <p>For a random initial ultimate \(U\) and a random selected cumulative pattern \(z\), the BF estimate is \(\widehat R^{BF}=U(1-z)\). The unconditional MSEP is \(E[(\widehat R^{BF}-R)^2]\). Mack’s source conditions on the observed increments; common independence means that the pair consisting of estimate and future reserve is independent of the observed-data sigma-algebra. </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:msep">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:bfPredictionError">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
     </span>
-    <span class="definition_thmlabel">2.8</span>
-    <span class="definition_thmtitle">Mack’s MSEP estimator</span>
+    <span class="theorem_thmlabel">27.4</span>
+    <span class="theorem_thmtitle">Product variance and the single-row MSEP</span>
     <div class="thm_header_extras">
 
     
@@ -738,7 +520,10 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#def:msep">#</a>
+    <a class="icon proof" href="sect0027.html#thm:bfPredictionError">#</a>
+    
+    <a class="icon proof" href="sect0027.html#a0000000295"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
     
     
     <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
@@ -753,11 +538,11 @@
         
         <ul class="uses">
           
-          <li><a href="sect0002.html#def:reserve">Definition 2.7</a></li>
+          <li><a href="sect0027.html#def:bfModel">Definition 27.1</a></li>
           
-          <li><a href="sect0002.html#def:sigma2">Definition 2.5</a></li>
+          <li><a href="sect0027.html#thm:bfModelMoments">Theorem 27.2</a></li>
           
-          <li><a href="sect0002.html#def:S">Definition 2.2</a></li>
+          <li><a href="sect0027.html#def:bfRandomEstimate">Definition 27.3</a></li>
           
         </ul>
     
@@ -777,7 +562,85 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msep" class="lean_decl">VerifiedReserving.msep</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.variance_mul_of_indepFun" class="lean_decl">VerifiedReserving.variance_mul_of_indepFun</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.variance_bfStochasticReserveEstimate" class="lean_decl">VerifiedReserving.variance_bfStochasticReserveEstimate</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfMeanSquaredPredictionError_eq_variance_add" class="lean_decl">VerifiedReserving.bfMeanSquaredPredictionError_eq_variance_add</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfMeanSquaredPredictionError_eq" class="lean_decl">VerifiedReserving.bfMeanSquaredPredictionError_eq</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_sq_bfPredictionError_eq" class="lean_decl">VerifiedReserving.condExp_sq_bfPredictionError_eq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> If \(U\) and \(z\) are independent and the displayed products are square-integrable, then </p>
+<div class="displaymath" id="a0000000296">
+  \[  \operatorname {Var}\bigl(U(1-z)\bigr) =\bigl(E[U]^2+\operatorname {Var}(U)\bigr)\operatorname {Var}(z) +\operatorname {Var}(U)(1-E[z])^2.  \]
+</div>
+<p> For \(i{\lt}n\) under BF1, BF3, the stated square-integrability assumptions, and independence and equal means of the BF estimate and true future reserve, </p>
+<div class="displaymath" id="a0000000297">
+  \[  \operatorname {msep}(\widehat R^{BF}) =\operatorname {Var}(\widehat R^{BF}) +x_i\sum _{d\leq k{\lt}m}\sigma _k^2.  \]
+</div>
+<p> Under common independence from an observed-data sigma-algebra, square integrability, and measurability of the prediction-target pair, the conditional expectation of the squared prediction error equals that same constant almost surely. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000295">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Factor first and second product moments by independence. For MSEP, center the prediction error and add the variances of the independent estimate and target. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:bfRaw">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">27.5</span>
+    <span class="definition_thmtitle">Raw pattern and variance estimators</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0027.html#def:bfRaw">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.bfYRawRv" class="lean_decl">VerifiedReserving.RandomTriangle.bfYRawRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.bfLinearPatternRv" class="lean_decl">VerifiedReserving.RandomTriangle.bfLinearPatternRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.bfResidualSumSqRv" class="lean_decl">VerifiedReserving.RandomTriangle.bfResidualSumSqRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.bfSigma2RawOnRv" class="lean_decl">VerifiedReserving.RandomTriangle.bfSigma2RawOnRv</a></li>
           
         </ul>
     
@@ -788,21 +651,21 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> Mack (1993), Theorem 3: </p>
-<div class="displaymath" id="a0000000073">
-  \[  \widehat{\mathrm{msep}}(\hat R_i) = \hat C_{i,n-1}^2 \sum _{k=n-1-i}^{n-2} \frac{\hat\sigma _k^2}{\hat f_k^2} \Big(\frac{1}{\hat C_{i,k}} + \frac{1}{S_k}\Big).  \]
+  <p>On a finite set \(A\) of accident years with known volumes \(x_i\), equations&#160;(1) and&#160;(2) become </p>
+<div class="displaymath" id="a0000000298">
+  \[  \widehat y_k=\frac{\sum _{i\in A}S_{ik}}{\sum _{i\in A}x_i},\qquad \widehat\sigma _k^2=\frac1{|A|-1}\sum _{i\in A} \frac{(S_{ik}-x_i\widehat y_k)^2}{x_i}.  \]
 </div>
+<p> A general linear estimator is \(\sum _{i\in A}a_iS_{ik}\). </p>
 
   </div>
 </div>
-<h1 id="a0000000033">2.2 Deterministic identities</h1>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:weighted">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:bfRaw">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
     </span>
-    <span class="lemma_thmlabel">2.9</span>
-    <span class="lemma_thmtitle">Weighted-average form</span>
+    <span class="theorem_thmlabel">27.6</span>
+    <span class="theorem_thmtitle">Mack equations (1) and (2)</span>
     <div class="thm_header_extras">
 
     
@@ -810,9 +673,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#lem:weighted">#</a>
+    <a class="icon proof" href="sect0027.html#thm:bfRaw">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000074"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0027.html#a0000000299"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -828,9 +691,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
+          <li><a href="sect0027.html#def:bfModel">Definition 27.1</a></li>
           
-          <li><a href="sect0002.html#def:F">Definition 2.4</a></li>
+          <li><a href="sect0027.html#def:bfRaw">Definition 27.5</a></li>
           
         </ul>
     
@@ -850,7 +713,23 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.fhat_eq_weighted_average" class="lean_decl">VerifiedReserving.fhat_eq_weighted_average</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_bfYRawRv" class="lean_decl">VerifiedReserving.integral_bfYRawRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.variance_bfYRawRv" class="lean_decl">VerifiedReserving.variance_bfYRawRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_bfLinearPatternRv" class="lean_decl">VerifiedReserving.integral_bfLinearPatternRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.variance_bfLinearPatternRv" class="lean_decl">VerifiedReserving.variance_bfLinearPatternRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfLinearPatternRisk_sub_raw" class="lean_decl">VerifiedReserving.bfLinearPatternRisk_sub_raw</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfYRawRv_best_linear_unbiased" class="lean_decl">VerifiedReserving.bfYRawRv_best_linear_unbiased</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bf_raw_weighted_sq_dev" class="lean_decl">VerifiedReserving.bf_raw_weighted_sq_dev</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.RandomTriangle.bfResidualSumSqRv_eq" class="lean_decl">VerifiedReserving.RandomTriangle.bfResidualSumSqRv_eq</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_bfSigma2RawOnRv" class="lean_decl">VerifiedReserving.integral_bfSigma2RawOnRv</a></li>
           
         </ul>
     
@@ -860,12 +739,12 @@
     
         </div>
   </div>
-  <div class="lemma_thmcontent">
-  <p> If \(C_{i,k} \neq 0\) for every contributor \(i\), then \(\hat f_k = \sum _{i} \frac{C_{i,k}}{S_k} F_{i,k}\). </p>
+  <div class="theorem_thmcontent">
+  <p> For nonnegative volumes with nonzero total, the raw estimator is unbiased and has variance \(\sigma _k^2/\sum _i x_i\). If \(\sigma _k^2\geq 0\), every linear unbiased competitor, \(\sum _i a_i x_i=1\), has at least that variance. With at least two contributors and nonzero individual volumes, the residual estimator is unbiased for \(\sigma _k^2\). </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000074">
+<div class="proof_wrapper" id="a0000000299">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -873,16 +752,17 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Termwise: \(\frac{C_{i,k}}{S_k}\cdot \frac{C_{i,k+1}}{C_{i,k}} = \frac{C_{i,k+1}}{S_k}\). </p>
+  <p>Independence makes the linear-estimator variance a diagonal quadratic form. Complete its square around \(a_i=1/\sum _jx_j\). For the residual estimator, subtract the fitted-mean square from the true-centre sum; their expectations are \(\sigma _k^2\) times \(|A|\) and one, respectively. </p>
 
   </div>
 </div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:T">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
+<div class="definition_thmwrapper theorem-style-definition" id="def:bfAssessments">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
     </span>
-    <span class="lemma_thmlabel">2.10</span>
+    <span class="definition_thmlabel">27.7</span>
+    <span class="definition_thmtitle">Practical assessments</span>
     <div class="thm_header_extras">
 
     
@@ -890,9 +770,72 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#lem:T">#</a>
+    <a class="icon proof" href="sect0027.html#def:bfAssessments">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000075"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfYRaw" class="lean_decl">VerifiedReserving.bfYRaw</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfSigma2Raw" class="lean_decl">VerifiedReserving.bfSigma2Raw</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfYStdErrSq" class="lean_decl">VerifiedReserving.bfYStdErrSq</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfZStdErrSq" class="lean_decl">VerifiedReserving.bfZStdErrSq</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfProcessErrorEstimate" class="lean_decl">VerifiedReserving.bfProcessErrorEstimate</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfEstimationErrorEstimate" class="lean_decl">VerifiedReserving.bfEstimationErrorEstimate</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfMsepEstimate" class="lean_decl">VerifiedReserving.bfMsepEstimate</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfCovarianceApprox" class="lean_decl">VerifiedReserving.bfCovarianceApprox</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>Equations (3), (4), (6), and (7) define the raw development proportions, raw column variances, squared standard errors of the selected proportions, and the minimum of the prefix and suffix variance sums. The single-year plug-in is </p>
+<div class="displaymath" id="a0000000300">
+  \[  \widehat{\operatorname {msep}} =\widehat{\operatorname {Var}}(R_i) +(U_i^2+s_U^2)s_z^2+s_U^2(1-z)^2.  \]
+</div>
+<p> The total-reserve covariance assessment on page 99 is also a definition. Its correlations, standard errors, smoothing, and tail values are supplied by the actuary. No unbiasedness or consistency claim is attached to those selected or assessed inputs. </p>
+<p>The standalone equation (3), (4), and (6) definitions retain Mack’s one-based symbols <span class="ttfamily">n</span> and <span class="ttfamily">k</span>; the stochastic theorems above instead use an explicit finite contributor set and therefore follow the repository’s zero-based triangle convention. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:bfTotalCovariance">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">27.8</span>
+    <span class="theorem_thmtitle">Assessment algebra and total covariance</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0027.html#thm:bfTotalCovariance">#</a>
+    
+    <a class="icon proof" href="sect0027.html#a0000000301"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -908,9 +851,7 @@
         
         <ul class="uses">
           
-          <li><a href="sect0002.html#def:S">Definition 2.2</a></li>
-          
-          <li><a href="sect0002.html#def:F">Definition 2.4</a></li>
+          <li><a href="sect0027.html#def:bfAssessments">Definition 27.7</a></li>
           
         </ul>
     
@@ -930,7 +871,9 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.T_eq_sum_weighted_F" class="lean_decl">VerifiedReserving.T_eq_sum_weighted_F</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bfMsepEstimate_eq" class="lean_decl">VerifiedReserving.bfMsepEstimate_eq</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.covariance_mul_mul_of_pair_indep" class="lean_decl">VerifiedReserving.covariance_mul_mul_of_pair_indep</a></li>
           
         </ul>
     
@@ -940,12 +883,15 @@
     
         </div>
   </div>
-  <div class="lemma_thmcontent">
-  <p> If \(C_{i,k} \neq 0\) for every contributor, \(T_k = \sum _i C_{i,k} F_{i,k}\). </p>
+  <div class="theorem_thmcontent">
+  <p> The single-year assessment is exactly its named process term plus its two estimation terms. Before Mack omits the middle term for the total-reserve approximation, independence of the pairs \(\{ X,W\} \) and \(\{ Y,Z\} \) gives </p>
+<div class="displaymath" id="a0000000302">
+  \[  \operatorname {Cov}(XY,WZ) =\operatorname {Cov}(X,W)E[Y]E[Z] +\operatorname {Cov}(X,W)\operatorname {Cov}(Y,Z) +E[X]E[W]\operatorname {Cov}(Y,Z).  \]
+</div>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000075">
+<div class="proof_wrapper" id="a0000000301">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -953,17 +899,17 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Cancel the denominator termwise. </p>
+  <p>Factor the required cross moments between the two independent pairs, substitute the covariance identities, and normalize the polynomial expression. </p>
 
   </div>
 </div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:sq">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:bfWitness">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
     </span>
-    <span class="lemma_thmlabel">2.11</span>
-    <span class="lemma_thmtitle">Sum-of-squares decomposition</span>
+    <span class="theorem_thmlabel">27.9</span>
+    <span class="theorem_thmtitle">A finite BF witness</span>
     <div class="thm_header_extras">
 
     
@@ -971,9 +917,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#lem:sq">#</a>
+    <a class="icon proof" href="sect0027.html#thm:bfWitness">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000076"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0027.html#a0000000303"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -989,7 +935,11 @@
         
         <ul class="uses">
           
-          <li><a href="sect0002.html#lem:T">Lemma 2.10</a></li>
+          <li><a href="sect0027.html#def:bfModel">Definition 27.1</a></li>
+          
+          <li><a href="sect0027.html#thm:bfModelMoments">Theorem 27.2</a></li>
+          
+          <li><a href="sect0027.html#thm:bfPredictionError">Theorem 27.4</a></li>
           
         </ul>
     
@@ -1009,7 +959,17 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.weighted_sq_dev" class="lean_decl">VerifiedReserving.weighted_sq_dev</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFPredictionWitness.X" class="lean_decl">VerifiedReserving.BFPredictionWitness.X</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFPredictionWitness.bf1" class="lean_decl">VerifiedReserving.BFPredictionWitness.bf1</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFPredictionWitness.bf2" class="lean_decl">VerifiedReserving.BFPredictionWitness.bf2</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFPredictionWitness.bf3" class="lean_decl">VerifiedReserving.BFPredictionWitness.bf3</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFPredictionWitness.future_moments" class="lean_decl">VerifiedReserving.BFPredictionWitness.future_moments</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BFPredictionWitness.conditional_msep_zero" class="lean_decl">VerifiedReserving.BFPredictionWitness.conditional_msep_zero</a></li>
           
         </ul>
     
@@ -1019,12 +979,12 @@
     
         </div>
   </div>
-  <div class="lemma_thmcontent">
-  <p> For any centre \(f\), with \(C_{i,k} \neq 0\) for every contributor, \(\sum _i C_{i,k}(F_{i,k}-f)^2 = \sum _i C_{i,k}F_{i,k}^2 - 2 f T_k + f^2 S_k\). </p>
+  <div class="theorem_thmcontent">
+  <p> On the one-point probability space, take \(C_{i,k}=k+1\), so every increment is one, \(x_i=y_k=1\), and \(\sigma _k^2=0\) on the one-period horizon. BF1–BF3 and the normalization hold together. The future reserve has mean one and variance zero, and prediction by one has conditional MSEP zero. This checks satisfiability of the hypotheses; it does not provide a positive-variance BF model. </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000076">
+<div class="proof_wrapper" id="a0000000303">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1032,323 +992,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Expand the square and use Lemma&#160;<a href="sect0002.html#lem:T">2.10</a>. </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:sq_fhat">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">2.12</span>
-    <span class="lemma_thmtitle">Collapse at the chain-ladder centre</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0002.html#lem:sq_fhat">#</a>
-    
-    <a class="icon proof" href="sect0002.html#a0000000077"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#lem:sq">Lemma 2.11</a></li>
-          
-          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.weighted_sq_dev_at_fhat" class="lean_decl">VerifiedReserving.weighted_sq_dev_at_fhat</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> If also \(S_k \neq 0\), then \(\sum _i C_{i,k}(F_{i,k}-\hat f_k)^2 = \sum _i C_{i,k}F_{i,k}^2 - S_k \hat f_k^2\). This is the identity behind the \(n-k-2\) degrees of freedom in \(\hat\sigma _k^2\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000077">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Put \(f = \hat f_k = T_k/S_k\) in Lemma&#160;<a href="sect0002.html#lem:sq">2.11</a>. </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:Chat_succ">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">2.13</span>
-    <span class="lemma_thmtitle">Projection step</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0002.html#lem:Chat_succ">#</a>
-    
-    <a class="icon proof" href="sect0002.html#a0000000078"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.Chat_succ" class="lean_decl">VerifiedReserving.Chat_succ</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> For \(k \ge n-1-i\), \(\hat C_{i,k+1} = \hat C_{i,k}\, \hat f_k\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000078">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Split off the top factor of the product. </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:Chat_diag">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">2.14</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0002.html#lem:Chat_diag">#</a>
-    
-    <a class="icon proof" href="sect0002.html#a0000000079"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.Chat_diag" class="lean_decl">VerifiedReserving.Chat_diag</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> \(\hat C_{i,n-1-i} = C_{i,n-1-i}\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000079">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Empty product. </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:oldest">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">2.15</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0002.html#lem:oldest">#</a>
-    
-    <a class="icon proof" href="sect0002.html#a0000000080"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:reserve">Definition 2.7</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.reserve_zero_of_oldest" class="lean_decl">VerifiedReserving.reserve_zero_of_oldest</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> The oldest accident year is fully developed: \(\hat R_0 = 0\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000080">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Empty product again. </p>
+  <p>Every random variable is constant. The generated sigma-algebras are trivial, so the full increment family is independent. </p>
 
   </div>
 </div>
@@ -1363,11 +1007,11 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0001.html" title="Introduction"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0026.html" title="Stochastic Bühlmann-Straub credibility"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0003.html" title="Mack 1999 equals Mack 1993"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0028.html" title="Panjer recursion"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

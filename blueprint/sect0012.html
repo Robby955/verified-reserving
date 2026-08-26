@@ -15,7 +15,7 @@
 <title>Merz-Wüthrich: the MSEP of the one-year claims development result</title>
 <link rel="next" href="sect0013.html" title="The observed data: Mack’s hypotheses discharged" />
 <link rel="prev" href="sect0011.html" title="A finite independent-row witness" />
-<link rel="up" href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint" />
+<link rel="up" href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
 <link rel="stylesheet" href="styles/showmore.css" />
@@ -26,7 +26,7 @@
 <body>
 <header>
 <svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
-<h1 id="doc_title"><a href="index.html">Mack’s chain-ladder model in Lean 4: blueprint</a></h1>
+<h1 id="doc_title"><a href="index.html">Machine-checked claims reserving in Lean 4: blueprint</a></h1>
 </header>
 
 <div class="wrapper">
@@ -40,10 +40,10 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0002.html#a0000000022"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0002.html#a0000000032"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000023"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
+  <a href="sect0002.html#a0000000033"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
  </li>
 
   </ul>
@@ -59,25 +59,25 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0005.html#a0000000024"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
+  <a href="sect0005.html#a0000000034"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000025"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
+  <a href="sect0005.html#a0000000035"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000026"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
+  <a href="sect0005.html#a0000000036"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000027"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
+  <a href="sect0005.html#a0000000037"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000028"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
+  <a href="sect0005.html#a0000000038"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000029"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
+  <a href="sect0005.html#a0000000039"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000030"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
+  <a href="sect0005.html#a0000000040"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
  </li>
 
   </ul>
@@ -87,7 +87,7 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0006.html#a0000000031"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
+  <a href="sect0006.html#a0000000041"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
  </li>
 
   </ul>
@@ -97,7 +97,7 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0007.html#a0000000032"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
+  <a href="sect0007.html#a0000000042"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
  </li>
 
   </ul>
@@ -107,19 +107,19 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0008.html#a0000000033"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0008.html#a0000000043"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000034"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
+  <a href="sect0008.html#a0000000044"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000035"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
+  <a href="sect0008.html#a0000000045"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000036"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
+  <a href="sect0008.html#a0000000046"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
  </li>
 <li class="">
-  <a href="sect0008.html#a0000000037"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
+  <a href="sect0008.html#a0000000047"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
  </li>
 
   </ul>
@@ -129,22 +129,22 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0009.html#a0000000038"><span class="toc_ref">9.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0009.html#a0000000048"><span class="toc_ref">9.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000039"><span class="toc_ref">9.2</span> <span class="toc_entry">Deterministic identities</span></a>
+  <a href="sect0009.html#a0000000049"><span class="toc_ref">9.2</span> <span class="toc_entry">Deterministic identities</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000040"><span class="toc_ref">9.3</span> <span class="toc_entry">The recursion equals \((*)\)</span></a>
+  <a href="sect0009.html#a0000000050"><span class="toc_ref">9.3</span> <span class="toc_entry">The recursion equals \((*)\)</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000041"><span class="toc_ref">9.4</span> <span class="toc_entry">The 1993 case</span></a>
+  <a href="sect0009.html#a0000000051"><span class="toc_ref">9.4</span> <span class="toc_entry">The 1993 case</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000042"><span class="toc_ref">9.5</span> <span class="toc_entry">Conditional unbiasedness of the weighted estimator</span></a>
+  <a href="sect0009.html#a0000000052"><span class="toc_ref">9.5</span> <span class="toc_entry">Conditional unbiasedness of the weighted estimator</span></a>
  </li>
 <li class="">
-  <a href="sect0009.html#a0000000043"><span class="toc_ref">9.6</span> <span class="toc_entry">Weighted variance and estimator unbiasedness</span></a>
+  <a href="sect0009.html#a0000000053"><span class="toc_ref">9.6</span> <span class="toc_entry">Weighted variance and estimator unbiasedness</span></a>
  </li>
 
   </ul>
@@ -154,16 +154,16 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0010.html#a0000000044"><span class="toc_ref">10.1</span> <span class="toc_entry">Definitions</span></a>
+  <a href="sect0010.html#a0000000054"><span class="toc_ref">10.1</span> <span class="toc_entry">Definitions</span></a>
  </li>
 <li class="">
-  <a href="sect0010.html#a0000000045"><span class="toc_ref">10.2</span> <span class="toc_entry">The score equations are score equations</span></a>
+  <a href="sect0010.html#a0000000055"><span class="toc_ref">10.2</span> <span class="toc_entry">The score equations are score equations</span></a>
  </li>
 <li class="">
-  <a href="sect0010.html#a0000000046"><span class="toc_ref">10.3</span> <span class="toc_entry">Chain ladder solves the score equations</span></a>
+  <a href="sect0010.html#a0000000056"><span class="toc_ref">10.3</span> <span class="toc_entry">Chain ladder solves the score equations</span></a>
  </li>
 <li class="">
-  <a href="sect0010.html#a0000000047"><span class="toc_ref">10.4</span> <span class="toc_entry">Uniqueness: the marginal-sum solution is chain ladder</span></a>
+  <a href="sect0010.html#a0000000057"><span class="toc_ref">10.4</span> <span class="toc_entry">Uniqueness: the marginal-sum solution is chain ladder</span></a>
  </li>
 
   </ul>
@@ -176,16 +176,16 @@
   <span class="expand-toc">▼</span>
   <ul class="sub-toc-1 active">
      <li class="">
-  <a href="sect0012.html#a0000000048"><span class="toc_ref">12.1</span> <span class="toc_entry">The exact one-year process variance</span></a>
+  <a href="sect0012.html#a0000000058"><span class="toc_ref">12.1</span> <span class="toc_entry">The exact one-year process variance</span></a>
  </li>
 <li class="">
-  <a href="sect0012.html#a0000000049"><span class="toc_ref">12.2</span> <span class="toc_entry">The estimator of Merz and Wüthrich</span></a>
+  <a href="sect0012.html#a0000000059"><span class="toc_ref">12.2</span> <span class="toc_entry">The estimator of Merz and Wüthrich</span></a>
  </li>
 <li class="">
-  <a href="sect0012.html#a0000000050"><span class="toc_ref">12.3</span> <span class="toc_entry">The bridge to the exact statement</span></a>
+  <a href="sect0012.html#a0000000060"><span class="toc_ref">12.3</span> <span class="toc_entry">The bridge to the exact statement</span></a>
  </li>
 <li class="">
-  <a href="sect0012.html#a0000000051"><span class="toc_ref">12.4</span> <span class="toc_entry">Aggregation over accident years</span></a>
+  <a href="sect0012.html#a0000000061"><span class="toc_ref">12.4</span> <span class="toc_entry">Aggregation over accident years</span></a>
  </li>
 
   </ul>
@@ -195,7 +195,7 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0013.html#a0000000052"><span class="toc_ref">13.1</span> <span class="toc_entry">From independence across accident years to the hypotheses</span></a>
+  <a href="sect0013.html#a0000000062"><span class="toc_ref">13.1</span> <span class="toc_entry">From independence across accident years to the hypotheses</span></a>
  </li>
 
   </ul>
@@ -208,10 +208,10 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0015.html#a0000000053"><span class="toc_ref">15.1</span> <span class="toc_entry">Development-factor correlation</span></a>
+  <a href="sect0015.html#a0000000063"><span class="toc_ref">15.1</span> <span class="toc_entry">Development-factor correlation</span></a>
  </li>
 <li class="">
-  <a href="sect0015.html#a0000000054"><span class="toc_ref">15.2</span> <span class="toc_entry">Calendar-year labels</span></a>
+  <a href="sect0015.html#a0000000064"><span class="toc_ref">15.2</span> <span class="toc_entry">Calendar-year labels</span></a>
  </li>
 
   </ul>
@@ -226,10 +226,72 @@
   <a href="sect0018.html"><span class="toc_ref">18</span> <span class="toc_entry">Bühlmann-Straub credibility</span></a>
  </li>
 <li class="">
-  <a href="sect0019.html"><span class="toc_ref">19</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+  <a href="sect0019.html"><span class="toc_ref">19</span> <span class="toc_entry">Munich chain ladder: the separate-chain-ladder gap</span></a>
  </li>
 <li class="">
-  <a href="sect0020.html"><span class="toc_ref">20</span> <span class="toc_entry">Reference computation</span></a>
+  <a href="sect0020.html"><span class="toc_ref">20</span> <span class="toc_entry">Munich residual correlations and adjusted factors</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html"><span class="toc_ref">21</span> <span class="toc_entry">The stochastic ODP layer</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0021.html#a0000000065"><span class="toc_ref">21.1</span> <span class="toc_entry">Model and conditional moments</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000066"><span class="toc_ref">21.2</span> <span class="toc_entry">Prediction error</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000067"><span class="toc_ref">21.3</span> <span class="toc_entry">Log-link and corner constraints</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000068"><span class="toc_ref">21.4</span> <span class="toc_entry">Residual bootstrap definitions</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000069"><span class="toc_ref">21.5</span> <span class="toc_entry">Finite non-vacuity witness</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0022.html"><span class="toc_ref">22</span> <span class="toc_entry">Mack 1999: row assumptions and active weights</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html"><span class="toc_ref">23</span> <span class="toc_entry">Calendar-year claims development results</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html"><span class="toc_ref">24</span> <span class="toc_entry">Röhr: arbitrary-horizon approximations</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0024.html#a0000000070"><span class="toc_ref">24.1</span> <span class="toc_entry">Source formulas</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html#a0000000071"><span class="toc_ref">24.2</span> <span class="toc_entry">Exact splits</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html#a0000000072"><span class="toc_ref">24.3</span> <span class="toc_entry">Endpoints and bounds</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0025.html"><span class="toc_ref">25</span> <span class="toc_entry">R <span class="ttfamily">ChainLadder</span> option semantics</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html"><span class="toc_ref">26</span> <span class="toc_entry">Stochastic Bühlmann-Straub credibility</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html"><span class="toc_ref">27</span> <span class="toc_entry">The stochastic Bornhuetter-Ferguson model</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html"><span class="toc_ref">28</span> <span class="toc_entry">Panjer recursion</span></a>
+ </li>
+<li class="">
+  <a href="sect0029.html"><span class="toc_ref">29</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+ </li>
+<li class="">
+  <a href="sect0030.html"><span class="toc_ref">30</span> <span class="toc_entry">Reference computation</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
@@ -241,10 +303,14 @@
 
 <div class="main-text">
 <h1 id="a0000000013">12 Merz-Wüthrich: the MSEP of the one-year claims development result</h1>
-<p>Merz and Wüthrich (2008), <em>Modelling the claims development result for solvency purposes</em>, Casualty Actuarial Society E-Forum, Fall 2008, pages 542-568, quantify the uncertainty of the one-year move of the predicted ultimate. The previous chapter defined the true claims development result and proved that it has conditional mean zero; this chapter adds its second moment, which is the conditional mean squared error of predicting it by the budget value \(0\), and records the estimator the paper displays for the observable claims development result. </p>
+<p>Merz and Wüthrich, <em>Modelling the claims development result for solvency purposes</em> <span class="cite">
+	[
+	<a href="sect0030.html#MerzWuethrich2008" >7</a>
+	]
+</span>, quantify the uncertainty of the one-year move of the predicted ultimate. The previous chapter defined the true claims development result and proved that it has conditional mean zero; this chapter adds its second moment, which is the conditional mean squared error of predicting it by the budget value \(0\), and records the estimator the paper displays for the observable claims development result. </p>
 <p>Index conventions. The paper writes \(I\) for the last accident year, \(J = I\) for the last development year, and \(\mathcal{D}_I\) for the triangle after \(I\) diagonals. Here \(I = J = n-1\); \(I - i\) is \(n-1-i\), \(C_{I-j,j}\) is \(C_{n-1-j,\, j}\), \(S^I_j\) is \(S_j\) computed with \(n\) accident years and \(S^{I+1}_j\) is the same column sum computed with \(n+1\), that is, with the next diagonal added. Both are functions of the triangle observed today, because \(S^{I+1}_j = S^I_j + C_{I-j,j}\) and \(C_{I-j,j}\) sits on the latest observed diagonal. </p>
 <p>The step formalized below is the development-year step \(\mathcal{D}_k \to \mathcal{D}_{k+1}\) of this library’s filtration, not the paper’s calendar-year step; the caveat is the one recorded for Theorem&#160;<a href="sect0007.html#thm:cdr_closed">7.4</a>. </p>
-<h1 id="a0000000048">12.1 The exact one-year process variance</h1>
+<h1 id="a0000000058">12.1 The exact one-year process variance</h1>
 <div class="definition_thmwrapper theorem-style-definition" id="def:cdrProcVar">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
@@ -306,7 +372,7 @@
   </div>
   <div class="definition_thmcontent">
   <p> For claims \(c\) at development year \(k\) and ultimate development year \(N\), </p>
-<div class="displaymath" id="a0000000166">
+<div class="displaymath" id="a0000000184">
   \[  \mathrm{cdrProcVar}(c, f, \sigma ^2, N, k) = \Big(\prod _{j=k+1}^{N-1} f_j\Big)^2 \sigma _k^2\,  c .  \]
 </div>
 
@@ -328,7 +394,7 @@
 
     <a class="icon proof" href="sect0012.html#thm:cdr_msep_exact">#</a>
     
-    <a class="icon proof" href="sect0012.html#a0000000167"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0012.html#a0000000185"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -388,14 +454,14 @@
   </div>
   <div class="theorem_thmcontent">
   <p> Under (M1) and (M3), for \(i {\lt} n\) and \(k {\lt} n-1\) and integrable claims, </p>
-<div class="displaymath" id="a0000000168">
+<div class="displaymath" id="a0000000186">
   \[  E\big[\mathrm{CDR}_i(k)^2 \mid \mathcal{D}_k\big] = \Big(\prod _{j=k+1}^{n-2} f_j\Big)^2 \sigma _k^2\,  C_{i,k}  \]
 </div>
 <p> almost surely. Since the true CDR has conditional mean zero, this is at once its conditional variance and the conditional mean squared error of predicting it by \(0\), which is the budget value the paper enters in the income statement for prior accident years. </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000167">
+<div class="proof_wrapper" id="a0000000185">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -407,7 +473,7 @@
 
   </div>
 </div>
-<h1 id="a0000000049">12.2 The estimator of Merz and Wüthrich</h1>
+<h1 id="a0000000059">12.2 The estimator of Merz and Wüthrich</h1>
 <p>Definitions only. The derivation in the paper’s appendix replaces the estimated development factors by resampled ones and drops terms of higher order in the residuals, so none of the objects below is upgraded to an identity. </p>
 <div class="lemma_thmwrapper theorem-style-plain" id="lem:S_succ">
   <div class="lemma_thmheading">
@@ -425,7 +491,7 @@
 
     <a class="icon proof" href="sect0012.html#lem:S_succ">#</a>
     
-    <a class="icon proof" href="sect0012.html#a0000000169"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0012.html#a0000000187"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -476,7 +542,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000169">
+<div class="proof_wrapper" id="a0000000187">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -561,10 +627,10 @@
   </div>
   <div class="definition_thmcontent">
   <p> With \(d = I - i\), </p>
-<div class="displaymath" id="a0000000170">
+<div class="displaymath" id="a0000000188">
   \begin{align*}  \hat\Psi ^I_i & = \frac{\hat\sigma ^2_{d}/(\hat f^I_{d})^2}{C_{i,d}}, &  \hat\Phi ^I_{i,J} & = \sum _{j=d+1}^{J-1}\Big(\frac{C_{I-j,j}}{S^{I+1}_j}\Big)^2 \frac{\hat\sigma ^2_j/(\hat f^I_j)^2}{C_{I-j,j}}, \\ \hat\Gamma ^I_{i,J} & = \hat\Phi ^I_{i,J} + \hat\Psi ^I_i, &  \hat\Delta ^I_{i,J} & = \frac{\hat\sigma ^2_{d}/(\hat f^I_{d})^2}{S^I_{d}} + \sum _{j=d+1}^{J-1}\Big(\frac{C_{I-j,j}}{S^{I+1}_j}\Big)^2 \frac{\hat\sigma ^2_j/(\hat f^I_j)^2}{S^I_j}. \end{align*}
 </div>
-<p> The later development steps enter the one-year figure only through the re-estimation of their development factors on the next diagonal, which is why each is scaled by \((C_{I-j,j}/S^{I+1}_j)^2 \le 1\). </p>
+<p> The later development steps enter the one-year figure only through the re-estimation of their development factors on the next diagonal, which is why each is scaled by \((C_{I-j,j}/S^{I+1}_j)^2\). No interval bound is claimed for general real-valued triangles. </p>
 
   </div>
 </div>
@@ -658,7 +724,7 @@
 
     <a class="icon proof" href="sect0012.html#lem:mw_311">#</a>
     
-    <a class="icon proof" href="sect0012.html#a0000000171"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0012.html#a0000000189"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -711,7 +777,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000171">
+<div class="proof_wrapper" id="a0000000189">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -739,7 +805,7 @@
 
     <a class="icon proof" href="sect0012.html#thm:mw_display">#</a>
     
-    <a class="icon proof" href="sect0012.html#a0000000172"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0012.html#a0000000190"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -791,14 +857,14 @@
   </div>
   <div class="theorem_thmcontent">
   <p> If the column sums \(S^I_j\) and \(S^{I+1}_j\) along the row do not vanish, then </p>
-<div class="displaymath" id="a0000000173">
+<div class="displaymath" id="a0000000191">
   \[  \widehat{\mathrm{msep}}(0) = (\hat C^I_{i,J})^2\Big( \frac{\hat\sigma ^2_{d}/(\hat f^I_{d})^2}{C_{i,d}} + \frac{\hat\sigma ^2_{d}/(\hat f^I_{d})^2}{S^I_{d}} + \sum _{j=d+1}^{J-1}\frac{C_{I-j,j}}{S^{I+1}_j}\,  \frac{\hat\sigma ^2_j/(\hat f^I_j)^2}{S^I_j}\Big).  \]
 </div>
-<p> Read next to Mack’s Theorem 3, the one-year figure keeps only the first term of the process variance, keeps the estimation error of the next diagonal in full, and scales every remaining run-off cell by \(C_{I-j,j}/S^{I+1}_j \le 1\). </p>
+<p> Read next to Mack’s Theorem 3, the one-year figure keeps only the first term of the process variance, keeps the estimation error of the next diagonal in full, and scales every remaining run-off cell by \(C_{I-j,j}/S^{I+1}_j\). No interval bound is claimed without additional sign hypotheses. </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000172">
+<div class="proof_wrapper" id="a0000000190">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -810,7 +876,7 @@
 
   </div>
 </div>
-<h1 id="a0000000050">12.3 The bridge to the exact statement</h1>
+<h1 id="a0000000060">12.3 The bridge to the exact statement</h1>
 <div class="theorem_thmwrapper theorem-style-plain" id="thm:mw_plugin">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
@@ -827,7 +893,7 @@
 
     <a class="icon proof" href="sect0012.html#thm:mw_plugin">#</a>
     
-    <a class="icon proof" href="sect0012.html#a0000000174"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0012.html#a0000000192"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -886,7 +952,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000174">
+<div class="proof_wrapper" id="a0000000192">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -914,7 +980,7 @@
 
     <a class="icon proof" href="sect0012.html#thm:cdr_telescope">#</a>
     
-    <a class="icon proof" href="sect0012.html#a0000000175"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0012.html#a0000000193"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -973,7 +1039,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000175">
+<div class="proof_wrapper" id="a0000000193">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -985,7 +1051,7 @@
 
   </div>
 </div>
-<h1 id="a0000000051">12.4 Aggregation over accident years</h1>
+<h1 id="a0000000061">12.4 Aggregation over accident years</h1>
 <p>Accident year \(0\) is fully developed, so the sums run over \(i = 1, \dots , n-1\) and the cross terms over the pairs \(k {\gt} i {\gt} 0\), the older year \(i\) carrying the shared development factors. Definitions only. </p>
 <div class="definition_thmwrapper theorem-style-definition" id="def:mw_total">
   <div class="definition_thmheading">
@@ -1060,7 +1126,7 @@
   </div>
   <div class="definition_thmcontent">
   
-<div class="displaymath" id="a0000000176">
+<div class="displaymath" id="a0000000194">
   \[  \hat\Lambda ^I_{i,J} = \frac{C_{i,d}}{S^{I+1}_{d}}\, \frac{\hat\sigma ^2_{d}/(\hat f^I_{d})^2}{S^I_{d}} + \sum _{j=d+1}^{J-1}\Big(\frac{C_{I-j,j}}{S^{I+1}_j}\Big)^2\frac{\hat\sigma ^2_j/(\hat f^I_j)^2}{S^I_j}, \qquad \hat\Xi ^I_{i,J} = \hat\Phi ^I_{i,J} + \frac{\hat\sigma ^2_{d}/(\hat f^I_{d})^2}{S^{I+1}_{d}},  \]
 </div>
 <p> and the two aggregates \(\sum _i \widehat{\mathrm{msep}}_i + 2\sum _{k{\gt}i{\gt}0}\hat C^I_{i,J}\hat C^I_{k,J}(\cdot _i + \hat\Lambda ^I_{i,J})\) with \(\cdot _i = \hat\Phi ^I_{i,J}\) for the retrospective view (3.12) and \(\cdot _i = \hat\Xi ^I_{i,J}\) for the prospective view (3.15). </p>
@@ -1083,7 +1149,7 @@
 
     <a class="icon proof" href="sect0012.html#thm:mw_total">#</a>
     
-    <a class="icon proof" href="sect0012.html#a0000000177"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0012.html#a0000000195"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1132,11 +1198,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> The aggregated prospective estimator exceeds the aggregated retrospective one by \(\sum _i \widehat{\mathrm{Var}}(\mathrm{CDR}_i(I+1)\mid \mathcal{D}_I) + 2\sum _{k{\gt}i{\gt}0}\hat C^I_{i,J}\hat C^I_{k,J}(\hat\Xi ^I_{i,J} - \hat\Phi ^I_{i,J})\): the same decoupling for aggregated accident years as for a single one. </p>
+  <p> The aggregated prospective estimator differs from the aggregated retrospective one by \(\sum _i \widehat{\mathrm{Var}}(\mathrm{CDR}_i(I+1)\mid \mathcal{D}_I) + 2\sum _{k{\gt}i{\gt}0}\hat C^I_{i,J}\hat C^I_{k,J}(\hat\Xi ^I_{i,J} - \hat\Phi ^I_{i,J})\): the same decoupling for aggregated accident years as for a single one. </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000177">
+<div class="proof_wrapper" id="a0000000195">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1161,7 +1227,7 @@
 
   <a href="sect0011.html" title="A finite independent-row witness"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
-  <a href="index.html" title="Mack’s chain-ladder model in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+  <a href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
   <a href="sect0013.html" title="The observed data: Mack’s hypotheses discharged"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>

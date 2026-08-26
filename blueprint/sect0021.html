@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The stochastic ODP layer</title>
+<link rel="next" href="sect0022.html" title="Mack 1999: row assumptions and active weights" />
+<link rel="prev" href="sect0020.html" title="Munich residual correlations and adjusted factors" />
+<link rel="up" href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Machine-checked claims reserving in Lean 4: blueprint</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">The chain-ladder estimators</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000032"><span class="toc_ref">2.1</span> <span class="toc_entry">Definitions</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000033"><span class="toc_ref">2.2</span> <span class="toc_entry">Deterministic identities</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Mack 1999 equals Mack 1993</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Bornhuetter-Ferguson on the chain-ladder pattern</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">The stochastic layer</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#a0000000034"><span class="toc_ref">5.1</span> <span class="toc_entry">Model</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000035"><span class="toc_ref">5.2</span> <span class="toc_entry">Mack’s Theorem 2</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000036"><span class="toc_ref">5.3</span> <span class="toc_entry">Mack’s Theorem 1</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000037"><span class="toc_ref">5.4</span> <span class="toc_entry">The variance assumptions and the estimation variance of \(\hat f_k\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000038"><span class="toc_ref">5.5</span> <span class="toc_entry">Unbiasedness of the variance estimator</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000039"><span class="toc_ref">5.6</span> <span class="toc_entry">Process variance and the exact MSEP (Theorem 3)</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000040"><span class="toc_ref">5.7</span> <span class="toc_entry">From independence across accident years to the \(\mathcal{D}_k\) form</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">The variant catalogue: Mack versus conditional resampling</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0006.html#a0000000041"><span class="toc_ref">6.1</span> <span class="toc_entry">The total reserve: Mack’s Corollary</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Solvency II: the one-year view</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0007.html#a0000000042"><span class="toc_ref">7.1</span> <span class="toc_entry">The one-year claims development result</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0008.html"><span class="toc_ref">8</span> <span class="toc_entry">Röhr 2016: the error-propagation form</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0008.html#a0000000043"><span class="toc_ref">8.1</span> <span class="toc_entry">Definitions</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000044"><span class="toc_ref">8.2</span> <span class="toc_entry">The split, and the two Mack plug-ins</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000045"><span class="toc_ref">8.3</span> <span class="toc_entry">Catalogue row 3</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000046"><span class="toc_ref">8.4</span> <span class="toc_entry">The total reserve</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000047"><span class="toc_ref">8.5</span> <span class="toc_entry">The total reserve: the exact conditional MSEP</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0009.html"><span class="toc_ref">9</span> <span class="toc_entry">Mack 1999: general weights and exponent</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0009.html#a0000000048"><span class="toc_ref">9.1</span> <span class="toc_entry">Definitions</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000049"><span class="toc_ref">9.2</span> <span class="toc_entry">Deterministic identities</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000050"><span class="toc_ref">9.3</span> <span class="toc_entry">The recursion equals \((*)\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000051"><span class="toc_ref">9.4</span> <span class="toc_entry">The 1993 case</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000052"><span class="toc_ref">9.5</span> <span class="toc_entry">Conditional unbiasedness of the weighted estimator</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000053"><span class="toc_ref">9.6</span> <span class="toc_entry">Weighted variance and estimator unbiasedness</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0010.html"><span class="toc_ref">10</span> <span class="toc_entry">The over-dispersed Poisson model</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0010.html#a0000000054"><span class="toc_ref">10.1</span> <span class="toc_entry">Definitions</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000055"><span class="toc_ref">10.2</span> <span class="toc_entry">The score equations are score equations</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000056"><span class="toc_ref">10.3</span> <span class="toc_entry">Chain ladder solves the score equations</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000057"><span class="toc_ref">10.4</span> <span class="toc_entry">Uniqueness: the marginal-sum solution is chain ladder</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0011.html"><span class="toc_ref">11</span> <span class="toc_entry">A finite independent-row witness</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html"><span class="toc_ref">12</span> <span class="toc_entry">Merz-Wüthrich: the MSEP of the one-year claims development result</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0012.html#a0000000058"><span class="toc_ref">12.1</span> <span class="toc_entry">The exact one-year process variance</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000059"><span class="toc_ref">12.2</span> <span class="toc_entry">The estimator of Merz and Wüthrich</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000060"><span class="toc_ref">12.3</span> <span class="toc_entry">The bridge to the exact statement</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000061"><span class="toc_ref">12.4</span> <span class="toc_entry">Aggregation over accident years</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0013.html"><span class="toc_ref">13</span> <span class="toc_entry">The observed data: Mack’s hypotheses discharged</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0013.html#a0000000062"><span class="toc_ref">13.1</span> <span class="toc_entry">From independence across accident years to the hypotheses</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0014.html"><span class="toc_ref">14</span> <span class="toc_entry">Mack’s published numerical example</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html"><span class="toc_ref">15</span> <span class="toc_entry">Mack’s model diagnostics</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0015.html#a0000000063"><span class="toc_ref">15.1</span> <span class="toc_entry">Development-factor correlation</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000064"><span class="toc_ref">15.2</span> <span class="toc_entry">Calendar-year labels</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0016.html"><span class="toc_ref">16</span> <span class="toc_entry">Mack’s lognormal approximation</span></a>
+ </li>
+<li class="">
+  <a href="sect0017.html"><span class="toc_ref">17</span> <span class="toc_entry">Prior uncertainty in Bornhuetter-Ferguson</span></a>
+ </li>
+<li class="">
+  <a href="sect0018.html"><span class="toc_ref">18</span> <span class="toc_entry">Bühlmann-Straub credibility</span></a>
+ </li>
+<li class="">
+  <a href="sect0019.html"><span class="toc_ref">19</span> <span class="toc_entry">Munich chain ladder: the separate-chain-ladder gap</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html"><span class="toc_ref">20</span> <span class="toc_entry">Munich residual correlations and adjusted factors</span></a>
+ </li>
+<li class=" active current">
+  <a href="sect0021.html"><span class="toc_ref">21</span> <span class="toc_entry">The stochastic ODP layer</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0021.html#a0000000065"><span class="toc_ref">21.1</span> <span class="toc_entry">Model and conditional moments</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000066"><span class="toc_ref">21.2</span> <span class="toc_entry">Prediction error</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000067"><span class="toc_ref">21.3</span> <span class="toc_entry">Log-link and corner constraints</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000068"><span class="toc_ref">21.4</span> <span class="toc_entry">Residual bootstrap definitions</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000069"><span class="toc_ref">21.5</span> <span class="toc_entry">Finite non-vacuity witness</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0022.html"><span class="toc_ref">22</span> <span class="toc_entry">Mack 1999: row assumptions and active weights</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html"><span class="toc_ref">23</span> <span class="toc_entry">Calendar-year claims development results</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html"><span class="toc_ref">24</span> <span class="toc_entry">Röhr: arbitrary-horizon approximations</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0024.html#a0000000070"><span class="toc_ref">24.1</span> <span class="toc_entry">Source formulas</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html#a0000000071"><span class="toc_ref">24.2</span> <span class="toc_entry">Exact splits</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html#a0000000072"><span class="toc_ref">24.3</span> <span class="toc_entry">Endpoints and bounds</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0025.html"><span class="toc_ref">25</span> <span class="toc_entry">R <span class="ttfamily">ChainLadder</span> option semantics</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html"><span class="toc_ref">26</span> <span class="toc_entry">Stochastic Bühlmann-Straub credibility</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html"><span class="toc_ref">27</span> <span class="toc_entry">The stochastic Bornhuetter-Ferguson model</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html"><span class="toc_ref">28</span> <span class="toc_entry">Panjer recursion</span></a>
+ </li>
+<li class="">
+  <a href="sect0029.html"><span class="toc_ref">29</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
+ </li>
+<li class="">
+  <a href="sect0030.html"><span class="toc_ref">30</span> <span class="toc_entry">Reference computation</span></a>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000022">21 The stochastic ODP layer</h1>
+<p>England and Verrall describe independent incremental claims with </p>
+<div class="displaymath" id="a0000000240">
+  \[  \mathbb {E}[X_{i,k}]=m_{i,k}, \qquad \operatorname {Var}(X_{i,k})=\varphi m_{i,k}, \qquad \log m_{i,k}=c+\alpha _i+\beta _k,  \]
+</div>
+<p> with \(\varphi {\gt}0\) and the corner constraints \(\alpha _0=\beta _0=0\) <span class="cite">
+	[
+	<a href="sect0030.html#EnglandVerrall1999" >4</a>
+	, 
+	Section 2, equations (2.5)–(2.7), p.
+	
+	283
+	]
+</span>. The same moment and link equations appear in <span class="cite">
+	[
+	<a href="sect0030.html#England2002" >6</a>
+	, 
+	Section 2, equations (2.1)–(2.3)
+	]
+</span>. This chapter separates exact consequences of those assumptions from the first-order GLM prediction-error formula and the residual bootstrap algorithm. </p>
+<h1 id="a0000000065">21.1 Model and conditional moments</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:odpStochasticModel">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">21.1</span>
+    <span class="definition_thmtitle">Finite stochastic ODP model</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#def:odpStochasticModel">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPCell" class="lean_decl">VerifiedReserving.ODPCell</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPLogLink" class="lean_decl">VerifiedReserving.ODPLogLink</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.odpCellRv" class="lean_decl">VerifiedReserving.odpCellRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPModel" class="lean_decl">VerifiedReserving.ODPModel</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPModel.mean_pos" class="lean_decl">VerifiedReserving.ODPModel.mean_pos</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.odpCellSigma" class="lean_decl">VerifiedReserving.odpCellSigma</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.odpObservedRv" class="lean_decl">VerifiedReserving.odpObservedRv</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.odpObservedSigma" class="lean_decl">VerifiedReserving.odpObservedSigma</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>For a finite square of cells, the dispersion is positive and the mean surface admits a corner-constrained log-link representation. Every incremental claim is measurable and square-integrable, has that mean \(m_{i,k}\) and variance \(\varphi m_{i,k}\), and the family is mutually independent. In particular, every modeled mean is positive. The observed-data sigma-algebra is generated by any selected finite set of cells. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:odpObservedIndep">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">21.2</span>
+    <span class="lemma_thmtitle">Generated sigma-algebras and independence</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#lem:odpObservedIndep">#</a>
+    
+    <a class="icon proof" href="sect0021.html#a0000000241"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0021.html#def:odpStochasticModel">Definition 21.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.odpCellSigma_le" class="lean_decl">VerifiedReserving.odpCellSigma_le</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.odpObservedSigma_le" class="lean_decl">VerifiedReserving.odpObservedSigma_le</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.odpIndep_cell_observed" class="lean_decl">VerifiedReserving.odpIndep_cell_observed</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> The sigma-algebras generated by one cell and by a finite vector of cells are sub-sigma-algebras of the ambient one. A cell outside the selected vector is independent of that vector. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000241">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Measurability gives the two inclusions. Mutual independence, restricted to the disjoint singleton and observed index sets, gives the final statement. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:odpConditionalMoments">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">21.3</span>
+    <span class="theorem_thmtitle">Exact conditional ODP moments</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#thm:odpConditionalMoments">#</a>
+    
+    <a class="icon proof" href="sect0021.html#a0000000242"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0021.html#lem:odpObservedIndep">Lemma 21.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_odpCell_given_observed" class="lean_decl">VerifiedReserving.condExp_odpCell_given_observed</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_sq_odpCell_sub_given_observed" class="lean_decl">VerifiedReserving.condExp_sq_odpCell_sub_given_observed</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> If \((i,k)\) is not among the observed cells, then </p>
+<div class="displaymath" id="a0000000243">
+  \[  \mathbb {E}[X_{i,k}\mid \mathcal{O}]=m_{i,k}, \qquad \mathbb {E}[(X_{i,k}-m_{i,k})^2\mid \mathcal{O}]=\varphi m_{i,k}  \]
+</div>
+<p> almost surely. These are exact conditional-moment identities, not GLM approximations. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000242">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Independence makes each conditional expectation equal to its integral; substitute the two fields of the ODP model. </p>
+
+  </div>
+</div>
+<h1 id="a0000000066">21.2 Prediction error</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:odpMsepExact">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">21.4</span>
+    <span class="definition_thmtitle">Aggregate and mean squared prediction error</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#def:odpMsepExact">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.odpAggregate" class="lean_decl">VerifiedReserving.odpAggregate</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.meanSquaredPredictionError" class="lean_decl">VerifiedReserving.meanSquaredPredictionError</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>For a finite set \(F\) of future cells, let \(Y_F=\sum _{p\in F}X_p\). For a predictor \(\widehat Y\), define \(\operatorname {MSEP}(Y_F,\widehat Y) =\mathbb {E}[(Y_F-\widehat Y)^2]\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:odpAggregateMoments">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">21.5</span>
+    <span class="theorem_thmtitle">Aggregate mean and process variance</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#thm:odpAggregateMoments">#</a>
+    
+    <a class="icon proof" href="sect0021.html#a0000000244"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0021.html#def:odpStochasticModel">Definition 21.1</a></li>
+          
+          <li><a href="sect0021.html#def:odpMsepExact">Definition 21.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_odpAggregate" class="lean_decl">VerifiedReserving.integral_odpAggregate</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.variance_odpAggregate" class="lean_decl">VerifiedReserving.variance_odpAggregate</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> For every finite \(F\), </p>
+<div class="displaymath" id="a0000000245">
+  \[  \mathbb {E}[Y_F]=\sum _{p\in F}m_p, \qquad \operatorname {Var}(Y_F)=\varphi \sum _{p\in F}m_p.  \]
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000244">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Integrate the finite sum and add the variances of the independent square-integrable cells. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:odpMsepExact">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">21.6</span>
+    <span class="theorem_thmtitle">Exact process-plus-estimation decomposition</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#thm:odpMsepExact">#</a>
+    
+    <a class="icon proof" href="sect0021.html#a0000000246"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0021.html#def:odpMsepExact">Definition 21.4</a></li>
+          
+          <li><a href="sect0021.html#thm:odpAggregateMoments">Theorem 21.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.meanSquaredPredictionError_eq_variance_add" class="lean_decl">VerifiedReserving.meanSquaredPredictionError_eq_variance_add</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.odpAggregateMsep_eq" class="lean_decl">VerifiedReserving.odpAggregateMsep_eq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> If a square-integrable predictor has the same mean as its square-integrable target and is independent of it, then </p>
+<div class="displaymath" id="a0000000247">
+  \[  \mathbb {E}[(Y-\widehat Y)^2]=\operatorname {Var}(Y)+\operatorname {Var}(\widehat Y).  \]
+</div>
+<p> For an ODP aggregate this is \(\varphi \sum _{p\in F}m_p+\operatorname {Var}(\widehat Y)\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000246">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>The difference has mean zero. Expand its variance and use independence to set the covariance to zero, then substitute Theorem&#160;<a href="sect0021.html#thm:odpAggregateMoments">21.5</a>. </p>
+
+  </div>
+</div>
+<p>England and Verrall use the delta method for the estimation component: since \(\widehat m=\exp (\widehat\eta )\), \(\operatorname {Var}(\widehat m)\mathrel {\dot=}\widehat m^2 \operatorname {Var}(\widehat\eta )\). Their single-cell and aggregate formulas are equations (3.3)–(3.5) of <span class="cite">
+	[
+	<a href="sect0030.html#EnglandVerrall1999" >4</a>
+	]
+</span> and equations (7.7)–(7.9) of <span class="cite">
+	[
+	<a href="sect0030.html#EnglandVerrall2002" >5</a>
+	]
+</span>. The dotted equality is not promoted to a theorem. </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:odpGlmMsep">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">21.7</span>
+    <span class="definition_thmtitle">Delta-method GLM MSEP formulas</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#def:odpGlmMsep">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.glmCellMsep" class="lean_decl">VerifiedReserving.glmCellMsep</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.glmAggregateEstimationVariance" class="lean_decl">VerifiedReserving.glmAggregateEstimationVariance</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.glmAggregateMsep" class="lean_decl">VerifiedReserving.glmAggregateMsep</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>The single-cell formula is \(\varphi \widehat m+\widehat m^2\operatorname {Var}(\widehat\eta )\). For a finite aggregate, the estimation term is the covariance quadratic form \(\sum _{p,q}\widehat m_p\widehat m_q\operatorname {Cov}(\widehat\eta _p,\widehat\eta _q)\), added to \(\varphi \sum _p\widehat m_p\). These are definitions of the source approximation. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:odpGlmSingleton">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">21.8</span>
+    <span class="lemma_thmtitle">Singleton bridge</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#lem:odpGlmSingleton">#</a>
+    
+    <a class="icon proof" href="sect0021.html#a0000000248"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0021.html#def:odpGlmMsep">Definition 21.7</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.glmAggregateMsep_singleton" class="lean_decl">VerifiedReserving.glmAggregateMsep_singleton</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> On a singleton future set, the aggregate definition is the single-cell formula, with the diagonal covariance used as \(\operatorname {Var}(\widehat\eta )\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000248">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Evaluate both finite sums on a singleton. </p>
+
+  </div>
+</div>
+<h1 id="a0000000067">21.3 Log-link and corner constraints</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:odpLogLink">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">21.9</span>
+    <span class="definition_thmtitle">Log-link and corner effects</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#def:odpLogLink">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.logLinkFit" class="lean_decl">VerifiedReserving.logLinkFit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.cornerRow" class="lean_decl">VerifiedReserving.cornerRow</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.cornerColumn" class="lean_decl">VerifiedReserving.cornerColumn</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>The log-link fit is \(\exp (c+\alpha _i+\beta _k)\). For positive multiplicative parameters \(a_i,b_k\), set \(\alpha _i=\log a_i-\log a_0\) and \(\beta _k=\log b_k-\log b_0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:odpLogLink">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">21.10</span>
+    <span class="theorem_thmtitle">Log-link and multiplicative equivalence</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#thm:odpLogLink">#</a>
+    
+    <a class="icon proof" href="sect0021.html#a0000000249"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0021.html#def:odpLogLink">Definition 21.9</a></li>
+          
+          <li><a href="sect0010.html#def:mult">Definition 10.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.logLinkFit_eq_multFit" class="lean_decl">VerifiedReserving.logLinkFit_eq_multFit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.cornerRow_zero" class="lean_decl">VerifiedReserving.cornerRow_zero</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.cornerColumn_zero" class="lean_decl">VerifiedReserving.cornerColumn_zero</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.logLinkFit_corner_eq_multFit" class="lean_decl">VerifiedReserving.logLinkFit_corner_eq_multFit</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Every log-link fit is multiplicative. Conversely, every positive multiplicative fit has the corner-constrained representation above, with \(c=\log a_0+\log b_0\) and \(\alpha _0=\beta _0=0\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000249">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Use \(\exp (x+y)=\exp (x)\exp (y)\) in one direction and \(\exp (\log x)=x\) for positive \(x\) in the other. </p>
+
+  </div>
+</div>
+<h1 id="a0000000068">21.4 Residual bootstrap definitions</h1>
+<p>England and Verrall’s unscaled Pearson residual, scale estimate, and inversion are equations (4.2)–(4.4) of <span class="cite">
+	[
+	<a href="sect0030.html#EnglandVerrall1999" >4</a>
+	]
+</span>. England’s later two-stage procedure first resamples adjusted residuals and refits the mean, then simulates future process outcomes conditional on that mean <span class="cite">
+	[
+	<a href="sect0030.html#England2002" >6</a>
+	, 
+	Sections 2–3
+	]
+</span>. </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:odpBootstrapResidual">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">21.11</span>
+    <span class="definition_thmtitle">Pearson residual operations</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#def:odpBootstrapResidual">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.pearsonResidual" class="lean_decl">VerifiedReserving.pearsonResidual</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.pearsonScale" class="lean_decl">VerifiedReserving.pearsonScale</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.adjustedPearsonResidual" class="lean_decl">VerifiedReserving.adjustedPearsonResidual</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bootstrapIncremental" class="lean_decl">VerifiedReserving.bootstrapIncremental</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>For an observation \(x\) and fitted mean \(m\), the unscaled Pearson residual is \(r=(x-m)/\sqrt m\). The Pearson scale is \(\sum r^2/(N-p)\), the degrees-of-freedom adjustment multiplies a residual by \(\sqrt{N/(N-p)}\), and inversion gives the pseudo-observation \(x^*=r^*\sqrt m+m\). Lean’s total division leaves these definitions meaningful at zero; the inversion theorems below assume \(m{\gt}0\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:odpBootstrapInverse">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">21.12</span>
+    <span class="lemma_thmtitle">Pearson inversion</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#lem:odpBootstrapInverse">#</a>
+    
+    <a class="icon proof" href="sect0021.html#a0000000250"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0021.html#def:odpBootstrapResidual">Definition 21.11</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.pearsonResidual_bootstrapIncremental" class="lean_decl">VerifiedReserving.pearsonResidual_bootstrapIncremental</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.bootstrapIncremental_pearsonResidual" class="lean_decl">VerifiedReserving.bootstrapIncremental_pearsonResidual</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> For \(m{\gt}0\), taking the residual of \(r\sqrt m+m\) returns \(r\), and rebuilding an observation from its Pearson residual returns that observation. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000250">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Cancel the nonzero factor \(\sqrt m\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:odpBootstrap">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">21.13</span>
+    <span class="definition_thmtitle">England-Verrall bootstrap and predictive reserve</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#def:odpBootstrap">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.englandVerrallBootstrapMean" class="lean_decl">VerifiedReserving.englandVerrallBootstrapMean</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.englandVerrallPredictiveReserve" class="lean_decl">VerifiedReserving.englandVerrallPredictiveReserve</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>One bootstrap refit resamples supplied residuals with replacement, inverts them against the fitted past means, and applies a supplied refitting map to obtain future means. The predictive reserve sums supplied process draws conditional on those bootstrap means. The process simulator is an input: the ODP moment equations do not determine a unique distribution. These declarations define the algorithm and make no coverage or consistency claim. </p>
+
+  </div>
+</div>
+<h1 id="a0000000069">21.5 Finite non-vacuity witness</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:odpWitness">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">21.14</span>
+    <span class="theorem_thmtitle">A nondegenerate ODP model exists</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0021.html#thm:odpWitness">#</a>
+    
+    <a class="icon proof" href="sect0021.html#a0000000251"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0021.html#thm:odpConditionalMoments">Theorem 21.3</a></li>
+          
+          <li><a href="sect0021.html#thm:odpMsepExact">Theorem 21.6</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.Cell" class="lean_decl">VerifiedReserving.ODPWitness.Cell</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.Bit" class="lean_decl">VerifiedReserving.ODPWitness.Bit</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.coin" class="lean_decl">VerifiedReserving.ODPWitness.coin</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.coin_singleton" class="lean_decl">VerifiedReserving.ODPWitness.coin_singleton</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.Omega" class="lean_decl">VerifiedReserving.ODPWitness.Omega</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.mu" class="lean_decl">VerifiedReserving.ODPWitness.mu</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.cellValue" class="lean_decl">VerifiedReserving.ODPWitness.cellValue</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.cellIndex" class="lean_decl">VerifiedReserving.ODPWitness.cellIndex</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.X" class="lean_decl">VerifiedReserving.ODPWitness.X</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.m" class="lean_decl">VerifiedReserving.ODPWitness.m</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.phi" class="lean_decl">VerifiedReserving.ODPWitness.phi</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.integral_cellValue" class="lean_decl">VerifiedReserving.ODPWitness.integral_cellValue</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.variance_cellValue" class="lean_decl">VerifiedReserving.ODPWitness.variance_cellValue</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.odpCellRv_X" class="lean_decl">VerifiedReserving.ODPWitness.odpCellRv_X</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.integral_X" class="lean_decl">VerifiedReserving.ODPWitness.integral_X</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.variance_X" class="lean_decl">VerifiedReserving.ODPWitness.variance_X</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.model" class="lean_decl">VerifiedReserving.ODPWitness.model</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.p00" class="lean_decl">VerifiedReserving.ODPWitness.p00</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.p01" class="lean_decl">VerifiedReserving.ODPWitness.p01</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.observed" class="lean_decl">VerifiedReserving.ODPWitness.observed</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.nontrivial" class="lean_decl">VerifiedReserving.ODPWitness.nontrivial</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.independentFutureObserved" class="lean_decl">VerifiedReserving.ODPWitness.independentFutureObserved</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.conditionalMean" class="lean_decl">VerifiedReserving.ODPWitness.conditionalMean</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.conditionalVariance" class="lean_decl">VerifiedReserving.ODPWitness.conditionalVariance</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.twoCellMsep" class="lean_decl">VerifiedReserving.ODPWitness.twoCellMsep</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.ODPWitness.exists_nondegenerate_odp_model" class="lean_decl">VerifiedReserving.ODPWitness.exists_nondegenerate_odp_model</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> On the product of four uniform two-point spaces, one coordinate is assigned to each cell of a \(2\) by \(2\) square. Every claim is \(0\) or \(2\), has mean and variance one, and the four claims are mutually independent. The unit mean surface satisfies the corner-constrained log link with zero effects and \(\varphi =1\). Taking \((0,1)\) as future and the nonempty singleton \(\{ (0,0)\} \) as observed instantiates both conditional-moment theorems. Two random coordinates also instantiate the exact MSEP decomposition with value \(2\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000251">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>The coordinate projections are independent under the finite product measure. Transport the two-point mean and variance along each measure-preserving evaluation map. </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0020.html" title="Munich residual correlations and adjusted factors"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0022.html" title="Mack 1999: row assumptions and active weights"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

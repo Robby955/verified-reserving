@@ -12,9 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Munich residual correlations and adjusted factors</title>
-<link rel="next" href="sect0021.html" title="The stochastic ODP layer" />
-<link rel="prev" href="sect0019.html" title="Munich chain ladder: the separate-chain-ladder gap" />
+<title>Stochastic Bühlmann-Straub credibility</title>
+<link rel="next" href="sect0027.html" title="The stochastic Bornhuetter-Ferguson model" />
+<link rel="prev" href="sect0025.html" title="R ChainLadder option semantics" />
 <link rel="up" href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -228,7 +228,7 @@
 <li class="">
   <a href="sect0019.html"><span class="toc_ref">19</span> <span class="toc_entry">Munich chain ladder: the separate-chain-ladder gap</span></a>
  </li>
-<li class=" active current">
+<li class="">
   <a href="sect0020.html"><span class="toc_ref">20</span> <span class="toc_entry">Munich residual correlations and adjusted factors</span></a>
  </li>
 <li class="">
@@ -278,7 +278,7 @@
 <li class="">
   <a href="sect0025.html"><span class="toc_ref">25</span> <span class="toc_entry">R <span class="ttfamily">ChainLadder</span> option semantics</span></a>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0026.html"><span class="toc_ref">26</span> <span class="toc_entry">Stochastic Bühlmann-Straub credibility</span></a>
  </li>
 <li class="">
@@ -302,19 +302,19 @@
 
 
 <div class="main-text">
-<h1 id="a0000000021">20 Munich residual correlations and adjusted factors</h1>
-<p>Quarg and Mack’s Sections 2.2 and 3.1.2 add the stochastic link between paid and incurred development <span class="cite">
+<h1 id="a0000000027">26 Stochastic Bühlmann-Straub credibility</h1>
+<p>Bühlmann and Straub <span class="cite">
 	[
-	<a href="sect0030.html#QuargMack2004" >3</a>
+	<a href="sect0030.html#BuhlmannStraub1970" >8</a>
 	]
-</span>. The model assumptions and the raw practical estimators are kept separate here. </p>
-<div class="definition_thmwrapper theorem-style-definition" id="def:munichResidual">
+</span>, Sections 3, 5, and 6, model a loss ratio \(X_l\) using a latent risk parameter \(\Theta \). This chapter fixes the contract conditions. Conditional on \(\Theta \), the loss ratios have common mean \(M=\mu (\Theta )\) and process variance \(\sigma ^2(\Theta )/P_l\), where \(P_l\) is exposure. The structural process parameter is \(v=E[\sigma ^2(\Theta )]\). Their Section 6 minimizes expected squared prediction error. This chapter proves the one-risk moment calculation and obtains the credibility factor in display (4), page 123. The scanned primary source is available from E-Periodica under DOI <span class="ttfamily">10.5169/seals-967024</span>. </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:bsStochastic">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">20.1</span>
-    <span class="definition_thmtitle">Joint row history and conditional residual</span>
+    <span class="definition_thmlabel">26.1</span>
+    <span class="definition_thmtitle">Conditional moment model</span>
     <div class="thm_header_extras">
 
     
@@ -322,7 +322,7 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0020.html#def:munichResidual">#</a>
+    <a class="icon proof" href="sect0026.html#def:bsStochastic">#</a>
     
     
     
@@ -337,15 +337,15 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichTriangle" class="lean_decl">VerifiedReserving.MunichTriangle</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubLatentSigma" class="lean_decl">VerifiedReserving.buhlmannStraubLatentSigma</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichTriangle.jointRowSigma" class="lean_decl">VerifiedReserving.MunichTriangle.jointRowSigma</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubRiskMean" class="lean_decl">VerifiedReserving.buhlmannStraubRiskMean</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichRowsIndep" class="lean_decl">VerifiedReserving.MunichRowsIndep</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubRiskVariance" class="lean_decl">VerifiedReserving.buhlmannStraubRiskVariance</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.conditionalStdDev" class="lean_decl">VerifiedReserving.conditionalStdDev</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubResidual" class="lean_decl">VerifiedReserving.buhlmannStraubResidual</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.conditionalResidual" class="lean_decl">VerifiedReserving.conditionalResidual</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BuhlmannStraubMomentModel" class="lean_decl">VerifiedReserving.BuhlmannStraubMomentModel</a></li>
           
         </ul>
     
@@ -356,21 +356,21 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p>For paid and incurred random triangles on one probability space, \(\mathcal B_i(k)\) is the join of their row histories through \(k\). For a random variable \(Y\) and a smaller history \(\mathcal A\) its residual is </p>
-<div class="displaymath" id="a0000000235">
-  \[  \operatorname {Res}(Y\mid \mathcal A) =\frac{Y-E[Y\mid \mathcal A]}{\sqrt{\operatorname {Var}(Y\mid \mathcal A)}}.  \]
+  <p>Let \(\mathcal G=\sigma (\Theta )\), \(S=\sigma ^2(\Theta )\), and \(e_l=X_l-M\). For the finite exposure sample, the model records </p>
+<div class="displaymath" id="a0000000281">
+  \[  E[X_l\mid \mathcal G]=M,\qquad E[e_l^2\mid \mathcal G]=\frac S{P_l},\qquad E[e_le_r\mid \mathcal G]=0\quad (l\ne r),  \]
 </div>
-<p> The PIU predicate states independence of the finite \(n\) accident years after grouping each year’s paid and incurred histories through the final modeled period \(n-1\). </p>
+<p> together with \(E[S]=v\), \(E[M]=m\), \(E[(M-m)^2]=w\), positive exposures, measurability, and the needed integrability. The source assumes conditional independence; the Lean proof records only the conditional cross moments it consumes. </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:munichRegression">
+<div class="definition_thmwrapper theorem-style-definition" id="def:bsRisk">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">20.2</span>
-    <span class="definition_thmtitle">PQ and IQ</span>
+    <span class="definition_thmlabel">26.2</span>
+    <span class="definition_thmtitle">Predictor, expected loss, and coefficient loss</span>
     <div class="thm_header_extras">
 
     
@@ -378,28 +378,8 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0020.html#def:munichRegression">#</a>
+    <a class="icon proof" href="sect0026.html#def:bsRisk">#</a>
     
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0020.html#def:munichResidual">Definition 20.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
     
     
     <button class="modal lean">L∃∀N</button>
@@ -413,9 +393,15 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichPaidRegression" class="lean_decl">VerifiedReserving.MunichPaidRegression</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubWeightedMeanRv" class="lean_decl">VerifiedReserving.buhlmannStraubWeightedMeanRv</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichIncurredRegression" class="lean_decl">VerifiedReserving.MunichIncurredRegression</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubWeightedResidualTotal" class="lean_decl">VerifiedReserving.buhlmannStraubWeightedResidualTotal</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubPredictor" class="lean_decl">VerifiedReserving.buhlmannStraubPredictor</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubExpectedSqLoss" class="lean_decl">VerifiedReserving.buhlmannStraubExpectedSqLoss</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubRiskQuadratic" class="lean_decl">VerifiedReserving.buhlmannStraubRiskQuadratic</a></li>
           
         </ul>
     
@@ -426,17 +412,25 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> PQ regresses the paid development residual, conditioned on \(\mathcal B_i(k)\), on the reciprocal-ratio residual with one common slope \(\lambda ^P\). IQ uses the incurred development residual and the paid/incurred-ratio residual with slope \(\lambda ^I\). Both predicates range over adjacent periods satisfying \(k+1{\lt}n\). </p>
+  <p>Write \(P=\sum _lP_l\), \(\bar X=\sum _lP_lX_l/P\), and </p>
+<div class="displaymath" id="a0000000282">
+  \[  \widehat M_z=m+z(\bar X-m),\qquad R(z)=E[(M-\widehat M_z)^2].  \]
+</div>
+<p> The exposure-scaled coefficient loss is </p>
+<div class="displaymath" id="a0000000283">
+  \[  Q(z)=Pw(1-z)^2+vz^2.  \]
+</div>
+<p> This stochastic objective is separate from the deterministic penalized sample loss in Definition&#160;<a href="sect0018.html#def:bs">18.1</a>. </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:munichCorrelation">
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:bsResidualMoments">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">20.3</span>
-    <span class="theorem_thmtitle">Residual slope is the standardized cross-moment</span>
+    <span class="theorem_thmlabel">26.3</span>
+    <span class="theorem_thmtitle">Conditional residual moments</span>
     <div class="thm_header_extras">
 
     
@@ -444,9 +438,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0020.html#thm:munichCorrelation">#</a>
+    <a class="icon proof" href="sect0026.html#thm:bsResidualMoments">#</a>
     
-    <a class="icon proof" href="sect0020.html#a0000000236"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0026.html#a0000000284"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -462,7 +456,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0020.html#def:munichRegression">Definition 20.2</a></li>
+          <li><a href="sect0026.html#def:bsStochastic">Definition 26.1</a></li>
+          
+          <li><a href="sect0026.html#def:bsRisk">Definition 26.2</a></li>
           
         </ul>
     
@@ -482,11 +478,21 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_mul_eq_slope_of_residual_regression" class="lean_decl">VerifiedReserving.condExp_mul_eq_slope_of_residual_regression</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubWeightedMeanRv_sub_riskMean" class="lean_decl">VerifiedReserving.buhlmannStraubWeightedMeanRv_sub_riskMean</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichPaid_residualCorrelation_eq" class="lean_decl">VerifiedReserving.munichPaid_residualCorrelation_eq</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_buhlmannStraubResidual_eq_zero" class="lean_decl">VerifiedReserving.condExp_buhlmannStraubResidual_eq_zero</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichIncurred_residualCorrelation_eq" class="lean_decl">VerifiedReserving.munichIncurred_residualCorrelation_eq</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_buhlmannStraubWeightedResidualTotal_eq_zero" class="lean_decl">VerifiedReserving.condExp_buhlmannStraubWeightedResidualTotal_eq_zero</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_buhlmannStraubWeightedResidualTotal_eq_zero" class="lean_decl">VerifiedReserving.integral_buhlmannStraubWeightedResidualTotal_eq_zero</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_buhlmannStraubPredictor_eq_collectiveMean" class="lean_decl">VerifiedReserving.integral_buhlmannStraubPredictor_eq_collectiveMean</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_sq_buhlmannStraubWeightedResidualTotal" class="lean_decl">VerifiedReserving.condExp_sq_buhlmannStraubWeightedResidualTotal</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_sq_buhlmannStraubWeightedMeanRv_sub_riskMean" class="lean_decl">VerifiedReserving.integral_sq_buhlmannStraubWeightedMeanRv_sub_riskMean</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.integral_buhlmannStraubRiskMean_mul_weightedResidual_eq_zero" class="lean_decl">VerifiedReserving.integral_buhlmannStraubRiskMean_mul_weightedResidual_eq_zero</a></li>
           
         </ul>
     
@@ -497,15 +503,15 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> Let \(\mathcal A\le \mathcal B\). If \(A\) is \(\mathcal B\)-measurable, \(E[Z\mid \mathcal B]=\lambda A\), and \(E[A^2\mid \mathcal A]=1\), then </p>
-<div class="displaymath" id="a0000000237">
-  \[  E[AZ\mid \mathcal A]=\lambda .  \]
+  <p> The weighted residual total has conditional mean zero and conditional second moment \(SP\). When the total exposure \(P\) is nonzero, it follows that </p>
+<div class="displaymath" id="a0000000285">
+  \[  E[(\bar X-M)^2]=\frac vP, \qquad E[(M-m)(\bar X-M)]=0.  \]
 </div>
-<p> Applying this to PQ and IQ proves the paid and incurred residual cross-moments equal \(\lambda ^P\) and \(\lambda ^I\), under the stated integrability and standardization hypotheses. </p>
+<p> Every predictor \(m+z(\bar X-m)\) in the scalar family has expectation \(m\), so it satisfies the source’s expectation-unbiasedness constraint. </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000236">
+<div class="proof_wrapper" id="a0000000284">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -513,109 +519,17 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Pull \(A\) out after conditioning on \(\mathcal B\), substitute the regression, use the tower property, and use \(E[A^2\mid \mathcal A]=1\). </p>
+  <p>Scale each residual by its exposure. Conditional cross moments remove the off-diagonal terms, and \(P_l^2(S/P_l)=SP_l\). Pulling the centered latent mean through conditional expectation removes the remaining cross term.</p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:munichProjection">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">20.4</span>
-    <span class="definition_thmtitle">Raw Munich estimators and recursion</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0020.html#def:munichProjection">#</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0020.html#def:munichRegression">Definition 20.2</a></li>
-          
-          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclRatioMean" class="lean_decl">VerifiedReserving.mclRatioMean</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclRatioScaleSqIncurred" class="lean_decl">VerifiedReserving.mclRatioScaleSqIncurred</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclRatioScaleSqPaid" class="lean_decl">VerifiedReserving.mclRatioScaleSqPaid</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclPaidResidual" class="lean_decl">VerifiedReserving.mclPaidResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclIncurredResidual" class="lean_decl">VerifiedReserving.mclIncurredResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclPaidRatioResidual" class="lean_decl">VerifiedReserving.mclPaidRatioResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclIncurredRatioResidual" class="lean_decl">VerifiedReserving.mclIncurredRatioResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclLambdaPaid" class="lean_decl">VerifiedReserving.mclLambdaPaid</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclLambdaIncurred" class="lean_decl">VerifiedReserving.mclLambdaIncurred</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedPaidFactor" class="lean_decl">VerifiedReserving.mclAdjustedPaidFactor</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedIncurredFactor" class="lean_decl">VerifiedReserving.mclAdjustedIncurredFactor</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichProjection" class="lean_decl">VerifiedReserving.munichProjection</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p> The raw pattern and dispersion estimators on pp.&#160;290–291 define the four residual arrays. The pooled least-squares slopes through the origin are \(\widehat\lambda ^P\) and \(\widehat\lambda ^I\). At a projected pair \((p,i)\) the paid factor is </p>
-<div class="displaymath" id="a0000000238">
-  \[  \widehat f^P_k+\widehat\lambda ^P \frac{\widehat\sigma ^P_k}{\widehat\rho ^P_k} \left(\frac{i}{p}-\widehat q_k^{-1}\right),  \]
-</div>
-<p> with the symmetric paid/incurred formula for the incurred factor. The coupled recursion applies both factors to the preceding pair. </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:munichZero">
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:bsExpectedLoss">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">20.5</span>
-    <span class="theorem_thmtitle">Zero residual slopes recover separate chain ladder</span>
+    <span class="theorem_thmlabel">26.4</span>
+    <span class="theorem_thmtitle">Expected prediction loss</span>
     <div class="thm_header_extras">
 
     
@@ -623,9 +537,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0020.html#thm:munichZero">#</a>
+    <a class="icon proof" href="sect0026.html#thm:bsExpectedLoss">#</a>
     
-    <a class="icon proof" href="sect0020.html#a0000000239"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0026.html#a0000000286"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -641,9 +555,7 @@
         
         <ul class="uses">
           
-          <li><a href="sect0020.html#def:munichProjection">Definition 20.4</a></li>
-          
-          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
+          <li><a href="sect0026.html#thm:bsResidualMoments">Theorem 26.3</a></li>
           
         </ul>
     
@@ -663,11 +575,9 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedPaidFactor_zero" class="lean_decl">VerifiedReserving.mclAdjustedPaidFactor_zero</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubExpectedSqLoss_eq" class="lean_decl">VerifiedReserving.buhlmannStraubExpectedSqLoss_eq</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedIncurredFactor_zero" class="lean_decl">VerifiedReserving.mclAdjustedIncurredFactor_zero</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichProjection_zero" class="lean_decl">VerifiedReserving.munichProjection_zero</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubExpectedSqLoss_scaled_eq_riskQuadratic" class="lean_decl">VerifiedReserving.buhlmannStraubExpectedSqLoss_scaled_eq_riskQuadratic</a></li>
           
         </ul>
     
@@ -678,11 +588,15 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> When both slopes are zero, every adjusted factor is its usual chain-ladder factor and the coupled recursion is exactly \((\widehat P_{i,d+m},\widehat I_{i,d+m})\) from the two separate projections. </p>
+  <p> For every scalar coefficient \(z\) and nonzero total exposure, </p>
+<div class="displaymath" id="a0000000287">
+  \[  R(z)=(1-z)^2w+z^2\frac vP, \qquad PR(z)=Q(z).  \]
+</div>
+<p> Thus the deterministic coefficient quadratic is derived from the expected squared prediction loss, rather than postulated. </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000239">
+<div class="proof_wrapper" id="a0000000286">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -690,7 +604,181 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Induction on \(m\), using the chain-ladder projection step for each component. </p>
+  <p>Expand \(M-\widehat M_z=(1-z)(M-m)-z(\bar X-M)\) and apply Theorem&#160;<a href="sect0026.html#thm:bsResidualMoments">26.3</a>.</p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:bsStochasticMinimizer">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">26.5</span>
+    <span class="theorem_thmtitle">Credibility is the risk minimizer</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0026.html#thm:bsStochasticMinimizer">#</a>
+    
+    <a class="icon proof" href="sect0026.html#a0000000288"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0026.html#thm:bsExpectedLoss">Theorem 26.4</a></li>
+          
+          <li><a href="sect0018.html#thm:bsCredibility">Theorem 18.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubRiskQuadratic_eq_at_credibility_add" class="lean_decl">VerifiedReserving.buhlmannStraubRiskQuadratic_eq_at_credibility_add</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubCredibility_minimizes_riskQuadratic" class="lean_decl">VerifiedReserving.buhlmannStraubCredibility_minimizes_riskQuadratic</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubCredibility_minimizes_expectedSqLoss" class="lean_decl">VerifiedReserving.buhlmannStraubCredibility_minimizes_expectedSqLoss</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.buhlmannStraubPredictor_credibility_eq_estimate" class="lean_decl">VerifiedReserving.buhlmannStraubPredictor_credibility_eq_estimate</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> If \(v+Pw{\gt}0\), then </p>
+<div class="displaymath" id="a0000000289">
+  \[  Q(z)=Q(Z)+(v+Pw)(z-Z)^2, \qquad Z=\frac{Pw}{v+Pw}.  \]
+</div>
+<p> For \(P{\gt}0\), \(Z\) minimizes the actual expected squared prediction loss. The predictor \(m+Z(\bar X-m)\) is pointwise equal to <span class="ttfamily">buhlmannStraubEstimate</span>. Supplying the source’s empirical portfolio mean as \(m\) gives its display (4) estimator. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000288">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Complete the square in \(Q\), use positivity to compare scaled expected losses, and apply the deterministic credibility-form identity.</p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:bsWitness">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">26.6</span>
+    <span class="theorem_thmtitle">Finite process-shock witness</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0026.html#thm:bsWitness">#</a>
+    
+    <a class="icon proof" href="sect0026.html#a0000000290"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0026.html#def:bsStochastic">Definition 26.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BuhlmannStraubWitness.observation_nondegenerate" class="lean_decl">VerifiedReserving.BuhlmannStraubWitness.observation_nondegenerate</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BuhlmannStraubWitness.momentModel" class="lean_decl">VerifiedReserving.BuhlmannStraubWitness.momentModel</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.BuhlmannStraubWitness.exists_process_nondegenerate_buhlmannStraubModel" class="lean_decl">VerifiedReserving.BuhlmannStraubWitness.exists_process_nondegenerate_buhlmannStraubModel</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> There is a two-outcome probability model with one unit exposure, constant latent mean \(1\), and observed loss ratio \(0\) or \(2\) with equal probability. It satisfies the moment model with process variance \(v=1{\gt}0\) and has a nonconstant observation. Its between-risk variance is zero; the general theorems do not require that specialization. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000290">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Conditional expectation given the trivial \(\sigma \)-algebra is the two-point average.</p>
 
   </div>
 </div>
@@ -705,11 +793,11 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0019.html" title="Munich chain ladder: the separate-chain-ladder gap"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0025.html" title="R ChainLadder option semantics"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0021.html" title="The stochastic ODP layer"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0027.html" title="The stochastic Bornhuetter-Ferguson model"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

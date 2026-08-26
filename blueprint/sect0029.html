@@ -12,9 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Munich residual correlations and adjusted factors</title>
-<link rel="next" href="sect0021.html" title="The stochastic ODP layer" />
-<link rel="prev" href="sect0019.html" title="Munich chain ladder: the separate-chain-ladder gap" />
+<title>Non-vacuity: a nondegenerate model</title>
+<link rel="next" href="sect0030.html" title="Reference computation" />
+<link rel="prev" href="sect0028.html" title="Panjer recursion" />
 <link rel="up" href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -228,7 +228,7 @@
 <li class="">
   <a href="sect0019.html"><span class="toc_ref">19</span> <span class="toc_entry">Munich chain ladder: the separate-chain-ladder gap</span></a>
  </li>
-<li class=" active current">
+<li class="">
   <a href="sect0020.html"><span class="toc_ref">20</span> <span class="toc_entry">Munich residual correlations and adjusted factors</span></a>
  </li>
 <li class="">
@@ -287,7 +287,7 @@
 <li class="">
   <a href="sect0028.html"><span class="toc_ref">28</span> <span class="toc_entry">Panjer recursion</span></a>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0029.html"><span class="toc_ref">29</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
  </li>
 <li class="">
@@ -302,141 +302,14 @@
 
 
 <div class="main-text">
-<h1 id="a0000000021">20 Munich residual correlations and adjusted factors</h1>
-<p>Quarg and Mack’s Sections 2.2 and 3.1.2 add the stochastic link between paid and incurred development <span class="cite">
-	[
-	<a href="sect0030.html#QuargMack2004" >3</a>
-	]
-</span>. The model assumptions and the raw practical estimators are kept separate here. </p>
-<div class="definition_thmwrapper theorem-style-definition" id="def:munichResidual">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">20.1</span>
-    <span class="definition_thmtitle">Joint row history and conditional residual</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0020.html#def:munichResidual">#</a>
-    
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichTriangle" class="lean_decl">VerifiedReserving.MunichTriangle</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichTriangle.jointRowSigma" class="lean_decl">VerifiedReserving.MunichTriangle.jointRowSigma</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichRowsIndep" class="lean_decl">VerifiedReserving.MunichRowsIndep</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.conditionalStdDev" class="lean_decl">VerifiedReserving.conditionalStdDev</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.conditionalResidual" class="lean_decl">VerifiedReserving.conditionalResidual</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p>For paid and incurred random triangles on one probability space, \(\mathcal B_i(k)\) is the join of their row histories through \(k\). For a random variable \(Y\) and a smaller history \(\mathcal A\) its residual is </p>
-<div class="displaymath" id="a0000000235">
-  \[  \operatorname {Res}(Y\mid \mathcal A) =\frac{Y-E[Y\mid \mathcal A]}{\sqrt{\operatorname {Var}(Y\mid \mathcal A)}}.  \]
-</div>
-<p> The PIU predicate states independence of the finite \(n\) accident years after grouping each year’s paid and incurred histories through the final modeled period \(n-1\). </p>
-
-  </div>
-</div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:munichRegression">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">20.2</span>
-    <span class="definition_thmtitle">PQ and IQ</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0020.html#def:munichRegression">#</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0020.html#def:munichResidual">Definition 20.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichPaidRegression" class="lean_decl">VerifiedReserving.MunichPaidRegression</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.MunichIncurredRegression" class="lean_decl">VerifiedReserving.MunichIncurredRegression</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p> PQ regresses the paid development residual, conditioned on \(\mathcal B_i(k)\), on the reciprocal-ratio residual with one common slope \(\lambda ^P\). IQ uses the incurred development residual and the paid/incurred-ratio residual with slope \(\lambda ^I\). Both predicates range over adjacent periods satisfying \(k+1{\lt}n\). </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:munichCorrelation">
+<h1 id="a0000000030">29 Non-vacuity: a nondegenerate model</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:nontrivial">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">20.3</span>
-    <span class="theorem_thmtitle">Residual slope is the standardized cross-moment</span>
+    <span class="theorem_thmlabel">29.1</span>
+    <span class="theorem_thmtitle">A nondegenerate Mack model exists</span>
     <div class="thm_header_extras">
 
     
@@ -444,9 +317,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0020.html#thm:munichCorrelation">#</a>
+    <a class="icon proof" href="sect0029.html#thm:nontrivial">#</a>
     
-    <a class="icon proof" href="sect0020.html#a0000000236"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0029.html#a0000000309"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -462,7 +335,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0020.html#def:munichRegression">Definition 20.2</a></li>
+          <li><a href="sect0005.html#def:Mack1">Definition 5.2</a></li>
+          
+          <li><a href="sect0005.html#def:Mack3">Definition 5.13</a></li>
           
         </ul>
     
@@ -482,11 +357,9 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.condExp_mul_eq_slope_of_residual_regression" class="lean_decl">VerifiedReserving.condExp_mul_eq_slope_of_residual_regression</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.X" class="lean_decl">VerifiedReserving.NontrivialModel.X</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichPaid_residualCorrelation_eq" class="lean_decl">VerifiedReserving.munichPaid_residualCorrelation_eq</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichIncurred_residualCorrelation_eq" class="lean_decl">VerifiedReserving.munichIncurred_residualCorrelation_eq</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.exists_nontrivial_mack_model" class="lean_decl">VerifiedReserving.NontrivialModel.exists_nontrivial_mack_model</a></li>
           
         </ul>
     
@@ -497,15 +370,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> Let \(\mathcal A\le \mathcal B\). If \(A\) is \(\mathcal B\)-measurable, \(E[Z\mid \mathcal B]=\lambda A\), and \(E[A^2\mid \mathcal A]=1\), then </p>
-<div class="displaymath" id="a0000000237">
-  \[  E[AZ\mid \mathcal A]=\lambda .  \]
-</div>
-<p> Applying this to PQ and IQ proves the paid and incurred residual cross-moments equal \(\lambda ^P\) and \(\lambda ^I\), under the stated integrability and standardization hypotheses. </p>
+  <p> There is a probability space, a random triangle with three accident years, and constants \(f_k\), \(\sigma _k^2\) with \(\sigma _0^2 {\gt} 0\), satisfying (M1), (M3) and (M2’), in which the first development step is genuinely random. The model: eight equally likely outcomes, an independent \(\pm 1\) shock per accident year, \(C_{i,0} = c\) and \(C_{i,k} = c f^k (1 + s\, \xi _i)\) for \(k \ge 1\), with \(\mathcal{D}_0\) trivial and \(\mathcal{D}_k\) everything for \(k \ge 1\). </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000236">
+<div class="proof_wrapper" id="a0000000309">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -513,109 +382,17 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Pull \(A\) out after conditioning on \(\mathcal B\), substitute the regression, use the tower property, and use \(E[A^2\mid \mathcal A]=1\). </p>
+  <p>Conditional expectations given the trivial \(\sigma \)-algebra are eight-term averages; the shocks sum to zero, have unit square, and are orthogonal. </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:munichProjection">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">20.4</span>
-    <span class="definition_thmtitle">Raw Munich estimators and recursion</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0020.html#def:munichProjection">#</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0020.html#def:munichRegression">Definition 20.2</a></li>
-          
-          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclRatioMean" class="lean_decl">VerifiedReserving.mclRatioMean</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclRatioScaleSqIncurred" class="lean_decl">VerifiedReserving.mclRatioScaleSqIncurred</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclRatioScaleSqPaid" class="lean_decl">VerifiedReserving.mclRatioScaleSqPaid</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclPaidResidual" class="lean_decl">VerifiedReserving.mclPaidResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclIncurredResidual" class="lean_decl">VerifiedReserving.mclIncurredResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclPaidRatioResidual" class="lean_decl">VerifiedReserving.mclPaidRatioResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclIncurredRatioResidual" class="lean_decl">VerifiedReserving.mclIncurredRatioResidual</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclLambdaPaid" class="lean_decl">VerifiedReserving.mclLambdaPaid</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclLambdaIncurred" class="lean_decl">VerifiedReserving.mclLambdaIncurred</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedPaidFactor" class="lean_decl">VerifiedReserving.mclAdjustedPaidFactor</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedIncurredFactor" class="lean_decl">VerifiedReserving.mclAdjustedIncurredFactor</a></li>
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichProjection" class="lean_decl">VerifiedReserving.munichProjection</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p> The raw pattern and dispersion estimators on pp.&#160;290–291 define the four residual arrays. The pooled least-squares slopes through the origin are \(\widehat\lambda ^P\) and \(\widehat\lambda ^I\). At a projected pair \((p,i)\) the paid factor is </p>
-<div class="displaymath" id="a0000000238">
-  \[  \widehat f^P_k+\widehat\lambda ^P \frac{\widehat\sigma ^P_k}{\widehat\rho ^P_k} \left(\frac{i}{p}-\widehat q_k^{-1}\right),  \]
-</div>
-<p> with the symmetric paid/incurred formula for the incurred factor. The coupled recursion applies both factors to the preceding pair. </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:munichZero">
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:instantiated">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">20.5</span>
-    <span class="theorem_thmtitle">Zero residual slopes recover separate chain ladder</span>
+    <span class="theorem_thmlabel">29.2</span>
+    <span class="theorem_thmtitle">Headline theorems instantiated</span>
     <div class="thm_header_extras">
 
     
@@ -623,9 +400,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0020.html#thm:munichZero">#</a>
+    <a class="icon proof" href="sect0029.html#thm:instantiated">#</a>
     
-    <a class="icon proof" href="sect0020.html#a0000000239"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0029.html#a0000000310"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -641,9 +418,15 @@
         
         <ul class="uses">
           
-          <li><a href="sect0020.html#def:munichProjection">Definition 20.4</a></li>
+          <li><a href="sect0029.html#thm:nontrivial">Theorem 29.1</a></li>
           
-          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
+          <li><a href="sect0005.html#thm:unbiased">Theorem 5.5</a></li>
+          
+          <li><a href="sect0005.html#thm:mack1">Theorem 5.12</a></li>
+          
+          <li><a href="sect0005.html#thm:var_fhat">Theorem 5.15</a></li>
+          
+          <li><a href="sect0005.html#thm:sigma2">Theorem 5.18</a></li>
           
         </ul>
     
@@ -663,11 +446,13 @@
         
         <ul class="uses">
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedPaidFactor_zero" class="lean_decl">VerifiedReserving.mclAdjustedPaidFactor_zero</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.fhat0_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.fhat0_unbiased</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mclAdjustedIncurredFactor_zero" class="lean_decl">VerifiedReserving.mclAdjustedIncurredFactor_zero</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.ultimate_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.ultimate_unbiased</a></li>
           
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.munichProjection_zero" class="lean_decl">VerifiedReserving.munichProjection_zero</a></li>
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.var_fhat0" class="lean_decl">VerifiedReserving.NontrivialModel.var_fhat0</a></li>
+          
+          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.NontrivialModel.sigma2_unbiased" class="lean_decl">VerifiedReserving.NontrivialModel.sigma2_unbiased</a></li>
           
         </ul>
     
@@ -678,11 +463,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> When both slopes are zero, every adjusted factor is its usual chain-ladder factor and the coupled recursion is exactly \((\widehat P_{i,d+m},\widehat I_{i,d+m})\) from the two separate projections. </p>
+  <p> On that model, \(E[\hat f_0 \mid \mathcal{D}_0] = 2\) although \(\hat f_0\) is random; \(E[\hat C_{2,2} \mid \mathcal{D}_0] = E[C_{2,2} \mid \mathcal{D}_0]\); \(E[(\hat f_0 - 2)^2 \mid \mathcal{D}_0] = \sigma _0^2 / S_0\); and \(E[\hat\sigma _0^2 \mid \mathcal{D}_0] = \sigma _0^2 = 4\). </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000239">
+<div class="proof_wrapper" id="a0000000310">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -690,7 +475,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Induction on \(m\), using the chain-ladder projection step for each component. </p>
+  <p>Direct instantiation of the general theorems; every hypothesis is discharged. </p>
 
   </div>
 </div>
@@ -705,11 +490,11 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0019.html" title="Munich chain ladder: the separate-chain-ladder gap"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0028.html" title="Panjer recursion"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0021.html" title="The stochastic ODP layer"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0030.html" title="Reference computation"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

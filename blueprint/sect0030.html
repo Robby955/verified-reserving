@@ -12,9 +12,8 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mack 1999 equals Mack 1993</title>
-<link rel="next" href="sect0004.html" title="Bornhuetter-Ferguson on the chain-ladder pattern" />
-<link rel="prev" href="sect0002.html" title="The chain-ladder estimators" />
+<title>Reference computation</title>
+<link rel="prev" href="sect0029.html" title="Non-vacuity: a nondegenerate model" />
 <link rel="up" href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -48,7 +47,7 @@
 
   </ul>
  </li>
-<li class=" active current">
+<li class="">
   <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Mack 1999 equals Mack 1993</span></a>
  </li>
 <li class="">
@@ -290,7 +289,7 @@
 <li class="">
   <a href="sect0029.html"><span class="toc_ref">29</span> <span class="toc_entry">Non-vacuity: a nondegenerate model</span></a>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0030.html"><span class="toc_ref">30</span> <span class="toc_entry">Reference computation</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
@@ -302,397 +301,75 @@
 
 
 <div class="main-text">
-<h1 id="a0000000004">3 Mack 1999 equals Mack 1993</h1>
-<div class="definition_thmwrapper theorem-style-definition" id="def:se2rec">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">3.1</span>
-    <span class="definition_thmtitle">Mack’s 1999 recursion</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0003.html#def:se2rec">#</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
-          
-          <li><a href="sect0002.html#def:sigma2">Definition 2.5</a></li>
-          
-          <li><a href="sect0002.html#def:S">Definition 2.2</a></li>
-          
-          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2rec" class="lean_decl">VerifiedReserving.se2rec</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p> For \(\alpha = 1\) and unit weights <span class="cite">
+<h1 id="a0000000031">30 Reference computation</h1>
+<p>Mack’s 1993 example <span class="cite">
 	[
-	<a href="sect0030.html#Mack1999" >2</a>
+	<a href="sect0030.html#Mack1993" >1</a>
 	]
-</span>, starting from \(\mathrm{se}^2 = 0\) on the latest diagonal \(d = n-1-i\) and stepping \(m\) times, </p>
-<div class="displaymath" id="a0000000081">
-  \[  \mathrm{se}^2_{m+1} = \hat C_{i,d+m}^2\Big(\frac{\hat\sigma _{d+m}^2}{\hat C_{i,d+m}} + \frac{\hat\sigma _{d+m}^2}{S_{d+m}}\Big) + \mathrm{se}^2_m\, \hat f_{d+m}^2 .  \]
-</div>
-
-  </div>
-</div>
-<div class="definition_thmwrapper theorem-style-definition" id="def:mackTerm">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">3.2</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0003.html#def:mackTerm">#</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:sigma2">Definition 2.5</a></li>
-          
-          <li><a href="sect0002.html#def:fhat">Definition 2.3</a></li>
-          
-          <li><a href="sect0002.html#def:Chat">Definition 2.6</a></li>
-          
-          <li><a href="sect0002.html#def:S">Definition 2.2</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.mackTerm" class="lean_decl">VerifiedReserving.mackTerm</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="definition_thmcontent">
-  <p> The summand of the closed form: \(\mathrm{term}_{i,k} = \frac{\hat\sigma _k^2}{\hat f_k^2}\big(\frac{1}{\hat C_{i,k}} + \frac{1}{S_k}\big)\). </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:msep_sum">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">3.3</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0003.html#lem:msep_sum">#</a>
-    
-    <a class="icon proof" href="sect0003.html#a0000000082"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0002.html#def:msep">Definition 2.8</a></li>
-          
-          <li><a href="sect0003.html#def:mackTerm">Definition 3.2</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.msep_eq_sum_mackTerm" class="lean_decl">VerifiedReserving.msep_eq_sum_mackTerm</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> \(\widehat{\mathrm{msep}}(\hat R_i) = \hat C_{i,n-1}^2 \sum _{k=n-1-i}^{n-2} \mathrm{term}_{i,k}\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000082">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>By definition. </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:se2rec_closed">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">3.4</span>
-    <span class="lemma_thmtitle">Truncated closed form</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0003.html#lem:se2rec_closed">#</a>
-    
-    <a class="icon proof" href="sect0003.html#a0000000083"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0003.html#def:se2rec">Definition 3.1</a></li>
-          
-          <li><a href="sect0003.html#def:mackTerm">Definition 3.2</a></li>
-          
-          <li><a href="sect0002.html#lem:Chat_succ">Lemma 2.13</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2rec_eq_closed" class="lean_decl">VerifiedReserving.se2rec_eq_closed</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> If \(\hat f_k \neq 0\) for \(d \le k {\lt} d+m\), then \(\mathrm{se}^2_m = \hat C_{i,d+m}^2 \sum _{k=d}^{d+m-1} \mathrm{term}_{i,k}\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000083">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Induction on \(m\) using Lemma&#160;<a href="sect0002.html#lem:Chat_succ">2.13</a> and \(\hat f_{d+m}^2/\hat f_{d+m}^2 = 1\). </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:recursion">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">3.5</span>
-    <span class="theorem_thmtitle">Mack 1999 = Mack 1993</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0003.html#thm:recursion">#</a>
-    
-    <a class="icon proof" href="sect0003.html#a0000000084"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0003.html#lem:se2rec_closed">Lemma 3.4</a></li>
-          
-          <li><a href="sect0003.html#lem:msep_sum">Lemma 3.3</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://robby955.github.io/verified-reserving/docs//find/#doc/VerifiedReserving.se2rec_eq_msep" class="lean_decl">VerifiedReserving.se2rec_eq_msep</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p> For \(i \le n-1\) and \(\hat f_k \neq 0\) along the row, \(i\) steps of the 1999 recursion return exactly Mack’s 1993 estimator: \(\mathrm{se}^2_i = \widehat{\mathrm{msep}}(\hat R_i)\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000084">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Lemma&#160;<a href="sect0003.html#lem:se2rec_closed">3.4</a> with \(m = i\), since \(d + i = n-1\). </p>
-
-  </div>
-</div>
+</span>, based on the Taylor and Ashe triangle <span class="cite">
+	[
+	<a href="sect0030.html#TaylorAshe1983" >19</a>
+	]
+</span>, is reproduced to every printed digit (nine reserves, the total 18,681 thousand, all standard-error percentages) by a dependency-free script implementing the definitions above in floating point. The Lean definitions are over \(\mathbb {R}\) and noncomputable; the script is the reference computation, not the Lean code. </p>
+<dl class="bibliography">
+  <dt><a name="Mack1993">1</a></dt>
+  <dd><p>T. Mack, Distribution-free calculation of the standard error of chain ladder reserve estimates, ASTIN Bulletin 23 (1993) 213-225. </p>
+</dd>
+  <dt><a name="Mack1999">2</a></dt>
+  <dd><p>T. Mack, The standard error of chain ladder reserve estimates: recursive calculation and inclusion of a tail factor, ASTIN Bulletin 29 (1999) 361-366. </p>
+</dd>
+  <dt><a name="QuargMack2004">3</a></dt>
+  <dd><p>G. Quarg and T. Mack, Munich chain ladder: a reserving method that reduces the gap between IBNR projections based on paid losses and IBNR projections based on incurred losses, Blätter der DGVFM 26 (2004) 597-630; authorized English reprint in Variance 2 (2008) 266-299. </p>
+</dd>
+  <dt><a name="EnglandVerrall1999">4</a></dt>
+  <dd><p>P. England and R. Verrall, Analytic and bootstrap estimates of prediction errors in claims reserving, Insurance: Mathematics and Economics 25 (1999) 281-293. </p>
+</dd>
+  <dt><a name="EnglandVerrall2002">5</a></dt>
+  <dd><p>P. England and R. Verrall, Stochastic claims reserving in general insurance, British Actuarial Journal 8 (2002) 443-518. </p>
+</dd>
+  <dt><a name="England2002">6</a></dt>
+  <dd><p>P. England, Addendum to “Analytic and bootstrap estimates of prediction errors in claims reserving”, Insurance: Mathematics and Economics 31 (2002) 461-466. </p>
+</dd>
+  <dt><a name="MerzWuethrich2008">7</a></dt>
+  <dd><p>M. Merz and M. V. Wüthrich, Modelling the claims development result for solvency purposes, Casualty Actuarial Society E-Forum, Fall 2008, 542-568. </p>
+</dd>
+  <dt><a name="BuhlmannStraub1970">8</a></dt>
+  <dd><p>H. Bühlmann and E. Straub, Glaubwürdigkeit für Schadensätze, Mitteilungen der Vereinigung Schweizerischer Versicherungsmathematiker 70 (1970) 111-133. </p>
+</dd>
+  <dt><a name="Mack2008BF">9</a></dt>
+  <dd><p>T. Mack, The prediction error of Bornhuetter/Ferguson, ASTIN Bulletin 38 (2008) 87-103. </p>
+</dd>
+  <dt><a name="Panjer1981">10</a></dt>
+  <dd><p>H. H. Panjer, Recursive evaluation of a family of compound distributions, ASTIN Bulletin 12 (1981) 22-26. </p>
+</dd>
+  <dt><a name="Rohr2014">11</a></dt>
+  <dd><p>A. Röhr, Chain ladder and error propagation, presentation at the Casualty Actuaries in Europe Fall Meeting, 31 October 2014. </p>
+</dd>
+  <dt><a name="RenshawVerrall1998">12</a></dt>
+  <dd><p>A. E. Renshaw and R. J. Verrall, A stochastic model underlying the chain-ladder technique, British Actuarial Journal 4 (1998) 903-923. </p>
+</dd>
+  <dt><a name="Mack1991">13</a></dt>
+  <dd><p>T. Mack, A simple parametric model for rating automobile insurance or estimating IBNR claims reserves, ASTIN Bulletin 21 (1991) 93-109. </p>
+</dd>
+  <dt><a name="WuthrichMerz2008">14</a></dt>
+  <dd><p>M. V. Wüthrich and M. Merz, Stochastic Claims Reserving Methods in Insurance, Wiley, Chichester, 2008. </p>
+</dd>
+  <dt><a name="BBMW2006">15</a></dt>
+  <dd><p>M. Buchwalder, H. Bühlmann, M. Merz and M. V. Wüthrich, The mean square error of prediction in the chain ladder reserving method (Mack and Murphy revisited), ASTIN Bulletin 36 (2006) 521-542. </p>
+</dd>
+  <dt><a name="Murphy1994">16</a></dt>
+  <dd><p>D. M. Murphy, Unbiased loss development factors, Proceedings of the Casualty Actuarial Society 81 (1994) 154-222. </p>
+</dd>
+  <dt><a name="Mack1994">17</a></dt>
+  <dd><p>T. Mack, Measuring the variability of chain ladder reserve estimates, Casualty Actuarial Society Forum, Spring 1994, 101-182. </p>
+</dd>
+  <dt><a name="Rohr2016">18</a></dt>
+  <dd><p>A. Röhr, Chain ladder and error propagation, ASTIN Bulletin 46 (2016) 293-330. </p>
+</dd>
+  <dt><a name="TaylorAshe1983">19</a></dt>
+  <dd><p>G. C. Taylor and F. R. Ashe, Second moments of estimates of outstanding claims, Journal of Econometrics 23 (1983) 37-61. </p>
+</dd>
+</dl>
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
@@ -704,11 +381,9 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0002.html" title="The chain-ladder estimators"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0029.html" title="Non-vacuity: a nondegenerate model"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Machine-checked claims reserving in Lean 4: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
-</a>
-  <a href="sect0004.html" title="Bornhuetter-Ferguson on the chain-ladder pattern"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 
