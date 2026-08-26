@@ -1,0 +1,71 @@
+\chapter{Calendar-year claims development results}
+
+Merz and W\"uthrich condition on the cells available after a calendar diagonal
+\cite{MerzWuethrich2008}. This chapter gives that filtration directly and keeps
+their Appendix A.1 linear approximation separate from the exact probability
+statements.
+
+\begin{definition}[Calendar-year information]\label{def:calendarSigma}\lean{VerifiedReserving.RandomTriangle.calendarSigma, VerifiedReserving.RandomTriangle.otherCalendar}\leanok
+At calendar time $t$,
+\[
+ \mathcal D^{\mathrm{cal}}_t
+ = \sigma\{C_{i,j}: i<n,\ i+j\le t\}.
+\]
+The companion sigma-algebra \texttt{otherCalendar} contains the observed cells
+from every row except a specified accident year.
+\end{definition}
+
+\begin{theorem}[The calendar triangle splits at one row]\label{thm:calendarSplit}\lean{VerifiedReserving.RandomTriangle.calendarSigma_mono, VerifiedReserving.RandomTriangle.calendarSigma_eq_sup, VerifiedReserving.condExp_calendarSigma_eq_rowSigma}\leanok
+\uses{def:calendarSigma, thm:independenceWitnessRows}
+At time $i+k$, the calendar triangle is row $i$ through development $k$ joined
+with the observed parts of the other rows. Under accident-year independence,
+conditioning a row-$i$ random variable on this calendar triangle is the same as
+conditioning it on row $i$ through $k$.
+\end{theorem}
+\begin{proof}\leanok Split the generating joins at row $i$, then apply conditioning on an independent enlargement.\end{proof}
+
+\begin{definition}[True calendar-year CDR]\label{def:calendarCDR}\lean{VerifiedReserving.RandomTriangle.calendarTrueCDR}\leanok
+The true claims development result over $t\to t+1$ is
+\[
+ E[C_{i,n-1}\mid\mathcal D^{\mathrm{cal}}_t]
+ -E[C_{i,n-1}\mid\mathcal D^{\mathrm{cal}}_{t+1}].
+\]
+\end{definition}
+
+\begin{theorem}[Exact calendar-year CDR]\label{thm:calendarCDR}\lean{VerifiedReserving.condExp_calendarTrueCDR_eq_zero, VerifiedReserving.calendarTrueCDR_eq_of_rows, VerifiedReserving.condExp_sq_calendarTrueCDR_of_rows, VerifiedReserving.condVar_calendarTrueCDR_of_rows}\leanok
+\uses{def:calendarCDR, thm:calendarSplit, def:Mack1, def:Mack3}
+The true calendar CDR has conditional mean zero. Under the row-conditioned
+Mack assumptions and independent accident years, at time $i+k$ it equals
+\[
+ \left(\prod_{j=k+1}^{n-2} f_j\right)
+ (f_kC_{i,k}-C_{i,k+1}),
+\]
+and its conditional second moment and conditional variance are
+$\left(\prod_{j=k+1}^{n-2}f_j\right)^2\sigma_k^2C_{i,k}$.
+\end{theorem}
+\begin{proof}\leanok The tower property gives the mean-zero result. The split theorem reduces the other two statements to the row filtration and (M1row), (M3row).\end{proof}
+
+\begin{definition}[Appendix A.1 boundary]\label{def:mwA1}\lean{VerifiedReserving.mwA1ProductIncrement, VerifiedReserving.mwA1LinearApprox, VerifiedReserving.mwA1Remainder}\leanok
+For finite increments $a_j$, the source replaces
+$\prod_j(1+a_j)-1$ by the first-order expression $\sum_j a_j$.
+Lean records the exact product, the linear approximation, and their difference
+as three separate definitions. No equality or statistical error bound is built
+into the approximation.
+\end{definition}
+
+\begin{theorem}[Exact boundary identities]\label{thm:mwA1}\lean{VerifiedReserving.mwA1ProductIncrement_eq_linear_add_remainder, VerifiedReserving.mwA1LinearApprox_le_productIncrement, VerifiedReserving.mwA1Remainder_pair}\leanok
+\uses{def:mwA1}
+The product increment is the linear approximation plus its exact remainder.
+For nonnegative increments the linear term is a lower bound, as stated after
+(A.1), and for two increments the discarded term is exactly $ab$.
+\end{theorem}
+\begin{proof}\leanok Ring algebra and the finite Weierstrass product inequality.\end{proof}
+
+\begin{theorem}[Finite CDR and MSEP witness]\label{thm:cdrWitness}\lean{VerifiedReserving.IndependenceWitness.mack3Row, VerifiedReserving.IndependenceWitness.mack3_from_rows, VerifiedReserving.IndependenceWitness.condMsep_witness, VerifiedReserving.IndependenceWitness.condMsepTotal_witness, VerifiedReserving.IndependenceWitness.calendarTrueCDR_three_nondegenerate}\leanok
+\uses{thm:calendarCDR, thm:msepRows, thm:msepTotalRows, thm:independenceWitnessRows}
+The eight-outcome independent-row model satisfies (M3row), instantiates the
+exact single-row and total MSEP wrappers, and has nonzero calendar CDR on three
+distinct updates: rows $0$, $1$, and $2$ reveal their independent first-step
+shocks at calendar times $0$, $1$, and $2$.
+\end{theorem}
+\begin{proof}\leanok Each row shock is Rademacher. The first residual has the prescribed second moment and every later residual vanishes.\end{proof}
