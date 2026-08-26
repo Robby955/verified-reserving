@@ -12,13 +12,12 @@ Contributions are welcome, from a one-line lemma to a whole theorem of the roadm
 The former good-first list is complete. Current work is narrower and varies in difficulty; check the matching `Still open` paragraph in [ROADMAP.md](ROADMAP.md) before starting.
 
 1. Formalize the Munich chain ladder paid/incurred definitions and the Quarg-Mack gap identity.
-2. Add the ODP variance structure before the GLM prediction-error and bootstrap layers. Do not treat the existing deterministic score equations as a stochastic GLM result.
-3. Add a row-conditioned CL2 predicate and its row-to-`D_k` theorem for `Mack3W` under explicit measurability, `RowsGenerateD` and `RowsIndep` hypotheses; add the corresponding independence derivation for `Mack2Factor'`.
-4. Give `Mack1999.lean` an active-contributor index set that omits zero-weight cells and uses active cardinality minus one for the variance estimator's degrees of freedom.
-5. Instantiate the weighted stochastic results at `α = 0` and `α = 2` on a finite witness triangle.
-6. Extend the independent-row witness with `Mack3Row`, then instantiate `condMsep_eq_of_rows` on that nondegenerate model.
-7. Add the calendar-year filtration and a witness for the exact CDR results before attempting the cited approximation for the observable CDR.
-8. Formalize a stochastic Bühlmann-Straub model that derives the quadratic loss from conditional moments; keep structural-parameter estimation separate.
+2. Add a row-conditioned CL2 predicate and its row-to-`D_k` theorem for `Mack3W` under explicit measurability, `RowsGenerateD` and `RowsIndep` hypotheses; add the corresponding independence derivation for `Mack2Factor'`.
+3. Give `Mack1999.lean` an active-contributor index set that omits zero-weight cells and uses active cardinality minus one for the variance estimator's degrees of freedom.
+4. Instantiate the weighted stochastic results at `α = 0` and `α = 2` on a finite witness triangle.
+5. Extend the independent-row witness with `Mack3Row`, then instantiate `condMsep_eq_of_rows` on that nondegenerate model.
+6. Add the calendar-year filtration and a witness for the exact CDR results before attempting the cited approximation for the observable CDR.
+7. Formalize a stochastic Bühlmann-Straub model that derives the quadratic loss from conditional moments; keep structural-parameter estimation separate.
 
 ## Rules
 

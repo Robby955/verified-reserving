@@ -13,7 +13,8 @@ hypotheses, nonnegativity. **Gap** says plainly how far apart they are.
 
 1. **Estimators are definitions.** Where a paper displays an estimator, the library records a
    definition and proves identities about it. `msep`, `msepTotal`, `mackProcess`, `mackEstimation`,
-   `bbmwEstimation`, `rohrMsep` and `msepW` are definitions. No theorem claims that any of them is
+   `bbmwEstimation`, `rohrMsep`, `msepW`, `glmCellMsep`, `glmAggregateMsep` and the
+   England-Verrall bootstrap objects are definitions. No theorem claims that any of them is
    unbiased for, or converges to, the quantity it estimates. The exact conditional objects
    (`condMsep_eq`, `condMsepTotal_eq`) are separate statements, so the approximation and the thing
    approximated never get confused.
@@ -72,13 +73,19 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Renshaw-Verrall 1998 / Mack 1991: the marginal sums are score equations | `rowQuasiLogLik`, `colQuasiLogLik`, `hasDerivAt_rowQuasiLogLik`, `hasDerivAt_colQuasiLogLik`, `deriv_rowQuasiLogLik_eq_zero_iff`, `deriv_colQuasiLogLik_eq_zero_iff` | formalized from the marginal-sum system as universally quoted, neither paper available in full text |
 | Renshaw-Verrall 1998 / Mack 1991: chain ladder solves the system | `chainLadder_fitted_row_totals`, `chainLadder_fitted_row_totals_eq`, `chainLadder_fitted_column_totals`, `chainLadder_scoreEquations` | identical; the column half needs nonzero development factors |
 | Mack 1991, Section 2: uniqueness of the multiplicative fit | `multFit_eq_CLincr`, `mult_cum_eq_CLcum`, `patternCum_mul_fhat` | Lean stronger hypotheses: strict positivity of `a` and `b` and the normalization `∑_{k<n} b_k = 1` |
+| England-Verrall 1999, equations (2.5)-(2.7): independent ODP moments | `ODPModel`, `condExp_odpCell_given_observed`, `condExp_sq_odpCell_sub_given_observed` | model assumptions plus exact consequences; Lean adds square integrability and works on a finite square |
+| England-Verrall 1999, equations (3.1)-(3.2): process plus estimation error | `meanSquaredPredictionError_eq_variance_add`, `variance_odpAggregate`, `odpAggregateMsep_eq` | exact under explicit unbiasedness and independence; the fitted-GLM approximation is separate |
+| England-Verrall 1999, equations (3.3)-(3.5): delta-method GLM prediction error | `glmCellMsep`, `glmAggregateEstimationVariance`, `glmAggregateMsep`, `glmAggregateMsep_singleton` | approximation recorded as definitions; only the singleton reduction is a theorem |
+| England-Verrall 1999, equations (2.6)-(2.7): log link and corner constraints | `logLinkFit_eq_multFit`, `cornerRow_zero`, `cornerColumn_zero`, `logLinkFit_corner_eq_multFit` | exact parametrization identity; the converse assumes positive multiplicative factors |
+| England-Verrall 1999, equations (4.2)-(4.4), and England 2002, Sections 2-3: residual bootstrap | `pearsonResidual`, `pearsonScale`, `adjustedPearsonResidual`, `bootstrapIncremental`, `englandVerrallBootstrapMean`, `englandVerrallPredictiveReserve` | algorithmic definitions plus exact residual-inversion lemmas; no coverage or validity theorem |
+| Non-vacuity: a nondegenerate finite ODP model | `ODPWitness.model`, `ODPWitness.conditionalMean`, `ODPWitness.conditionalVariance`, `ODPWitness.exists_nondegenerate_odp_model` | not in a source; one genuinely random cell with mean and variance one |
 | Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve`, `bfUltimate`, `bfReserve_of_ultimate`, `bfUltimate_of_ultimate`, `bfReserve_smul`, `bfReserve_add`, `one_le_cdf`, `bfReserve_nonneg`, `bfReserve_le` | definitions plus deterministic identities; the module names no source display |
 | Non-vacuity: degenerate witness | `Witness.X`, `Witness.fhat_unbiased`, `Witness.ultimate_unbiased` | not in any source; certifies the hypotheses are jointly satisfiable |
 | Non-vacuity: a nondegenerate Mack model | `NontrivialModel.exists_nontrivial_mack_model`, `NontrivialModel.fhat0_unbiased`, `NontrivialModel.ultimate_unbiased`, `NontrivialModel.var_fhat0`, `NontrivialModel.sigma2_unbiased` | not in any source; `σ_0² = 4 > 0` and the first development step is genuinely random |
 | Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack1_from_rows`, `IndependenceWitness.mack2'_from_rows` | not in any source; realizes Mack 1993 eq. (1)-(2) and the `B_k` filtration on eight outcomes |
 | Non-vacuity: the cross-term condition of the total | `NontrivialModel.crossFree_ultimates`, `NontrivialModel.exists_crossFree_nondegenerate` | not in any source; three genuinely random ultimates, conditionally uncorrelated |
 
-Thirty-seven rows.
+Forty-five rows.
 
 ## The deterministic layer
 
@@ -670,6 +677,98 @@ normalization; the strict positivity is what the Lean proof needs to divide, and
 assumes it or derives it could not be checked, the paper not being available in full text. The
 conclusion is cell by cell on observed cells, not a statement about the parameters themselves,
 which are identified only up to the normalization.
+
+## The stochastic ODP layer
+
+### ODP moment assumptions and exact conditional moments
+
+**Source.** England and Verrall, *Analytic and bootstrap estimates of prediction errors in claims
+reserving*, Insurance: Mathematics and Economics 25 (1999) 281-293, Section 2.2, equations
+(2.5)-(2.7), state the ODP model as independent incremental claims with
+`E[C_{i,j}] = m_{i,j}`, `Var(C_{i,j}) = φ m_{i,j}`, and
+`log m_{i,j} = c + α_i + β_j`, subject to corner constraints. England and Verrall,
+*Stochastic claims reserving in general insurance*, British Actuarial Journal 8 (2002) 443-518,
+Section 2.3.4, repeats the moment assumptions and log-link form.
+
+**Lean.** `ODPModel X μ m φ n` requires every cell of a finite `n` by `n` square to be measurable
+and in `L²(μ)`, to have integral `m i k` and variance `φ * m i k`, and for the whole cell family to
+be mutually independent. `odpIndep_cell_observed` derives independence of a cell from a finite
+vector of other cells. On a probability space, `condExp_odpCell_given_observed` and
+`condExp_sq_odpCell_sub_given_observed` conclude that a cell outside that vector has conditional
+mean `m i k` and conditional second central moment `φ * m i k` almost surely.
+
+**Gap.** The first two moments and independence are the source assumptions; the conditional
+statements are exact consequences. Lean adds measurability and square integrability explicitly and
+uses a finite square. It does not assert a Poisson distribution: an over-dispersed Poisson GLM is a
+mean-variance specification here, and those moments do not identify a unique law.
+
+### Exact aggregate prediction error
+
+**Source.** England and Verrall (1999), equation (3.1), split MSEP into process and estimation
+variance. Equation (3.2) gives the cell process variance `φ m_{i,j}` in the ODP case. The paper uses
+an approximation sign because the fitted-mean estimation variance is subsequently approximated
+by the delta method.
+
+**Lean.** `integral_odpAggregate` and `variance_odpAggregate` prove that a finite sum of ODP cells
+has mean `∑ m` and variance `φ * ∑ m`. `meanSquaredPredictionError_eq_variance_add` is the exact
+identity `E[(Y-Yhat)²] = Var(Y) + Var(Yhat)` when `Y` and `Yhat` are square-integrable, independent,
+and have the same mean. `odpAggregateMsep_eq` substitutes the ODP process variance for an unbiased
+predictor independent of the future aggregate.
+
+**Gap.** Exact under stronger, explicit hypotheses. The source's fitted GLM predictor is a function
+of past observations and therefore independent of future cells under the independent-increment
+model; Lean accepts an arbitrary predictor and asks for that independence and unbiasedness rather
+than building a particular fitting procedure into the probability theorem.
+
+### Delta-method GLM prediction error
+
+**Source.** England and Verrall (1999), equations (3.3)-(3.5), and England and Verrall (2002),
+equations (7.7)-(7.9), use a first-order Taylor expansion of `exp(etaHat)`. A single future cell has
+the approximation `φ mHat + mHat² Var(etaHat)`; a reserve aggregate adds the covariance terms
+`mHat_p mHat_q Cov(etaHat_p, etaHat_q)`.
+
+**Lean.** `glmCellMsep`, `glmAggregateEstimationVariance` and `glmAggregateMsep` are exactly those
+formulas as definitions. `glmAggregateMsep_singleton` proves only that the covariance-matrix form
+reduces to the single-cell form when the future set has one element.
+
+**Gap.** Source-faithful status. No theorem equates the delta-method definition with an exact MSEP,
+and no asymptotic remainder or quality guarantee is claimed.
+
+### Log link and corner constraints
+
+**Source.** England and Verrall (1999), equations (2.6)-(2.7), write
+`log m_{i,j} = c + α_i + β_j` with `α_0 = β_0 = 0` after translating their one-based indices.
+
+**Lean.** `logLinkFit c alpha beta i k = exp (c + alpha i + beta k)`.
+`logLinkFit_eq_multFit` proves every such fit is multiplicative. For positive `a` and `b`,
+`cornerRow a i = log(a i)-log(a 0)` and `cornerColumn b k = log(b k)-log(b 0)`;
+`cornerRow_zero`, `cornerColumn_zero` and `logLinkFit_corner_eq_multFit` prove the corner
+constraints and the converse representation with `c = log(a 0) + log(b 0)`.
+
+**Gap.** Exact parametrization identity. Positivity is needed only for the converse use of `log`.
+The result identifies fitted means, not statistical estimates of the parameters.
+
+### England-Verrall residual bootstrap
+
+**Source.** England and Verrall (1999), equations (4.2)-(4.4), define the unscaled Pearson residual
+`r = (x-m)/sqrt(m)`, invert a resampled residual as `x* = r* sqrt(m) + m`, and estimate the Pearson
+scale by `∑ r²/(N-p)`. England, *Addendum to “Analytic and bootstrap estimates of prediction errors
+in claims reserving”*, Insurance: Mathematics and Economics 31 (2002) 461-466, equation (3.1),
+scales residuals by `sqrt(N/(N-p))`. Its Section 2 then separates estimation error, obtained by
+resampling and refitting, from process error, obtained by simulating future increments conditional
+on the bootstrap means.
+
+**Lean.** `pearsonResidual`, `pearsonScale`, `adjustedPearsonResidual` and
+`bootstrapIncremental` are the displayed formulas. `pearsonResidual_bootstrapIncremental` and
+`bootstrapIncremental_pearsonResidual` prove the two inversion identities when the fitted mean is
+positive. `englandVerrallBootstrapMean` composes a supplied resampling map, the pseudo-data
+construction and a supplied refit. `englandVerrallPredictiveReserve` sums future values from a
+supplied process simulator conditional on those means.
+
+**Gap.** The algorithm is a definition, not a theorem about frequentist coverage, consistency, or
+predictive validity. The process simulator remains an argument because the ODP moment assumptions
+do not determine its distribution. The definitions also expose Lean's total division at `N=p`;
+the source procedure requires positive residual degrees of freedom.
 
 ## Bornhuetter-Ferguson
 
