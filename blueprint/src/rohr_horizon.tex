@@ -1,0 +1,103 @@
+% Blueprint chapter for VerifiedReserving/RohrHorizon.lean.
+% Source: Ancus Roehr, Chain Ladder and Error Propagation, CAE Fall 2014,
+% slides 13, 17, and 20.
+
+\chapter{R\"ohr: arbitrary-horizon approximations}
+
+The primary-author presentation \emph{Chain Ladder and Error Propagation}, given by
+Ancus R\"ohr at the CAE Fall 2014 meeting, states two relative-MSEP approximations on
+slide 13. If $\hat u_j^2$ is the squared relative uncertainty of factor $j$ and
+$\hat q_j$ is its influence on the predicted ultimate $\hat X$, they are
+\[
+  \frac{\operatorname{MSEP}}{\hat X^2}
+    \approx \sum_{j\in S}\hat u_j^2\hat q_j
+\]
+for ultimate development and
+\[
+  \frac{\operatorname{MSEP}(\operatorname{CDR}_k)}{\hat X^2}
+    \approx \sum_{j\in S}\hat u_j^2
+      \frac{\hat q_j-\hat q_{j-k}}{1-\hat q_{j-k}}
+\]
+for the claims development result over the next $k$ years. The source sets
+$\hat q_j=0$ below the active index range. Slide 17 labels an exact algebraic
+decomposition of each approximation as process and parameter error, and slide 20
+shows the $k=1$ form.
+
+The formulas below are definitions because the source marks both MSEP statements with
+$\approx$. The Lean results prove algebra about those definitions. They do not construct
+$\hat q_j$ from its logarithmic derivative or identify an approximation with a stochastic
+MSEP theorem. The formulas are attributed to the 2014 slides, not to an inaccessible
+display of the 2016 paper.
+
+\section{Source formulas}
+
+\begin{definition}[Slide 13, ultimate approximation]\label{def:rohrHorizonUltimate}\lean{VerifiedReserving.rohrUltimateRelMsepApprox, VerifiedReserving.rohrUltimateProcessRelApprox, VerifiedReserving.rohrUltimateParameterRelApprox}\leanok
+For a finite index set $S$, define the ultimate relative-MSEP approximation by
+$\sum_{j\in S}\hat u_j^2\hat q_j$. Its slide-17 process and parameter components are
+$\sum_j\hat u_j^2(1-\hat q_j)\hat q_j$ and
+$\sum_j\hat u_j^2\hat q_j^2$.
+\end{definition}
+
+\begin{definition}[Slide 13, arbitrary-horizon approximation]\label{def:rohrHorizon}\lean{VerifiedReserving.rohrHorizonWeight, VerifiedReserving.rohrHorizonTerm, VerifiedReserving.rohrHorizonProcessTerm, VerifiedReserving.rohrHorizonParameterTerm, VerifiedReserving.rohrHorizonRelMsepApprox, VerifiedReserving.rohrHorizonProcessRelApprox, VerifiedReserving.rohrHorizonParameterRelApprox}\leanok
+For current and earlier influences $q$ and $q^-$, put
+\[
+  w(q,q^-)=\frac{q-q^-}{1-q^-}.
+\]
+The horizon approximation is $\sum_j\hat u_j^2w(\hat q_j,\hat q_{j-k})$.
+Its displayed process and parameter terms are
+\[
+ \hat u_j^2\frac{(1-\hat q_j)(\hat q_j-\hat q_{j-k})}
+ {(1-\hat q_{j-k})^2}
+ \quad\text{and}\quad
+ \hat u_j^2\left(\frac{\hat q_j-\hat q_{j-k}}
+ {1-\hat q_{j-k}}\right)^2.
+\]
+\end{definition}
+
+\begin{definition}[$k$-year and one-year forms]\label{def:rohrKYear}\lean{VerifiedReserving.rohrKYearRelMsepApprox, VerifiedReserving.rohrOneYearRelMsepApprox}\leanok
+The $k$-year definition substitutes $q^-_j=q_{j-k}$ when $k\le j$ and sets
+$q^-_j=0$ when $j<k$. The one-year definition uses $q_{j-1}$ when $1\le j$
+and zero at the earlier index.
+\end{definition}
+
+\section{Exact splits}
+
+\begin{theorem}[Slide 17, ultimate split]\label{thm:rohrHorizonUltimateSplit}\lean{VerifiedReserving.rohrUltimateTerm_split, VerifiedReserving.rohrUltimateRelMsepApprox_split}\leanok
+The ultimate approximation splits exactly:
+\[
+ \sum_j\hat u_j^2\hat q_j
+ =\sum_j\hat u_j^2(1-\hat q_j)\hat q_j
+  +\sum_j\hat u_j^2\hat q_j^2.
+\]
+\end{theorem}
+\begin{proof}\leanok Expand the right side and collect terms. \end{proof}
+
+\begin{theorem}[Slide 17, arbitrary-horizon split]\label{thm:rohrHorizonSplit}\lean{VerifiedReserving.rohrHorizonWeight_split, VerifiedReserving.rohrHorizonTerm_split, VerifiedReserving.rohrHorizonRelMsepApprox_split, VerifiedReserving.rohrKYearRelMsepApprox_split}\leanok
+If $q^-_j\ne 1$ on $S$, then
+\[
+ \sum_j\hat u_j^2\frac{q_j-q^-_j}{1-q^-_j}
+ =\sum_j\hat u_j^2\frac{(1-q_j)(q_j-q^-_j)}{(1-q^-_j)^2}
+  +\sum_j\hat u_j^2\left(\frac{q_j-q^-_j}{1-q^-_j}\right)^2.
+\]
+\end{theorem}
+\begin{proof}\leanok Put the two right-hand numerators over the common denominator
+$(1-q^-_j)^2$ and sum the termwise identity. \end{proof}
+
+\section{Endpoints and bounds}
+
+\begin{theorem}[Horizon specializations]\label{thm:rohrHorizonEndpoints}\lean{VerifiedReserving.rohrHorizonWeight_zero_past, VerifiedReserving.rohrHorizonRelMsepApprox_zero_past, VerifiedReserving.rohrHorizonProcessRelApprox_zero_past, VerifiedReserving.rohrHorizonParameterRelApprox_zero_past, VerifiedReserving.rohrKYearRelMsepApprox_one, VerifiedReserving.rohrKYearRelMsepApprox_zero, VerifiedReserving.rohrKYearRelMsepApprox_eq_ultimate}\leanok
+Zero earlier influence reduces the horizon approximation and both split components to
+their ultimate forms. The $k=1$ definition is the one-year formula. If $q_j\ne1$
+on $S$, the algebraic $k=0$ endpoint is zero. More generally, if $q_{j-k}=0$
+for every active $j\in S$, the $k$-year formula is the ultimate formula.
+\end{theorem}
+\begin{proof}\leanok Substitute the indicated earlier influence in each definition. \end{proof}
+
+\begin{theorem}[Influence bounds]\label{thm:rohrHorizonBounds}\lean{VerifiedReserving.rohrHorizonWeight_nonneg, VerifiedReserving.rohrHorizonWeight_le_one, VerifiedReserving.rohrHorizonWeight_le_current, VerifiedReserving.rohrHorizonWeight_mem_Icc, VerifiedReserving.rohrHorizonTerm_nonneg, VerifiedReserving.rohrHorizonProcessTerm_nonneg, VerifiedReserving.rohrHorizonParameterTerm_nonneg, VerifiedReserving.rohrHorizonRelMsepApprox_nonneg, VerifiedReserving.rohrHorizonProcessRelApprox_nonneg, VerifiedReserving.rohrHorizonParameterRelApprox_nonneg, VerifiedReserving.rohrHorizonRelMsepApprox_le_ultimate}\leanok
+Suppose $0\le q^-_j\le q_j\le1$ and $q^-_j<1$. Then each horizon weight lies
+in $[0,1]$. With $\hat u_j^2\ge0$, every horizon, process, and parameter term is
+nonnegative. The horizon approximation is at most the ultimate approximation when
+$q^-_j\ge0$, $q_j\le1$, and $q^-_j<1$ pointwise.
+\end{theorem}
+\begin{proof}\leanok The denominator $1-q^-_j$ is positive. Division preserves the
+pointwise inequalities, squares are nonnegative, and finite sums preserve them. \end{proof}

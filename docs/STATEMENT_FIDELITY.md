@@ -13,8 +13,8 @@ hypotheses, nonnegativity. **Gap** says plainly how far apart they are.
 
 1. **Estimators are definitions.** Where a paper displays an estimator, the library records a
    definition and proves identities about it. `msep`, `msepTotal`, `mackProcess`, `mackEstimation`,
-   `bbmwEstimation`, `rohrMsep` and `msepW` are definitions. No theorem claims that any of them is
-   unbiased for, or converges to, the quantity it estimates. The exact conditional objects
+   `bbmwEstimation`, `rohrMsep`, `rohrHorizonRelMsepApprox` and `msepW` are definitions. No theorem
+   claims that any of them is unbiased for, or converges to, the quantity it estimates. The exact conditional objects
    (`condMsep_eq`, `condMsepTotal_eq`) are separate statements, so the approximation and the thing
    approximated never get confused.
 2. **Conventions are consumed by no theorem.** Mack's last-period variance extrapolation and the
@@ -65,6 +65,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | The two estimators differ strictly | `exists_mackEstimation_lt_bbmwEstimation`, `mackEstimation_lt_bbmwEstimation_Cex` | not in the source; a concrete triangle, every number checked by `norm_num` |
 | BBMW 2006, Section 4.3, aggregated over accident years | `bbmwTotalEstimation`, `bbmwTotalEstimation_sub_mackTotalEstimation`, `mackTotalEstimation_le_bbmwTotalEstimation` | definition plus identity; the inequality needs nonnegative ultimates and relative variances |
 | Röhr 2016, classical-case display | `rohrMsep`, `rohrMsep_eq_msep`, `rohrProcess_eq_mackProcess`, `rohrParameter_eq_mackEstimation`, `msep_div_ultimate_sq`, `bbmwEstimation_sub_rohrParameter` | formalized from the abstract's display, full text unavailable |
+| Röhr CAE 2014 slides 13, 17, and 20, ultimate and arbitrary-horizon approximations | `rohrUltimateRelMsepApprox`, `rohrKYearRelMsepApprox`, `rohrUltimateRelMsepApprox_split`, `rohrKYearRelMsepApprox_split` | source formulas are approximations and therefore definitions; Lean proves the displayed splits as exact algebra only |
 | Röhr 2016, aggregation over accident years | `rohrMsepTotal`, `rohrMsepTotal_eq_msepTotal` | not attributed: the cross terms are Mack's, carried into a definition |
 | Merz-Wüthrich 2008, true CDR has conditional mean zero | `RandomTriangle.trueCDR`, `condExp_trueCDR_eq_zero` | identical; Lean's filtration is by development year, the source's by calendar year |
 | Merz-Wüthrich 2008, true CDR as a one-step residual | `trueCDR_eq`, `condExp_C_ultimate_of_Mack1`, `condExp_C_of_Mack1_at` | identical under (M1) in the `D_k` form |
@@ -78,7 +79,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack1_from_rows`, `IndependenceWitness.mack2'_from_rows` | not in any source; realizes Mack 1993 eq. (1)-(2) and the `B_k` filtration on eight outcomes |
 | Non-vacuity: the cross-term condition of the total | `NontrivialModel.crossFree_ultimates`, `NontrivialModel.exists_crossFree_nondegenerate` | not in any source; three genuinely random ultimates, conditionally uncorrelated |
 
-Thirty-seven rows.
+Thirty-eight rows.
 
 ## The deterministic layer
 
@@ -536,7 +537,9 @@ statement that in the classical case treated by Mack (1993) the mean squared pre
 divided by the squared estimated ultimate loss can be written as `∑_j û_j²`, where `û_j` measures
 the relative uncertainty around the `j`-th development factor and the proportion of the estimated
 ultimate loss that it affects, together with the abstract's split into process error and parameter
-error, taken in the form `û_k² = σ̂_k²/(f̂_k² Ĉ_{i,k}) + σ̂_k²/(f̂_k² S_k)`.
+error, taken in the form `û_k² = σ̂_k²/(f̂_k² Ĉ_{i,k}) + σ̂_k²/(f̂_k² S_k)`. The primary-author
+2014 slides in the next section are a separate source and do not expand this attribution to the
+full paper.
 
 **Lean.** `rohrRelProcess`, `rohrRelParam`, `rohrRelVar`, `rohrProcess`, `rohrParameter` and
 `rohrMsep` are definitions.
@@ -549,10 +552,41 @@ for every `k` in `Ico (n-1-i) (n-1)`, and concludes `rohrProcess C n i = mackPro
 `bbmwEstimation_sub_rohrParameter` needs no hypothesis and exhibits the parameter term as the
 first-order part of the conditional-resampling term.
 
-**Gap.** Formalized from the abstract's display, full text unavailable. The paper's general
-claims-development-result formulas between two arbitrary future horizons are not formalized. That
+**Gap.** Formalized from the abstract's display, full text unavailable. That
 `rohrMsep_eq_msep` needs no side condition is a consequence of Lean's division convention:
 `σ̂_k²/(f̂_k² Ĉ_{i,k})` and `(σ̂_k²/f̂_k²)(1/Ĉ_{i,k})` are the same term of the language.
+
+### Röhr 2014 primary-author slides: arbitrary horizons
+
+**Source.** Ancus Röhr, *Chain Ladder and Error Propagation*, CAE Fall 2014 meeting, 31 October
+2014, [official presentation PDF](https://www.casact.org/sites/default/files/presentation/affiliates_cae_1014_6_slidescae_aroehr_presented_at_event.pdf).
+Slide 13 displays the ultimate relative-MSEP approximation
+`∑_j û_j² q̂_j` and the `k`-year CDR relative-MSEP approximation
+`∑_j û_j² (q̂_j-q̂_{j-k})/(1-q̂_{j-k})`. It defines `q̂_j` as the logarithmic influence
+of factor `j` on the predicted ultimate and sets it to zero below the active index range. Slide 17
+splits the horizon summand into the process term
+`û_j² (1-q̂_j)(q̂_j-q̂_{j-k})/(1-q̂_{j-k})²` and the parameter term
+`û_j² ((q̂_j-q̂_{j-k})/(1-q̂_{j-k}))²`. Slide 20 shows `k = 1`.
+
+**Lean.** `rohrUltimateRelMsepApprox`, `rohrHorizonRelMsepApprox`,
+`rohrKYearRelMsepApprox`, and `rohrOneYearRelMsepApprox` record the source formulas as
+definitions. `rohrUltimateRelMsepApprox_split`, `rohrHorizonRelMsepApprox_split`, and
+`rohrKYearRelMsepApprox_split` prove the slide-17 decompositions by exact algebra.
+`rohrKYearRelMsepApprox_zero` is the algebraic zero-horizon endpoint under the source-domain
+condition `q j ≠ 1`, `rohrKYearRelMsepApprox_one` is the one-year specialization, and
+`rohrKYearRelMsepApprox_eq_ultimate` assumes `q (j-k) = 0` at active indices with `k ≤ j` and
+reduces the `k`-year formula to the ultimate formula. Indices with `j < k` use the source's
+zero extension explicitly, rather than truncated natural subtraction. The three `*_zero_past` theorems make the same
+reduction separately for the total, process, and parameter definitions. Under pointwise
+conditions `0 ≤ qPast ≤ qNow ≤ 1`, `qPast < 1`, and nonnegative `uSq`, the horizon weights
+lie in `[0,1]` and every displayed term is nonnegative. The horizon approximation is at most the
+ultimate approximation under the stated nonnegative-influence conditions.
+
+**Gap.** These are identities and bounds about definitions of approximation formulas. The
+influence sequence `q` and squared relative uncertainties `uSq` are inputs; Lean does not derive
+`q` from the source's logarithmic derivative. No theorem identifies the definitions with an exact
+or approximate stochastic MSEP, validates the Taylor step, or attributes them to an unchecked
+display of the 2016 paper.
 
 ### Röhr's aggregation over accident years
 
