@@ -73,12 +73,12 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Renshaw-Verrall 1998 / Mack 1991: the marginal sums are score equations | `rowQuasiLogLik`, `colQuasiLogLik`, `hasDerivAt_rowQuasiLogLik`, `hasDerivAt_colQuasiLogLik`, `deriv_rowQuasiLogLik_eq_zero_iff`, `deriv_colQuasiLogLik_eq_zero_iff` | formalized from the marginal-sum system as universally quoted, neither paper available in full text |
 | Renshaw-Verrall 1998 / Mack 1991: chain ladder solves the system | `chainLadder_fitted_row_totals`, `chainLadder_fitted_row_totals_eq`, `chainLadder_fitted_column_totals`, `chainLadder_scoreEquations` | identical; the column half needs nonzero development factors |
 | Mack 1991, Section 2: uniqueness of the multiplicative fit | `multFit_eq_CLincr`, `mult_cum_eq_CLcum`, `patternCum_mul_fhat` | Lean stronger hypotheses: strict positivity of `a` and `b` and the normalization `∑_{k<n} b_k = 1` |
-| England-Verrall 1999, equations (2.5)-(2.7): independent ODP moments | `ODPModel`, `condExp_odpCell_given_observed`, `condExp_sq_odpCell_sub_given_observed` | model assumptions plus exact consequences; Lean adds square integrability and works on a finite square |
+| England-Verrall 1999, equations (2.5)-(2.7): independent ODP model | `ODPLogLink`, `ODPModel`, `ODPModel.mean_pos`, `condExp_odpCell_given_observed`, `condExp_sq_odpCell_sub_given_observed` | positive dispersion, corner-constrained log-link means, independent moment assumptions, and exact conditional consequences; Lean adds square integrability and works on a finite square |
 | England-Verrall 1999, equations (3.1)-(3.2): process plus estimation error | `meanSquaredPredictionError_eq_variance_add`, `variance_odpAggregate`, `odpAggregateMsep_eq` | exact under explicit unbiasedness and independence; the fitted-GLM approximation is separate |
 | England-Verrall 1999, equations (3.3)-(3.5): delta-method GLM prediction error | `glmCellMsep`, `glmAggregateEstimationVariance`, `glmAggregateMsep`, `glmAggregateMsep_singleton` | approximation recorded as definitions; only the singleton reduction is a theorem |
-| England-Verrall 1999, equations (2.6)-(2.7): log link and corner constraints | `logLinkFit_eq_multFit`, `cornerRow_zero`, `cornerColumn_zero`, `logLinkFit_corner_eq_multFit` | exact parametrization identity; the converse assumes positive multiplicative factors |
+| England-Verrall 1999, equations (2.6)-(2.7): log link and corner constraints | `ODPLogLink`, `logLinkFit_eq_multFit`, `cornerRow_zero`, `cornerColumn_zero`, `logLinkFit_corner_eq_multFit` | the source link is a field of `ODPModel`; the parametrization equivalence is exact and its converse assumes positive multiplicative factors |
 | England-Verrall 1999, equations (4.2)-(4.4), and England 2002, Sections 2-3: residual bootstrap | `pearsonResidual`, `pearsonScale`, `adjustedPearsonResidual`, `bootstrapIncremental`, `englandVerrallBootstrapMean`, `englandVerrallPredictiveReserve` | algorithmic definitions plus exact residual-inversion lemmas; no coverage or validity theorem |
-| Non-vacuity: a nondegenerate finite ODP model | `ODPWitness.model`, `ODPWitness.conditionalMean`, `ODPWitness.conditionalVariance`, `ODPWitness.exists_nondegenerate_odp_model` | not in a source; one genuinely random cell with mean and variance one |
+| Non-vacuity: a nondegenerate finite ODP model | `ODPWitness.model`, `ODPWitness.independentFutureObserved`, `ODPWitness.conditionalMean`, `ODPWitness.conditionalVariance`, `ODPWitness.twoCellMsep`, `ODPWitness.exists_nondegenerate_odp_model` | not in a source; four independent random cells with unit mean and variance, including nonempty observed-versus-future conditioning |
 | Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve`, `bfUltimate`, `bfReserve_of_ultimate`, `bfUltimate_of_ultimate`, `bfReserve_smul`, `bfReserve_add`, `one_le_cdf`, `bfReserve_nonneg`, `bfReserve_le` | definitions plus deterministic identities; the module names no source display |
 | Non-vacuity: degenerate witness | `Witness.X`, `Witness.fhat_unbiased`, `Witness.ultimate_unbiased` | not in any source; certifies the hypotheses are jointly satisfiable |
 | Non-vacuity: a nondegenerate Mack model | `NontrivialModel.exists_nontrivial_mack_model`, `NontrivialModel.fhat0_unbiased`, `NontrivialModel.ultimate_unbiased`, `NontrivialModel.var_fhat0`, `NontrivialModel.sigma2_unbiased` | not in any source; `σ_0² = 4 > 0` and the first development step is genuinely random |
@@ -690,17 +690,21 @@ reserving*, Insurance: Mathematics and Economics 25 (1999) 281-293, Section 2.2,
 *Stochastic claims reserving in general insurance*, British Actuarial Journal 8 (2002) 443-518,
 Section 2.3.4, repeats the moment assumptions and log-link form.
 
-**Lean.** `ODPModel X μ m φ n` requires every cell of a finite `n` by `n` square to be measurable
-and in `L²(μ)`, to have integral `m i k` and variance `φ * m i k`, and for the whole cell family to
-be mutually independent. `odpIndep_cell_observed` derives independence of a cell from a finite
-vector of other cells. On a probability space, `condExp_odpCell_given_observed` and
+**Lean.** `ODPLogLink m n` says that on the modeled square the mean surface is
+`exp(c + alpha_i + beta_k)` for some effects satisfying `alpha_0 = beta_0 = 0`.
+`ODPModel X μ m φ n` requires that link, `φ > 0`, and every cell to be measurable and in `L²(μ)`,
+to have integral `m i k` and variance `φ * m i k`, and for the whole cell family to be mutually
+independent. `ODPModel.mean_pos` derives positivity of every modeled mean.
+`odpIndep_cell_observed` derives independence of a cell from a finite vector of other cells. On a
+probability space, `condExp_odpCell_given_observed` and
 `condExp_sq_odpCell_sub_given_observed` conclude that a cell outside that vector has conditional
 mean `m i k` and conditional second central moment `φ * m i k` almost surely.
 
-**Gap.** The first two moments and independence are the source assumptions; the conditional
-statements are exact consequences. Lean adds measurability and square integrability explicitly and
-uses a finite square. It does not assert a Poisson distribution: an over-dispersed Poisson GLM is a
-mean-variance specification here, and those moments do not identify a unique law.
+**Gap.** The positive dispersion, log-link means, first two moments and independence are the source
+assumptions; the positivity and conditional statements are exact consequences. Lean adds
+measurability and square integrability explicitly and uses a finite square. It does not assert a
+Poisson distribution: an over-dispersed Poisson GLM is a mean-variance specification here, and
+those moments do not identify a unique law.
 
 ### Exact aggregate prediction error
 
@@ -739,8 +743,9 @@ and no asymptotic remainder or quality guarantee is claimed.
 **Source.** England and Verrall (1999), equations (2.6)-(2.7), write
 `log m_{i,j} = c + α_i + β_j` with `α_0 = β_0 = 0` after translating their one-based indices.
 
-**Lean.** `logLinkFit c alpha beta i k = exp (c + alpha i + beta k)`.
-`logLinkFit_eq_multFit` proves every such fit is multiplicative. For positive `a` and `b`,
+**Lean.** `logLinkFit c alpha beta i k = exp (c + alpha i + beta k)`, and `ODPLogLink` couples
+that form and its corner constraints to `ODPModel`. `logLinkFit_eq_multFit` proves every such fit is
+multiplicative. For positive `a` and `b`,
 `cornerRow a i = log(a i)-log(a 0)` and `cornerColumn b k = log(b k)-log(b 0)`;
 `cornerRow_zero`, `cornerColumn_zero` and `logLinkFit_corner_eq_multFit` prove the corner
 constraints and the converse representation with `c = log(a 0) + log(b 0)`.
@@ -769,6 +774,20 @@ supplied process simulator conditional on those means.
 predictive validity. The process simulator remains an argument because the ODP moment assumptions
 do not determine its distribution. The definitions also expose Lean's total division at `N=p`;
 the source procedure requires positive residual degrees of freedom.
+
+### Finite stochastic witness
+
+**Source.** Not in the cited papers. This is a satisfiability witness for the formal assumptions.
+
+**Lean.** `ODPWitness.mu` is the four-fold product of the uniform measure on `Fin 2`, indexed by
+the cells of a `2` by `2` square. Each claim coordinate is `0` or `2`, hence has unit mean and
+variance. `iIndepFun_pi` proves mutual independence. The unit mean surface has the
+corner-constrained log-link representation with zero effects and `phi = 1`.
+`ODPWitness.independentFutureObserved`, `conditionalMean`, and `conditionalVariance` take `(0,1)`
+as future and the nonempty singleton `{(0,0)}` as observed. `ODPWitness.twoCellMsep` instantiates the
+exact MSEP identity on two independent random coordinates.
+
+**Gap.** Concrete finite witness, not a distributional claim about real claims triangles.
 
 ## Bornhuetter-Ferguson
 
