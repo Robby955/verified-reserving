@@ -29,6 +29,7 @@ import VerifiedReserving.Mack1994Tests
 import VerifiedReserving.LognormalCI
 import VerifiedReserving.BFPriorUncertainty
 import VerifiedReserving.BuhlmannStraub
+import VerifiedReserving.ChainLadderR
 import VerifiedReserving.Test.NontrivialModel
 import VerifiedReserving.Test.IndependenceWitness
 import VerifiedReserving.Test.ODPStochasticWitness

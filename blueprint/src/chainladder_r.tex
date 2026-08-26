@@ -1,0 +1,76 @@
+\chapter{R \texttt{ChainLadder} option semantics}
+\enlargethispage{2\baselineskip}
+
+This chapter pins the parameter-risk branch in R package \texttt{ChainLadder}
+0.2.22 at source commit
+\href{https://github.com/mages/ChainLadder/blob/41f4e949e5c3bffd7a18af2c0eaa98d6bae2da2f/R/MackChainLadderFunctions.R\#L229-L299}{\texttt{41f4e949}}.
+Lean formalizes the arithmetic in lines 229--299; it does not execute R.
+
+\begin{definition}[MSE option and parameter-risk step]\label{def:r_parameter_step}
+\lean{VerifiedReserving.ChainLadderMseMethod, VerifiedReserving.chainLadderParameterCross, VerifiedReserving.chainLadderParameterStep, VerifiedReserving.chainLadderParameterMultiplier}\leanok
+For prior squared parameter risk $p$, projected claim $c$, fitted factor $f$
+and $v=\mathrm{f.se}_k^2$, the two methods use
+\[
+ c^2v+pf^2 \quad\text{for Mack},\qquad
+ c^2v+pf^2+pv \quad\text{for Independence}.
+\]
+Equivalently, the multiplier of $p$ is $f^2$ or $f^2+v$.
+\end{definition}
+
+\begin{theorem}[The option changes one term]\label{thm:r_parameter_step}
+\lean{VerifiedReserving.chainLadderParameterStep_mack, VerifiedReserving.chainLadderParameterStep_independence, VerifiedReserving.chainLadderParameterStep_independence_sub_mack, VerifiedReserving.chainLadderParameterStep_eq}\leanok
+\uses{def:r_parameter_step}
+At a fixed step, Independence minus Mack is exactly $pv$.
+\end{theorem}
+\begin{proof}\leanok Unfold the two constructors and subtract. \end{proof}
+
+\begin{definition}[Per-row source recursion]\label{def:r_row_recursion}
+\lean{VerifiedReserving.chainLadderRowParameterRiskSq}\leanok
+\uses{def:r_parameter_step, def:Chat, def:sigma2, def:S, def:fhat}
+Starting from zero on the latest diagonal, use $c=\hat C_{i,k}$,
+$f=\hat f_k$ and $v=\hat\sigma_k^2/S_k$.
+\end{definition}
+
+\begin{theorem}[Per-row option identities]\label{thm:r_row_recursion}
+\lean{VerifiedReserving.factorVariance_eq_factor_sq_mul_relVar, VerifiedReserving.chainLadderRowParameterRiskSq_mack_eq_closed, VerifiedReserving.chainLadderRowParameterRiskSq_independence_eq_closed, VerifiedReserving.chainLadderRowParameterRiskSq_mack_eq_mackEstimation, VerifiedReserving.chainLadderRowParameterRiskSq_independence_eq_bbmwEstimation}\leanok
+\uses{def:r_row_recursion, def:bbmw, def:mackEst}
+For nonzero fitted factors and $a_k=\hat\sigma_k^2/(\hat f_k^2S_k)$,
+\[
+\begin{aligned}
+\text{Mack: }&\hat C_{i,n-1}^2\sum_k a_k=\texttt{mackEstimation},\\
+\text{Independence: }&\hat C_{i,n-1}^2\left(\prod_k(1+a_k)-1\right)=\texttt{bbmwEstimation}.
+\end{aligned}
+\]
+\end{theorem}
+\begin{proof}\leanok Induct along the row and use
+$\hat\sigma_k^2/S_k=\hat f_k^2a_k$ and
+$\hat C_{i,k+1}=\hat C_{i,k}\hat f_k$. \end{proof}
+
+\begin{definition}[Total source recursion]\label{def:r_total_recursion}
+\lean{VerifiedReserving.chainLadderTotalParameterRiskSq}\leanok
+\uses{def:r_parameter_step}
+For total parameter risk, the package replaces $c$ by the projected sum $M_k$.
+\end{definition}
+
+\begin{theorem}[Total recursion branches and closed form]\label{thm:r_total_recursion}
+\lean{VerifiedReserving.chainLadderTotalParameterRiskSq_mack_succ, VerifiedReserving.chainLadderTotalParameterRiskSq_independence_succ, VerifiedReserving.chainLadderTotalParameterRiskSq_eq_sum}\leanok
+\uses{def:r_total_recursion}
+Mack propagates each increment through later $f_l^2$; Independence uses
+$f_l^2+v_l$.  The theorem gives the finite-sum closed form for both.
+\end{theorem}
+\begin{proof}\leanok Induct and split the last factor from each product. \end{proof}
+
+\begin{definition}[Named row and total formulas]\label{def:r_formulas}
+\lean{VerifiedReserving.chainLadderRowParameterFormula, VerifiedReserving.chainLadderTotalParameterFormula}\leanok
+\uses{def:bbmw, def:total}
+The constructors select the existing Mack or BBMW row and total formulas.
+\end{definition}
+
+\begin{theorem}[Exact aggregate option difference]\label{thm:r_formulas}
+\lean{VerifiedReserving.chainLadderTotalParameterFormula_independence_sub_mack}\leanok
+\uses{def:r_formulas, thm:total}
+The selected aggregate formulas differ by the existing row-wise
+BBMW-minus-Mack remainder weighted by the projected ultimates.
+\end{theorem}
+\begin{proof}\leanok This is
+\texttt{bbmwTotalEstimation\_sub\_mackTotalEstimation}. \end{proof}

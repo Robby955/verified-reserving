@@ -11,6 +11,8 @@ Contributions are welcome, from a one-line lemma to a whole theorem of the roadm
 
 The former good-first list is complete. Current work is narrower and varies in difficulty; check the matching `Still open` paragraph in [ROADMAP.md](ROADMAP.md) before starting.
 
+R `ChainLadder` option semantics are closed in `ChainLadderR.lean` against package version 0.2.22 and source commit `41f4e949`; follow-up work should use a newer pinned source diff.
+
 1. Add distribution-specific ODP process simulators and prove bootstrap properties only under explicit distributional assumptions.
 2. Formalize an observable-CDR approximation under stated linearization or resampling hypotheses; keep it separate from the exact true-CDR results.
 3. Add Bühlmann-Straub structural-parameter estimators without folding them into the proved conditional-moment model.
