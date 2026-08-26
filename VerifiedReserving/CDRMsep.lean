@@ -95,8 +95,10 @@ assumed in.
 Nothing here upgrades an estimator to an identity. The passage from the exact
 conditional MSEP to `mwMsepCDR` uses the linear approximation of the paper's
 appendix (A.1), in which the estimated development factors are treated as
-resampled ones and terms of higher order in the residuals are dropped; that
-step is not formalized, which is why every `mw*` object is a definition.
+resampled ones and terms of higher order in the residuals are dropped. The
+product-to-sum boundary is formalized below as separate exact, linearized and
+remainder definitions. The resampling passage itself remains a modeling
+approximation, which is why every `mw*` estimator is a definition.
 -/
 
 open MeasureTheory Finset Filter
@@ -171,6 +173,46 @@ Definitions only, exactly as the paper displays them. -/
 noncomputable section Estimator
 
 open Finset
+
+/-! ### The Appendix A.1 approximation boundary -/
+
+/-- The exact product increment in Merz--Wüthrich (2008), Appendix (A.1):
+`prod (1 + a_j) - 1`. -/
+def mwA1ProductIncrement { ι : Type* } (s : Finset ι) (a : ι → ℝ) : ℝ :=
+  ∏ j ∈ s, (1 + a j) - 1
+
+/-- The first-order expression used in Appendix (A.1), `sum a_j`. This is a
+definition of the paper's approximation, not an equality with the product
+increment and not an error estimate. -/
+def mwA1LinearApprox { ι : Type* } (s : Finset ι) (a : ι → ℝ) : ℝ :=
+  ∑ j ∈ s, a j
+
+/-- The exact terms discarded by the Appendix (A.1) linearization. -/
+def mwA1Remainder { ι : Type* } (s : Finset ι) (a : ι → ℝ) : ℝ :=
+  mwA1ProductIncrement s a - mwA1LinearApprox s a
+
+/-- The exact decomposition at the approximation boundary. It deliberately
+does not identify the remainder with zero. -/
+theorem mwA1ProductIncrement_eq_linear_add_remainder { ι : Type* }
+    (s : Finset ι) (a : ι → ℝ) :
+    mwA1ProductIncrement s a = mwA1LinearApprox s a + mwA1Remainder s a := by
+  simp only [mwA1Remainder]
+  ring
+
+/-- The lower-bound statement accompanying Appendix (A.1): for nonnegative
+increments, the linear approximation is at most the exact product increment. -/
+theorem mwA1LinearApprox_le_productIncrement { ι : Type* }
+    (s : Finset ι) (a : ι → ℝ) (ha : ∀ j ∈ s, 0 ≤ a j) :
+    mwA1LinearApprox s a ≤ mwA1ProductIncrement s a := by
+  have h := one_add_sum_le_prod_one_add s a ha
+  simp only [mwA1LinearApprox, mwA1ProductIncrement]
+  linarith
+
+/-- For two increments, the discarded term is exactly their product. -/
+theorem mwA1Remainder_pair (a b : ℝ) :
+    mwA1Remainder ({0, 1} : Finset ℕ) (fun j => if j = 0 then a else b) = a * b := by
+  simp [mwA1Remainder, mwA1ProductIncrement, mwA1LinearApprox]
+  ring
 
 /-- The column sum one year later. `S^{I+1}_j = S^I_j + C_{I-j,j}`: the extra
 contributor to column `j` on the next diagonal is the cell `C_{I-j,j}`, which

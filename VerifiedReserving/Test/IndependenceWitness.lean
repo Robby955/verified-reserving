@@ -1,5 +1,6 @@
 import VerifiedReserving.Independence
 import VerifiedReserving.ObservedData
+import VerifiedReserving.CDRCalendar
 import VerifiedReserving.Test.NontrivialModel
 
 /-!
@@ -368,10 +369,54 @@ theorem mack1Row : Mack1Row X μ f := by
         (stronglyMeasurable_const.mul (X.stronglyMeasurable_rowSigma i le_rfl))
         (integrable_all _))
 
+theorem eps_zero_eq_independenceWitness (i : ℕ) :
+    X.eps f i 0 = fun ω => c * fdev * s * xi i ω := by
+  ext ω
+  simp only [RandomTriangle.eps, X]
+  rw [Cw_succ, Cw_zero]
+  simp only [f]
+  ring
+
+theorem eps_succ_eq_independenceWitness (i k : ℕ) :
+    X.eps f i (k + 1) = fun _ => 0 := by
+  ext ω
+  simp only [RandomTriangle.eps, X]
+  rw [Cw_succ, Cw_succ]
+  simp only [f]
+  ring
+
+/-- The same witness satisfies Mack's row-conditioned variance assumption.
+At development zero its Rademacher shock has variance `σ² 0 * C i 0`;
+after that first random step all residuals vanish. -/
+theorem mack3Row : Mack3Row X μ f σ2 := by
+  intro i hi k
+  cases k with
+  | zero =>
+      show μ[fun ω => (X.eps f i 0 ω) ^ 2 | X.rowSigma i 0]
+        =ᵐ[μ] fun ω => σ2 0 * X.C i 0 ω
+      rw [rowSigma_zero, ← Dfil_zero, eps_zero_eq_independenceWitness, condExp_bot_eq_sum,
+        sum_eps_sq i hi]
+      refine Eventually.of_forall fun ω => ?_
+      change 1 / 8 * (8 * (c * fdev * s) ^ 2) = σ2 0 * Cw i 0 ω
+      rw [Cw_zero]
+      simp only [σ2, ↓reduceIte]
+      ring
+  | succ k =>
+      show μ[fun ω => (X.eps f i (k + 1) ω) ^ 2 | X.rowSigma i (k + 1)]
+        =ᵐ[μ] fun ω => σ2 (k + 1) * X.C i (k + 1) ω
+      rw [eps_succ_eq_independenceWitness]
+      simp [σ2]
+
 /-- Mack's `D_k`-conditioned mean assumption follows on the witness from
 the row-conditioned equation (1) and accident-year independence (2). -/
 theorem mack1_from_rows : Mack1 X μ f :=
   mack1_of_mack1Row X f rowsGenerateD rowsIndep mack1Row (fun _ _ => integrable_all _)
+
+/-- Mack's `D_k`-conditioned variance assumption follows from the new
+row-conditioned witness and accident-year independence. -/
+theorem mack3_from_rows : Mack3 X μ f σ2 :=
+  mack3_of_mack3Row X f σ2 rowsGenerateD rowsIndep mack3Row
+    (fun _ _ => integrable_all _)
 
 /-- Mack's cross-row residual condition follows on the witness from the
 row-conditioned equation (1) and accident-year independence (2). -/
@@ -417,6 +462,46 @@ randomness. -/
 theorem condCrossFree_obs_of_rows :
     CondCrossFree μ X.obsSigma (Finset.range 3) fun i => X.C i 2 :=
   condCrossFree_of_rows X rowsIndep fun _ _ => memLp_all _
+
+/-- Mack's exact single-accident-year conditional MSEP, instantiated on the
+eight-outcome independent-row witness. -/
+theorem condMsep_witness (i m : ℕ) (hi : i < 3) :
+    μ[fun ω => (X.ChatRv i m ω - X.C i (3 - 1 - i + m) ω) ^ 2 | X.obsSigma]
+      =ᵐ[μ] fun ω => procVar (X.C i (3 - 1 - i) ω) f σ2 (3 - 1 - i) m
+          + (X.ChatRv i m ω
+              - X.C i (3 - 1 - i) ω * ∏ l ∈ Ico (3 - 1 - i) (3 - 1 - i + m), f l) ^ 2 :=
+  condMsep_eq_of_rows X f σ2 i m hi rowsGenerateD rowsIndep mack1Row mack3Row
+    (fun _ _ => memLp_all _) (memLp_all _)
+
+/-- Mack's exact total-reserve conditional MSEP, instantiated on the same
+finite witness. -/
+theorem condMsepTotal_witness :
+    μ[fun ω => (∑ i ∈ range 3, X.ChatRv i i ω - ∑ i ∈ range 3, X.C i 2 ω) ^ 2 | X.obsSigma]
+      =ᵐ[μ] fun ω => (∑ i ∈ range 3, procVar (X.C i (3 - 1 - i) ω) f σ2 (3 - 1 - i) i)
+        + (∑ i ∈ range 3, (X.ChatRv i i ω
+            - X.C i (3 - 1 - i) ω * ∏ l ∈ Ico (3 - 1 - i) 2, f l)) ^ 2 :=
+  condMsepTotal_eq_of_rows X f σ2 rowsGenerateD rowsIndep mack1Row mack3Row
+    (fun _ _ => memLp_all _) (fun _ => memLp_all _)
+
+theorem xi_ne_zero (i : ℕ) (hi : i < 3) (ω : Ω) : xi i ω ≠ 0 := by
+  interval_cases i <;> fin_cases ω <;> simp [xi]
+
+/-- Three distinct calendar updates in the finite model have nonzero true
+CDR: at times `0`, `1`, and `2`, the next diagonal reveals the independent
+first-development shock of rows `0`, `1`, and `2`, respectively. -/
+theorem calendarTrueCDR_three_nondegenerate (i : ℕ) (hi : i < 3) :
+    ∀ᵐ ω ∂μ, X.calendarTrueCDR μ i i ω ≠ 0 := by
+  have h := calendarTrueCDR_eq_of_rows X f i 0 hi (by omega)
+    rowsIndep mack1Row (fun _ => integrable_all _)
+  filter_upwards [h] with ω hω
+  rw [show i + 0 = i by omega] at hω
+  rw [hω]
+  simp only [X]
+  rw [Cw_zero, Cw_succ]
+  norm_num [f, c, fdev, s]
+  intro hzero
+  apply xi_ne_zero i hi ω
+  linarith
 
 end
 

@@ -69,16 +69,19 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Merz-Wüthrich 2008, true CDR has conditional mean zero | `RandomTriangle.trueCDR`, `condExp_trueCDR_eq_zero` | identical; Lean's filtration is by development year, the source's by calendar year |
 | Merz-Wüthrich 2008, true CDR as a one-step residual | `trueCDR_eq`, `condExp_C_ultimate_of_Mack1`, `condExp_C_of_Mack1_at` | identical under (M1) in the `D_k` form |
 | Merz-Wüthrich 2008, observable CDR and its MSEP (Results 3.1-3.3) | `obsCDR`, `RandomTriangle.obsCDRRv`, `obsCDR_eq_reserve_sub` | definition plus one algebraic identity; nothing about its distribution is proved |
+| Merz-Wüthrich 2008, calendar filtration and exact true CDR moments | `RandomTriangle.calendarSigma`, `condExp_calendarTrueCDR_eq_zero`, `calendarTrueCDR_eq_of_rows`, `condExp_sq_calendarTrueCDR_of_rows`, `condVar_calendarTrueCDR_of_rows` | identical under (M1row), (M3row), independence and integrability |
+| Merz-Wüthrich 2008, Appendix (A.1) | `mwA1ProductIncrement`, `mwA1LinearApprox`, `mwA1Remainder`, `mwA1LinearApprox_le_productIncrement` | the approximation is a definition; only its exact remainder and stated lower bound are theorems |
 | Renshaw-Verrall 1998 / Mack 1991: the marginal sums are score equations | `rowQuasiLogLik`, `colQuasiLogLik`, `hasDerivAt_rowQuasiLogLik`, `hasDerivAt_colQuasiLogLik`, `deriv_rowQuasiLogLik_eq_zero_iff`, `deriv_colQuasiLogLik_eq_zero_iff` | formalized from the marginal-sum system as universally quoted, neither paper available in full text |
 | Renshaw-Verrall 1998 / Mack 1991: chain ladder solves the system | `chainLadder_fitted_row_totals`, `chainLadder_fitted_row_totals_eq`, `chainLadder_fitted_column_totals`, `chainLadder_scoreEquations` | identical; the column half needs nonzero development factors |
 | Mack 1991, Section 2: uniqueness of the multiplicative fit | `multFit_eq_CLincr`, `mult_cum_eq_CLcum`, `patternCum_mul_fhat` | Lean stronger hypotheses: strict positivity of `a` and `b` and the normalization `∑_{k<n} b_k = 1` |
 | Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve`, `bfUltimate`, `bfReserve_of_ultimate`, `bfUltimate_of_ultimate`, `bfReserve_smul`, `bfReserve_add`, `one_le_cdf`, `bfReserve_nonneg`, `bfReserve_le` | definitions plus deterministic identities; the module names no source display |
 | Non-vacuity: degenerate witness | `Witness.X`, `Witness.fhat_unbiased`, `Witness.ultimate_unbiased` | not in any source; certifies the hypotheses are jointly satisfiable |
 | Non-vacuity: a nondegenerate Mack model | `NontrivialModel.exists_nontrivial_mack_model`, `NontrivialModel.fhat0_unbiased`, `NontrivialModel.ultimate_unbiased`, `NontrivialModel.var_fhat0`, `NontrivialModel.sigma2_unbiased` | not in any source; `σ_0² = 4 > 0` and the first development step is genuinely random |
-| Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack1_from_rows`, `IndependenceWitness.mack2'_from_rows` | not in any source; realizes Mack 1993 eq. (1)-(2) and the `B_k` filtration on eight outcomes |
+| Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack3Row`, `IndependenceWitness.condMsep_witness`, `IndependenceWitness.condMsepTotal_witness` | not in any source; realizes Mack's row assumptions and both exact MSEP wrappers on eight outcomes |
+| Non-vacuity: three calendar CDR updates | `IndependenceWitness.calendarTrueCDR_three_nondegenerate` | not in any source; three distinct next diagonals reveal three independent row shocks |
 | Non-vacuity: the cross-term condition of the total | `NontrivialModel.crossFree_ultimates`, `NontrivialModel.exists_crossFree_nondegenerate` | not in any source; three genuinely random ultimates, conditionally uncorrelated |
 
-Thirty-seven rows.
+Forty rows.
 
 ## The deterministic layer
 
@@ -292,9 +295,9 @@ conditions. `condCrossFree_of_rows` derives the former from `RowsIndep` and squa
 while `condExp_obsSigma_eq_D` supplies the latter from `RowsGenerateD`, `RowsIndep` and
 integrability. `condMsepTotal_eq_of_rows` packages the exact total result from the row-conditioned
 assumptions, `RowsGenerateD`, independence and square integrability. The eight-outcome
-independent-row witness checks both derived conditions, but does not yet instantiate this packaged
-theorem because it does not supply `Mack3Row`. Square integrability is carried as `MemLp _ 2 μ` so
-that Hölder supplies the product integrability, which is a convenience, not a weakening.
+independent-row witness supplies `Mack3Row` and instantiates both `condMsep_witness` and
+`condMsepTotal_witness`. Square integrability is carried as `MemLp _ 2 μ` so that Hölder
+supplies the product integrability, which is a convenience, not a weakening.
 
 ### Mack 1993, Corollary: the plug-in has the exact shape
 
@@ -581,9 +584,8 @@ as stated, since mathlib's conditional expectation is `0` off the integrable cas
 carries its intended meaning exactly when `C_{i,n-1}` is integrable.
 
 **Gap.** Identical, and Lean's hypotheses are weaker than the source's, which assumes a model.
-The filtration differs in indexing: Lean's `D_k` is by development year, the source indexes
-information by calendar year, `D_I = {C_{i,j} : i + j ≤ I}`. The martingale statement is the same
-tower property in either filtration, and the docstring records the difference.
+This declaration uses the development-year filtration. The source's calendar-year version is
+formalized separately below.
 
 ### Merz-Wüthrich 2008: the true CDR as a one-step residual
 
@@ -595,6 +597,45 @@ from an arbitrary starting development year.
 
 **Gap.** Identical under (M1) in the `D_k` form, with integrability added. Stated in the
 development-year filtration, as above.
+
+### Merz-Wüthrich 2008: the exact calendar-year CDR
+
+**Source.** Information at calendar time `t` is the triangle
+`D_t = {C_{i,j} : i+j ≤ t}`. The true CDR over the next accounting year is the difference
+between successive conditional predictions of the same ultimate. Displays (2.17) and (2.18)
+give its conditional mean zero and conditional variance.
+
+**Lean.** `RandomTriangle.calendarSigma X t` is the sigma-algebra generated by precisely the
+cells with `i < n` and `i+j ≤ t`; `calendarSigma_mono` proves it is a filtration.
+`calendarSigma_eq_sup` proves that at time `i+k` it is `rowSigma i k` joined with the available
+cells from all other rows, and `condExp_calendarSigma_eq_rowSigma` removes the independent
+enlargement. `RandomTriangle.calendarTrueCDR X μ i t` is the difference of the two conditional
+expectations. `condExp_calendarTrueCDR_eq_zero` assumes only a finite measure.
+`calendarTrueCDR_eq_of_rows` additionally assumes `i<n`, `k<n-1`, `RowsIndep`, `Mack1Row` and
+row integrability, and gives the residual formula at time `i+k`.
+`condExp_sq_calendarTrueCDR_of_rows` adds `Mack3Row` and integrability of the squared residual,
+and gives `(prod_{j>k} f_j)^2 * σ2 k * C i k` conditionally on `calendarSigma (i+k)`.
+`condVar_calendarTrueCDR_of_rows` identifies the same expression as the conditional variance.
+
+**Gap.** Identical, with finiteness and integrability explicit. The source assumes the
+distribution-free model; Lean derives both conditional model statements in the calendar
+filtration from the row-conditioned assumptions and accident-year independence.
+
+### Merz-Wüthrich 2008: Appendix (A.1)
+
+**Source.** For positive small constants `a_j`, Appendix (A.1) replaces
+`prod_j (1+a_j)-1` by `sum_j a_j` and states that the sum is a lower bound. The appendix then
+uses the replacement in the observable-CDR estimator derivation.
+
+**Lean.** `mwA1ProductIncrement s a` is the exact product increment,
+`mwA1LinearApprox s a` is the sum used as the approximation, and `mwA1Remainder s a` is their
+exact difference. `mwA1ProductIncrement_eq_linear_add_remainder` keeps the discarded term
+visible. `mwA1LinearApprox_le_productIncrement` proves the source's lower bound for nonnegative
+increments, and `mwA1Remainder_pair` proves that two increments discard exactly `a*b`.
+
+**Gap.** The algebraic boundary is exact. No theorem says the remainder vanishes, supplies a
+numerical error tolerance from the informal condition `a_j` small, or identifies the resampled
+factor construction with the true observable-CDR distribution.
 
 ### Merz-Wüthrich 2008: the observable CDR
 
@@ -608,10 +649,10 @@ which is what a Solvency II one-year reserve risk figure reports.
 the form the source displays: opening reserve minus the payments of the year and the closing
 reserve. Nothing else is proved.
 
-**Gap.** Differently scoped, deliberately. Results 3.1 to 3.3 rest on an approximation step of the
-same kind as Mack's, treating estimated factors as resampled and dropping second-order residual
-terms. That step is not formalized, so no expectation, variance or MSEP statement about `obsCDR`
-appears.
+**Gap.** Differently scoped, deliberately. The product-to-sum boundary from Appendix (A.1) is
+formalized above, but treating estimated factors as resampled and connecting that construction
+to the true observable-CDR distribution remains a modeling approximation. No expectation,
+variance or MSEP theorem about `obsCDR` appears.
 
 ## Chain ladder as a generalized linear model
 
