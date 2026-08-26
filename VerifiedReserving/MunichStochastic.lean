@@ -7,8 +7,8 @@ import VerifiedReserving.MunichChainLadder
 Quarg and Mack, *Munich Chain Ladder* (2004), Sections 2.2 and 3.1.2,
 couple cumulative paid and incurred triangles in two distinct layers.
 
-The stochastic layer uses the joint history of the paid and incurred processes
-for one accident year.  Its assumptions PQ and IQ regress a standardized future
+The stochastic layer uses the finite joint history of the paid and incurred
+processes for one accident year.  Its assumptions PQ and IQ regress an adjacent
 development residual on the standardized reciprocal paid/incurred ratio.  The
 generic theorem `condExp_mul_eq_slope_of_residual_regression` proves the source's
 correlation calculation: once the regressor is standardized, the conditional
@@ -45,15 +45,16 @@ development year `k`, Quarg and Mack's `B_i(k)`. -/
 def MunichTriangle.jointRowSigma (X : MunichTriangle Ω n) (i k : ℕ) : MeasurableSpace Ω :=
   X.paid.rowSigma i k ⊔ X.incurred.rowSigma i k
 
-/-- The whole paid/incurred history of accident year `i`. -/
+/-- The finite paid/incurred history of accident year `i` through the final
+modeled development period. -/
 @[implicit_reducible]
 def MunichTriangle.jointRowSigmaAll (X : MunichTriangle Ω n) (i : ℕ) : MeasurableSpace Ω :=
-  X.paid.rowSigmaAll i ⊔ X.incurred.rowSigmaAll i
+  X.jointRowSigma i (n - 1)
 
-/-- Quarg and Mack's PIU assumption: accident years are independent after paid
-and incurred histories are grouped together. -/
+/-- Quarg and Mack's finite-horizon PIU assumption: the `n` accident years are
+independent after paid and incurred histories through `n - 1` are grouped. -/
 def MunichRowsIndep (X : MunichTriangle Ω n) (μ : Measure Ω) : Prop :=
-  iIndep X.jointRowSigmaAll μ
+  iIndep (fun i : Fin n => X.jointRowSigmaAll i) μ
 
 /-- The paid individual development factor as a random variable. -/
 def MunichTriangle.paidDevelopmentRv (X : MunichTriangle Ω n) (i k : ℕ) : Ω → ℝ :=
@@ -81,21 +82,23 @@ def conditionalStdDev (μ : Measure Ω) (m : MeasurableSpace Ω) (Y : Ω → ℝ
 def conditionalResidual (μ : Measure Ω) (m : MeasurableSpace Ω) (Y : Ω → ℝ) : Ω → ℝ :=
   fun ω => (Y ω - (μ[Y | m]) ω) / Real.sqrt (Var[Y; μ | m] ω)
 
-/-- PQ: after conditioning on the joint paid/incurred history, the paid
-development residual is linear in the reciprocal-ratio residual with the
-development-year-independent slope `lambdaPaid`. -/
+/-- PQ: at every adjacent development pair within the modeled horizon, after
+conditioning on the joint paid/incurred history, the paid development residual
+is linear in the reciprocal-ratio residual with the development-year-independent
+slope `lambdaPaid`. -/
 def MunichPaidRegression (X : MunichTriangle Ω n) (μ : Measure Ω) (lambdaPaid : ℝ) : Prop :=
-  ∀ i, i < n → ∀ k,
+  ∀ i, i < n → ∀ k, k + 1 < n →
     μ[conditionalResidual μ (X.paid.rowSigma i k) (X.paidDevelopmentRv i k) |
         X.jointRowSigma i k] =ᵐ[μ]
       fun ω => lambdaPaid *
         conditionalResidual μ (X.paid.rowSigma i k) (X.incurredPaidRatioRv i k) ω
 
-/-- IQ: the incurred development residual is linear in the paid/incurred-ratio
-residual with slope `lambdaIncurred`. -/
+/-- IQ: at every adjacent development pair within the modeled horizon, the
+incurred development residual is linear in the paid/incurred-ratio residual
+with slope `lambdaIncurred`. -/
 def MunichIncurredRegression
     (X : MunichTriangle Ω n) (μ : Measure Ω) (lambdaIncurred : ℝ) : Prop :=
-  ∀ i, i < n → ∀ k,
+  ∀ i, i < n → ∀ k, k + 1 < n →
     μ[conditionalResidual μ (X.incurred.rowSigma i k) (X.incurredDevelopmentRv i k) |
         X.jointRowSigma i k] =ᵐ[μ]
       fun ω => lambdaIncurred *
@@ -133,6 +136,7 @@ theorem condExp_mul_eq_slope_of_residual_regression
 residual, the paid standardized residual cross-moment is `lambdaPaid`. -/
 theorem munichPaid_residualCorrelation_eq [IsFiniteMeasure μ]
     (X : MunichTriangle Ω n) (lambdaPaid : ℝ) (i k : ℕ) (hi : i < n)
+    (hk : k + 1 < n)
     (hPQ : MunichPaidRegression X μ lambdaPaid)
     (hAmeas : StronglyMeasurable[X.jointRowSigma i k]
       (conditionalResidual μ (X.paid.rowSigma i k) (X.incurredPaidRatioRv i k)))
@@ -154,12 +158,13 @@ theorem munichPaid_residualCorrelation_eq [IsFiniteMeasure μ]
     (lambda := lambdaPaid)
     (le_sup_left : X.paid.rowSigma i k ≤ X.jointRowSigma i k)
     (sup_le (X.paid.rowSigma_le i k) (X.incurred.rowSigma_le i k))
-    hAmeas hZint hAZint (hPQ i hi k) hstd
+    hAmeas hZint hAZint (hPQ i hi k hk) hstd
 
 /-- The IQ analogue: under the residual standardization conditions, the
 incurred standardized residual cross-moment is `lambdaIncurred`. -/
 theorem munichIncurred_residualCorrelation_eq [IsFiniteMeasure μ]
     (X : MunichTriangle Ω n) (lambdaIncurred : ℝ) (i k : ℕ) (hi : i < n)
+    (hk : k + 1 < n)
     (hIQ : MunichIncurredRegression X μ lambdaIncurred)
     (hAmeas : StronglyMeasurable[X.jointRowSigma i k]
       (conditionalResidual μ (X.incurred.rowSigma i k) (X.paidIncurredRatioRv i k)))
@@ -181,7 +186,7 @@ theorem munichIncurred_residualCorrelation_eq [IsFiniteMeasure μ]
     (lambda := lambdaIncurred)
     (le_sup_right : X.incurred.rowSigma i k ≤ X.jointRowSigma i k)
     (sup_le (X.paid.rowSigma_le i k) (X.incurred.rowSigma_le i k))
-    hAmeas hZint hAZint (hIQ i hi k) hstd
+    hAmeas hZint hAZint (hIQ i hi k hk) hstd
 
 /-! ## Practical estimators from Section 3.1.2 -/
 

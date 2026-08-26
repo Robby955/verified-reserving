@@ -12,8 +12,9 @@ variable $Y$ and a smaller history $\mathcal A$ its residual is
  \operatorname{Res}(Y\mid\mathcal A)
  =\frac{Y-E[Y\mid\mathcal A]}{\sqrt{\operatorname{Var}(Y\mid\mathcal A)}}.
 \]
-The PIU predicate groups paid and incurred histories by accident year before
-stating independence.
+The PIU predicate states independence of the finite $n$ accident years after
+grouping each year's paid and incurred histories through the final modeled
+period $n-1$.
 \end{definition}
 
 \begin{definition}[PQ and IQ]\label{def:munichRegression}\lean{VerifiedReserving.MunichPaidRegression, VerifiedReserving.MunichIncurredRegression}\leanok
@@ -21,7 +22,8 @@ stating independence.
 PQ regresses the paid development residual, conditioned on $\mathcal B_i(k)$,
 on the reciprocal-ratio residual with one common slope $\lambda^P$.  IQ uses
 the incurred development residual and the paid/incurred-ratio residual with
-slope $\lambda^I$.
+slope $\lambda^I$.  Both predicates range over adjacent periods satisfying
+$k+1<n$.
 \end{definition}
 
 \begin{theorem}[Residual slope is the standardized cross-moment]\label{thm:munichCorrelation}\lean{VerifiedReserving.condExp_mul_eq_slope_of_residual_regression, VerifiedReserving.munichPaid_residualCorrelation_eq, VerifiedReserving.munichIncurred_residualCorrelation_eq}\leanok

@@ -41,7 +41,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Mack 1993, eq. (2): `f̂_k` is the `C`-weighted mean of the `F_{i,k}` | `fhat_eq_weighted_average` | identical, with a nonvanishing hypothesis on the individual denominators only |
 | Mack 1993, degrees of freedom of `σ̂²_k` | `weighted_sq_dev`, `weighted_sq_dev_at_fhat` | identical |
 | Quarg-Mack 2004, Section 1.1.2: normalized paid/incurred gap under separate chain ladder | `sclColumnTotal_succ`, `sclColumnTotal_eq_mul_prod`, `quargMack_gap_identity` | identical after converting the source's one-based indices to zero-based indices; Lean states every nonzero denominator |
-| Quarg-Mack 2004, Sections 2.2 and 3.1.2: paid/incurred residual regressions and adjusted recursion | `MunichPaidRegression`, `MunichIncurredRegression`, `munichPaid_residualCorrelation_eq`, `munichIncurred_residualCorrelation_eq`, `munichProjection` | the model regressions are exact assumptions; the correlation results state integrability, measurability and standardization explicitly; the practical estimators and recursion are definitions |
+| Quarg-Mack 2004, Sections 2.2 and 3.1.2: paid/incurred residual regressions and adjusted recursion | `MunichRowsIndep`, `MunichPaidRegression`, `MunichIncurredRegression`, `munichPaid_residualCorrelation_eq`, `munichIncurred_residualCorrelation_eq`, `munichProjection` | PIU is stated for the finite `n` accident years and their histories through `n - 1`; PQ and IQ are exact assumptions for adjacent periods `k + 1 < n`; the correlation results state integrability, measurability and standardization explicitly; the practical estimators and recursion are definitions |
 | Mack 1993, Theorem 1 | `condExp_ultimate_eq`, `condExp_ChatRv`, `condExp_C_of_Mack1` | Lean stronger hypotheses: integrability, a.s. nonvanishing column sums, finite measure |
 | Mack 1993, Theorem 2 | `condExp_fhatRv`, `condExp_fhatRv_mul`, `integral_fhatRv`, `integral_fhatRv_mul` | Lean stronger hypotheses: integrability, a.s. nonvanishing `S_k` |
 | Mack 1993, proof of Theorem 3: estimation variance of `f̂_k` | `condExp_sq_fhatRv_sub` | identical up to integrability and a.s. nonvanishing `S_k` |
@@ -80,7 +80,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack1_from_rows`, `IndependenceWitness.mack2'_from_rows` | not in any source; realizes Mack 1993 eq. (1)-(2) and the `B_k` filtration on eight outcomes |
 | Non-vacuity: the cross-term condition of the total | `NontrivialModel.crossFree_ultimates`, `NontrivialModel.exists_crossFree_nondegenerate` | not in any source; three genuinely random ultimates, conditionally uncorrelated |
 
-Thirty-nine rows.
+Forty-one rows.
 
 ## The deterministic layer
 
@@ -146,10 +146,12 @@ arrays and the two pooled slopes, and inserts those slopes into coupled paid/inc
 factors.
 
 **Lean.** `MunichTriangle` puts the paid and incurred random triangles on one probability space and
-`jointRowSigma` joins their row histories. `conditionalResidual` uses the conditional mean and the
-square root of the conditional variance. `MunichPaidRegression` and `MunichIncurredRegression`
-state PQ and IQ directly as conditional-expectation equalities. The generic theorem
-`condExp_mul_eq_slope_of_residual_regression` assumes `𝒜 ≤ ℬ`, integrability of `A * Z` and `A²`,
+`jointRowSigma` joins their row histories. `MunichRowsIndep` states PIU for the finite `n` accident
+years using joint histories through the final period `n - 1`. `conditionalResidual` uses the
+conditional mean and the square root of the conditional variance. `MunichPaidRegression` and
+`MunichIncurredRegression` state PQ and IQ directly as conditional-expectation equalities for
+adjacent periods satisfying `k + 1 < n`. The generic theorem
+`condExp_mul_eq_slope_of_residual_regression` assumes `𝒜 ≤ ℬ`, integrability of `Z` and `A * Z`,
 strong `ℬ`-measurability of `A`, the regression `E[Z | ℬ] = λ A`, and the standardization
 `E[A² | 𝒜] = 1`; it concludes `E[A Z | 𝒜] = λ`. The two `munich..._residualCorrelation_eq`
 corollaries apply it to PQ and IQ. `mclRatioMean`, the two ratio-scale estimators, four residual
