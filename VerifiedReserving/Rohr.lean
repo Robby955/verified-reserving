@@ -32,10 +32,12 @@ prediction error divided by the squared estimated ultimate loss can be written
 as `∑_j û_j²`, where `û_j` measures the relative uncertainty around the `j`-th
 development factor and the proportion of the estimated ultimate loss that it
 affects", together with "a split into process error and parameter error" - with
-the two parts in the form quoted above. The general claims-development-result
-formulas of that paper, between two arbitrary future horizons, are not
-formalized here; neither is the paper's own aggregation over accident years,
-which could not be checked against the source (see `rohrMsepTotal`).
+the two parts in the form quoted above. A primary-author CAE 2014 presentation
+is available for the distinct aggregate-influence formulas at arbitrary
+horizons; `RohrHorizon.lean` records slides 13, 17, and 20 as approximation
+definitions and proves their algebraic split. It does not use those slides to
+attribute further formulas to the full paper. The paper's own aggregation over
+accident years remains unchecked (see `rohrMsepTotal`).
 
 ## What is proved
 

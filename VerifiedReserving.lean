@@ -15,6 +15,7 @@ import VerifiedReserving.Catalogue
 import VerifiedReserving.Counterexample
 import VerifiedReserving.TotalReserve
 import VerifiedReserving.Rohr
+import VerifiedReserving.RohrHorizon
 import VerifiedReserving.TotalMsep
 import VerifiedReserving.Mack1999
 import VerifiedReserving.Mack1999Closure
