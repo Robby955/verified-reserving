@@ -89,6 +89,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Non-vacuity: a nondegenerate finite ODP model | `ODPWitness.model`, `ODPWitness.independentFutureObserved`, `ODPWitness.conditionalMean`, `ODPWitness.conditionalVariance`, `ODPWitness.twoCellMsep`, `ODPWitness.exists_nondegenerate_odp_model` | not in a source; four independent random cells with unit mean and variance, including nonempty observed-versus-future conditioning |
 | Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve`, `bfUltimate`, `bfReserve_of_ultimate`, `bfUltimate_of_ultimate`, `bfReserve_smul`, `bfReserve_add`, `one_le_cdf`, `bfReserve_nonneg`, `bfReserve_le` | definitions plus deterministic identities; the module names no source display |
 | Bühlmann-Straub 1970, Sections 3, 5 and 6; display (4) | `BuhlmannStraubMomentModel`, `buhlmannStraubExpectedSqLoss_eq`, `buhlmannStraubCredibility_minimizes_expectedSqLoss`, `buhlmannStraubPredictor_credibility_eq_estimate` | one-risk scalar-coefficient specialization; conditional independence weakened to the consumed cross moments; structural parameters remain inputs |
+| Mack 2008, BF1--BF3, eqs. (1)--(2), and prediction error | `BFFullIncrementIndependence`, `BFIncrementMean`, `BFIncrementVariance`, `bfYRawRv_best_linear_unbiased`, `integral_bfSigma2RawOnRv`, `variance_bfStochasticReserveEstimate`, `condExp_sq_bfPredictionError_eq`, `covariance_mul_mul_of_pair_indep` | exact model moments, raw-estimator claims and decompositions; selected assessments and covariance truncation are definitions |
 | Non-vacuity: degenerate witness | `Witness.X`, `Witness.fhat_unbiased`, `Witness.ultimate_unbiased` | not in any source; certifies the hypotheses are jointly satisfiable |
 | Non-vacuity: a nondegenerate Mack model | `NontrivialModel.exists_nontrivial_mack_model`, `NontrivialModel.fhat0_unbiased`, `NontrivialModel.ultimate_unbiased`, `NontrivialModel.var_fhat0`, `NontrivialModel.sigma2_unbiased` | not in any source; `σ_0² = 4 > 0` and the first development step is genuinely random |
 | Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack3Row`, `IndependenceWitness.condMsep_witness`, `IndependenceWitness.condMsepTotal_witness` | not in any source; realizes Mack's row assumptions and both exact MSEP wrappers on eight outcomes |
@@ -1033,6 +1034,57 @@ The deterministic `buhlmannStraubLoss` remains a separate penalized sample quadr
 identified with expected prediction loss. The finite witness has positive process variance and a
 nonconstant observation but zero between-risk variance; it proves non-vacuity of the stochastic
 process layer, not heterogeneity of the smallest example.
+
+## Bornhuetter-Ferguson prediction error
+
+### Mack 2008, BF1--BF3 and the prediction error
+
+**Source.** Mack (2008), page 91, assumes that all increments `S_i,k` are independent (BF1),
+have means `x_i y_k` with the development proportions summing to one (BF2), and have variances
+`x_i σ_k²` (BF3). The same page derives the mean and variance of the future row sum. Page 92
+states that equation (1) is best linear unbiased and that equation (2) is an unbiased estimator
+of `σ_k²`. Pages 94--95
+describe selected priors and development patterns as practically independent and assume their
+unbiasedness. Pages 95--96 split the single-year MSEP into estimation and process variance and use
+the variance formula for a product of independent random variables. Equations (3), (4), (6), and
+(7) give raw or assessed inputs. Pages 98--99 give the exact product-covariance identity for the
+total reserve, then omit its middle term as lower order and assess the remaining correlations.
+
+**Lean.** `BFFullIncrementIndependence`, `BFIncrementMean`, `BFIncrementVariance`, and
+`BFPatternNormalized` state BF1--BF3. The independence predicate covers the full natural-number
+family, which is stronger than the source's finite modeled rectangle; each theorem consumes only
+a finite restriction. `integral_bfFutureReserveRv` and `variance_bfFutureReserveRv` prove the exact
+mean `x_i(1-z_d)` and variance `x_i ∑_{d≤k<m} σ_k²` under integrability or square integrability.
+`variance_mul_of_indepFun` proves the general product-variance identity, and
+`variance_bfStochasticReserveEstimate` specializes it to `U(1-z)`. The latter explicitly assumes
+that `U` and `z` are independent and that their product is square-integrable.
+
+`bfMeanSquaredPredictionError_eq_variance_add` proves that independent, equal-mean prediction and
+target variables have MSEP equal to the sum of their variances.
+`bfMeanSquaredPredictionError_eq` substitutes BF3. `BFObservedPredictionIndependence` is the
+source's common-independence condition for the pair consisting of estimate and future reserve.
+`condExp_sq_bfPredictionError_eq` then proves the page 95 conditional statement for any observed
+sigma-algebra satisfying that condition. `covariance_mul_mul_of_pair_indep` proves all three terms
+of the exact product-covariance identity before the source drops the middle one.
+`integral_bfYRawRv` and `variance_bfYRawRv` prove the raw estimator in equation (1) has mean
+`y_k` and variance `σ_k²/∑_i x_i`. `variance_bfLinearPatternRv` gives the variance of every linear
+competitor, and `bfYRawRv_best_linear_unbiased` completes its coefficient square to prove the
+source's best-linear-unbiased claim. `bfResidualSumSqRv_eq` gives the residual sum-of-squares
+identity with one fitted degree of freedom, and `integral_bfSigma2RawOnRv` proves the equation (2)
+estimator is unbiased when the active set has at least two nonzero volumes.
+
+**Gap.** `bfYRaw`, `bfSigma2Raw`, `bfYStdErrSq`, `bfZStdErrSq`,
+`bfProcessErrorEstimate`, `bfEstimationErrorEstimate`, `bfMsepEstimate`, and
+`bfCovarianceApprox` are definitions. Lean does not claim that manual smoothing, tail
+extrapolation, the 50 percent tail coefficient of variation, the minimum in equation (7), the
+Dirichlet correlation assessment, or the omitted covariance term is statistically valid.
+The standalone `bfYRaw`, `bfSigma2Raw`, and `bfYStdErrSq` definitions retain
+Mack's one-based `n` and `k` symbols; the probability theorems use an explicit finite contributor
+set, which can be instantiated as `obsCol n k` under the repository's zero-based convention.
+
+`Test/BFPredictionWitness.lean` gives a one-point model with unit increments and zero process
+variance. It instantiates BF1--BF3, the future-reserve moments, and the conditional MSEP theorem.
+This checks satisfiability of the hypotheses but not a positive-variance version of the model.
 
 ## Non-vacuity
 
