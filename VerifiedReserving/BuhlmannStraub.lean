@@ -7,7 +7,8 @@ Bühlmann and Straub, "Glaubwürdigkeit für Schadensätze" (1970), derive the
 credibility estimator for exposure-weighted observations. Their Section 6,
 pp. 118-120, minimizes expected squared prediction error over unbiased linear
 estimators and obtains the normal equations in display (1). Their display (4),
-p. 123, writes the one-risk estimator as
+p. 123, writes the one-risk estimator using an empirical portfolio mean. With
+that quantity supplied as `collectiveMean`, its form is
 
 `Z * weightedMean + (1 - Z) * collectiveMean`,
 `Z = totalWeight * betweenVariance /
@@ -56,7 +57,8 @@ def buhlmannStraubCredibility
 
 /-- Closed-form Bühlmann-Straub estimate, written without separately dividing
 by the total exposure. This is algebraically the display (4) form
-`Z X̄ + (1-Z) m`. -/
+`Z X̄ + (1-Z) m` when `collectiveMean` is supplied by the source's empirical
+portfolio mean. -/
 def buhlmannStraubEstimate
     (sample : Finset ι) (weight observation : ι → ℝ)
     (collectiveMean processVariance betweenVariance : ℝ) : ℝ :=
@@ -147,7 +149,8 @@ theorem buhlmannStraubEstimate_minimizes
   exact le_add_of_nonneg_right (mul_nonneg hpos.le (sq_nonneg _))
 
 /-- The closed-form estimate is the credibility-weighted blend in
-Bühlmann-Straub (1970), display (4), p. 123. -/
+Bühlmann-Straub (1970), display (4), p. 123, when `collectiveMean` is set to
+the source's empirical portfolio mean. -/
 theorem buhlmannStraubEstimate_eq_credibility
     (sample : Finset ι) (weight observation : ι → ℝ)
     (collectiveMean processVariance betweenVariance : ℝ)

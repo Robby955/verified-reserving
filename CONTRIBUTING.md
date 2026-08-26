@@ -15,7 +15,7 @@ R `ChainLadder` option semantics are closed in `ChainLadderR.lean` against packa
 
 1. Add distribution-specific ODP process simulators and prove bootstrap properties only under explicit distributional assumptions.
 2. Formalize an observable-CDR approximation under stated linearization or resampling hypotheses; keep it separate from the exact true-CDR results.
-3. Add Bühlmann-Straub structural-parameter estimators without folding them into the proved conditional-moment model.
+3. Formalize Bühlmann-Straub Section 7 structural-parameter estimators without folding them into the proved conditional-moment model; record source truncation rules as definitions unless their properties are proved.
 4. Construct a positive-variance witness for the Bornhuetter-Ferguson prediction-error layer.
 5. Extend the Röhr development-horizon layer only when a primary source supports the additional aggregation formulas.
 

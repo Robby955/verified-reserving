@@ -1,0 +1,95 @@
+\chapter{Stochastic Bühlmann-Straub credibility}
+
+Bühlmann and Straub (1970), Sections 3, 5, and 6, model a loss ratio $X_l$
+using a latent risk parameter $\Theta$. This chapter fixes the contract
+conditions. Conditional on $\Theta$, the loss
+ratios have common mean $M=\mu(\Theta)$ and process variance
+$\sigma^2(\Theta)/P_l$, where $P_l$ is exposure. The structural process
+parameter is $v=E[\sigma^2(\Theta)]$. Their Section 6 minimizes expected squared prediction
+error. This chapter proves the one-risk moment calculation and obtains the
+credibility factor in display (4), page 123. The scanned primary source is
+available from E-Periodica under DOI \texttt{10.5169/seals-967024}.
+
+\begin{definition}[Conditional moment model]\label{def:bsStochastic}\lean{VerifiedReserving.buhlmannStraubLatentSigma, VerifiedReserving.buhlmannStraubRiskMean, VerifiedReserving.buhlmannStraubRiskVariance, VerifiedReserving.buhlmannStraubResidual, VerifiedReserving.BuhlmannStraubMomentModel}\leanok
+Let $\mathcal G=\sigma(\Theta)$, $S=\sigma^2(\Theta)$, and $e_l=X_l-M$.
+For the finite exposure
+sample, the model records
+\[
+  E[X_l\mid\mathcal G]=M,\qquad
+  E[e_l^2\mid\mathcal G]=\frac S{P_l},\qquad
+  E[e_le_r\mid\mathcal G]=0\quad(l\ne r),
+\]
+together with $E[S]=v$, $E[M]=m$, $E[(M-m)^2]=w$, positive exposures,
+measurability, and the needed integrability. The source assumes conditional independence; the
+Lean proof records only the conditional cross moments it consumes.
+\end{definition}
+
+\begin{definition}[Predictor, expected loss, and coefficient loss]\label{def:bsRisk}\lean{VerifiedReserving.buhlmannStraubWeightedMeanRv, VerifiedReserving.buhlmannStraubWeightedResidualTotal, VerifiedReserving.buhlmannStraubPredictor, VerifiedReserving.buhlmannStraubExpectedSqLoss, VerifiedReserving.buhlmannStraubRiskQuadratic}\leanok
+Write $P=\sum_lP_l$, $\bar X=\sum_lP_lX_l/P$, and
+\[
+  \widehat M_z=m+z(\bar X-m),\qquad
+  R(z)=E[(M-\widehat M_z)^2].
+\]
+The exposure-scaled coefficient loss is
+\[
+  Q(z)=Pw(1-z)^2+vz^2.
+\]
+This stochastic objective is separate from the deterministic penalized sample
+loss in Definition~\ref{def:bs}.
+\end{definition}
+
+\begin{theorem}[Conditional residual moments]\label{thm:bsResidualMoments}\lean{VerifiedReserving.buhlmannStraubWeightedMeanRv_sub_riskMean, VerifiedReserving.condExp_buhlmannStraubResidual_eq_zero, VerifiedReserving.condExp_buhlmannStraubWeightedResidualTotal_eq_zero, VerifiedReserving.integral_buhlmannStraubWeightedResidualTotal_eq_zero, VerifiedReserving.integral_buhlmannStraubPredictor_eq_collectiveMean, VerifiedReserving.condExp_sq_buhlmannStraubWeightedResidualTotal, VerifiedReserving.integral_sq_buhlmannStraubWeightedMeanRv_sub_riskMean, VerifiedReserving.integral_buhlmannStraubRiskMean_mul_weightedResidual_eq_zero}\leanok
+\uses{def:bsStochastic, def:bsRisk}
+The weighted residual total has conditional mean zero and conditional second
+moment $SP$. Consequently,
+\[
+ E[(\bar X-M)^2]=\frac vP,
+ \qquad E[(M-m)(\bar X-M)]=0.
+\]
+Every predictor $m+z(\bar X-m)$ in the scalar family has expectation $m$,
+so it satisfies the source's expectation-unbiasedness constraint.
+\end{theorem}
+\begin{proof}\leanok Scale each residual by its exposure. Conditional cross
+moments remove the off-diagonal terms, and
+$P_l^2(S/P_l)=SP_l$. Pulling the centered latent mean through conditional
+expectation removes the remaining cross term.\end{proof}
+
+\begin{theorem}[Expected prediction loss]\label{thm:bsExpectedLoss}\lean{VerifiedReserving.buhlmannStraubExpectedSqLoss_eq, VerifiedReserving.buhlmannStraubExpectedSqLoss_scaled_eq_riskQuadratic}\leanok
+\uses{thm:bsResidualMoments}
+For every scalar coefficient $z$ and nonzero total exposure,
+\[
+  R(z)=(1-z)^2w+z^2\frac vP,
+  \qquad PR(z)=Q(z).
+\]
+Thus the deterministic coefficient quadratic is derived from the expected
+squared prediction loss, rather than postulated.
+\end{theorem}
+\begin{proof}\leanok Expand
+$M-\widehat M_z=(1-z)(M-m)-z(\bar X-M)$ and apply
+Theorem~\ref{thm:bsResidualMoments}.\end{proof}
+
+\begin{theorem}[Credibility is the risk minimizer]\label{thm:bsStochasticMinimizer}\lean{VerifiedReserving.buhlmannStraubRiskQuadratic_eq_at_credibility_add, VerifiedReserving.buhlmannStraubCredibility_minimizes_riskQuadratic, VerifiedReserving.buhlmannStraubCredibility_minimizes_expectedSqLoss, VerifiedReserving.buhlmannStraubPredictor_credibility_eq_estimate}\leanok
+\uses{thm:bsExpectedLoss, thm:bsCredibility}
+If $v+Pw>0$, then
+\[
+ Q(z)=Q(Z)+(v+Pw)(z-Z)^2,
+ \qquad Z=\frac{Pw}{v+Pw}.
+\]
+For $P>0$, $Z$ minimizes the actual expected squared prediction loss. The
+predictor $m+Z(\bar X-m)$ is pointwise equal to
+\texttt{buhlmannStraubEstimate}. Supplying the source's empirical portfolio
+mean as $m$ gives its display (4) estimator.
+\end{theorem}
+\begin{proof}\leanok Complete the square in $Q$, use positivity to compare
+scaled expected losses, and apply the deterministic credibility-form identity.\end{proof}
+
+\begin{theorem}[Finite process-shock witness]\label{thm:bsWitness}\lean{VerifiedReserving.BuhlmannStraubWitness.observation_nondegenerate, VerifiedReserving.BuhlmannStraubWitness.momentModel, VerifiedReserving.BuhlmannStraubWitness.exists_process_nondegenerate_buhlmannStraubModel}\leanok
+\uses{def:bsStochastic}
+There is a two-outcome probability model with one unit exposure, constant
+latent mean $1$, and observed loss ratio $0$ or $2$ with equal probability.
+It satisfies the moment model with process variance $v=1>0$ and has a
+nonconstant observation. Its between-risk variance is zero; the general
+theorems do not require that specialization.
+\end{theorem}
+\begin{proof}\leanok Conditional expectation given the trivial
+$\sigma$-algebra is the two-point average.\end{proof}

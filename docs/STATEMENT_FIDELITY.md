@@ -88,6 +88,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | England-Verrall 1999, equations (4.2)-(4.4), and England 2002, Sections 2-3: residual bootstrap | `pearsonResidual`, `pearsonScale`, `adjustedPearsonResidual`, `bootstrapIncremental`, `englandVerrallBootstrapMean`, `englandVerrallPredictiveReserve` | algorithmic definitions plus exact residual-inversion lemmas; no coverage or validity theorem |
 | Non-vacuity: a nondegenerate finite ODP model | `ODPWitness.model`, `ODPWitness.independentFutureObserved`, `ODPWitness.conditionalMean`, `ODPWitness.conditionalVariance`, `ODPWitness.twoCellMsep`, `ODPWitness.exists_nondegenerate_odp_model` | not in a source; four independent random cells with unit mean and variance, including nonempty observed-versus-future conditioning |
 | Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve`, `bfUltimate`, `bfReserve_of_ultimate`, `bfUltimate_of_ultimate`, `bfReserve_smul`, `bfReserve_add`, `one_le_cdf`, `bfReserve_nonneg`, `bfReserve_le` | definitions plus deterministic identities; the module names no source display |
+| Bühlmann-Straub 1970, Sections 3, 5 and 6; display (4) | `BuhlmannStraubMomentModel`, `buhlmannStraubExpectedSqLoss_eq`, `buhlmannStraubCredibility_minimizes_expectedSqLoss`, `buhlmannStraubPredictor_credibility_eq_estimate` | one-risk scalar-coefficient specialization; conditional independence weakened to the consumed cross moments; structural parameters remain inputs |
 | Non-vacuity: degenerate witness | `Witness.X`, `Witness.fhat_unbiased`, `Witness.ultimate_unbiased` | not in any source; certifies the hypotheses are jointly satisfiable |
 | Non-vacuity: a nondegenerate Mack model | `NontrivialModel.exists_nontrivial_mack_model`, `NontrivialModel.fhat0_unbiased`, `NontrivialModel.ultimate_unbiased`, `NontrivialModel.var_fhat0`, `NontrivialModel.sigma2_unbiased` | not in any source; `σ_0² = 4 > 0` and the first development step is genuinely random |
 | Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack3Row`, `IndependenceWitness.condMsep_witness`, `IndependenceWitness.condMsepTotal_witness` | not in any source; realizes Mack's row assumptions and both exact MSEP wrappers on eight outcomes |
@@ -984,6 +985,54 @@ with the chain-ladder ultimate as prior returns the chain-ladder ultimate and re
 
 **Gap.** Definitions plus deterministic identities. The module names no source display, so there
 is no numbered statement to compare against; nothing stochastic is claimed about the method.
+
+## Bühlmann-Straub credibility
+
+### Conditional moments, prediction risk and display (4)
+
+**Source.** Bühlmann and Straub, *Glaubwürdigkeit für Schadensätze*, Mitteilungen der
+Vereinigung Schweizerischer Versicherungsmathematiker 70 (1970) 111-133,
+DOI `10.5169/seals-967024`. Section 3, pp. 113-114, defines the latent risk parameter and assumes
+that a loss ratio has conditional mean `μ(Θ)` and conditional variance `σ²(Θ)/P`, inversely
+proportional to exposure. Section 5, p. 116, assumes conditional independence of the loss ratios,
+time homogeneity and independently sampled latent parameters. Section 6, pp. 118-120, minimizes
+mean squared prediction error over expectation-unbiased linear estimators and derives the normal
+equations. Display (4), p. 123, writes the answer as a credibility-weighted individual mean plus
+the complementary portfolio mean, with credibility `Pw/(v+Pw)`.
+
+**Lean.** `BuhlmannStraubMomentModel sample weight theta hypotheticalMean hypotheticalVariance`
+`observation m v w μ`
+uses `M = hypotheticalMean ∘ theta`, `S = hypotheticalVariance ∘ theta` and the generated
+sigma-algebra `G = σ(theta)`. It assumes positive exposure on the finite sample; square
+integrability of `M` and every observation; integrability of `S`; `E[X_i | G] = M`;
+`E[(X_i-M)² | G] = S/P_i`; vanishing conditional residual cross moments for distinct sample
+indices; `E[S] = v`; `E[M] = m`; and `E[(M-m)²] = w`.
+`condExp_sq_buhlmannStraubWeightedResidualTotal` proves that the conditional second moment of
+`∑ P_i(X_i-M)` is `SP`, where `P = ∑ P_i`.
+`integral_buhlmannStraubPredictor_eq_collectiveMean` proves that every scalar predictor
+`m+z(Xbar-m)` is expectation-unbiased, matching the constraint in the source's Section 6.
+`integral_sq_buhlmannStraubWeightedMeanRv_sub_riskMean` gives
+`E[(Xbar-M)²] = v/P` when `P ≠ 0`, and
+`integral_buhlmannStraubRiskMean_mul_weightedResidual_eq_zero` removes the latent-process cross
+term. For every scalar `z`, `buhlmannStraubExpectedSqLoss_eq` then proves
+`E[(M-(m+z(Xbar-m)))²] = (1-z)²w + z²v/P`.
+`buhlmannStraubExpectedSqLoss_scaled_eq_riskQuadratic` proves that multiplying this exact risk by
+`P` gives `Pw(1-z)² + vz²`. Under `P>0` and `v+Pw>0`,
+`buhlmannStraubCredibility_minimizes_expectedSqLoss` proves the minimum occurs at
+`z = Pw/(v+Pw)`. `buhlmannStraubPredictor_credibility_eq_estimate` says this predictor is
+pointwise equal to the deterministic `buhlmannStraubEstimate`.
+
+**Gap.** The Lean result is the one-risk, fixed-contract-condition, scalar-coefficient
+specialization with the true collective mean `m` supplied as a model parameter. The source solves
+a larger expectation-unbiased linear problem across the portfolio and then substitutes an
+empirical portfolio mean in display (4). No theorem here estimates that mean or the structural
+parameters `v` and `w`; Section 7 is still outside the formalization. The source's conditional
+independence is stronger than the conditional cross-moment assumption recorded in Lean, which is
+exactly what the risk proof uses.
+The deterministic `buhlmannStraubLoss` remains a separate penalized sample quadratic and is not
+identified with expected prediction loss. The finite witness has positive process variance and a
+nonconstant observation but zero between-risk variance; it proves non-vacuity of the stochastic
+process layer, not heterogeneity of the smallest example.
 
 ## Non-vacuity
 
