@@ -683,7 +683,7 @@ which are identified only up to the normalization.
 ### ODP moment assumptions and exact conditional moments
 
 **Source.** England and Verrall, *Analytic and bootstrap estimates of prediction errors in claims
-reserving*, Insurance: Mathematics and Economics 25 (1999) 281-293, Section 2.2, equations
+reserving*, Insurance: Mathematics and Economics 25 (1999) 281-293, Section 2, equations
 (2.5)-(2.7), state the ODP model as independent incremental claims with
 `E[C_{i,j}] = m_{i,j}`, `Var(C_{i,j}) = φ m_{i,j}`, and
 `log m_{i,j} = c + α_i + β_j`, subject to corner constraints. England and Verrall,
