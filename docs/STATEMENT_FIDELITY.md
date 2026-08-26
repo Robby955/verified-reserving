@@ -60,8 +60,9 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Mack 1999, recursion equals the 1993 closed form (`α = 1`, unit weights) | `se2rec_eq_msep`, `se2rec_eq_closed` | Lean stronger hypothesis: nonzero development factors along the row |
 | Mack 1999, eq. (*) and the recursion below it, general `w` and `α` | `msepW`, `se2recW`, `se2recW_eq_msepW`, `msepW_unit`, `se2recW_eq_msep_unit` | Lean more general in `w` and `α`, narrower in the type of `α` (natural, not real) |
 | Mack 1999, weighted factor is conditionally unbiased | `condExp_fhatWrv` | not displayed as a theorem in the source; Lean proves it under (M1) in the `D_k` form |
-| Mack 1999, CL2 and `s.e.(f̂_k)² = σ_k² / ∑_j w_jk C_jk^α` | `Mack3W`, `Mack2Factor'`, `condExp_sq_fhatWrv_sub`, `condVar_fhatWrv` | proved from explicit `D_k` assumptions on nonzero weighted volumes; row-to-`D_k` and cross-factor derivations remain open |
-| Mack 1999, weighted `σ̂_k²` is unbiased | `condExp_wssWrv`, `condExp_sigma2Wrv` | Lean assumes fixed contributors, nonzero weighted volumes, and the stated conditioned model; zero-weight omission needs a different index set and degrees of freedom |
+| Mack 1999, row-conditioned CL2 and `s.e.(f̂_k)² = σ_k² / ∑_j w_jk C_jk^α` | `Mack3WRow`, `mack3W_of_mack3WRow`, `Mack3W`, `mack2Factor'_of_rows`, `condExp_sq_fhatWrv_sub`, `condVar_fhatWrv` | Lean proves the row-to-`D_k` passage and derives cross-factor terms from independent rows, under explicit measurability, nonvanishing and integrability hypotheses |
+| Mack 1999, weighted `σ̂_k²` is unbiased | `condExp_wssWrv`, `condExp_sigma2Wrv`, `activeContributors`, `Mack3WOn`, `sigma2WOn`, `condExp_sigma2WActiveRv` | the original theorem covers all-nonzero weights; the active theorem omits zero deterministic weights, restricts CL2 to the fixed active set, and uses `active.card - 1` |
+| Mack 1999, named cases `α = 0` and `α = 2` | `Mack1999Witness.exists_weighted_witness_alpha_zero`, `Mack1999Witness.exists_weighted_witness_alpha_two` | finite nondegenerate witnesses with positive first-step variance and active-estimator unbiasedness |
 | Mack 1999, Section 3, tail factor | `tailUltimate`, `tailSe2Step` | convention, no theorem |
 | Mack 1993, last-period `σ²` extrapolation | not formalized | convention, no theorem |
 | BBMW 2006 / Murphy 1994, conditional-resampling term | `bbmwEstimation`, `mackEstimation_le_bbmwEstimation`, `bbmwEstimation_sub_mackEstimation`, `bbmwEstimation_sub_mackEstimation_le`, `bbmwEstimation_eq_mackEstimation_of_one_factor` | source statement is an estimator; Lean has it as a definition and proves the exact difference against Mack's |
@@ -489,9 +490,12 @@ contributing entries are almost surely nonzero, which `α = 0` cannot do without
 `s.e.(f̂_k)² = σ̂_k²/∑_j w_{jk} C_{jk}^α`, and defines
 `σ̂_k² = (n-k-2)⁻¹ ∑_i w_{ik} C_{ik}^α(F_{ik}-f̂_k)²`.
 
-**Lean.** `Mack3W X μ w α f σ2` is CL2 in conditional second-moment form around `f k`, and
-`Mack2Factor' X μ f` states conditional uncorrelatedness of different accident years' factor
-residuals. `condExp_sq_fhatWrv_sub` assumes both, predictable weights, almost-surely nonzero
+**Lean.** `Mack3WRow X μ w α f sigma2` states CL2 conditioned on the accident year's own history
+and records predictability of the weights there. Under `RowsGenerateD`, `RowsIndep` and
+integrability, `mack3W_of_mack3WRow` transports it to `Mack3W`, the `D_k`-conditioned form.
+`mack2Factor'_of_rows` derives conditional uncorrelatedness of different accident years' factor
+residuals from row-conditioned CL1, independent rows, nonzero claims and integrability.
+`condExp_sq_fhatWrv_sub` assumes the transported statements, predictable weights, almost-surely nonzero
 claims, weighted volumes and weighted column sum, plus the listed integrability conditions, and
 concludes
 `μ[(fhatWrv w α k - f k)² | D k] =ᵐ fun ω => σ2 k / SWrv w α k ω`.
@@ -501,14 +505,22 @@ identifies the same expression with mathlib's conditional variance.
 `(n-k-2)σ2 k`; for `k+3≤n`, `condExp_sigma2Wrv` divides by the nonzero degrees of freedom and
 concludes `μ[sigma2Wrv w α k | D k] =ᵐ fun _ => σ2 k`.
 
-**Gap.** Mack permits weights in `[0,1]`, but CL2 divides by `w_{ik}C_{ik}^α`. A zero-weight cell
-is naturally omitted from the sample. The current Lean estimator keeps the fixed
-`contributors n k` set and denominator `n-k-2`, so the theorem requires every contributing
-weighted volume to be nonzero. A theorem allowing zero weights needs an active-contributor set
-and denominator `active.card-1`. `Mack3W` is conditioned on the full `D_k`; deriving it from the
-paper's row-conditioned CL2 and independence is not included. Lean also permits predictable
-random weights; deterministic weights are a special case, while weights chosen after observing
-`F_{ik}` are not covered.
+For zero weights, `activeContributors n k w` filters the deterministic contributors before the
+fit. `Mack3WOn` restricts CL2 to that fixed set, imposing no condition on excluded zero-weight
+cells. `sigma2WOn` divides the corresponding weighted residual sum of squares by
+`active.card - 1`, and `condExp_sigma2WActiveRv` proves conditional unbiasedness when at least two
+active claims and volumes are nonzero. The claim hypothesis is needed at `α = 0`, where nonzero
+weighted volume alone does not keep the individual factor in the source's ordinary-ratio domain.
+The active set is fixed rather than outcome-dependent, so the theorem does not introduce a
+data-dependent selection rule. `Mack1999Witness` instantiates the row
+assumptions, their transport, the derived cross terms and the active estimator on eight outcomes
+for both `α = 0` and `α = 2`; in both cases the first-step variance is positive.
+
+**Gap.** Lean makes the source's implicit requirements explicit: finite measure, integrability,
+nonzero cumulative claims where a factor is formed, nonzero active weighted volumes and at least
+two active contributors. `activeContributors` filters deterministic zero weights; predictable
+random weights remain supported by the full fixed-contributor theorems, but an outcome-dependent
+active set is deliberately not claimed.
 
 ### Section 3: the tail factor
 
