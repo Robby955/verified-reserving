@@ -63,7 +63,32 @@ surely.
 For MSEP, center the prediction error and add the variances of the independent
 estimate and target. \end{proof}
 
-\begin{definition}[Raw pattern estimator and practical assessments]\label{def:bfAssessments}\lean{VerifiedReserving.RandomTriangle.bfYRawRv, VerifiedReserving.bfYRaw, VerifiedReserving.bfSigma2Raw, VerifiedReserving.bfYStdErrSq, VerifiedReserving.bfZStdErrSq, VerifiedReserving.bfProcessErrorEstimate, VerifiedReserving.bfEstimationErrorEstimate, VerifiedReserving.bfMsepEstimate, VerifiedReserving.bfCovarianceApprox}\leanok
+\begin{definition}[Raw pattern and variance estimators]\label{def:bfRaw}\lean{VerifiedReserving.RandomTriangle.bfYRawRv, VerifiedReserving.RandomTriangle.bfLinearPatternRv, VerifiedReserving.RandomTriangle.bfResidualSumSqRv, VerifiedReserving.RandomTriangle.bfSigma2RawOnRv}\leanok
+On a finite set $A$ of accident years with known volumes $x_i$, equations~(1)
+and~(2) become
+\[
+ \widehat y_k=\frac{\sum_{i\in A}S_{ik}}{\sum_{i\in A}x_i},\qquad
+ \widehat\sigma_k^2=\frac1{|A|-1}\sum_{i\in A}
+   \frac{(S_{ik}-x_i\widehat y_k)^2}{x_i}.
+\]
+A general linear estimator is $\sum_{i\in A}a_iS_{ik}$.
+\end{definition}
+
+\begin{theorem}[Mack equations (1) and (2)]\label{thm:bfRaw}\lean{VerifiedReserving.integral_bfYRawRv, VerifiedReserving.variance_bfYRawRv, VerifiedReserving.integral_bfLinearPatternRv, VerifiedReserving.variance_bfLinearPatternRv, VerifiedReserving.bfLinearPatternRisk_sub_raw, VerifiedReserving.bfYRawRv_best_linear_unbiased, VerifiedReserving.bf_raw_weighted_sq_dev, VerifiedReserving.RandomTriangle.bfResidualSumSqRv_eq, VerifiedReserving.integral_bfSigma2RawOnRv}\leanok
+\uses{def:bfModel, def:bfRaw}
+For nonnegative volumes with nonzero total, the raw estimator is unbiased and
+has variance $\sigma_k^2/\sum_i x_i$. Every linear unbiased competitor,
+$\sum_i a_i x_i=1$, has at least that variance. With at least two contributors
+and nonzero individual volumes, the residual estimator is unbiased for
+$\sigma_k^2$.
+\end{theorem}
+\begin{proof}\leanok Independence makes the linear-estimator variance a
+diagonal quadratic form. Complete its square around $a_i=1/\sum_jx_j$. For the
+residual estimator, subtract the fitted-mean square from the true-centre sum;
+their expectations are $\sigma_k^2$ times $|A|$ and one, respectively.
+\end{proof}
+
+\begin{definition}[Practical assessments]\label{def:bfAssessments}\lean{VerifiedReserving.bfYRaw, VerifiedReserving.bfSigma2Raw, VerifiedReserving.bfYStdErrSq, VerifiedReserving.bfZStdErrSq, VerifiedReserving.bfProcessErrorEstimate, VerifiedReserving.bfEstimationErrorEstimate, VerifiedReserving.bfMsepEstimate, VerifiedReserving.bfCovarianceApprox}\leanok
 Equations (3), (4), (6), and (7) define the raw development proportions, raw
 column variances, squared standard errors of the selected proportions, and the
 minimum of the prefix and suffix variance sums. The single-year plug-in is
@@ -76,15 +101,15 @@ The total-reserve covariance assessment on page 99 is also a definition. Its
 correlations, standard errors, smoothing, and tail values are supplied by the
 actuary. No unbiasedness or consistency claim is attached to those selected
 or assessed inputs.
+
+The standalone equation (3), (4), and (6) definitions retain Mack's one-based
+symbols \texttt{n} and \texttt{k}; the stochastic theorems above instead use an explicit
+finite contributor set and therefore follow the repository's zero-based
+triangle convention.
 \end{definition}
 
-\begin{theorem}[Raw-pattern moments and assessment algebra]\label{thm:bfTotalCovariance}\lean{VerifiedReserving.integral_bfYRawRv, VerifiedReserving.variance_bfYRawRv, VerifiedReserving.bfMsepEstimate_eq, VerifiedReserving.covariance_mul_mul_of_pair_indep}\leanok
+\begin{theorem}[Assessment algebra and total covariance]\label{thm:bfTotalCovariance}\lean{VerifiedReserving.bfMsepEstimate_eq, VerifiedReserving.covariance_mul_mul_of_pair_indep}\leanok
 \uses{def:bfAssessments}
-For known volumes and a nonzero total volume, BF2 and BF3 give the raw
-development-proportion estimator mean $y_k$ and variance
-$\sigma_k^2/\sum_i x_i$. This is the exact equality behind equation (6) before
-the selected, smoothed pattern is substituted for the raw estimator.
-
 The single-year assessment is exactly its named process term plus its two
 estimation terms. Before Mack omits the middle term for the total-reserve
 approximation, independence of the pairs $\{X,W\}$ and $\{Y,Z\}$ gives

@@ -15,10 +15,11 @@ The exact results below give the mean and variance of a future row sum, the
 variance of a BF estimate with independent random prior and development
 pattern, and the single-row MSEP split into estimation and process variance.
 
-The raw estimators and assessment formulas in Sections 4-5 are kept as
-definitions. In particular, smoothing and tail selection, the minimum used for
-the pattern standard error, and the omitted middle covariance term are not
-promoted to probability theorems.
+The raw pattern and dispersion estimators from Section 4 are proved unbiased;
+the raw pattern estimator is also proved best among linear unbiased estimators.
+The plug-in assessment formulas remain definitions. In particular, smoothing
+and tail selection, the minimum used for the pattern standard error, and the
+omitted middle covariance term are not promoted to probability theorems.
 -/
 
 open MeasureTheory ProbabilityTheory Finset Filter
@@ -310,7 +311,8 @@ theorem integral_bfYRawRv [IsProbabilityMeasure mu]
   unfold RandomTriangle.bfYRawRv
   rw [integral_div]
   rw [integral_finsetSum s hint]
-  rw [Finset.sum_congr rfl fun i hi => hmean i (hrows i hi) k hk]
+  rw [Finset.sum_congr rfl fun i hi => by
+    rw [hmean i (hrows i hi) k hk]]
   rw [← Finset.sum_mul]
   field_simp
 
@@ -350,20 +352,308 @@ theorem variance_bfYRawRv
   rw [variance_mul_const, htotalValue]
   field_simp
 
-/-- Raw development-proportion estimate, Mack (2008), equation (3). -/
+/-! ### Mack's equations (1) and (2) -/
+
+/-- A linear estimator of one development proportion on a finite set of
+accident years. -/
+def RandomTriangle.bfLinearPatternRv (X : RandomTriangle Omega n)
+    (coefficient : Nat -> Real) (s : Finset Nat) (k : Nat) : Omega -> Real :=
+  fun omega => Finset.sum s fun i => coefficient i * X.bfIncrementRv i k omega
+
+/-- Under BF2, a linear estimator has mean `y k * sum_i coefficient_i x_i`. -/
+theorem integral_bfLinearPatternRv [IsProbabilityMeasure mu]
+    (X : RandomTriangle Omega n) (x y coefficient : Nat -> Real)
+    (s : Finset Nat) (k m : Nat) (hk : k < m)
+    (hrows : forall i, i ∈ s -> i < n)
+    (hmean : BFIncrementMean X mu x y m)
+    (hint : forall i, i ∈ s -> Integrable (X.bfIncrementRv i k) mu) :
+    integral mu (X.bfLinearPatternRv coefficient s k) =
+      y k * Finset.sum s fun i => coefficient i * x i := by
+  unfold RandomTriangle.bfLinearPatternRv
+  rw [integral_finsetSum s fun i hi => (hint i hi).const_mul (coefficient i)]
+  rw [Finset.sum_congr rfl fun i _ => integral_const_mul
+    (μ := mu) (coefficient i) (X.bfIncrementRv i k)]
+  rw [Finset.sum_congr rfl fun i hi => by
+    rw [hmean i (hrows i hi) k hk]]
+  rw [mul_sum]
+  exact Finset.sum_congr rfl fun i _ => by ring
+
+/-- Under BF1 and BF3, the variance of a linear pattern estimator is its
+diagonal quadratic form. -/
+theorem variance_bfLinearPatternRv
+    (X : RandomTriangle Omega n) (x sigma2 coefficient : Nat -> Real)
+    (s : Finset Nat) (k m : Nat) (hk : k < m)
+    (hrows : forall i, i ∈ s -> i < n)
+    (hindep : BFFullIncrementIndependence X mu)
+    (hvar : BFIncrementVariance X mu x sigma2 m)
+    (hmem : forall i, i ∈ s -> MemLp (X.bfIncrementRv i k) 2 mu) :
+    variance (X.bfLinearPatternRv coefficient s k) mu =
+      sigma2 k * Finset.sum s fun i => x i * coefficient i ^ 2 := by
+  unfold RandomTriangle.bfLinearPatternRv
+  have hpair : Set.Pairwise (↑s : Set Nat) fun i j =>
+      (fun omega => coefficient i * X.bfIncrementRv i k omega) ⟂ᵢ[mu]
+        fun omega => coefficient j * X.bfIncrementRv j k omega := by
+    intro i hi j hj hij
+    have hp : (i, k) ≠ (j, k) := by
+      intro hpairs
+      exact hij (Prod.mk.inj hpairs).1
+    have hbase := hindep.indepFun hp
+    simpa [Function.comp_def] using hbase.comp
+      (measurable_const.mul measurable_id) (measurable_const.mul measurable_id)
+  rw [show (fun omega => Finset.sum s fun i => coefficient i * X.bfIncrementRv i k omega) =
+      Finset.sum s fun i omega => coefficient i * X.bfIncrementRv i k omega by
+    funext omega
+    exact (Finset.sum_apply omega s fun i omega =>
+      coefficient i * X.bfIncrementRv i k omega).symm]
+  rw [IndepFun.variance_sum
+    (fun i hi => (hmem i hi).const_mul (coefficient i)) hpair]
+  rw [Finset.sum_congr rfl fun i hi => by
+    rw [variance_const_mul, hvar i (hrows i hi) k hk]]
+  rw [mul_sum]
+  exact Finset.sum_congr rfl fun i _ => by ring
+
+/-- Exact square-completion identity for the variance of an unbiased linear
+pattern estimator. -/
+theorem bfLinearPatternRisk_sub_raw
+    (x coefficient : Nat -> Real) (sigma : Real) (s : Finset Nat)
+    (hden : Finset.sum s x ≠ 0)
+    (hunbiased : Finset.sum s (fun i => coefficient i * x i) = 1) :
+    sigma * Finset.sum s (fun i => x i * coefficient i ^ 2) -
+        sigma / Finset.sum s x =
+      sigma * Finset.sum s (fun i =>
+        x i * (coefficient i - 1 / Finset.sum s x) ^ 2) := by
+  have hexpand :
+      Finset.sum s (fun i => x i *
+          (coefficient i - 1 / Finset.sum s x) ^ 2) =
+        Finset.sum s (fun i => x i * coefficient i ^ 2) -
+          2 * (1 / Finset.sum s x) *
+            Finset.sum s (fun i => coefficient i * x i) +
+          (1 / Finset.sum s x) ^ 2 * Finset.sum s x := by
+    calc
+      Finset.sum s (fun i => x i *
+          (coefficient i - 1 / Finset.sum s x) ^ 2) =
+          Finset.sum s (fun i =>
+            x i * coefficient i ^ 2 -
+              2 * (1 / Finset.sum s x) * (coefficient i * x i) +
+              (1 / Finset.sum s x) ^ 2 * x i) := by
+            exact Finset.sum_congr rfl fun i _ => by ring
+      _ = Finset.sum s (fun i => x i * coefficient i ^ 2) -
+          2 * (1 / Finset.sum s x) *
+            Finset.sum s (fun i => coefficient i * x i) +
+          (1 / Finset.sum s x) ^ 2 * Finset.sum s x := by
+            rw [Finset.sum_add_distrib, Finset.sum_sub_distrib, mul_sum, mul_sum]
+  rw [hexpand, hunbiased]
+  field_simp [hden]
+  ring
+
+/-- **Mack (2008), equation (1).** The raw estimator is best among linear
+unbiased estimators under BF1--BF3. The conclusion records both unbiasedness
+and the variance comparison. -/
+theorem bfYRawRv_best_linear_unbiased [IsProbabilityMeasure mu]
+    (X : RandomTriangle Omega n) (x y sigma2 coefficient : Nat -> Real)
+    (s : Finset Nat) (k m : Nat) (hk : k < m)
+    (hrows : forall i, i ∈ s -> i < n)
+    (hindep : BFFullIncrementIndependence X mu)
+    (hmean : BFIncrementMean X mu x y m)
+    (hvar : BFIncrementVariance X mu x sigma2 m)
+    (hmem : forall i, i ∈ s -> MemLp (X.bfIncrementRv i k) 2 mu)
+    (hx : forall i, i ∈ s -> 0 <= x i) (hsigma : 0 <= sigma2 k)
+    (hden : Finset.sum s x ≠ 0)
+    (hunbiased : Finset.sum s (fun i => coefficient i * x i) = 1) :
+    integral mu (X.bfYRawRv x s k) = y k ∧
+      integral mu (X.bfLinearPatternRv coefficient s k) = y k ∧
+      variance (X.bfYRawRv x s k) mu <=
+        variance (X.bfLinearPatternRv coefficient s k) mu := by
+  have hrawMean := integral_bfYRawRv X x y s k m hk hrows hmean
+    (fun i hi => (hmem i hi).integrable one_le_two) hden
+  have hlinearMean := integral_bfLinearPatternRv X x y coefficient s k m hk hrows hmean
+    (fun i hi => (hmem i hi).integrable one_le_two)
+  have hrawVar := variance_bfYRawRv X x sigma2 s k m hk hrows hindep hvar hmem hden
+  have hlinearVar := variance_bfLinearPatternRv X x sigma2 coefficient s k m hk hrows
+    hindep hvar hmem
+  refine ⟨hrawMean, ?_, ?_⟩
+  · rw [hlinearMean, hunbiased, mul_one]
+  · rw [hrawVar, hlinearVar]
+    have hid := bfLinearPatternRisk_sub_raw x coefficient (sigma2 k) s hden hunbiased
+    have hnonneg : 0 <= sigma2 k * Finset.sum s (fun i =>
+        x i * (coefficient i - 1 / Finset.sum s x) ^ 2) := by
+      exact mul_nonneg hsigma (Finset.sum_nonneg fun i hi =>
+        mul_nonneg (hx i hi) (sq_nonneg _))
+    linarith
+
+/-- Weighted residual sum of squares around the raw development-proportion
+estimator. -/
+def RandomTriangle.bfResidualSumSqRv (X : RandomTriangle Omega n)
+    (x : Nat -> Real) (s : Finset Nat) (k : Nat) : Omega -> Real :=
+  fun omega => Finset.sum s fun i =>
+    (X.bfIncrementRv i k omega - x i * X.bfYRawRv x s k omega) ^ 2 / x i
+
+/-- The residual variance estimator of Mack (2008), equation (2), on an
+explicit finite set of accident years. -/
+def RandomTriangle.bfSigma2RawOnRv (X : RandomTriangle Omega n)
+    (x : Nat -> Real) (s : Finset Nat) (k : Nat) : Omega -> Real :=
+  fun omega => (1 / ((s.card : Real) - 1)) * X.bfResidualSumSqRv x s k omega
+
+/-- Deterministic residual sum-of-squares identity behind equation (2). -/
+theorem bf_raw_weighted_sq_dev
+    (claim x : Nat -> Real) (s : Finset Nat) (y : Real)
+    (hx : forall i, i ∈ s -> x i ≠ 0) (hden : Finset.sum s x ≠ 0) :
+    Finset.sum s (fun i =>
+        (claim i - x i * (Finset.sum s claim / Finset.sum s x)) ^ 2 / x i) =
+      Finset.sum s (fun i => (claim i - x i * y) ^ 2 / x i) -
+        Finset.sum s x * (Finset.sum s claim / Finset.sum s x - y) ^ 2 := by
+  have hexpand : forall center : Real,
+      Finset.sum s (fun i => (claim i - x i * center) ^ 2 / x i) =
+        Finset.sum s (fun i => claim i ^ 2 / x i) -
+          2 * center * Finset.sum s claim + center ^ 2 * Finset.sum s x := by
+    intro center
+    calc
+      Finset.sum s (fun i => (claim i - x i * center) ^ 2 / x i) =
+          Finset.sum s (fun i =>
+            claim i ^ 2 / x i - 2 * center * claim i + center ^ 2 * x i) := by
+            exact Finset.sum_congr rfl fun i hi => by
+              field_simp [hx i hi]
+              ring
+      _ = Finset.sum s (fun i => claim i ^ 2 / x i) -
+          2 * center * Finset.sum s claim + center ^ 2 * Finset.sum s x := by
+            rw [Finset.sum_add_distrib, Finset.sum_sub_distrib, mul_sum, mul_sum]
+  rw [hexpand, hexpand]
+  field_simp [hden]
+  ring
+
+/-- The residual sum of squares equals the true-centre sum minus the one
+degree of freedom spent estimating the development proportion. -/
+theorem RandomTriangle.bfResidualSumSqRv_eq
+    (X : RandomTriangle Omega n) (x : Nat -> Real) (s : Finset Nat)
+    (k : Nat) (y : Real)
+    (hx : forall i, i ∈ s -> x i ≠ 0) (hden : Finset.sum s x ≠ 0) :
+    X.bfResidualSumSqRv x s k = fun omega =>
+      Finset.sum s (fun i =>
+        (X.bfIncrementRv i k omega - x i * y) ^ 2 / x i) -
+      Finset.sum s x * (X.bfYRawRv x s k omega - y) ^ 2 := by
+  funext omega
+  simpa [RandomTriangle.bfResidualSumSqRv, RandomTriangle.bfYRawRv] using
+    bf_raw_weighted_sq_dev (fun i => X.bfIncrementRv i k omega) x s y hx hden
+
+/-- **Mack (2008), equation (2).** With at least two contributing accident
+years, the raw residual variance estimator is unbiased for `sigma2 k` under
+BF1--BF3. -/
+theorem integral_bfSigma2RawOnRv [IsProbabilityMeasure mu]
+    (X : RandomTriangle Omega n) (x y sigma2 : Nat -> Real)
+    (s : Finset Nat) (k m : Nat) (hk : k < m) (hcard : 2 <= s.card)
+    (hrows : forall i, i ∈ s -> i < n)
+    (hindep : BFFullIncrementIndependence X mu)
+    (hmean : BFIncrementMean X mu x y m)
+    (hvar : BFIncrementVariance X mu x sigma2 m)
+    (hmem : forall i, i ∈ s -> MemLp (X.bfIncrementRv i k) 2 mu)
+    (hx : forall i, i ∈ s -> x i ≠ 0)
+    (hden : Finset.sum s x ≠ 0) :
+    integral mu (X.bfSigma2RawOnRv x s k) = sigma2 k := by
+  let yhat : Omega -> Real := X.bfYRawRv x s k
+  let A : Omega -> Real := fun omega => Finset.sum s fun i =>
+    (X.bfIncrementRv i k omega - x i * y k) ^ 2 / x i
+  let B : Omega -> Real := fun omega =>
+    Finset.sum s x * (yhat omega - y k) ^ 2
+  have hyhatMem : MemLp yhat 2 mu := by
+    have hsum : MemLp (fun omega => Finset.sum s fun i =>
+        X.bfIncrementRv i k omega) 2 mu := memLp_finsetSum s hmem
+    have hpoint : yhat = fun omega =>
+        (Finset.sum s fun i => X.bfIncrementRv i k omega) *
+          (Finset.sum s x)⁻¹ := by
+      funext omega
+      simp [yhat, RandomTriangle.bfYRawRv, div_eq_mul_inv]
+    rw [hpoint]
+    exact hsum.mul_const _
+  have htermMem : forall i, i ∈ s ->
+      MemLp (fun omega => X.bfIncrementRv i k omega - x i * y k) 2 mu := by
+    intro i hi
+    exact (hmem i hi).sub (memLp_const (x i * y k))
+  have htermInt : forall i, i ∈ s -> Integrable
+      (fun omega => (X.bfIncrementRv i k omega - x i * y k) ^ 2 / x i) mu := by
+    intro i hi
+    exact ((htermMem i hi).integrable_sq).div_const (x i)
+  have hAint : Integrable A mu := by
+    exact (integrable_finsetSum s htermInt).congr
+      (Eventually.of_forall fun omega => by simp [A])
+  have hBint : Integrable B mu := by
+    exact ((hyhatMem.sub (memLp_const (y k))).integrable_sq.const_mul
+      (Finset.sum s x)).congr (Eventually.of_forall fun omega => by simp [B, yhat])
+  have htermValue : forall i, i ∈ s -> integral mu
+      (fun omega => (X.bfIncrementRv i k omega - x i * y k) ^ 2 / x i) =
+      sigma2 k := by
+    intro i hi
+    have hcenter : integral mu
+        (fun omega => (X.bfIncrementRv i k omega - x i * y k) ^ 2) =
+        variance (X.bfIncrementRv i k) mu := by
+      have hv := variance_eq_integral (hmem i hi).aemeasurable
+      rw [hmean i (hrows i hi) k hk] at hv
+      exact hv.symm
+    calc
+      integral mu
+          (fun omega => (X.bfIncrementRv i k omega - x i * y k) ^ 2 / x i) =
+          integral mu
+            (fun omega => (X.bfIncrementRv i k omega - x i * y k) ^ 2) / x i :=
+        integral_div (x i) _
+      _ = variance (X.bfIncrementRv i k) mu / x i := by rw [hcenter]
+      _ = sigma2 k := by rw [hvar i (hrows i hi) k hk]; field_simp [hx i hi]
+  have hAvalue : integral mu A = (s.card : Real) * sigma2 k := by
+    have hApoint : A = fun omega => Finset.sum s fun i =>
+        (X.bfIncrementRv i k omega - x i * y k) ^ 2 / x i := rfl
+    rw [hApoint, integral_finsetSum s htermInt]
+    calc
+      (Finset.sum s fun i => integral mu
+          (fun omega => (X.bfIncrementRv i k omega - x i * y k) ^ 2 / x i)) =
+          Finset.sum s (fun _ => sigma2 k) :=
+        Finset.sum_congr rfl fun i hi => htermValue i hi
+      _ = (s.card : Real) * sigma2 k := by rw [Finset.sum_const, nsmul_eq_mul]
+  have hyhatMean : integral mu yhat = y k := by
+    exact integral_bfYRawRv X x y s k m hk hrows hmean
+      (fun i hi => (hmem i hi).integrable one_le_two) hden
+  have hyhatVar : variance yhat mu = sigma2 k / Finset.sum s x := by
+    exact variance_bfYRawRv X x sigma2 s k m hk hrows hindep hvar hmem hden
+  have hcenterY : integral mu (fun omega => (yhat omega - y k) ^ 2) =
+      sigma2 k / Finset.sum s x := by
+    have hv := variance_eq_integral hyhatMem.aemeasurable
+    rw [hyhatMean] at hv
+    exact hv ▸ hyhatVar
+  have hBvalue : integral mu B = sigma2 k := by
+    have hBpoint : B = fun omega =>
+        Finset.sum s x * (yhat omega - y k) ^ 2 := rfl
+    rw [hBpoint, integral_const_mul, hcenterY]
+    field_simp [hden]
+  have hresidual : integral mu (X.bfResidualSumSqRv x s k) =
+      ((s.card : Real) - 1) * sigma2 k := by
+    rw [X.bfResidualSumSqRv_eq x s k (y k) hx hden]
+    rw [integral_sub hAint hBint, hAvalue, hBvalue]
+    ring
+  have hcardReal : (1 : Real) < (s.card : Real) := by
+    exact_mod_cast (show 1 < s.card by omega)
+  have hdof : (s.card : Real) - 1 ≠ 0 := by positivity
+  unfold RandomTriangle.bfSigma2RawOnRv
+  rw [integral_const_mul, hresidual]
+  field_simp [hdof]
+
+/-- Raw development-proportion estimate, Mack (2008), equation (3).
+
+The arguments `n` and `k` retain the source's one-based symbols here, so the
+contributing rows are `range (n + 1 - k)`. For the repository's zero-based
+triangle convention, use `RandomTriangle.bfYRawRv` with an explicit set such
+as `obsCol n k`. -/
 def bfYRaw (S : Nat -> Nat -> Real) (U : Nat -> Real) (n k : Nat) : Real :=
   (Finset.sum (range (n + 1 - k)) fun i => S i k) /
     Finset.sum (range (n + 1 - k)) U
 
 /-- Raw column variance estimate after a selected pattern, Mack (2008),
 equation (4). It is a definition because the selected pattern may include
-manual smoothing and tail extrapolation. -/
+manual smoothing and tail extrapolation. Its `n` and `k` arguments retain the
+source's one-based symbols, as in `bfYRaw`. -/
 def bfSigma2Raw (S : Nat -> Nat -> Real) (U y : Nat -> Real) (n k : Nat) : Real :=
   (1 / (n - k : Real)) *
     Finset.sum (range (n + 1 - k)) fun i => (S i k - U i * y k) ^ 2 / U i
 
 /-- Assessed squared standard error of a selected development proportion,
-Mack (2008), equation (6). -/
+Mack (2008), equation (6). Its `n` and `k` arguments retain the source's
+one-based symbols, as in `bfYRaw`. -/
 def bfYStdErrSq (U sigma2 : Nat -> Real) (n k : Nat) : Real :=
   sigma2 k / Finset.sum (range (n + 1 - k)) U
 

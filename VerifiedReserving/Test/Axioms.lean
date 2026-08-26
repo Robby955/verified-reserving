@@ -284,6 +284,13 @@ set_option format.width 400
 #print axioms condExp_sq_bfPredictionError_eq
 #print axioms integral_bfYRawRv
 #print axioms variance_bfYRawRv
+#print axioms integral_bfLinearPatternRv
+#print axioms variance_bfLinearPatternRv
+#print axioms bfLinearPatternRisk_sub_raw
+#print axioms bfYRawRv_best_linear_unbiased
+#print axioms bf_raw_weighted_sq_dev
+#print axioms RandomTriangle.bfResidualSumSqRv_eq
+#print axioms integral_bfSigma2RawOnRv
 #print axioms bfMsepEstimate_eq
 #print axioms covariance_mul_mul_of_pair_indep
 #print axioms BFPredictionWitness.bfIncrementRv_eq_one
