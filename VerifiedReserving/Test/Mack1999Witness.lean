@@ -168,6 +168,10 @@ theorem sigma2WActive_unbiased (α : ℕ) :
       exact (mem_activeContributors.mp hi).1
     · exact mack3W α
   · exact mack2Factor'_from_rows
+  · intro i _hi
+    exact Eventually.of_forall fun ω => by
+      change Cw i 0 ω ≠ 0
+      exact Cw_ne_zero i 0 ω
   · intro i hi
     rw [hwEq]
     exact weightVolume_unit_zero_ne_zero α i hi

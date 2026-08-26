@@ -446,8 +446,10 @@ For zero weights, `activeContributors n k w` filters the deterministic contribut
 fit. `Mack3WOn` restricts CL2 to that fixed set, imposing no condition on excluded zero-weight
 cells. `sigma2WOn` divides the corresponding weighted residual sum of squares by
 `active.card - 1`, and `condExp_sigma2WActiveRv` proves conditional unbiasedness when at least two
-active volumes are nonzero. The active set is fixed rather than outcome-dependent, so the theorem
-does not introduce a data-dependent selection rule. `Mack1999Witness` instantiates the row
+active claims and volumes are nonzero. The claim hypothesis is needed at `α = 0`, where nonzero
+weighted volume alone does not keep the individual factor in the source's ordinary-ratio domain.
+The active set is fixed rather than outcome-dependent, so the theorem does not introduce a
+data-dependent selection rule. `Mack1999Witness` instantiates the row
 assumptions, their transport, the derived cross terms and the active estimator on eight outcomes
 for both `α = 0` and `α = 2`; in both cases the first-step variance is positive.
 

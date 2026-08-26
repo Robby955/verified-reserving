@@ -329,13 +329,16 @@ theorem mack3WOn_of_mack3W (X : RandomTriangle Ω n)
   intro i hi
   exact h3 i (lt_of_mem_contributors (haSub hi)) k
 
-/-- Conditional squared error of the fixed-set weighted mean. -/
+/-- Conditional squared error of the fixed-set weighted mean. The nonzero-claim
+hypothesis keeps every individual factor in Mack's ordinary-ratio domain,
+including when `α = 0`. -/
 theorem condExp_sq_fhatWOnRv_sub [IsFiniteMeasure μ]
     (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α : ℕ)
     (f σ2 : ℕ → ℝ) (k : ℕ) (a : Finset ℕ)
     (haSub : a ⊆ contributors n k)
     (hw : ∀ i ∈ a, StronglyMeasurable[X.D k] (w i k))
     (h3 : Mack3WOn X μ w α f σ2 k a) (h2 : Mack2Factor' X μ f)
+    (hC : ∀ i ∈ a, ∀ᵐ ω ∂μ, X.C i k ω ≠ 0)
     (hvol : ∀ i ∈ a, ∀ᵐ ω ∂μ, X.weightVolume w α i k ω ≠ 0)
     (hS : ∀ᵐ ω ∂μ, X.SWOnRv w α k a ω ≠ 0)
     (hδ : ∀ i j, Integrable (fun ω =>
@@ -351,8 +354,13 @@ theorem condExp_sq_fhatWOnRv_sub [IsFiniteMeasure μ]
       (X.weightVolume w α i k ω * X.factorResidual f i k ω) *
         (X.weightVolume w α j k ω * X.factorResidual f j k ω) with hQ
   set W : Ω → ℝ := fun ω => (X.SWOnRv w α k a ω)⁻¹ ^ 2 with hW
+  -- Source-domain guard: Mack omits an observation when its cumulative claim
+  -- is zero. The algebra below does not use this because Lean totalizes `F`.
+  have hCall : ∀ᵐ ω ∂μ, ∀ i ∈ a, X.C i k ω ≠ 0 := by
+    rw [eventually_all_finset]
+    exact hC
   have hrw : (fun ω => (X.fhatWOnRv w α k a ω - f k) ^ 2) =ᵐ[μ] W * Q := by
-    filter_upwards [hS] with ω hSω
+    filter_upwards [hS, hCall] with ω hSω _
     simp only [Pi.mul_apply, hW, hQ, RandomTriangle.fhatWOnRv,
       RandomTriangle.SWOnRv, RandomTriangle.weightVolume,
       RandomTriangle.factorResidual]
@@ -481,6 +489,7 @@ theorem condExp_wssWOnRv [IsFiniteMeasure μ]
     (haSub : a ⊆ contributors n k)
     (hw : ∀ i ∈ a, StronglyMeasurable[X.D k] (w i k))
     (h3 : Mack3WOn X μ w α f σ2 k a) (h2 : Mack2Factor' X μ f)
+    (hC : ∀ i ∈ a, ∀ᵐ ω ∂μ, X.C i k ω ≠ 0)
     (hvol : ∀ i ∈ a, ∀ᵐ ω ∂μ, X.weightVolume w α i k ω ≠ 0)
     (hS : ∀ᵐ ω ∂μ, X.SWOnRv w α k a ω ≠ 0)
     (hδ : ∀ i j, Integrable (fun ω =>
@@ -554,7 +563,7 @@ theorem condExp_wssWOnRv [IsFiniteMeasure μ]
       (X.stronglyMeasurable_SWOnRv w α k a hw)
       (by rw [← heq]; exact hBint) hsq).trans ?_
     filter_upwards [condExp_sq_fhatWOnRv_sub X w α f σ2 k a haSub hw h3 h2
-      hvol hS hδ hweighted hsq, hS] with ω hω hSω
+      hC hvol hS hδ hweighted hsq, hS] with ω hω hSω
     simp only [Pi.mul_apply, hω]
     field_simp
   have hfinal : μ[X.wssWOnRv w α k a | X.D k] =ᵐ[μ]
@@ -575,6 +584,7 @@ theorem condExp_sigma2WOnRv [IsFiniteMeasure μ]
     (haSub : a ⊆ contributors n k)
     (hw : ∀ i ∈ a, StronglyMeasurable[X.D k] (w i k))
     (h3 : Mack3WOn X μ w α f σ2 k a) (h2 : Mack2Factor' X μ f)
+    (hC : ∀ i ∈ a, ∀ᵐ ω ∂μ, X.C i k ω ≠ 0)
     (hvol : ∀ i ∈ a, ∀ᵐ ω ∂μ, X.weightVolume w α i k ω ≠ 0)
     (hS : ∀ᵐ ω ∂μ, X.SWOnRv w α k a ω ≠ 0)
     (hδ : ∀ i j, Integrable (fun ω =>
@@ -588,7 +598,7 @@ theorem condExp_sigma2WOnRv [IsFiniteMeasure μ]
     (hSsq : Integrable (fun ω =>
       X.SWOnRv w α k a ω * (X.fhatWOnRv w α k a ω - f k) ^ 2) μ) :
     μ[X.sigma2WOnRv w α k a | X.D k] =ᵐ[μ] fun _ => σ2 k := by
-  have h := condExp_wssWOnRv X w α f σ2 k a haSub hw h3 h2 hvol hS
+  have h := condExp_wssWOnRv X w α f σ2 k a haSub hw h3 h2 hC hvol hS
     hδ hweighted hweightedSq hsq hSsq
   have heq : X.sigma2WOnRv w α k a =
       (1 / ((a.card : ℝ) - 1)) • X.wssWOnRv w α k a := by
@@ -608,7 +618,9 @@ def RandomTriangle.sigma2WActiveRv (X : RandomTriangle Ω n)
     (w : ℕ → ℕ → ℝ) (α k : ℕ) : Ω → ℝ :=
   X.sigma2WOnRv (fun i k _ => w i k) α k (activeContributors n k w)
 
-/-- Conditional unbiasedness of the source-facing active estimator. -/
+/-- Conditional unbiasedness of the source-facing active estimator. Active
+claims are assumed nonzero because Mack omits zero-denominator individual
+factors, a condition not implied by nonzero weighted volume when `α = 0`. -/
 theorem condExp_sigma2WActiveRv [IsFiniteMeasure μ]
     (X : RandomTriangle Ω n) (w : ℕ → ℕ → ℝ) (α : ℕ)
     (f σ2 : ℕ → ℝ) (k : ℕ)
@@ -616,6 +628,7 @@ theorem condExp_sigma2WActiveRv [IsFiniteMeasure μ]
     (h3 : Mack3WOn X μ (fun i k _ => w i k) α f σ2 k
       (activeContributors n k w))
     (h2 : Mack2Factor' X μ f)
+    (hC : ∀ i ∈ activeContributors n k w, ∀ᵐ ω ∂μ, X.C i k ω ≠ 0)
     (hvol : ∀ i ∈ activeContributors n k w, ∀ᵐ ω ∂μ,
       X.weightVolume (fun i k _ => w i k) α i k ω ≠ 0)
     (hS : ∀ᵐ ω ∂μ,
@@ -642,6 +655,7 @@ theorem condExp_sigma2WActiveRv [IsFiniteMeasure μ]
     exact stronglyMeasurable_const
   · exact h3
   · exact h2
+  · exact hC
   · exact hvol
   · exact hS
   · exact hδ
