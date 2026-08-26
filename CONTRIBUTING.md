@@ -18,7 +18,7 @@ The former good-first list is complete. Current work is narrower and varies in d
 5. Instantiate the weighted stochastic results at `α = 0` and `α = 2` on a finite witness triangle.
 6. Extend the independent-row witness with `Mack3Row`, then instantiate `condMsep_eq_of_rows` on that nondegenerate model.
 7. Add the calendar-year filtration and a witness for the exact CDR results before attempting the cited approximation for the observable CDR.
-8. Formalize a stochastic Bühlmann-Straub model that derives the quadratic loss from conditional moments; keep structural-parameter estimation separate.
+8. Formalize Bühlmann-Straub Section 7 structural-parameter estimators without folding them into the proved conditional-moment model. State truncation or nonnegativity rules as definitions unless the source proves their properties.
 
 ## Rules
 
