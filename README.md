@@ -28,6 +28,8 @@ Bühlmann-Straub credibility (`VerifiedReserving/BuhlmannStraub.lean`). For expo
 
 Stochastic Bühlmann-Straub (`VerifiedReserving/BuhlmannStraubStochastic.lean`). A latent risk mean `M = μ(Θ)` has collective mean `m` and between-risk variance `w`; conditional loss-ratio variance is `σ²(Θ)/P_l`, its expectation is `v`, and distinct process residuals have zero conditional cross moment. The kernel derives `E[(X̄-M)²] = v/P`, proves the exact prediction-risk identity `E[(M-(m+z(X̄-m)))²] = (1-z)²w + z²v/P`, and completes the resulting coefficient quadratic at `Z = Pw/(v+Pw)`. The minimizing predictor is pointwise the existing deterministic estimate. A two-outcome witness has process variance `v=1>0` and a nonconstant observation. The source's stronger conditional independence and its estimation of the collective and variance parameters remain separate from these theorems.
 
+Panjer recursion (`VerifiedReserving/Panjer.lean`). Claim-count masses satisfying Panjer's `(a,b,0)` recurrence are represented by a formal probability-generating series. `panjerFrequency_iff_derivative` turns the count recurrence into its formal differential equation; substitution of a positive-integer severity series and the power-series chain rule then prove Panjer's discrete compound-distribution recursion, equation (5), coefficient by coefficient. `compoundMass_eq_finsum` gives the usual convolution mixture of equation (6), while the geometric count family with deterministic unit severity supplies an infinite algebraic check. The coefficients are real and need not be nonnegative or normalized, so probability interpretation remains a separate assumption.
+
 Mack 1999 equals Mack 1993 (`VerifiedReserving/Recursion.lean`). Mack's 1999 paper restates the 1993 MSEP as a recursion along each accident year and says the recursion leads to the closed form. `se2rec_eq_msep` proves the two are the same estimator (for the unit-weight, `α = 1` case) whenever the development factors along the row are nonzero.
 
 Bornhuetter-Ferguson (`VerifiedReserving/BornhuetterFerguson.lean`). The BF reserve and ultimate on the chain-ladder pattern as definitions; proved: linearity in the a priori ultimate, BF with the chain-ladder ultimate as prior returns chain ladder exactly, and the BF reserve is a fraction of the prior when every development factor is at least one.
@@ -119,6 +121,7 @@ For each headline result, [docs/STATEMENT_FIDELITY.md](docs/STATEMENT_FIDELITY.m
 | Mack 2008 BF reserve mean and process variance | `integral_bfFutureReserveRv`, `variance_bfFutureReserveRv` | theorem |
 | Mack 2008 BF product variance and conditional MSEP split | `variance_bfStochasticReserveEstimate`, `condExp_sq_bfPredictionError_eq` | theorem |
 | Mack 2008 BF raw estimators, equations (1)--(2) | `bfYRawRv_best_linear_unbiased`, `integral_bfSigma2RawOnRv` | theorem |
+| Panjer 1981 compound-distribution recursion, equation (5) | `compoundMass_panjer_equation5`, `compoundMass_zero` | theorem |
 | A nondegenerate model satisfying every hypothesis | `NontrivialModel.exists_nontrivial_mack_model` | theorem |
 | Last-period σ² extrapolation (Mack's minimum rule) | not formalized: a convention, kept outside the theorems | convention |
 | Conditioning on an independent enlargement, `E[f given m₁ ⊔ m₂] = E[f given m₁]` | `condExp_sup_of_indep` | theorem |

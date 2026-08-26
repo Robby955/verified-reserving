@@ -90,13 +90,14 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve`, `bfUltimate`, `bfReserve_of_ultimate`, `bfUltimate_of_ultimate`, `bfReserve_smul`, `bfReserve_add`, `one_le_cdf`, `bfReserve_nonneg`, `bfReserve_le` | definitions plus deterministic identities; the module names no source display |
 | Bühlmann-Straub 1970, Sections 3, 5 and 6; display (4) | `BuhlmannStraubMomentModel`, `buhlmannStraubExpectedSqLoss_eq`, `buhlmannStraubCredibility_minimizes_expectedSqLoss`, `buhlmannStraubPredictor_credibility_eq_estimate` | one-risk scalar-coefficient specialization; conditional independence weakened to the consumed cross moments; structural parameters remain inputs |
 | Mack 2008, BF1--BF3, eqs. (1)--(2), and prediction error | `BFFullIncrementIndependence`, `BFIncrementMean`, `BFIncrementVariance`, `bfYRawRv_best_linear_unbiased`, `integral_bfSigma2RawOnRv`, `variance_bfStochasticReserveEstimate`, `condExp_sq_bfPredictionError_eq`, `covariance_mul_mul_of_pair_indep` | exact model moments, raw-estimator claims and decompositions; selected assessments and covariance truncation are definitions |
+| Panjer 1981, eqs. (1), (5) and (6): count recurrence and compound recursion | `PanjerFrequency`, `compoundMass`, `panjerFrequency_iff_derivative`, `compoundMass_eq_finsum`, `compoundMass_panjer_equation5`, `compoundMass_zero` | exact formal-series identities; probability normalization and nonnegativity are not assumed |
 | Non-vacuity: degenerate witness | `Witness.X`, `Witness.fhat_unbiased`, `Witness.ultimate_unbiased` | not in any source; certifies the hypotheses are jointly satisfiable |
 | Non-vacuity: a nondegenerate Mack model | `NontrivialModel.exists_nontrivial_mack_model`, `NontrivialModel.fhat0_unbiased`, `NontrivialModel.ultimate_unbiased`, `NontrivialModel.var_fhat0`, `NontrivialModel.sigma2_unbiased` | not in any source; `σ_0² = 4 > 0` and the first development step is genuinely random |
 | Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack3Row`, `IndependenceWitness.condMsep_witness`, `IndependenceWitness.condMsepTotal_witness` | not in any source; realizes Mack's row assumptions and both exact MSEP wrappers on eight outcomes |
 | Non-vacuity: three calendar CDR updates | `IndependenceWitness.calendarTrueCDR_three_nondegenerate` | not in any source; three distinct next diagonals reveal three independent row shocks |
 | Non-vacuity: the cross-term condition of the total | `NontrivialModel.crossFree_ultimates`, `NontrivialModel.exists_crossFree_nondegenerate` | not in any source; three genuinely random ultimates, conditionally uncorrelated |
 
-Forty-five rows.
+Fifty-six rows.
 
 ## The deterministic layer
 
@@ -1085,6 +1086,28 @@ set, which can be instantiated as `obsCol n k` under the repository's zero-based
 `Test/BFPredictionWitness.lean` gives a one-point model with unit increments and zero process
 variance. It instantiates BF1--BF3, the future-reserve moments, and the conditional MSEP theorem.
 This checks satisfiability of the hypotheses but not a positive-variance version of the model.
+
+## Panjer 1981 compound-distribution recursion
+
+**Source.** Panjer, *Recursive Evaluation of a Family of Compound Distributions*, ASTIN Bulletin
+12 (1981) 22-26. Equation (1) is the count recurrence
+`p_n = p_{n-1}(a + b/n)`. For positive-integer severities, equation (5) is
+`g_i = sum_{j=1}^i (a + bj/i) f_j g_{i-j}` with `g_0 = p_0`; equation (6) is the usual mixture
+of convolution powers.
+
+**Lean.** `PanjerFrequency` writes equation (1) without division. `panjerFrequency_iff_derivative`
+proves that it is equivalent to the formal-series equation `P' = (a+b)P + aXP'`.
+`compoundMassSeries frequency severity = P(F(X))`; when `severity 0 = 0`,
+`compoundMass_eq_finsum` proves equation (6). `derivative_compoundMassSeries` uses formal
+substitution and the chain rule, after which `compoundMass_panjer_equation5` proves equation (5)
+at each positive index and `compoundMass_zero` proves its initial condition. The geometric family
+and deterministic unit severity give a source-family check at every index.
+
+**Gap.** The three source equations are exact. Lean works with arbitrary real coefficients and
+uses formal power series, so no convergence hypothesis is needed. Nonnegativity, normalization,
+and parameter ranges are not present; they are required only when interpreting the coefficients
+as probability masses. The theorem validates the recursion algebraically and does not claim a
+particular finite-precision implementation.
 
 ## Non-vacuity
 

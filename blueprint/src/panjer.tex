@@ -1,0 +1,43 @@
+\chapter{Panjer recursion}
+
+Panjer, \emph{Recursive Evaluation of a Family of Compound Distributions}
+(1981), equation~(1), assumes claim-count probabilities satisfying
+$p_n=p_{n-1}(a+b/n)$. For a severity distribution supported on the positive
+integers, equation~(5) gives a direct recursion for the aggregate mass.
+
+\begin{definition}[Formal generating series and compound mass]\label{def:panjer}\lean{VerifiedReserving.massSeries, VerifiedReserving.PanjerFrequency, VerifiedReserving.compoundMassSeries, VerifiedReserving.compoundMass, VerifiedReserving.panjerEquation5}\leanok
+For a coefficient sequence $p$, let $P(X)=\sum_n p_nX^n$. For a severity
+sequence $f$ with $f_0=0$, the compound series is $G(X)=P(F(X))$. The predicate
+\texttt{PanjerFrequency} is the division-free recurrence
+\[
+  (n+1)p_{n+1}=(a(n+1)+b)p_n.
+\]
+The definition \texttt{panjerEquation5} is the finite sum printed in the source.
+\end{definition}
+
+\begin{theorem}[Panjer equation (5)]\label{thm:panjer}\lean{VerifiedReserving.panjerFrequency_iff_derivative, VerifiedReserving.compoundMass_eq_finsum, VerifiedReserving.derivative_compoundMassSeries, VerifiedReserving.compoundMass_panjer_equation5, VerifiedReserving.compoundMass_zero}\leanok
+\uses{def:panjer}
+The count recurrence is equivalent to
+\[
+  P'=(a+b)P+aXP'.
+\]
+Formal substitution and the power-series chain rule give, for $i\geq1$,
+\[
+  g_i=\sum_{j=1}^{i}\left(a+b\frac ji\right)f_jg_{i-j},
+  \qquad g_0=p_0.
+\]
+The coefficient of $P(F(X))$ is also the convolution mixture in the source's
+equation~(6).
+\end{theorem}
+\begin{proof}\leanok Convert the count recurrence to a formal differential
+equation, substitute the severity series, apply the formal chain rule, and
+compare coefficients. \end{proof}
+
+\begin{theorem}[Geometric and unit-severity check]\label{thm:panjer-check}\lean{VerifiedReserving.geometricFrequencyMass_panjer, VerifiedReserving.massSeries_unitSeverityMass, VerifiedReserving.compoundMass_unitSeverity, VerifiedReserving.geometric_unitSeverity_panjer_equation5}\leanok
+\uses{def:panjer, thm:panjer}
+The geometric masses $(1-q)q^n$ satisfy the Panjer recurrence with $(a,b)=(q,0)$.
+For deterministic severity one, composition leaves the count mass unchanged,
+and the resulting geometric instance satisfies equation~(5) at every index.
+\end{theorem}
+\begin{proof}\leanok Expand the geometric recurrence. The unit-severity series
+is $X$, so substitution by it is the identity. \end{proof}

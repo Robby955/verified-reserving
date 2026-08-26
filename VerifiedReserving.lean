@@ -32,6 +32,7 @@ import VerifiedReserving.BFPredictionError
 import VerifiedReserving.BuhlmannStraub
 import VerifiedReserving.ChainLadderR
 import VerifiedReserving.BuhlmannStraubStochastic
+import VerifiedReserving.Panjer
 import VerifiedReserving.Test.NontrivialModel
 import VerifiedReserving.Test.IndependenceWitness
 import VerifiedReserving.Test.ODPStochasticWitness
