@@ -283,3 +283,11 @@ set_option format.width 400
 #print axioms sclColumnTotal_succ
 #print axioms sclColumnTotal_eq_mul_prod
 #print axioms quargMack_gap_identity
+#print axioms condExp_mul_eq_slope_of_residual_regression
+#print axioms munichPaid_residualCorrelation_eq
+#print axioms munichIncurred_residualCorrelation_eq
+#print axioms mclAdjustedPaidFactor_zero
+#print axioms mclAdjustedIncurredFactor_zero
+#print axioms munichProjection_zero_step
+#print axioms munichProjection_succ
+#print axioms munichProjection_zero

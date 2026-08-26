@@ -1,0 +1,61 @@
+\chapter{Munich residual correlations and adjusted factors}
+
+Quarg and Mack's Sections 2.2 and 3.1.2 add the stochastic link between paid
+and incurred development \cite{QuargMack2004}.  The model assumptions and the
+raw practical estimators are kept separate here.
+
+\begin{definition}[Joint row history and conditional residual]\label{def:munichResidual}\lean{VerifiedReserving.MunichTriangle, VerifiedReserving.MunichTriangle.jointRowSigma, VerifiedReserving.MunichRowsIndep, VerifiedReserving.conditionalStdDev, VerifiedReserving.conditionalResidual}\leanok
+For paid and incurred random triangles on one probability space,
+$\mathcal B_i(k)$ is the join of their row histories through $k$.  For a random
+variable $Y$ and a smaller history $\mathcal A$ its residual is
+\[
+ \operatorname{Res}(Y\mid\mathcal A)
+ =\frac{Y-E[Y\mid\mathcal A]}{\sqrt{\operatorname{Var}(Y\mid\mathcal A)}}.
+\]
+The PIU predicate groups paid and incurred histories by accident year before
+stating independence.
+\end{definition}
+
+\begin{definition}[PQ and IQ]\label{def:munichRegression}\lean{VerifiedReserving.MunichPaidRegression, VerifiedReserving.MunichIncurredRegression}\leanok
+\uses{def:munichResidual}
+PQ regresses the paid development residual, conditioned on $\mathcal B_i(k)$,
+on the reciprocal-ratio residual with one common slope $\lambda^P$.  IQ uses
+the incurred development residual and the paid/incurred-ratio residual with
+slope $\lambda^I$.
+\end{definition}
+
+\begin{theorem}[Residual slope is the standardized cross-moment]\label{thm:munichCorrelation}\lean{VerifiedReserving.condExp_mul_eq_slope_of_residual_regression, VerifiedReserving.munichPaid_residualCorrelation_eq, VerifiedReserving.munichIncurred_residualCorrelation_eq}\leanok
+\uses{def:munichRegression}
+Let $\mathcal A\le\mathcal B$.  If $A$ is $\mathcal B$-measurable,
+$E[Z\mid\mathcal B]=\lambda A$, and $E[A^2\mid\mathcal A]=1$, then
+\[
+  E[AZ\mid\mathcal A]=\lambda.
+\]
+Applying this to PQ and IQ proves the paid and incurred residual
+cross-moments equal $\lambda^P$ and $\lambda^I$, under the stated
+integrability and standardization hypotheses.
+\end{theorem}
+\begin{proof}\leanok Pull $A$ out after conditioning on $\mathcal B$, substitute the regression, use the tower property, and use $E[A^2\mid\mathcal A]=1$. \end{proof}
+
+\begin{definition}[Raw Munich estimators and recursion]\label{def:munichProjection}\lean{VerifiedReserving.mclRatioMean, VerifiedReserving.mclRatioScaleSqIncurred, VerifiedReserving.mclRatioScaleSqPaid, VerifiedReserving.mclPaidResidual, VerifiedReserving.mclIncurredResidual, VerifiedReserving.mclPaidRatioResidual, VerifiedReserving.mclIncurredRatioResidual, VerifiedReserving.mclLambdaPaid, VerifiedReserving.mclLambdaIncurred, VerifiedReserving.mclAdjustedPaidFactor, VerifiedReserving.mclAdjustedIncurredFactor, VerifiedReserving.munichProjection}\leanok
+\uses{def:munichRegression, def:fhat}
+The raw pattern and dispersion estimators on pp.~290--291 define the four
+residual arrays.  The pooled least-squares slopes through the origin are
+$\widehat\lambda^P$ and $\widehat\lambda^I$.  At a projected pair $(p,i)$ the
+paid factor is
+\[
+ \widehat f^P_k+\widehat\lambda^P
+ \frac{\widehat\sigma^P_k}{\widehat\rho^P_k}
+ \left(\frac{i}{p}-\widehat q_k^{-1}\right),
+\]
+with the symmetric paid/incurred formula for the incurred factor.  The coupled
+recursion applies both factors to the preceding pair.
+\end{definition}
+
+\begin{theorem}[Zero correlation recovers separate chain ladder]\label{thm:munichZero}\lean{VerifiedReserving.mclAdjustedPaidFactor_zero, VerifiedReserving.mclAdjustedIncurredFactor_zero, VerifiedReserving.munichProjection_zero}\leanok
+\uses{def:munichProjection, def:Chat}
+When both slopes are zero, every adjusted factor is its usual chain-ladder
+factor and the coupled recursion is exactly
+$(\widehat P_{i,d+m},\widehat I_{i,d+m})$ from the two separate projections.
+\end{theorem}
+\begin{proof}\leanok Induction on $m$, using the chain-ladder projection step for each component. \end{proof}

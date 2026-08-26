@@ -1,5 +1,6 @@
 import VerifiedReserving.ChainLadder
 import VerifiedReserving.MunichChainLadder
+import VerifiedReserving.MunichStochastic
 import VerifiedReserving.Recursion
 import VerifiedReserving.BornhuetterFerguson
 import VerifiedReserving.Stochastic
