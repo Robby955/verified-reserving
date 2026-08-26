@@ -22,6 +22,8 @@ Lognormal approximation (`VerifiedReserving/LognormalCI.lean`). Mack's moment-ma
 
 Bühlmann-Straub credibility (`VerifiedReserving/BuhlmannStraub.lean`). For exposure weights `P_l`, the module defines the weighted individual mean, the credibility factor `Z = P_· w / (v + P_· w)`, and the estimate `Z X̄ + (1-Z)m` from Bühlmann and Straub (1970), display (4). Completing the weighted quadratic loss around the closed-form estimate proves its normal equation and minimality when the total quadratic coefficient is positive. Under nonnegative variance components the credibility factor lies in `[0,1]`. The variance components and collective mean are inputs; these deterministic theorems do not estimate them.
 
+Panjer recursion (`VerifiedReserving/Panjer.lean`). Claim-count masses satisfying Panjer's `(a,b,0)` recurrence are represented by a formal probability-generating series. `panjerFrequency_iff_derivative` turns the count recurrence into its formal differential equation; substitution of a positive-integer severity series and the power-series chain rule then prove Panjer's discrete compound-distribution recursion, equation (5), coefficient by coefficient. `compoundMass_eq_finsum` gives the usual convolution mixture of equation (6), while the geometric count family with deterministic unit severity supplies an infinite algebraic check. The coefficients are real and need not be nonnegative or normalized, so probability interpretation remains a separate assumption.
+
 Mack 1999 equals Mack 1993 (`VerifiedReserving/Recursion.lean`). Mack's 1999 paper restates the 1993 MSEP as a recursion along each accident year and says the recursion leads to the closed form. `se2rec_eq_msep` proves the two are the same estimator (for the unit-weight, `α = 1` case) whenever the development factors along the row are nonzero.
 
 Bornhuetter-Ferguson (`VerifiedReserving/BornhuetterFerguson.lean`). The BF reserve and ultimate on the chain-ladder pattern as definitions; proved: linearity in the a priori ultimate, BF with the chain-ladder ultimate as prior returns chain ladder exactly, and the BF reserve is a fraction of the prior when every development factor is at least one.
@@ -92,6 +94,7 @@ For each headline result, [docs/STATEMENT_FIDELITY.md](docs/STATEMENT_FIDELITY.m
 | Same for the total reserve | `mackTotalEstimation_le_bbmwTotalEstimation`, `bbmwTotalEstimation_sub_mackTotalEstimation` | theorem |
 | The two terms differ strictly on a concrete triangle | `exists_mackEstimation_lt_bbmwEstimation` | theorem |
 | Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve_of_ultimate`, `one_le_cdf`, `bfReserve_le` | theorem |
+| Panjer 1981 compound-distribution recursion, equation (5) | `compoundMass_panjer_equation5`, `compoundMass_zero` | theorem |
 | A nondegenerate model satisfying every hypothesis | `NontrivialModel.exists_nontrivial_mack_model` | theorem |
 | Last-period σ² extrapolation (Mack's minimum rule) | not formalized: a convention, kept outside the theorems | convention |
 | Conditioning on an independent enlargement, `E[f given m₁ ⊔ m₂] = E[f given m₁]` | `condExp_sup_of_indep` | theorem |

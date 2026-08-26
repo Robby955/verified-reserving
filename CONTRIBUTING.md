@@ -52,4 +52,4 @@ Open a pull request against `main`. CI runs the build, the sorry and axiom check
 
 ## Scope
 
-Mack's model first, then the neighbours that practising actuaries use with it: Munich chain ladder, the Merz-Wüthrich one-year uncertainty, the ODP stochastic layer, Bornhuetter-Ferguson, Bühlmann-Straub credibility and, later, Panjer's recursion for compound distributions. Life contingencies are covered elsewhere (see the related work in the README); we do not duplicate them.
+Mack's model first, then the neighbours that practising actuaries use with it: Munich chain ladder, the Merz-Wüthrich one-year uncertainty, the ODP stochastic layer, Bornhuetter-Ferguson, Bühlmann-Straub credibility and Panjer's recursion for compound distributions. Life contingencies are covered elsewhere (see the related work in the README); we do not duplicate them.

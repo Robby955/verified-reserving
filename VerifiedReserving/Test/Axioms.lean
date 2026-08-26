@@ -280,3 +280,22 @@ set_option format.width 400
 #print axioms buhlmannStraubEstimate_minimizes
 #print axioms buhlmannStraubEstimate_eq_credibility
 #print axioms buhlmannStraubCredibility_mem_Icc
+
+#print axioms coeff_massSeries
+#print axioms panjerFrequency_iff_derivative
+#print axioms coeff_compoundMassSeries
+#print axioms hasSubst_massSeries
+#print axioms compoundMass_eq_finsum
+#print axioms derivative_compoundMassSeries
+#print axioms panjerWeightedSum_succ_eq_coeff
+#print axioms compoundMass_panjerWeighted_succ
+#print axioms panjerWeightedSum_eq_mul_recursionSum
+#print axioms compoundMass_panjer_succ
+#print axioms compoundMass_zero
+#print axioms panjerRecursionSum_succ_eq_equation5
+#print axioms compoundMass_panjer_equation5
+#print axioms geometricFrequencyMass_panjer
+#print axioms unitSeverityMass_zero
+#print axioms massSeries_unitSeverityMass
+#print axioms compoundMass_unitSeverity
+#print axioms geometric_unitSeverity_panjer_equation5

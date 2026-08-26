@@ -73,12 +73,13 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Renshaw-Verrall 1998 / Mack 1991: chain ladder solves the system | `chainLadder_fitted_row_totals`, `chainLadder_fitted_row_totals_eq`, `chainLadder_fitted_column_totals`, `chainLadder_scoreEquations` | identical; the column half needs nonzero development factors |
 | Mack 1991, Section 2: uniqueness of the multiplicative fit | `multFit_eq_CLincr`, `mult_cum_eq_CLcum`, `patternCum_mul_fhat` | Lean stronger hypotheses: strict positivity of `a` and `b` and the normalization `∑_{k<n} b_k = 1` |
 | Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve`, `bfUltimate`, `bfReserve_of_ultimate`, `bfUltimate_of_ultimate`, `bfReserve_smul`, `bfReserve_add`, `one_le_cdf`, `bfReserve_nonneg`, `bfReserve_le` | definitions plus deterministic identities; the module names no source display |
+| Panjer 1981, eqs. (1), (5) and (6): count recurrence and compound recursion | `PanjerFrequency`, `compoundMass`, `panjerFrequency_iff_derivative`, `compoundMass_eq_finsum`, `compoundMass_panjer_equation5`, `compoundMass_zero` | exact formal-series identities; probability normalization and nonnegativity are not assumed |
 | Non-vacuity: degenerate witness | `Witness.X`, `Witness.fhat_unbiased`, `Witness.ultimate_unbiased` | not in any source; certifies the hypotheses are jointly satisfiable |
 | Non-vacuity: a nondegenerate Mack model | `NontrivialModel.exists_nontrivial_mack_model`, `NontrivialModel.fhat0_unbiased`, `NontrivialModel.ultimate_unbiased`, `NontrivialModel.var_fhat0`, `NontrivialModel.sigma2_unbiased` | not in any source; `σ_0² = 4 > 0` and the first development step is genuinely random |
 | Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack1_from_rows`, `IndependenceWitness.mack2'_from_rows` | not in any source; realizes Mack 1993 eq. (1)-(2) and the `B_k` filtration on eight outcomes |
 | Non-vacuity: the cross-term condition of the total | `NontrivialModel.crossFree_ultimates`, `NontrivialModel.exists_crossFree_nondegenerate` | not in any source; three genuinely random ultimates, conditionally uncorrelated |
 
-Thirty-seven rows.
+Thirty-eight rows.
 
 ## The deterministic layer
 
@@ -688,6 +689,28 @@ with the chain-ladder ultimate as prior returns the chain-ladder ultimate and re
 
 **Gap.** Definitions plus deterministic identities. The module names no source display, so there
 is no numbered statement to compare against; nothing stochastic is claimed about the method.
+
+## Panjer 1981 compound-distribution recursion
+
+**Source.** Panjer, *Recursive Evaluation of a Family of Compound Distributions*, ASTIN Bulletin
+12 (1981) 22-26. Equation (1) is the count recurrence
+`p_n = p_{n-1}(a + b/n)`. For positive-integer severities, equation (5) is
+`g_i = sum_{j=1}^i (a + bj/i) f_j g_{i-j}` with `g_0 = p_0`; equation (6) is the usual mixture
+of convolution powers.
+
+**Lean.** `PanjerFrequency` writes equation (1) without division. `panjerFrequency_iff_derivative`
+proves that it is equivalent to the formal-series equation `P' = (a+b)P + aXP'`.
+`compoundMassSeries frequency severity = P(F(X))`; when `severity 0 = 0`,
+`compoundMass_eq_finsum` proves equation (6). `derivative_compoundMassSeries` uses formal
+substitution and the chain rule, after which `compoundMass_panjer_equation5` proves equation (5)
+at each positive index and `compoundMass_zero` proves its initial condition. The geometric family
+and deterministic unit severity give a source-family check at every index.
+
+**Gap.** The three source equations are exact. Lean works with arbitrary real coefficients and
+uses formal power series, so no convergence hypothesis is needed. Nonnegativity, normalization,
+and parameter ranges are not present; they are required only when interpreting the coefficients
+as probability masses. The theorem validates the recursion algebraically and does not claim a
+particular finite-precision implementation.
 
 ## Non-vacuity
 
