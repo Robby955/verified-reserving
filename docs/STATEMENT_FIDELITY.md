@@ -58,7 +58,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Mack 1999, eq. (*) and the recursion below it, general `w` and `α` | `msepW`, `se2recW`, `se2recW_eq_msepW`, `msepW_unit`, `se2recW_eq_msep_unit` | Lean more general in `w` and `α`, narrower in the type of `α` (natural, not real) |
 | Mack 1999, weighted factor is conditionally unbiased | `condExp_fhatWrv` | not displayed as a theorem in the source; Lean proves it under (M1) in the `D_k` form |
 | Mack 1999, row-conditioned CL2 and `s.e.(f̂_k)² = σ_k² / ∑_j w_jk C_jk^α` | `Mack3WRow`, `mack3W_of_mack3WRow`, `Mack3W`, `mack2Factor'_of_rows`, `condExp_sq_fhatWrv_sub`, `condVar_fhatWrv` | Lean proves the row-to-`D_k` passage and derives cross-factor terms from independent rows, under explicit measurability, nonvanishing and integrability hypotheses |
-| Mack 1999, weighted `σ̂_k²` is unbiased | `condExp_wssWrv`, `condExp_sigma2Wrv`, `activeContributors`, `sigma2WOn`, `condExp_sigma2WActiveRv` | the original theorem covers all-nonzero weights; the active theorem omits zero deterministic weights and uses `active.card - 1` |
+| Mack 1999, weighted `σ̂_k²` is unbiased | `condExp_wssWrv`, `condExp_sigma2Wrv`, `activeContributors`, `Mack3WOn`, `sigma2WOn`, `condExp_sigma2WActiveRv` | the original theorem covers all-nonzero weights; the active theorem omits zero deterministic weights, restricts CL2 to the fixed active set, and uses `active.card - 1` |
 | Mack 1999, named cases `α = 0` and `α = 2` | `Mack1999Witness.exists_weighted_witness_alpha_zero`, `Mack1999Witness.exists_weighted_witness_alpha_two` | finite nondegenerate witnesses with positive first-step variance and active-estimator unbiasedness |
 | Mack 1999, Section 3, tail factor | `tailUltimate`, `tailSe2Step` | convention, no theorem |
 | Mack 1993, last-period `σ²` extrapolation | not formalized | convention, no theorem |
@@ -443,7 +443,8 @@ identifies the same expression with mathlib's conditional variance.
 concludes `μ[sigma2Wrv w α k | D k] =ᵐ fun _ => σ2 k`.
 
 For zero weights, `activeContributors n k w` filters the deterministic contributors before the
-fit. `sigma2WOn` divides the corresponding weighted residual sum of squares by
+fit. `Mack3WOn` restricts CL2 to that fixed set, imposing no condition on excluded zero-weight
+cells. `sigma2WOn` divides the corresponding weighted residual sum of squares by
 `active.card - 1`, and `condExp_sigma2WActiveRv` proves conditional unbiasedness when at least two
 active volumes are nonzero. The active set is fixed rather than outcome-dependent, so the theorem
 does not introduce a data-dependent selection rule. `Mack1999Witness` instantiates the row

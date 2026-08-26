@@ -168,6 +168,7 @@ set_option format.width 400
 #print axioms weighted_sq_devWOn_factorResidual
 #print axioms RandomTriangle.SWOnRv_eq_sum
 #print axioms RandomTriangle.stronglyMeasurable_SWOnRv
+#print axioms mack3WOn_of_mack3W
 #print axioms condExp_sq_fhatWOnRv_sub
 #print axioms condExp_wssWOnRv
 #print axioms condExp_sigma2WOnRv

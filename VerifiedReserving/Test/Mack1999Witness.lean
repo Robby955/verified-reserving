@@ -162,7 +162,11 @@ theorem sigma2WActive_unbiased (α : ℕ) :
   apply condExp_sigma2WActiveRv X unitWeights α f (σ2Factor α) 0
   · rw [activeContributors_unit_zero_card]
   · rw [hwEq]
-    exact mack3W α
+    apply mack3WOn_of_mack3W X wUnit α f (σ2Factor α) 0
+      (activeContributors 3 0 unitWeights)
+    · intro i hi
+      exact (mem_activeContributors.mp hi).1
+    · exact mack3W α
   · exact mack2Factor'_from_rows
   · intro i hi
     rw [hwEq]

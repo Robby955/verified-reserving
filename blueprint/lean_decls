@@ -425,6 +425,8 @@ VerifiedReserving.RandomTriangle.wssWOnRv
 VerifiedReserving.RandomTriangle.sigma2WOnRv
 VerifiedReserving.RandomTriangle.SWOnRv_eq_sum
 VerifiedReserving.RandomTriangle.stronglyMeasurable_SWOnRv
+VerifiedReserving.Mack3WOn
+VerifiedReserving.mack3WOn_of_mack3W
 VerifiedReserving.condExp_sq_fhatWOnRv_sub
 VerifiedReserving.condExp_wssWOnRv
 VerifiedReserving.condExp_sigma2WOnRv

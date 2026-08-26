@@ -310,13 +310,32 @@ theorem RandomTriangle.stronglyMeasurable_SWOnRv (X : RandomTriangle Ω n)
   exact Finset.stronglyMeasurable_sum _ fun i hi =>
     X.stronglyMeasurable_weightVolume w α i k (hw i hi)
 
+/-- Weighted CL2 restricted to one fixed contributor set.  This is the right
+hypothesis for an active estimator: excluded zero-weight cells impose no
+second-moment condition. -/
+def Mack3WOn (X : RandomTriangle Ω n) (μ : Measure Ω)
+    (w : ℕ → ℕ → Ω → ℝ) (α : ℕ) (f σ2 : ℕ → ℝ)
+    (k : ℕ) (a : Finset ℕ) : Prop :=
+  ∀ i ∈ a,
+    μ[fun ω => (X.factorResidual f i k ω) ^ 2 | X.D k]
+      =ᵐ[μ] fun ω => σ2 k / X.weightVolume w α i k ω
+
+/-- The full weighted CL2 predicate restricts to any set of valid
+contributors. -/
+theorem mack3WOn_of_mack3W (X : RandomTriangle Ω n)
+    (w : ℕ → ℕ → Ω → ℝ) (α : ℕ) (f σ2 : ℕ → ℝ)
+    (k : ℕ) (a : Finset ℕ) (haSub : a ⊆ contributors n k)
+    (h3 : Mack3W X μ w α f σ2) : Mack3WOn X μ w α f σ2 k a := by
+  intro i hi
+  exact h3 i (lt_of_mem_contributors (haSub hi)) k
+
 /-- Conditional squared error of the fixed-set weighted mean. -/
 theorem condExp_sq_fhatWOnRv_sub [IsFiniteMeasure μ]
     (X : RandomTriangle Ω n) (w : ℕ → ℕ → Ω → ℝ) (α : ℕ)
     (f σ2 : ℕ → ℝ) (k : ℕ) (a : Finset ℕ)
     (haSub : a ⊆ contributors n k)
     (hw : ∀ i ∈ a, StronglyMeasurable[X.D k] (w i k))
-    (h3 : Mack3W X μ w α f σ2) (h2 : Mack2Factor' X μ f)
+    (h3 : Mack3WOn X μ w α f σ2 k a) (h2 : Mack2Factor' X μ f)
     (hvol : ∀ i ∈ a, ∀ᵐ ω ∂μ, X.weightVolume w α i k ω ≠ 0)
     (hS : ∀ᵐ ω ∂μ, X.SWOnRv w α k a ω ≠ 0)
     (hδ : ∀ i j, Integrable (fun ω =>
@@ -407,7 +426,7 @@ theorem condExp_sq_fhatWOnRv_sub [IsFiniteMeasure μ]
               (fun ω => (v ω * d ω) * (v ω * d ω)) by rfl, heq]
           refine (condExp_mul_of_stronglyMeasurable_left hvmeas
             (by rw [← heq]; exact hweighted i i) hd2).trans ?_
-          filter_upwards [h3 i (lt_of_mem_contributors (haSub hi)) k, hvol i hi]
+          filter_upwards [h3 i hi, hvol i hi]
             with ω h3ω hvω
           simp only [Pi.mul_apply, d, h3ω, v, if_true]
           field_simp
@@ -461,7 +480,7 @@ theorem condExp_wssWOnRv [IsFiniteMeasure μ]
     (f σ2 : ℕ → ℝ) (k : ℕ) (a : Finset ℕ)
     (haSub : a ⊆ contributors n k)
     (hw : ∀ i ∈ a, StronglyMeasurable[X.D k] (w i k))
-    (h3 : Mack3W X μ w α f σ2) (h2 : Mack2Factor' X μ f)
+    (h3 : Mack3WOn X μ w α f σ2 k a) (h2 : Mack2Factor' X μ f)
     (hvol : ∀ i ∈ a, ∀ᵐ ω ∂μ, X.weightVolume w α i k ω ≠ 0)
     (hS : ∀ᵐ ω ∂μ, X.SWOnRv w α k a ω ≠ 0)
     (hδ : ∀ i j, Integrable (fun ω =>
@@ -512,7 +531,7 @@ theorem condExp_wssWOnRv [IsFiniteMeasure μ]
         (hδ i i).congr (Eventually.of_forall fun ω => by simp [sq])
       refine (condExp_mul_of_stronglyMeasurable_left hvmeas
         (hweightedSq i) hd2).trans ?_
-      filter_upwards [h3 i (lt_of_mem_contributors (haSub hi)) k, hvol i hi]
+      filter_upwards [h3 i hi, hvol i hi]
         with ω h3ω hvω
       simp only [Pi.mul_apply, h3ω]
       field_simp
@@ -555,7 +574,7 @@ theorem condExp_sigma2WOnRv [IsFiniteMeasure μ]
     (f σ2 : ℕ → ℝ) (k : ℕ) (a : Finset ℕ) (hcard : 2 ≤ a.card)
     (haSub : a ⊆ contributors n k)
     (hw : ∀ i ∈ a, StronglyMeasurable[X.D k] (w i k))
-    (h3 : Mack3W X μ w α f σ2) (h2 : Mack2Factor' X μ f)
+    (h3 : Mack3WOn X μ w α f σ2 k a) (h2 : Mack2Factor' X μ f)
     (hvol : ∀ i ∈ a, ∀ᵐ ω ∂μ, X.weightVolume w α i k ω ≠ 0)
     (hS : ∀ᵐ ω ∂μ, X.SWOnRv w α k a ω ≠ 0)
     (hδ : ∀ i j, Integrable (fun ω =>
@@ -594,7 +613,8 @@ theorem condExp_sigma2WActiveRv [IsFiniteMeasure μ]
     (X : RandomTriangle Ω n) (w : ℕ → ℕ → ℝ) (α : ℕ)
     (f σ2 : ℕ → ℝ) (k : ℕ)
     (hcard : 2 ≤ (activeContributors n k w).card)
-    (h3 : Mack3W X μ (fun i k _ => w i k) α f σ2)
+    (h3 : Mack3WOn X μ (fun i k _ => w i k) α f σ2 k
+      (activeContributors n k w))
     (h2 : Mack2Factor' X μ f)
     (hvol : ∀ i ∈ activeContributors n k w, ∀ᵐ ω ∂μ,
       X.weightVolume (fun i k _ => w i k) α i k ω ≠ 0)
