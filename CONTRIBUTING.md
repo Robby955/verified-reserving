@@ -11,6 +11,8 @@ Contributions are welcome, from a one-line lemma to a whole theorem of the roadm
 
 The former good-first list is complete. Current work is narrower and varies in difficulty; check the matching `Still open` paragraph in [ROADMAP.md](ROADMAP.md) before starting.
 
+R `ChainLadder` option semantics are closed in `ChainLadderR.lean` against package version 0.2.22 and source commit `41f4e949`; follow-up work should not reinterpret the two `mse.method` branches without a newer pinned source diff.
+
 1. Formalize the Munich chain ladder paid/incurred definitions and the Quarg-Mack gap identity.
 2. Add the ODP variance structure before the GLM prediction-error and bootstrap layers. Do not treat the existing deterministic score equations as a stochastic GLM result.
 3. Add a row-conditioned CL2 predicate and its row-to-`D_k` theorem for `Mack3W` under explicit measurability, `RowsGenerateD` and `RowsIndep` hypotheses; add the corresponding independence derivation for `Mack2Factor'`.

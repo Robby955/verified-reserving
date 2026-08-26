@@ -64,6 +64,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | BBMW 2006 / Murphy 1994, conditional-resampling term | `bbmwEstimation`, `mackEstimation_le_bbmwEstimation`, `bbmwEstimation_sub_mackEstimation`, `bbmwEstimation_sub_mackEstimation_le`, `bbmwEstimation_eq_mackEstimation_of_one_factor` | source statement is an estimator; Lean has it as a definition and proves the exact difference against Mack's |
 | The two estimators differ strictly | `exists_mackEstimation_lt_bbmwEstimation`, `mackEstimation_lt_bbmwEstimation_Cex` | not in the source; a concrete triangle, every number checked by `norm_num` |
 | BBMW 2006, Section 4.3, aggregated over accident years | `bbmwTotalEstimation`, `bbmwTotalEstimation_sub_mackTotalEstimation`, `mackTotalEstimation_le_bbmwTotalEstimation` | definition plus identity; the inequality needs nonnegative ultimates and relative variances |
+| R `ChainLadder` 0.2.22, `mse.method` parameter-risk branches | `ChainLadderMseMethod`, `chainLadderParameterStep`, `chainLadderRowParameterRiskSq_mack_eq_mackEstimation`, `chainLadderRowParameterRiskSq_independence_eq_bbmwEstimation`, `chainLadderTotalParameterRiskSq_eq_sum` | formula-level transcription pinned to source commit `41f4e949`; no R runtime claim |
 | Röhr 2016, classical-case display | `rohrMsep`, `rohrMsep_eq_msep`, `rohrProcess_eq_mackProcess`, `rohrParameter_eq_mackEstimation`, `msep_div_ultimate_sq`, `bbmwEstimation_sub_rohrParameter` | formalized from the abstract's display, full text unavailable |
 | Röhr 2016, aggregation over accident years | `rohrMsepTotal`, `rohrMsepTotal_eq_msepTotal` | not attributed: the cross terms are Mack's, carried into a definition |
 | Merz-Wüthrich 2008, true CDR has conditional mean zero | `RandomTriangle.trueCDR`, `condExp_trueCDR_eq_zero` | identical; Lean's filtration is by development year, the source's by calendar year |
@@ -78,7 +79,7 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack1_from_rows`, `IndependenceWitness.mack2'_from_rows` | not in any source; realizes Mack 1993 eq. (1)-(2) and the `B_k` filtration on eight outcomes |
 | Non-vacuity: the cross-term condition of the total | `NontrivialModel.crossFree_ultimates`, `NontrivialModel.exists_crossFree_nondegenerate` | not in any source; three genuinely random ultimates, conditionally uncorrelated |
 
-Thirty-seven rows.
+Thirty-eight rows.
 
 ## The deterministic layer
 
@@ -527,6 +528,39 @@ conditional-resampling estimator with the cross term `2 Ĉ_i Ĉ_j (∏_{k ∈ ro
 **Gap.** Definitions plus an identity, as in the single-year row. The inequality's nonnegativity
 hypotheses are stronger than they need to be in one place: `ha` quantifies over all `k`, not only
 over the rows in play.
+
+### R `ChainLadder` 0.2.22: `mse.method`
+
+**Source.** R package `ChainLadder` version 0.2.22, source commit
+`41f4e949e5c3bffd7a18af2c0eaa98d6bae2da2f`. The package documentation for
+`MackChainLadder` says that `mse.method = "Mack"` uses Mack's recursive parameter-risk estimate,
+while `"Independence"` includes the Murphy/BBMW cross-product term. In
+`R/MackChainLadderFunctions.R`, lines 229-255, the per-row squared parameter-risk step is
+`c²v + pf²` under Mack and `c²v + pf² + pv` under Independence, where the source stores the
+square roots and squares them in the displayed code. Lines 260-299 run the same branch for total
+parameter risk with the source's projected-amount sum `M[k]` in place of `c`.
+
+**Lean.** `ChainLadderMseMethod` has constructors `mack` and `independence`.
+`chainLadderParameterStep` and `chainLadderParameterStep_independence_sub_mack` prove that the
+option changes one term, exactly `p * v`. `chainLadderRowParameterRiskSq` instantiates the source
+step with `c = Chat C n i k`, `f = fhat C n k` and `v = sigma2 C n k / S C n k`.
+`chainLadderRowParameterRiskSq_mack_eq_mackEstimation` assumes `i ≤ n-1` and nonzero fitted
+development factors along the row, and proves that the ultimate value is `mackEstimation`.
+`chainLadderRowParameterRiskSq_independence_eq_bbmwEstimation` has the same hypotheses and proves
+that the other branch is `bbmwEstimation`. `chainLadderTotalParameterRiskSq` records the generic
+total recursion over inputs `M`, `factor` and `factorVariance`, while
+`chainLadderTotalParameterRiskSq_eq_sum` proves its finite-sum closed form for either option with
+no hypothesis. `chainLadderRowParameterFormula` and `chainLadderTotalParameterFormula` are
+transparent selectors for the already formalized Mack and Murphy/BBMW row and aggregate terms;
+`chainLadderTotalParameterFormula_independence_sub_mack` gives the existing exact aggregate
+difference.
+
+**Gap.** The arithmetic branches in the pinned source and the per-row closed forms are exact.
+The total recursion theorem is generic in the arrays supplied to it; the aggregate formula
+selector records the documented Mack versus Murphy/BBMW interpretation. No theorem says that
+Lean ran the R package, parsed an R object, or checked how a particular installed build constructs
+its numeric arrays. A later package version requires a source diff and a new pin before changing
+these declarations.
 
 ### Röhr 2016
 
