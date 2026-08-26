@@ -5,11 +5,11 @@ Contributions are welcome, from a one-line lemma to a whole theorem of the roadm
 ## Where to start
 
 - [ROADMAP.md](ROADMAP.md) lists current priorities, completed modules and their remaining gaps. Pick one bounded item, open an issue with the "Theorem proposal" template saying you are on it, and go.
-- The [blueprint](https://robby955.github.io/verified-reserving/blueprint/) is the proved-statement catalogue and dependency graph. Open work is tracked in the roadmap rather than represented by placeholder nodes.
+- The [blueprint](https://robby955.github.io/verified-reserving/blueprint/) is the formalized-declaration catalogue and dependency graph. Open work is tracked in the roadmap rather than represented by placeholder nodes.
 
 ## Open contribution directions
 
-The former good-first list is complete. Current work is narrower and varies in difficulty; check the matching `Still open` paragraph in [ROADMAP.md](ROADMAP.md) before starting.
+The former good-first list is complete. Current work is narrower and varies in difficulty; check the matching module entry in [ROADMAP.md](ROADMAP.md) before starting.
 
 R `ChainLadder` option semantics are closed in `ChainLadderR.lean` against package version 0.2.22 and source commit `41f4e949`; follow-up work should use a newer pinned source diff.
 

@@ -201,7 +201,7 @@ theorem se2recW_step (A B P Sc f X : ℝ) (hf : f ≠ 0) :
   ring
 
 /-- After `m` steps the generalized recursion equals formula (*) truncated at
-development year `n-1-i+m`, for every exponent `α` and every weight function,
+development year `n-1-i+m`, for every natural-number exponent `α` and every weight function,
 provided the generalized development factors used so far are nonzero. -/
 theorem se2recW_eq_closed (C : ℕ → ℕ → ℝ) (n : ℕ) (w : ℕ → ℕ → ℝ) (α i m : ℕ)
     (hf : ∀ k ∈ Ico (n - 1 - i) (n - 1 - i + m), fhatW C n w α k ≠ 0) :
@@ -398,7 +398,7 @@ theorem RandomTriangle.fhatWrv_eq (X : RandomTriangle Ω n) (w : ℕ → ℕ →
 
 /-- **Conditional unbiasedness of Mack's 1999 weighted estimator.** Under (M1)
 in the `D_k` form, with `D_k`-measurable weights and on the event that the
-weighted column sum is nonzero, `E[f̂^w_k | D_k] = f_k` for every exponent `α`.
+weighted column sum is nonzero, `E[f̂^w_k | D_k] = f_k` for every natural-number exponent `α`.
 The hypothesis `C_{ik} ≠ 0` on the contributing entries is what the individual
 factors `F_{ik}` need in any case, and is what makes the multiplier
 `w_{ik} C_{ik}^α / C_{ik}` recover `w_{ik} C_{ik}^α` when it meets `C_{ik}`

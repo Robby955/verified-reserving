@@ -4,10 +4,11 @@
 
 \chapter{Introduction}
 
-This blueprint tracks the formalization of Mack's distribution-free chain-ladder model
-\cite{Mack1993} in Lean 4 on top of mathlib. Each statement below carries the name of its
-Lean declaration; green nodes in the dependency graph are proved, the others are open work
-listed in the roadmap. Statements are given in the paper's own terms, and where a published
+This blueprint tracks formalized claims-reserving and actuarial risk results in Lean 4 on top
+of mathlib, with Mack's distribution-free chain-ladder model \cite{Mack1993} as the central
+strand. Each statement below carries the name of its
+Lean declaration; green nodes in the dependency graph are linked to checked declarations,
+while any open work is listed in the roadmap. Statements use source-aligned terms where applicable, and where a published
 formula is an estimator or an approximation rather than an identity, the text says so.
 
 A run-off triangle with $n$ accident years and $n$ development years is a function
@@ -243,7 +244,7 @@ down to $\mathcal{D}_j$ and Theorem~\ref{thm:unbiased} again for column $j$.
 \uses{thm:uncorrelated, thm:unbiased}
 On a probability space, under the same hypotheses, $E[\hat f_k] = f_k$ and
 $E[\hat f_j \hat f_k] = f_j f_k$ for $j < k$: the chain-ladder factors are unbiased and
-uncorrelated, which is what makes $\prod_k \hat f_k$ an unbiased estimator of $\prod_k f_k$.
+pairwise uncorrelated.
 \end{theorem}
 \begin{proof}\leanok Integrate the conditional statements. \end{proof}
 
@@ -353,23 +354,27 @@ $V_m = \sum_{j<m}\big(\prod_{l=j+1}^{m-1} f_{d+l}\big)^2 \sigma_{d+j}^2\, c \pro
 
 \begin{theorem}[Process variance along a row]\label{thm:procVar}\lean{VerifiedReserving.condVar_C_eq_procVar}\leanok
 \uses{lem:second_moment, lem:C_succ, def:procVar}
-Under (M1) and (M3), $E[C_{i,d+m}^2 \mid \mathcal{D}_d] - E[C_{i,d+m} \mid \mathcal{D}_d]^2 = V_m$
+For $i<n$, under (M1), (M3), and the stated claim, claim-square, residual-square,
+and claim--residual integrability hypotheses,
+$E[C_{i,d+m}^2 \mid \mathcal{D}_d] - E[C_{i,d+m} \mid \mathcal{D}_d]^2 = V_m$
 with $c = C_{i,d}$.
 \end{theorem}
 \begin{proof}\leanok Induction on $m$ with Lemma~\ref{lem:second_moment} and Lemma~\ref{lem:C_succ}. \end{proof}
 
 \begin{lemma}[Conditional MSEP decomposition]\label{lem:msep_decomp}\lean{VerifiedReserving.condExp_sq_sub_of_stronglyMeasurable}\leanok
-For a $\mathcal{D}$-measurable predictor $P$ of $Y$,
+For a sub-sigma-algebra $\mathcal D$, a $\mathcal{D}$-measurable predictor $P$ of $Y$,
+and the stated target-square, predictor-square, and product integrability hypotheses,
 $E[(P - Y)^2 \mid \mathcal{D}] = \big(E[Y^2 \mid \mathcal{D}] - E[Y \mid \mathcal{D}]^2\big) + (P - E[Y \mid \mathcal{D}])^2$.
 \end{lemma}
 \begin{proof}\leanok Expand the square; $P$ comes out of the conditional expectation. \end{proof}
 
 \begin{theorem}[Mack's Theorem 3, exact form]\label{thm:msep}\lean{VerifiedReserving.condMsep_eq}\leanok
 \uses{lem:msep_decomp, thm:procVar, lem:ChatRv_meas, thm:mack1}
-Let $\mathcal{D}$ be the observed data. Assume $\hat C_{i,d+m}$ is $\mathcal{D}$-measurable and
+Let $\mathcal{D}$ be the observed data and $i<n$. Assume $\hat C_{i,d+m}$ is $\mathcal{D}$-measurable and
 that $\mathcal{D}$ adds nothing to $\mathcal{D}_d$ about row $i$'s future (the conditional mean and
 second moment of $C_{i,d+m}$ given $\mathcal{D}$ agree with those given $\mathcal{D}_d$; this is
-what independence across accident years supplies). Then under (M1) and (M3)
+what independence across accident years supplies). Then under (M1), (M3), and the stated
+claim, residual, predictor, square, and product integrability hypotheses,
 \[
 E\big[(\hat C_{i,d+m} - C_{i,d+m})^2 \mid \mathcal{D}\big] = V_m + \big(\hat C_{i,d+m} - C_{i,d}\textstyle\prod_{l<m} f_{d+l}\big)^2 .
 \]
@@ -383,8 +388,8 @@ $\hat C_{i,n-1}^2 \sum_k \hat\sigma_k^2/(\hat f_k^2 S_k)$ is obtained from $(\ha
 Mack's conditional-resampling step: replace $(\hat f_k - f_k)^2$ by $\sigma_k^2/S_k$
 (Theorem~\ref{thm:var_fhat}), drop the cross terms (Theorem~\ref{thm:uncorrelated}), and plug in
 $\hat f, \hat\sigma^2$. This is a definition, not a theorem: it is the approximation in Mack
-(1993), and the exact conditional MSEP above is the object it approximates (Buchwalder,
-Bühlmann, Merz and Wüthrich 2006 estimate the same object differently).
+\cite{Mack1993}, and the exact conditional MSEP above is the object it approximates. Buchwalder,
+Bühlmann, Merz and Wüthrich \cite{BBMW2006} estimate the same object differently.
 \end{definition}
 
 \section{From independence across accident years to the $\mathcal{D}_k$ form}
@@ -463,7 +468,7 @@ $\mathcal{D}_k$. \end{proof}
 Write $a_k = \hat\sigma_k^2/(\hat f_k^2 S_k)$ for the relative estimation variance of
 development factor $k$ along the row. Mack's estimation-error term is
 $\hat C_{i,n-1}^2\sum_k a_k$; the conditional-resampling term of Buchwalder, Bühlmann,
-Merz and Wüthrich (2006), which Murphy (1994) also reaches, is
+Merz and Wüthrich \cite{BBMW2006}, which Murphy \cite{Murphy1994} also reaches, is
 $\hat C_{i,n-1}^2\big(\prod_k (1+a_k) - 1\big)$.
 
 \begin{definition}\label{def:bbmw}\lean{VerifiedReserving.relVar, VerifiedReserving.bbmwEstimation}\leanok
@@ -504,7 +509,8 @@ is $\hat C^2 a_0 a_1 > 0$. Every number is checked by \texttt{norm\_num} from th
 \uses{def:msep, def:bbmw}
 Mack's Corollary: $\widehat{\mathrm{msep}}(\hat R) = \sum_i \widehat{\mathrm{msep}}_i + \sum_i \hat C_i \big(\sum_{j>i}\hat C_j\big)\, 2\sum_{k \in \mathrm{row}\,i} a_k$,
 the cross terms running over the older year's remaining factors. The conditional-resampling
-aggregate replaces $2\sum_k a_k$ by $2(\prod_k (1+a_k) - 1)$ (Buchwalder et al. 2006, Section 4.3).
+aggregate replaces $2\sum_k a_k$ by $2(\prod_k (1+a_k) - 1)$
+\cite[Section 4.3]{BBMW2006}.
 \end{definition}
 
 \begin{theorem}[Aggregated catalogue row]\label{thm:total}\lean{VerifiedReserving.bbmwTotalEstimation_sub_mackTotalEstimation, VerifiedReserving.mackTotalEstimation_le_bbmwTotalEstimation}\leanok
@@ -562,12 +568,13 @@ $E[(\hat f_0 - 2)^2 \mid \mathcal{D}_0] = \sigma_0^2 / S_0$; and $E[\hat\sigma_0
 
 \chapter{Reference computation}
 
-Mack's 1993 example (the Taylor and Ashe 1983 triangle) is reproduced to every printed digit
+Mack's 1993 example \cite{Mack1993}, based on the Taylor and Ashe triangle
+\cite{TaylorAshe1983}, is reproduced to every printed digit
 (nine reserves, the total 18,681 thousand, all standard-error percentages) by a dependency-free
 script implementing the definitions above in floating point. The Lean definitions are over
 $\mathbb{R}$ and noncomputable; the script is the reference computation, not the Lean code.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 \bibitem{Mack1993} T. Mack, Distribution-free calculation of the standard error of chain ladder reserve estimates, ASTIN Bulletin 23 (1993) 213-225.
 \bibitem{Mack1999} T. Mack, The standard error of chain ladder reserve estimates: recursive calculation and inclusion of a tail factor, ASTIN Bulletin 29 (1999) 361-366.
 \bibitem{QuargMack2004} G. Quarg and T. Mack, Munich chain ladder: a reserving method that reduces the gap between IBNR projections based on paid losses and IBNR projections based on incurred losses, Blätter der DGVFM 26 (2004) 597-630; authorized English reprint in Variance 2 (2008) 266-299.
@@ -575,4 +582,16 @@ $\mathbb{R}$ and noncomputable; the script is the reference computation, not the
 \bibitem{EnglandVerrall2002} P. England and R. Verrall, Stochastic claims reserving in general insurance, British Actuarial Journal 8 (2002) 443-518.
 \bibitem{England2002} P. England, Addendum to ``Analytic and bootstrap estimates of prediction errors in claims reserving'', Insurance: Mathematics and Economics 31 (2002) 461-466.
 \bibitem{MerzWuethrich2008} M. Merz and M. V. W\"uthrich, Modelling the claims development result for solvency purposes, Casualty Actuarial Society E-Forum, Fall 2008, 542-568.
+\bibitem{BuhlmannStraub1970} H. B\"uhlmann and E. Straub, Glaubw\"urdigkeit f\"ur Schadens\"atze, Mitteilungen der Vereinigung Schweizerischer Versicherungsmathematiker 70 (1970) 111-133.
+\bibitem{Mack2008BF} T. Mack, The prediction error of Bornhuetter/Ferguson, ASTIN Bulletin 38 (2008) 87-103.
+\bibitem{Panjer1981} H. H. Panjer, Recursive evaluation of a family of compound distributions, ASTIN Bulletin 12 (1981) 22-26.
+\bibitem{Rohr2014} A. R\"ohr, Chain ladder and error propagation, presentation at the Casualty Actuaries in Europe Fall Meeting, 31 October 2014.
+\bibitem{RenshawVerrall1998} A. E. Renshaw and R. J. Verrall, A stochastic model underlying the chain-ladder technique, British Actuarial Journal 4 (1998) 903-923.
+\bibitem{Mack1991} T. Mack, A simple parametric model for rating automobile insurance or estimating IBNR claims reserves, ASTIN Bulletin 21 (1991) 93-109.
+\bibitem{WuthrichMerz2008} M. V. W\"uthrich and M. Merz, Stochastic Claims Reserving Methods in Insurance, Wiley, Chichester, 2008.
+\bibitem{BBMW2006} M. Buchwalder, H. B\"uhlmann, M. Merz and M. V. W\"uthrich, The mean square error of prediction in the chain ladder reserving method (Mack and Murphy revisited), ASTIN Bulletin 36 (2006) 521-542.
+\bibitem{Murphy1994} D. M. Murphy, Unbiased loss development factors, Proceedings of the Casualty Actuarial Society 81 (1994) 154-222.
+\bibitem{Mack1994} T. Mack, Measuring the variability of chain ladder reserve estimates, Casualty Actuarial Society Forum, Spring 1994, 101-182.
+\bibitem{Rohr2016} A. R\"ohr, Chain ladder and error propagation, ASTIN Bulletin 46 (2016) 293-330.
+\bibitem{TaylorAshe1983} G. C. Taylor and F. R. Ashe, Second moments of estimates of outstanding claims, Journal of Econometrics 23 (1983) 37-61.
 \end{thebibliography}

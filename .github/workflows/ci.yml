@@ -50,11 +50,10 @@ jobs:
             exit 1
           fi
           n=$(grep -c "^'VerifiedReserving" axioms.txt)
-          echo "audited theorems: $n"
-          test "$n" -ge 268
+          echo "audited declarations: $n"
+          test "$n" -ge 479
 
-      # A concrete triangle satisfying every hypothesis of the stochastic
-      # theorems, with the headline theorems instantiated on it: the statements
-      # are not vacuous.
+      # A concrete triangle satisfying the core Mack assumptions (M1), (M3),
+      # and (M2'), with representative results instantiated on it.
       - name: Non-vacuity witness
         run: lake env lean VerifiedReserving/Test/Witness.lean

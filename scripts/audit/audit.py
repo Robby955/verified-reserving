@@ -4,8 +4,9 @@
 For every company triangle in the six lines (cumulative paid, upper triangle as
 of year-end 1997) this script evaluates the formalized Mack chain-ladder
 definitions (VerifiedReserving/ChainLadder.lean, Msep.lean, Catalogue.lean) and
-records, in a certificate JSON, which hypotheses of the machine-checked theorems
-hold on that triangle and where the approximations enter.
+records, in a certificate JSON, which audited data-side hypotheses hold on that
+triangle and where the approximations enter. Distributional assumptions that
+cannot be checked from one observed triangle are not certified by the audit.
 
 Numerics follow ../reproduce_mack1993.py `mack()` exactly (zero-based indices,
 f_k from contributing rows, sigma_k^2 with divisor n-k-2, Mack's min-rule for
@@ -340,8 +341,8 @@ def audit_triangle(C, meta):
                       estimable_columns_with_fewer_than_2_nonzero_contributors=few_contrib, holds=len(few_contrib) == 0),
     )
     mack_keys = ["cells_nonneg", "S_nonzero", "C_contributors_nonzero", "latest_diagonal_nonzero", "f_nonzero", "relvar_nonneg", "sigma_df"]
-    hyp["all_mack_theorem_hypotheses_hold"] = all(hyp[k]["holds"] for k in mack_keys)
-    hyp["all_hypotheses_including_bf_hold"] = hyp["all_mack_theorem_hypotheses_hold"] and hyp["f_ge_one"]["holds"]
+    hyp["all_mack_data_hypotheses_hold"] = all(hyp[k]["holds"] for k in mack_keys)
+    hyp["all_data_hypotheses_including_bf_hold"] = hyp["all_mack_data_hypotheses_hold"] and hyp["f_ge_one"]["holds"]
     hyp["failed"] = [k for k in mack_keys + ["f_ge_one"] if not hyp[k]["holds"]]
     cert["hypotheses"] = hyp
 
@@ -487,8 +488,8 @@ def aggregate(certs):
     for g in order:
         cs = groups[g]
         aud = [c for c in cs if c["status"] == "audited"]
-        clean = [c for c in aud if c["hypotheses"]["all_mack_theorem_hypotheses_hold"]]
-        clean_bf = [c for c in aud if c["hypotheses"]["all_hypotheses_including_bf_hold"]]
+        clean = [c for c in aud if c["hypotheses"]["all_mack_data_hypotheses_hold"]]
+        clean_bf = [c for c in aud if c["hypotheses"]["all_data_hypotheses_including_bf_hold"]]
         skipped = [c for c in cs if c["status"] == "skipped"]
         fail_counts = Counter()
         for c in aud:
@@ -519,7 +520,7 @@ def aggregate(certs):
         entry = dict(
             label=LINE_LABEL.get(g, "All six lines"),
             companies=len(cs), audited=len(aud), skipped=len(skipped), skip_reasons=dict(skip_reasons),
-            all_mack_hypotheses_hold=len(clean), all_hypotheses_including_bf_hold=len(clean_bf),
+            all_mack_data_hypotheses_hold=len(clean), all_data_hypotheses_including_bf_hold=len(clean_bf),
             hypothesis_failures=dict(fail_counts),
             n_reference_mack_undefined=sum(1 for c in aud if not c["reference_mack_defined"]),
         )
@@ -558,15 +559,15 @@ def write_tables(agg, order, certs):
     md, tex = [], []
     # Table 1: counts
     md.append("### Table 1. Triangles, audits, hypothesis status, and threshold counts\n")
-    md.append("Excess = (BBMW - Mack)/Mack of the total estimation-error term (cross terms included). LL = |relative change in total Mack S.E.| when the last sigma is extrapolated log-linearly instead of by the min-rule. Counts on the hypothesis-clean set.\n")
-    md.append("| Line | Companies | Audited | Skipped | CL defined | All Mack hyps | + BF f>=1 | Excess >1% | >5% | >10% | LL >1% | >5% | >10% | LL default >1% | >5% | >10% |")
+    md.append("Excess = (BBMW - Mack)/Mack of the total estimation-error term (cross terms included). LL = |relative change in total Mack S.E.| when the last sigma is extrapolated log-linearly instead of by the min-rule. Counts on the data-clean set.\n")
+    md.append("| Line | Companies | Audited | Skipped | CL defined | All Mack data hyps | + BF f>=1 | Excess >1% | >5% | >10% | LL >1% | >5% | >10% | LL default >1% | >5% | >10% |")
     md.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
-    tex.append("% Table 1: counts (line & companies & audited & skipped & CL defined & all Mack hypotheses & incl. BF & excess>1% & >5% & >10% & LL>1% & >5% & >10% & LL default >1% & >5% & >10%)")
+    tex.append("% Table 1: counts (line & companies & audited & skipped & CL defined & all Mack data hypotheses & incl. BF & excess>1% & >5% & >10% & LL>1% & >5% & >10% & LL default >1% & >5% & >10%)")
     for g in order:
         e = agg[g]
         rc, lc = e["sets"]["clean"]["relative_excess_total_counts"], e["sets"]["clean"]["loglinear_abs_rel_change_counts"]
         dc = e["sets"]["clean"]["loglinear_package_default_abs_counts"]
-        cells = [e["label"] if g != "overall" else "All lines", e["companies"], e["audited"], e["skipped"], e["chain_ladder_defined"], e["all_mack_hypotheses_hold"], e["all_hypotheses_including_bf_hold"],
+        cells = [e["label"] if g != "overall" else "All lines", e["companies"], e["audited"], e["skipped"], e["chain_ladder_defined"], e["all_mack_data_hypotheses_hold"], e["all_data_hypotheses_including_bf_hold"],
                  rc["gt_1pct"], rc["gt_5pct"], rc["gt_10pct"], lc["gt_1pct"], lc["gt_5pct"], lc["gt_10pct"], dc["gt_1pct"], dc["gt_5pct"], dc["gt_10pct"]]
         md.append("| " + " | ".join(str(x) for x in cells) + " |")
         tex.append(" & ".join(str(x) for x in cells) + " \\\\" + ("\\midrule" if g == "othliab" else ""))
@@ -582,10 +583,10 @@ def write_tables(agg, order, certs):
     ]
     for key, title, scale, nd in dists:
         md.append(f"### {title}\n")
-        md.append("Hypothesis-clean triangles.\n")
+        md.append("Data-clean triangles.\n")
         md.append("| Line | N | min | Q1 | median | mean | Q3 | max |")
         md.append("|---|---|---|---|---|---|---|---|")
-        tex.append(f"% {title} (line & N & min & Q1 & median & mean & Q3 & max), hypothesis-clean set")
+        tex.append(f"% {title} (line & N & min & Q1 & median & mean & Q3 & max), data-clean set")
         for g in order:
             e = agg[g]
             d = e["sets"]["clean"][key]
@@ -621,10 +622,10 @@ def write_tables(agg, order, certs):
         md.append(f"| {e['label'] if g != 'overall' else 'All lines'} | {len(cs)} | {allz} | {len(cs)-allz} |")
     md.append("")
     # top excess triangles
-    md.append("### Table 10. Ten hypothesis-clean triangles with the largest total relative excess\n")
+    md.append("### Table 10. Ten data-clean triangles with the largest total relative excess\n")
     md.append("| Line | GRCODE | Company | Reserve | Excess % | max a_k % | argmax k | Total S.E. ratio (BBMW/Mack) |")
     md.append("|---|---|---|---|---|---|---|---|")
-    clean = [c for c in certs if c["status"] == "audited" and c["hypotheses"]["all_mack_theorem_hypotheses_hold"] and c["total"]["relative_excess"] is not None]
+    clean = [c for c in certs if c["status"] == "audited" and c["hypotheses"]["all_mack_data_hypotheses_hold"] and c["total"]["relative_excess"] is not None]
     for c in sorted(clean, key=lambda c: -c["total"]["relative_excess"])[:10]:
         md.append(f"| {c['line']} | {c['grcode']} | {c['grname']} | {c['total']['reserve']:,.0f} | {100*c['total']['relative_excess']:.2f} | {100*c['relvar']['max_a']:.2f} | {c['relvar']['argmax_a']} | {c['total']['se_ratio_bbmw_over_mack']:.4f} |")
     md.append("")
@@ -684,7 +685,7 @@ def main():
                  "machine-readable aggregates in `summary.json`; LaTeX table bodies in `tables.tex`; sources and hashes in `SOURCES.md`.\n\n")
         fh.write("Dataset: " + ", ".join(f"{l} {dataset[l]['companies']}" for l, _ in LINES) + f" companies ({sum(d['companies'] for d in dataset.values())} total). ")
         fh.write(f"Audited {agg['overall']['audited']}, skipped {agg['overall']['skipped']} (degenerate). "
-                 f"All Mack-theorem hypotheses hold on {agg['overall']['all_mack_hypotheses_hold']}; adding the BF lemma's f_k >= 1, on {agg['overall']['all_hypotheses_including_bf_hold']}.\n\n")
+                 f"All audited Mack data hypotheses hold on {agg['overall']['all_mack_data_hypotheses_hold']}; adding the BF lemma's data-side condition f_k >= 1, on {agg['overall']['all_data_hypotheses_including_bf_hold']}.\n\n")
         fh.write("## Findings\n\n" + findings.strip() + "\n\n## Aggregate tables\n\n" + md_tables + "\n")
         if duplicates:
             fh.write("## Duplicate triangles within a line (identical 55 upper cells, not all zero)\n\n")
@@ -692,7 +693,7 @@ def main():
                 fh.write(f"- {d['line']}: GRCODE {d['grcode']} ({d['grname']}) equals GRCODE {d['same_as_grcode']} ({d['same_as_grname']})\n")
     print(f"wrote {len(certs)} certificates, summary.json, tables.tex, aggregate_tables.md, AUDIT_RESULTS.md")
     o = agg["overall"]
-    print(f"overall: audited {o['audited']}, CL defined {o['chain_ladder_defined']}, mack() defined {o['reference_mack_defined']}, clean {o['all_mack_hypotheses_hold']}, excess>1% {o['sets']['clean']['relative_excess_total_counts']}, LL {o['sets']['clean']['loglinear_abs_rel_change_counts']}, LL default {o['sets']['clean']['loglinear_package_default_abs_counts']}")
+    print(f"overall: audited {o['audited']}, CL defined {o['chain_ladder_defined']}, mack() defined {o['reference_mack_defined']}, data-clean {o['all_mack_data_hypotheses_hold']}, excess>1% {o['sets']['clean']['relative_excess_total_counts']}, LL {o['sets']['clean']['loglinear_abs_rel_change_counts']}, LL default {o['sets']['clean']['loglinear_package_default_abs_counts']}")
     return 0
 
 

@@ -1,6 +1,6 @@
 \chapter{The stochastic Bornhuetter-Ferguson model}
 
-Mack, \emph{The Prediction Error of Bornhuetter/Ferguson} (2008), states the
+Mack, \emph{The Prediction Error of Bornhuetter/Ferguson} \cite{Mack2008BF}, states the
 increment model on page 91 and derives the prediction-error calculation on
 pages 95--99. The exact probability statements and the practical assessments
 are separated below.
@@ -21,8 +21,9 @@ $z_d=\sum_{k<d}y_k$ is the expected reported proportion.
 \uses{def:bfModel}
 Under BF2 and integrability,
 \[
- E[R_i]=x_i\sum_{d\leq k<m}y_k=x_i(1-z_d).
+ E[R_i]=x_i\sum_{d\leq k<m}y_k.
 \]
+If also $d\leq m$, this equals $x_i(1-z_d)$.
 Under BF1, BF3, and square integrability,
 \[
  \operatorname{Var}(R_i)=x_i\sum_{d\leq k<m}\sigma_k^2.
@@ -48,16 +49,16 @@ square-integrable, then
  =\bigl(E[U]^2+\operatorname{Var}(U)\bigr)\operatorname{Var}(z)
   +\operatorname{Var}(U)(1-E[z])^2.
 \]
-If the BF estimate and true future reserve are independent and have the same
-mean, then
+For $i<n$ under BF1, BF3, the stated square-integrability assumptions, and
+independence and equal means of the BF estimate and true future reserve,
 \[
  \operatorname{msep}(\widehat R^{BF})
  =\operatorname{Var}(\widehat R^{BF})
   +x_i\sum_{d\leq k<m}\sigma_k^2.
 \]
-Under common independence from an observed-data sigma-algebra, the conditional
-expectation of the squared prediction error equals that same constant almost
-surely.
+Under common independence from an observed-data sigma-algebra, square integrability,
+and measurability of the prediction-target pair, the conditional expectation of
+the squared prediction error equals that same constant almost surely.
 \end{theorem}
 \begin{proof}\leanok Factor first and second product moments by independence.
 For MSEP, center the prediction error and add the variances of the independent
@@ -77,7 +78,7 @@ A general linear estimator is $\sum_{i\in A}a_iS_{ik}$.
 \begin{theorem}[Mack equations (1) and (2)]\label{thm:bfRaw}\lean{VerifiedReserving.integral_bfYRawRv, VerifiedReserving.variance_bfYRawRv, VerifiedReserving.integral_bfLinearPatternRv, VerifiedReserving.variance_bfLinearPatternRv, VerifiedReserving.bfLinearPatternRisk_sub_raw, VerifiedReserving.bfYRawRv_best_linear_unbiased, VerifiedReserving.bf_raw_weighted_sq_dev, VerifiedReserving.RandomTriangle.bfResidualSumSqRv_eq, VerifiedReserving.integral_bfSigma2RawOnRv}\leanok
 \uses{def:bfModel, def:bfRaw}
 For nonnegative volumes with nonzero total, the raw estimator is unbiased and
-has variance $\sigma_k^2/\sum_i x_i$. Every linear unbiased competitor,
+has variance $\sigma_k^2/\sum_i x_i$. If $\sigma_k^2\geq0$, every linear unbiased competitor,
 $\sum_i a_i x_i=1$, has at least that variance. With at least two contributors
 and nonzero individual volumes, the residual estimator is unbiased for
 $\sigma_k^2$.

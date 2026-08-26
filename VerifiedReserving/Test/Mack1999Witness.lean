@@ -76,7 +76,7 @@ theorem sum_factorResidual_zero_sq (i : ℕ) (hi : i < 3) :
   simp only [mul_pow, ← mul_sum, sum_xi_sq i hi]
   ring
 
-/-- Weighted CL2 conditioned on each row's own history, for every exponent.
+/-- Weighted CL2 conditioned on each row's own history, for every natural-number exponent.
 In particular this supplies the `α = 0` and `α = 2` cases. -/
 theorem mack3WRow (α : ℕ) : Mack3WRow X μ wUnit α f (σ2Factor α) := by
   constructor

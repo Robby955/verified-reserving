@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Blueprint (what is proved, what is open)
+  - name: Blueprint (formalized declarations)
     url: https://robby955.github.io/verified-reserving/blueprint/
-    about: Every statement with its dependency graph; nodes not yet green are open work.
+    about: Formalized declarations and their dependency graph; open work is tracked in ROADMAP.md.

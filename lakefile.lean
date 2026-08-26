@@ -2,7 +2,7 @@ import Lake
 open Lake DSL
 
 package «verified-reserving» where
-  -- Machine-checked claims reserving in Lean 4: Mack's chain-ladder model.
+  -- Machine-checked claims reserving and actuarial risk mathematics in Lean 4.
 
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4.git" @ "v4.32.2"

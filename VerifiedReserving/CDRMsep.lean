@@ -73,7 +73,7 @@ assumed in.
   (3.4)-(3.10) as definitions.
 * `mwMsepCDR_eq_display`: those definitions collapse to the paper's own
   display (3.17), where the remaining run-off cells appear scaled by
-  `C_{I-j,j}/S^{I+1}_j ≤ 1`. This is the identity that makes Merz-Wüthrich
+  `C_{I-j,j}/S^{I+1}_j`. This is the identity that makes Merz-Wüthrich
   readable next to Mack, and it holds because `S^{I+1}_j = S^I_j + C_{I-j,j}`.
 * `mwVarCDR_eq_plugin` and `mwProcessCDR_eq_plugin`: the bridge. The paper's
   estimator of the first development step is exactly the plug-in of the exact
@@ -236,7 +236,8 @@ def mwPsi (C : ℕ → ℕ → ℝ) (n i : ℕ) : ℝ :=
 `Φ̂^I_{i,J} = ∑_{j=I-i+1}^{J-1} (C_{I-j,j}/S^{I+1}_j)² (σ̂²_j/(f̂^I_j)²) / C_{I-j,j}`.
 The remaining run-off steps enter the one-year uncertainty only through the
 re-estimation of their development factors on the next diagonal, which is why
-each is scaled by `(C_{I-j,j}/S^{I+1}_j)² ≤ 1`. -/
+each is scaled by `(C_{I-j,j}/S^{I+1}_j)²`. No interval bound is claimed for
+the library's general real-valued triangles. -/
 def mwPhi (C : ℕ → ℕ → ℝ) (n i : ℕ) : ℝ :=
   ∑ j ∈ Ico (n - 1 - i + 1) (n - 1),
     (C (n - 1 - j) j / S C (n + 1) j) ^ 2 * (sigma2 C n j / (fhat C n j) ^ 2) / C (n - 1 - j) j
@@ -285,7 +286,7 @@ def mwMsepObsCDR (C : ℕ → ℕ → ℝ) (n i : ℕ) : ℝ :=
 /-! ### The relations among the displayed estimators -/
 
 /-- **Merz-Wüthrich (2008), first line of display (3.11).** The prospective
-estimator exceeds the retrospective one by exactly the estimated variance of
+estimator differs from the retrospective one by exactly the estimated variance of
 the true CDR: `msêp(0) = msêp(ĈDR) + V̂ar(CDR | D_I)`. Algebra on the
 definitions, since `Γ̂ = Φ̂ + Ψ̂`. -/
 theorem mwMsepCDR_eq_mwMsepObsCDR_add_mwVarCDR (C : ℕ → ℕ → ℝ) (n i : ℕ) :
@@ -317,7 +318,8 @@ written out:
   + ∑_{j=I-i+1}^{J-1} (C_{I-j,j}/S^{I+1}_j)(σ̂²_j/(f̂^I_j)²)/S^I_j )`.
 Compared with Mack's Theorem 3 the one-year figure keeps only the first term of
 the process variance, keeps the estimation error of the next diagonal in full,
-and scales every remaining run-off cell by `C_{I-j,j}/S^{I+1}_j ≤ 1`. The
+and scales every remaining run-off cell by `C_{I-j,j}/S^{I+1}_j`. No interval
+bound is claimed without additional sign hypotheses. The
 collapse of the two sums into one is exactly `S^{I+1}_j = S^I_j + C_{I-j,j}`
 (`S_succ_eq`); the hypotheses are that the two column sums involved do not
 vanish. -/
@@ -506,7 +508,7 @@ def mwMsepTotalCDR (C : ℕ → ℕ → ℝ) (n : ℕ) : ℝ :=
   ∑ i ∈ Ico 1 n, mwMsepCDR C n i + ∑ i ∈ Ico 1 n, mwCross C n i
 
 /-- **Merz-Wüthrich (2008), display (3.16): the same decoupling for aggregated
-accident years as for a single one.** The prospective aggregate exceeds the
+accident years as for a single one.** The prospective aggregate differs from the
 retrospective aggregate by the summed estimated variances of the true CDRs plus
 the cross terms `2 Ĉ_i (∑_{k>i} Ĉ_k)(Ξ̂_i - Φ̂_i)`. Algebra on the definitions
 and the single-year display (3.11). -/

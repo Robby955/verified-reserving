@@ -6,7 +6,7 @@ Apply this checklist to each versioned release. Do not call a release published 
 
 - [ ] Record a clean release-candidate commit and confirm its author email is `robbysneiderman@gmail.com`.
 - [ ] Run `lake build` with the committed `lean-toolchain` and `lake-manifest.json`.
-- [ ] Run `lake env lean VerifiedReserving/Test/Axioms.lean`; confirm at least 265 audited declarations and no dependency outside `propext`, `Classical.choice`, and `Quot.sound`.
+- [ ] Run `lake env lean VerifiedReserving/Test/Axioms.lean`; confirm exactly 479 audited declarations and no dependency outside `propext`, `Classical.choice`, and `Quot.sound`.
 - [ ] Run `lake env lean VerifiedReserving/Test/Witness.lean`.
 - [ ] Run `lake -Kenv=dev exe checkdecls blueprint/lean_decls`.
 - [ ] Scan tracked Lean files for `sorry`, `admit`, `native_decide`, and custom `axiom` declarations.
@@ -29,6 +29,6 @@ Apply this checklist to each versioned release. Do not call a release published 
 
 ## Publication
 
-- [ ] Create the signed `v0.1.0` tag only after the release commit and artifacts pass review.
+- [ ] Create the `v0.2.0` tag only after the release commit and artifacts pass review. Claim a signed tag only when GitHub verifies its signature.
 - [ ] Create the GitHub release from that tag and attach artifacts built from the same commit.
 - [ ] If archiving with Zenodo, mint the DOI from the tagged release, verify the archive, then add the DOI in a follow-up metadata commit.

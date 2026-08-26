@@ -7,7 +7,7 @@ labels: theorem
 
 **Statement (in words, then the formula).** What is to be proved, with the source: paper, year, theorem or equation number.
 
-**Hypotheses.** Which of (M1), (M2), (M3) it uses, in which form (row-conditioned or `D_k`-conditioned), plus integrability or nonvanishing conditions.
+**Hypotheses.** State the applicable model assumptions in their exact conditioning form, plus integrability, measurability, independence, positivity, or nonvanishing conditions.
 
 **Status in the source.** Exact theorem, estimator (definition), approximation, or convention. If the source calls it an approximation, the Lean statement must say so.
 

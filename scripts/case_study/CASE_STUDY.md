@@ -6,7 +6,7 @@ Tracked inputs: `raa_cumulative.csv` and `published_r_chainladder.json`. The rep
 
 ## 1. Inputs
 
-The RAA triangle is the Reinsurance Association of America Historical Loss Development Study 1991 Automatic Facultative General Liability triangle, cumulative incurred in $1000 for accident years 1981 to 1990. The committed CSV was prepared in the paper lane from chainladder-python's `raa.csv` and checked there against the R `ChainLadder` vignette and Mack (1994), p. 126. That source-assembly helper is not included here, so reproduction from a clean checkout starts from the committed CSV.
+The RAA triangle is the Reinsurance Association of America Historical Loss Development Study 1991 Automatic Facultative General Liability triangle, cumulative incurred in $1000 for accident years 1981 to 1990. The committed CSV is derived from chainladder-python's `raa.csv` and was cross-checked against the R `ChainLadder` vignette and Mack (1994), p. 126. The source-assembly helper is not included, so reproduction from a clean checkout starts from the committed CSV.
 
 The published comparison column is the R ChainLadder vignette output of `MackChainLadder(RAA, est.sigma = "Mack")`. Mack (1994) p. 130 prints the same table digit for digit, so the R output and Mack's own 1994 calculation are one and the same target.
 
@@ -72,7 +72,7 @@ Same triangle, our formulas, last sigma^2 replaced by 0.6454 (log-linear):
 
 The published default-rule totals (ChainLadder reference page for `summary.MackChainLadder`, call `MackChainLadder(Triangle = RAA)`) are Mack S.E. 26,880.74 and CV(IBNR) 0.5155965; ours are 26,880.74 and 0.515596. Both sigma rules therefore reproduce R; which one applies is decided by the `est.sigma` argument and nothing else. Ultimates and IBNR do not depend on the rule.
 
-So, for anyone comparing against R: the commonly quoted total Mack S.E. of 26,909 is the `est.sigma = "Mack"` figure (and Mack's own 1994 figure); a plain `MackChainLadder(RAA)` prints 26,881. The whole 28-point gap is the last sigma. Every year's standard error moves because every projection passes through f_9; the effect is largest for 1982, whose MSEP is the f_9 term alone (206 versus 143).
+For comparison against R, the reported total Mack S.E. of 26,909 is the `est.sigma = "Mack"` figure and Mack's own 1994 figure; a plain `MackChainLadder(RAA)` prints 26,881. The whole 28-point gap is the last sigma. Every year's standard error moves because every projection passes through f_9; the effect is largest for 1982, whose MSEP is the f_9 term alone (206 versus 143).
 
 ## 5. Exhibit 2: Mack's estimation-error term versus the conditional-resampling term
 
@@ -102,7 +102,7 @@ Reading. The resampling term is always at least Mack's (prod (1 + a_k) - 1 >= su
 
 ## 6. Surprises and cautions
 
-1. The R package default does not reproduce Mack (1994) or the widely quoted 26,909. It prints 26,881, because its default last-sigma rule is the log-linear regression that Mack mentions and declines. Both numbers are correct implementations of their respective rules; anyone citing "the R number" should say which.
+1. The R package default does not reproduce Mack (1994) or the 26,909 result. It prints 26,881, because its default last-sigma rule is the log-linear regression that Mack mentions and declines. Both numbers are correct implementations of their respective rules; anyone citing "the R number" should say which.
 2. The log-linear fit is not marginal on RAA (p = 0.0008), so the fallback to Mack's rule that the package documents never triggers here.
 3. Mack's total MSEP cross-term formula and the pairwise form used for the resampling total agree exactly in the Mack case (assertion in the script), a small consistency check on the cross terms as written in `reproduce_mack1993.py`.
 4. On RAA the Mack versus resampling gap is negligible at the total level and only visible for the youngest year. A triangle with larger a_k (small S_k or large sigma_k^2 in several periods) would separate the two formulas more; RAA is not that triangle.

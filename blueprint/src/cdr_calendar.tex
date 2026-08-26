@@ -9,16 +9,16 @@ statements.
 At calendar time $t$,
 \[
  \mathcal D^{\mathrm{cal}}_t
- = \sigma\{C_{i,j}: i<n,\ i+j\le t\}.
+ = \sigma\{C_{i,j}: i<n,\ j<n,\ i+j\le t\}.
 \]
 The companion sigma-algebra \texttt{otherCalendar} contains the observed cells
 from every row except a specified accident year.
 \end{definition}
 
 \begin{theorem}[The calendar triangle splits at one row]\label{thm:calendarSplit}\lean{VerifiedReserving.RandomTriangle.calendarSigma_mono, VerifiedReserving.RandomTriangle.calendarSigma_eq_sup, VerifiedReserving.condExp_calendarSigma_eq_rowSigma}\leanok
-\uses{def:calendarSigma, thm:independenceWitnessRows}
-At time $i+k$, the calendar triangle is row $i$ through development $k$ joined
-with the observed parts of the other rows. Under accident-year independence,
+\uses{def:calendarSigma, def:rowAssumptions, thm:condExp_sup}
+For $i<n$ and $k<n$, at time $i+k$ the calendar triangle is row $i$ through development
+$k$ joined with the observed parts of the other rows. Under accident-year independence,
 conditioning a row-$i$ random variable on this calendar triangle is the same as
 conditioning it on row $i$ through $k$.
 \end{theorem}
@@ -34,8 +34,10 @@ The true claims development result over $t\to t+1$ is
 
 \begin{theorem}[Exact calendar-year CDR]\label{thm:calendarCDR}\lean{VerifiedReserving.condExp_calendarTrueCDR_eq_zero, VerifiedReserving.calendarTrueCDR_eq_of_rows, VerifiedReserving.condExp_sq_calendarTrueCDR_of_rows, VerifiedReserving.condVar_calendarTrueCDR_of_rows}\leanok
 \uses{def:calendarCDR, thm:calendarSplit, def:Mack1, def:Mack3}
-The true calendar CDR has conditional mean zero. Under the row-conditioned
-Mack assumptions and independent accident years, at time $i+k$ it equals
+The raw mean-zero equality needs only a finite measure; since conditional expectation is
+zero off the integrable case in the formalization, it has its intended probabilistic meaning
+when the ultimate is integrable. For $i<n$ and $k<n-1$, under the row-conditioned Mack assumptions, independent accident
+years, row integrability, and squared-residual integrability, at time $i+k$ it equals
 \[
  \left(\prod_{j=k+1}^{n-2} f_j\right)
  (f_kC_{i,k}-C_{i,k+1}),

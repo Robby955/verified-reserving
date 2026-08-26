@@ -1,7 +1,7 @@
 \chapter{Merz-Wüthrich: the MSEP of the one-year claims development result}
 
-Merz and Wüthrich (2008), \emph{Modelling the claims development result for solvency purposes},
-Casualty Actuarial Society E-Forum, Fall 2008, pages 542-568, quantify the uncertainty of the
+Merz and Wüthrich, \emph{Modelling the claims development result for solvency purposes}
+\cite{MerzWuethrich2008}, quantify the uncertainty of the
 one-year move of the predicted ultimate. The previous chapter defined the true claims development
 result and proved that it has conditional mean zero; this chapter adds its second moment, which is
 the conditional mean squared error of predicting it by the budget value $0$, and records the
@@ -73,7 +73,7 @@ With $d = I - i$,
 \end{align*}
 The later development steps enter the one-year figure only through the re-estimation of their
 development factors on the next diagonal, which is why each is scaled by
-$(C_{I-j,j}/S^{I+1}_j)^2 \le 1$.
+$(C_{I-j,j}/S^{I+1}_j)^2$. No interval bound is claimed for general real-valued triangles.
 \end{definition}
 
 \begin{definition}[Displays (3.8)-(3.10)]\label{def:mwMsep}\lean{VerifiedReserving.mwVarCDR, VerifiedReserving.mwProcessCDR, VerifiedReserving.mwParamCDR, VerifiedReserving.mwMsepCDR, VerifiedReserving.mwMsepObsCDR}\leanok
@@ -106,7 +106,8 @@ If the column sums $S^I_j$ and $S^{I+1}_j$ along the row do not vanish, then
 \]
 Read next to Mack's Theorem 3, the one-year figure keeps only the first term of the process
 variance, keeps the estimation error of the next diagonal in full, and scales every remaining
-run-off cell by $C_{I-j,j}/S^{I+1}_j \le 1$.
+run-off cell by $C_{I-j,j}/S^{I+1}_j$. No interval bound is claimed without additional sign
+hypotheses.
 \end{theorem}
 \begin{proof}\leanok
 The two sums combine term by term: with $s = S^I_j$, $c = C_{I-j,j}$ and $s + c = S^{I+1}_j$ by
@@ -165,7 +166,7 @@ for the prospective view (3.15).
 
 \begin{theorem}[Display (3.16)]\label{thm:mw_total}\lean{VerifiedReserving.mwMsepTotalCDR_sub_mwMsepTotalObsCDR}\leanok
 \uses{def:mw_total, lem:mw_311}
-The aggregated prospective estimator exceeds the aggregated retrospective one by
+The aggregated prospective estimator differs from the aggregated retrospective one by
 $\sum_i \widehat{\mathrm{Var}}(\mathrm{CDR}_i(I+1)\mid\mathcal{D}_I)
  + 2\sum_{k>i>0}\hat C^I_{i,J}\hat C^I_{k,J}(\hat\Xi^I_{i,J} - \hat\Phi^I_{i,J})$: the same
 decoupling for aggregated accident years as for a single one.

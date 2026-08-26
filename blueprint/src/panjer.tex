@@ -1,7 +1,7 @@
 \chapter{Panjer recursion}
 
 Panjer, \emph{Recursive Evaluation of a Family of Compound Distributions}
-(1981), equation~(1), assumes claim-count probabilities satisfying
+\cite{Panjer1981}, equation~(1), assumes claim-count probabilities satisfying
 $p_n=p_{n-1}(a+b/n)$. For a severity distribution supported on the positive
 integers, equation~(5) gives a direct recursion for the aggregate mass.
 
@@ -35,7 +35,7 @@ compare coefficients. \end{proof}
 
 \begin{theorem}[Geometric and unit-severity check]\label{thm:panjer-check}\lean{VerifiedReserving.geometricFrequencyMass_panjer, VerifiedReserving.massSeries_unitSeverityMass, VerifiedReserving.compoundMass_unitSeverity, VerifiedReserving.geometric_unitSeverity_panjer_equation5}\leanok
 \uses{def:panjer, thm:panjer}
-The geometric masses $(1-q)q^n$ satisfy the Panjer recurrence with $(a,b)=(q,0)$.
+The geometric coefficients $(1-q)q^n$ satisfy the Panjer recurrence with $(a,b)=(q,0)$.
 For deterministic severity one, composition leaves the count mass unchanged,
 and the resulting geometric instance satisfies equation~(5) at every index.
 \end{theorem}

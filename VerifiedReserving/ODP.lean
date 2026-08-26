@@ -25,8 +25,8 @@ These are the equations obtained by setting the derivatives of the quasi-Poisson
 log-likelihood `∑ (X log m - m)/φ` in the row and column parameters to zero;
 `deriv_rowQuasiLogLik_eq_zero_iff` and `deriv_colQuasiLogLik_eq_zero_iff` prove
 that here, so the dispersion `φ` cancels and the name "score equations" is
-earned rather than asserted. That cancellation is the reason chain ladder is
-quoted as a generalized linear model: the fit does not depend on `φ`, only on
+earned rather than asserted. That cancellation is the algebraic basis for the
+chain-ladder/GLM equivalence: the fit does not depend on `φ`, only on
 the mean structure, and the ODP fit is the Poisson fit.
 
 What this file proves.
@@ -40,11 +40,11 @@ What this file proves.
   *is* the chain-ladder fit, cell by cell. That is Mack's uniqueness result.
 
 Source note. Neither paper was available in full text for this formalization.
-What is formalized is the marginal-sum system as it is universally quoted (see
+What is formalized is the marginal-sum system as reported in the cited secondary sources (see
 also England and Verrall, *Stochastic claims reserving in general insurance*,
 British Actuarial Journal 8 (2002) 443-518, Section 2.3, and Wüthrich and Merz,
-*Stochastic Claims Reserving Methods in Insurance* (2008), Section 2.3), stated
-in the two papers' own terms. The displayed equations of the sources are
+*Stochastic Claims Reserving Methods in Insurance* (2008), Section 2.3), using
+the terminology attributed there. The displayed equations of the sources are
 therefore named by section and by the display itself, not by number.
 
 Everything here is deterministic: no probability space appears. The ODP

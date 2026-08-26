@@ -8,8 +8,8 @@
 
 \chapter{The over-dispersed Poisson model}
 
-Renshaw and Verrall, \emph{A stochastic model underlying the chain-ladder technique},
-British Actuarial Journal 4 (1998) 903--923, put the run-off triangle in incremental
+Renshaw and Verrall, \emph{A stochastic model underlying the chain-ladder technique}
+\cite{RenshawVerrall1998}, put the run-off triangle in incremental
 form, $X_{i,k} = C_{i,k} - C_{i,k-1}$ with $X_{i,0} = C_{i,0}$, and model the
 incrementals as an over-dispersed Poisson (ODP) generalized linear model: independent,
 with mean $m_{i,k}$ and variance $\varphi\, m_{i,k}$, and a log link carrying a row
@@ -18,7 +18,7 @@ effect and a column effect, so the mean is multiplicative,
   m_{i,k} = a_i b_k , \qquad \sum_{k=0}^{n-1} b_k = 1 .
 \]
 Mack, \emph{A simple parametric model for rating automobile insurance or estimating
-IBNR claims reserves}, ASTIN Bulletin 21 (1991) 93--109, starts from the same
+IBNR claims reserves} \cite{Mack1991}, starts from the same
 multiplicative mean and estimates it from the \emph{marginal sums}. Both papers arrive
 at the same system: for each accident year $i$ and each development year $k$,
 \[
@@ -38,10 +38,8 @@ positive multiplicative solution of the system \emph{is} chain ladder
 
 \emph{Source note.} Neither paper was available in full text for this formalization.
 What is formalized is the marginal-sum system as quoted above and as it is stated in
-the secondary literature (England and Verrall, \emph{Stochastic claims reserving in
-general insurance}, British Actuarial Journal 8 (2002) 443--518, Section 2.3;
-W\"uthrich and Merz, \emph{Stochastic Claims Reserving Methods in Insurance} (2008),
-Section 2.3), in the two papers' own terms. The displayed equations of Renshaw and
+the secondary literature: England and Verrall \cite[Section 2.3]{EnglandVerrall2002}
+and W\"uthrich and Merz \cite[Section 2.3]{WuthrichMerz2008}. The displayed equations of Renshaw and
 Verrall (Section 3) and of Mack (Section 2) are therefore identified by section and by
 the display itself, not by an equation number. Nothing here is probabilistic: the ODP
 assumption enters only through the shape of the score equations, which are algebraic
@@ -132,8 +130,8 @@ $\sum_{k \le m} X_{i,k} = C_{i,m}$ and $\sum_{k \le m} \hat X_{i,k} = \hat C_{i,
 For every accident year $i$,
 $\sum_{k \le n-1-i} \hat X_{i,k} = C_{i,\,n-1-i} = \sum_{k \le n-1-i} X_{i,k}$: the
 chain-ladder fit reproduces every observed row total. This is the first marginal-sum
-family of Mack (1991), Section 2, and the row score equation of Renshaw and Verrall
-(1998), Section 3. No hypothesis is needed.
+family of Mack \cite[Section 2]{Mack1991}, and the row score equation of Renshaw and Verrall
+\cite[Section 3]{RenshawVerrall1998}. No hypothesis is needed.
 \end{theorem}
 \begin{proof}\leanok
 Both sides telescope to the latest observed entry, by Lemma~\ref{lem:telescope} and
@@ -166,8 +164,8 @@ development year $k$
   \sum_{i \le n-1-k} \hat X_{i,k} = \sum_{i \le n-1-k} X_{i,k}:
 \]
 the chain-ladder fit reproduces every observed column total. This is the second
-marginal-sum family of Mack (1991), Section 2, and the column score equation of Renshaw
-and Verrall (1998), Section 3.
+marginal-sum family of Mack \cite[Section 2]{Mack1991}, and the column score equation of Renshaw
+and Verrall \cite[Section 3]{RenshawVerrall1998}.
 \end{theorem}
 \begin{proof}\leanok
 For $k = 0$ the incrementals are the cumulatives and this is Lemma~\ref{lem:colCum}. For
@@ -184,7 +182,7 @@ system of Definition~\ref{def:score}.
 
 \section{Uniqueness: the marginal-sum solution is chain ladder}
 
-Mack (1991), Section 2, states the converse: the marginal-sum estimates of the
+Mack \cite[Section 2]{Mack1991} states the converse: the marginal-sum estimates of the
 multiplicative model are the chain-ladder estimates. Positivity of the parameters
 replaces the informal assumption that the triangle is a real one.
 

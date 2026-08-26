@@ -1,6 +1,6 @@
 \chapter{Stochastic Bühlmann-Straub credibility}
 
-Bühlmann and Straub (1970), Sections 3, 5, and 6, model a loss ratio $X_l$
+Bühlmann and Straub \cite{BuhlmannStraub1970}, Sections 3, 5, and 6, model a loss ratio $X_l$
 using a latent risk parameter $\Theta$. This chapter fixes the contract
 conditions. Conditional on $\Theta$, the loss
 ratios have common mean $M=\mu(\Theta)$ and process variance
@@ -41,7 +41,7 @@ loss in Definition~\ref{def:bs}.
 \begin{theorem}[Conditional residual moments]\label{thm:bsResidualMoments}\lean{VerifiedReserving.buhlmannStraubWeightedMeanRv_sub_riskMean, VerifiedReserving.condExp_buhlmannStraubResidual_eq_zero, VerifiedReserving.condExp_buhlmannStraubWeightedResidualTotal_eq_zero, VerifiedReserving.integral_buhlmannStraubWeightedResidualTotal_eq_zero, VerifiedReserving.integral_buhlmannStraubPredictor_eq_collectiveMean, VerifiedReserving.condExp_sq_buhlmannStraubWeightedResidualTotal, VerifiedReserving.integral_sq_buhlmannStraubWeightedMeanRv_sub_riskMean, VerifiedReserving.integral_buhlmannStraubRiskMean_mul_weightedResidual_eq_zero}\leanok
 \uses{def:bsStochastic, def:bsRisk}
 The weighted residual total has conditional mean zero and conditional second
-moment $SP$. Consequently,
+moment $SP$. When the total exposure $P$ is nonzero, it follows that
 \[
  E[(\bar X-M)^2]=\frac vP,
  \qquad E[(M-m)(\bar X-M)]=0.

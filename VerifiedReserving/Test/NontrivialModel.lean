@@ -133,11 +133,11 @@ theorem sum_xi_sq (i : ℕ) (hi : i < 3) : ∑ ω : Ω, xi i ω ^ 2 = 8 := by
 
 theorem sum_xi_mul (i j : ℕ) (hi : i < 3) (hj : j < 3) (hij : i ≠ j) :
     ∑ ω : Ω, xi i ω * xi j ω = 0 := by
-  interval_cases i <;> interval_cases j <;> simp [xi, Fin.sum_univ_eight] at * <;> norm_num
+  interval_cases i <;> interval_cases j <;> simp [xi, Fin.sum_univ_eight] at *
 
 theorem sum_Cw_one (i : ℕ) (hi : i < 3) : ∑ ω : Ω, Cw i 1 ω = 8 * (c * fdev) := by
   rw [Cw_succ]
-  simp only [pow_one, mul_add, mul_one, sum_add_distrib, sum_const, card_univ, Fintype.card_fin,
+  simp only [mul_add, mul_one, sum_add_distrib, sum_const, card_univ, Fintype.card_fin,
     nsmul_eq_mul, ← mul_sum, sum_xi i hi]
   ring
 
@@ -159,7 +159,7 @@ theorem eps_zero_eq (i : ℕ) : X.eps f i 0 = fun ω => c * fdev * s * xi i ω :
   ext ω
   simp only [RandomTriangle.eps, X]
   rw [Cw_succ, Cw_zero]
-  simp only [f, pow_one]; ring
+  simp only [f]; ring
 
 theorem eps_succ_eq (i k : ℕ) : X.eps f i (k + 1) = fun _ => 0 := by
   ext ω
@@ -178,7 +178,7 @@ theorem mack3 : Mack3 X μ f σ2 := by
     show μ[fun ω => (X.eps f i 0 ω) ^ 2 | Dfil 0] =ᵐ[μ] fun ω => σ2 0 * Cw i 0 ω
     rw [eps_zero_eq, condExp_bot_eq_sum, sum_eps_sq i hi, Cw_zero]
     refine Eventually.of_forall fun _ => ?_
-    simp only [σ2, if_true, ↓reduceIte]; ring
+    simp only [σ2, ↓reduceIte]; ring
   | succ k =>
     show μ[fun ω => (X.eps f i (k + 1) ω) ^ 2 | Dfil (k + 1)] =ᵐ[μ] fun ω => σ2 (k + 1) * Cw i (k + 1) ω
     rw [eps_succ_eq]
@@ -241,7 +241,7 @@ theorem Srv_pos (k : ℕ) (hk : k + 2 ≤ 3) : ∀ᵐ ω ∂μ, X.Srv k ω ≠ 0
     simp only [S, RandomTriangle.at, X, contributors]
     rw [show (3 : ℕ) - 1 - 1 = 1 from rfl, sum_range_one, Cw_succ]
     have := xi_bounds 0 ω
-    simp only [c, fdev, s, pow_one]
+    simp only [c, fdev, s]
     nlinarith [this.1, this.2]
 
 /-- Theorem 2 on the model: `E[f̂_0 | D_0] = 2`, although `f̂_0` is random. -/

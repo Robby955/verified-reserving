@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use verified-reserving, please cite it as below."
 type: software
 title: "verified-reserving: machine-checked claims reserving in Lean 4"
-version: "0.1.0"
+version: "0.2.0"
 date-released: 2026-08-25
 authors:
   - family-names: Sneiderman
@@ -18,8 +18,9 @@ keywords:
   - formal verification
   - Lean 4
 abstract: >-
-  Lean 4 formalization of Mack's distribution-free chain-ladder model for
-  claims reserving. The library separates exact conditional results from
-  plug-in estimators and conventions, derives the observed-data form of the
-  model from independent accident years, checks the published numerical
-  example, and audits every listed declaration for proof dependencies.
+  Lean 4 formalization of claims-reserving and actuarial risk results,
+  including Mack chain ladder, Munich chain ladder, stochastic ODP,
+  claims development results, Bornhuetter-Ferguson, Buhlmann-Straub, and
+  Panjer recursion. The library separates exact results from estimators,
+  approximations, and conventions, and includes an explicit proof-dependency
+  audit of 479 named declarations.
