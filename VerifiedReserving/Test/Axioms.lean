@@ -189,6 +189,37 @@ set_option format.width 400
 #print axioms mult_cum_eq_CLcum
 #print axioms multFit_eq_CLincr
 
+#print axioms odpCellSigma_le
+#print axioms odpObservedSigma_le
+#print axioms ODPModel.mean_pos
+#print axioms odpIndep_cell_observed
+#print axioms condExp_odpCell_given_observed
+#print axioms condExp_sq_odpCell_sub_given_observed
+#print axioms integral_odpAggregate
+#print axioms variance_odpAggregate
+#print axioms meanSquaredPredictionError_eq_variance_add
+#print axioms odpAggregateMsep_eq
+#print axioms glmAggregateMsep_singleton
+#print axioms logLinkFit_eq_multFit
+#print axioms cornerRow_zero
+#print axioms cornerColumn_zero
+#print axioms logLinkFit_corner_eq_multFit
+#print axioms pearsonResidual_bootstrapIncremental
+#print axioms bootstrapIncremental_pearsonResidual
+#print axioms ODPWitness.coin_singleton
+#print axioms ODPWitness.integral_cellValue
+#print axioms ODPWitness.variance_cellValue
+#print axioms ODPWitness.odpCellRv_X
+#print axioms ODPWitness.integral_X
+#print axioms ODPWitness.variance_X
+#print axioms ODPWitness.model
+#print axioms ODPWitness.nontrivial
+#print axioms ODPWitness.independentFutureObserved
+#print axioms ODPWitness.conditionalMean
+#print axioms ODPWitness.conditionalVariance
+#print axioms ODPWitness.twoCellMsep
+#print axioms ODPWitness.exists_nondegenerate_odp_model
+
 #print axioms IndependenceWitness.rowsGenerateD
 #print axioms IndependenceWitness.measurableSet_shockEvent
 #print axioms IndependenceWitness.measure_shockEvent
