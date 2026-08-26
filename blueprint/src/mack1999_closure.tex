@@ -1,0 +1,90 @@
+\chapter{Mack 1999: row assumptions and active weights}
+
+Mack's weighted CL2 is conditioned on the history of one accident year.  The
+full-filtration formula and the cross-accident-year cancellation therefore
+come from the same independence step as their Mack 1993 counterparts.  Zero
+weights are handled by fixing the active observations before fitting the
+weighted mean.
+
+\begin{definition}[Row-conditioned weighted CL2]
+\label{def:mack3w-row}
+\lean{VerifiedReserving.Mack3WRow}
+\leanok
+The weights are measurable for the accident year's history and
+\[
+ \mathbb E\!\left[(F_{i,k}-f_k)^2\mid C_{i,0},\ldots,C_{i,k}\right]
+ = \frac{\sigma_k^2}{w_{i,k}C_{i,k}^{\alpha}}.
+\]
+\end{definition}
+
+\begin{theorem}[Transport of weighted CL2]
+\label{thm:mack3w-row-transport}
+\lean{VerifiedReserving.mack3W_of_mack3WRow}
+\leanok
+\uses{def:mack3w-row}
+If the rows are independent and generate the observed-data filtration, then
+row-conditioned weighted CL2 implies \texttt{Mack3W}, its form conditioned on
+the full data through development year~$k$.
+\end{theorem}
+\begin{proof}\leanok
+Split the filtration into row~$i$ and the other rows.  Conditioning on the
+independent enlargement leaves the squared factor residual unchanged.
+\end{proof}
+
+\begin{theorem}[Cross-factor terms from independent rows]
+\label{thm:mack2-factor-rows}
+\lean{VerifiedReserving.mack2Factor'_of_rows}
+\leanok
+Under row-conditioned CL1, nonzero cumulative claims and integrability, row
+independence gives
+\[
+ \mathbb E[(F_{i,k}-f_k)(F_{j,k}-f_k)\mid D_k]=0,
+ \qquad i\ne j.
+\]
+\end{theorem}
+\begin{proof}\leanok
+Enlarge $D_k$ by the whole of row~$j$, take its residual outside the
+conditional expectation, use the zero conditional mean for row~$i$, and
+apply the tower property.
+\end{proof}
+
+\begin{definition}[Active contributors and variance estimator]
+\label{def:sigma2w-active}
+\lean{VerifiedReserving.activeContributors, VerifiedReserving.sigma2WOn,
+VerifiedReserving.sigma2WActive}
+\leanok
+The active set is the fixed subset of contributors with nonzero deterministic
+weight.  For an active set $A$,
+\[
+ \widehat\sigma_{k,A}^2
+ =\frac{1}{|A|-1}\sum_{i\in A}w_{i,k}C_{i,k}^{\alpha}
+   (F_{i,k}-\widehat f_{k,A})^2.
+\]
+When cumulative claims are nonzero, membership in $A$ is equivalent to a
+nonzero weighted volume.
+\end{definition}
+
+\begin{theorem}[Active weighted variance is unbiased]
+\label{thm:sigma2w-active-unbiased}
+\lean{VerifiedReserving.condExp_sigma2WActiveRv}
+\leanok
+\uses{def:mack3w-row, def:sigma2w-active}
+For at least two active observations, weighted CL2, the cross-factor condition
+and the stated nonvanishing and integrability hypotheses imply
+\[
+ \mathbb E[\widehat\sigma_{k,A}^2\mid D_k]=\sigma_k^2.
+\]
+The set $A$ is fixed; the theorem makes no claim for a selection rule that
+depends on the outcome.
+\end{theorem}
+
+\begin{theorem}[Finite witnesses for $\alpha=0$ and $\alpha=2$]
+\label{thm:mack1999-weighted-witnesses}
+\lean{VerifiedReserving.Mack1999Witness.exists_weighted_witness_alpha_zero,
+VerifiedReserving.Mack1999Witness.exists_weighted_witness_alpha_two}
+\leanok
+The eight-outcome independent-row model satisfies the row-conditioned and
+full-filtration weighted assumptions, the derived cross-factor condition and
+active-estimator unbiasedness for both named exponents.  Its first-step
+factor variance is positive and its claims are genuinely random.
+\end{theorem}

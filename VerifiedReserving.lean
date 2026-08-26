@@ -15,6 +15,7 @@ import VerifiedReserving.TotalReserve
 import VerifiedReserving.Rohr
 import VerifiedReserving.TotalMsep
 import VerifiedReserving.Mack1999
+import VerifiedReserving.Mack1999Closure
 import VerifiedReserving.ODP
 import VerifiedReserving.CDRMsep
 import VerifiedReserving.ObservedData
@@ -25,3 +26,4 @@ import VerifiedReserving.BFPriorUncertainty
 import VerifiedReserving.BuhlmannStraub
 import VerifiedReserving.Test.NontrivialModel
 import VerifiedReserving.Test.IndependenceWitness
+import VerifiedReserving.Test.Mack1999Witness
