@@ -73,12 +73,13 @@ Conventions: accident years `i` and development years `k` are zero-based, `C i k
 | Renshaw-Verrall 1998 / Mack 1991: chain ladder solves the system | `chainLadder_fitted_row_totals`, `chainLadder_fitted_row_totals_eq`, `chainLadder_fitted_column_totals`, `chainLadder_scoreEquations` | identical; the column half needs nonzero development factors |
 | Mack 1991, Section 2: uniqueness of the multiplicative fit | `multFit_eq_CLincr`, `mult_cum_eq_CLcum`, `patternCum_mul_fhat` | Lean stronger hypotheses: strict positivity of `a` and `b` and the normalization `∑_{k<n} b_k = 1` |
 | Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve`, `bfUltimate`, `bfReserve_of_ultimate`, `bfUltimate_of_ultimate`, `bfReserve_smul`, `bfReserve_add`, `one_le_cdf`, `bfReserve_nonneg`, `bfReserve_le` | definitions plus deterministic identities; the module names no source display |
+| Mack 2008, BF1--BF3 and prediction error, pp. 91 and 95--99 | `BFFullIncrementIndependence`, `BFIncrementMean`, `BFIncrementVariance`, `integral_bfFutureReserveRv`, `variance_bfFutureReserveRv`, `variance_bfStochasticReserveEstimate`, `condExp_sq_bfPredictionError_eq`, `covariance_mul_mul_of_pair_indep` | exact model moments and decompositions; raw estimators, standard-error assessments and covariance truncation are definitions |
 | Non-vacuity: degenerate witness | `Witness.X`, `Witness.fhat_unbiased`, `Witness.ultimate_unbiased` | not in any source; certifies the hypotheses are jointly satisfiable |
 | Non-vacuity: a nondegenerate Mack model | `NontrivialModel.exists_nontrivial_mack_model`, `NontrivialModel.fhat0_unbiased`, `NontrivialModel.ultimate_unbiased`, `NontrivialModel.var_fhat0`, `NontrivialModel.sigma2_unbiased` | not in any source; `σ_0² = 4 > 0` and the first development step is genuinely random |
 | Non-vacuity: independent rows and the row-generated filtration | `IndependenceWitness.exists_independence_witness`, `IndependenceWitness.rowsIndep`, `IndependenceWitness.rowsGenerateD`, `IndependenceWitness.mack1Row`, `IndependenceWitness.mack1_from_rows`, `IndependenceWitness.mack2'_from_rows` | not in any source; realizes Mack 1993 eq. (1)-(2) and the `B_k` filtration on eight outcomes |
 | Non-vacuity: the cross-term condition of the total | `NontrivialModel.crossFree_ultimates`, `NontrivialModel.exists_crossFree_nondegenerate` | not in any source; three genuinely random ultimates, conditionally uncorrelated |
 
-Thirty-seven rows.
+Thirty-eight rows.
 
 ## The deterministic layer
 
@@ -688,6 +689,51 @@ with the chain-ladder ultimate as prior returns the chain-ladder ultimate and re
 
 **Gap.** Definitions plus deterministic identities. The module names no source display, so there
 is no numbered statement to compare against; nothing stochastic is claimed about the method.
+
+### Mack 2008, BF1--BF3 and the prediction error
+
+**Source.** Mack (2008), page 91, assumes that all increments `S_i,k` are independent (BF1),
+have means `x_i y_k` with the development proportions summing to one (BF2), and have variances
+`x_i σ_k²` (BF3). The same page derives the mean and variance of the future row sum. Pages 94--95
+describe selected priors and development patterns as practically independent and assume their
+unbiasedness. Pages 95--96 split the single-year MSEP into estimation and process variance and use
+the variance formula for a product of independent random variables. Equations (3), (4), (6), and
+(7) give raw or assessed inputs. Pages 98--99 give the exact product-covariance identity for the
+total reserve, then omit its middle term as lower order and assess the remaining correlations.
+
+**Lean.** `BFFullIncrementIndependence`, `BFIncrementMean`, `BFIncrementVariance`, and
+`BFPatternNormalized` state BF1--BF3. The independence predicate covers the full natural-number
+family, which is stronger than the source's finite modeled rectangle; each theorem consumes only
+a finite restriction. `integral_bfFutureReserveRv` and `variance_bfFutureReserveRv` prove the exact
+mean `x_i(1-z_d)` and variance `x_i ∑_{d≤k<m} σ_k²` under integrability or square integrability.
+`variance_mul_of_indepFun` proves the general product-variance identity, and
+`variance_bfStochasticReserveEstimate` specializes it to `U(1-z)`. The latter explicitly assumes
+that `U` and `z` are independent and that their product is square-integrable.
+
+`meanSquaredPredictionError_eq_variance_add` proves that independent, equal-mean prediction and
+target variables have MSEP equal to the sum of their variances.
+`bfMeanSquaredPredictionError_eq` substitutes BF3. `BFObservedPredictionIndependence` is the
+source's common-independence condition for the pair consisting of estimate and future reserve.
+`condExp_sq_bfPredictionError_eq` then proves the page 95 conditional statement for any observed
+sigma-algebra satisfying that condition. `covariance_mul_mul_of_pair_indep` proves all three terms
+of the exact product-covariance identity before the source drops the middle one.
+`integral_bfYRawRv` proves the raw estimator in equation (1) is unbiased under BF2, and
+`variance_bfYRawRv` proves its exact variance `σ_k²/∑_i x_i` under BF1 and BF3. This is the
+equality used as the basis for equation (6), before the source replaces the raw estimator by a
+smoothed selection.
+
+**Gap.** `bfYRaw`, `bfSigma2Raw`, `bfYStdErrSq`, `bfZStdErrSq`,
+`bfProcessErrorEstimate`, `bfEstimationErrorEstimate`, `bfMsepEstimate`, and
+`bfCovarianceApprox` are definitions. Lean does not claim that manual smoothing, tail
+extrapolation, the 50 percent tail coefficient of variation, the minimum in equation (7), the
+Dirichlet correlation assessment, or the omitted covariance term is statistically valid. It also
+does not prove the source's full claims following equations (1)--(2): the raw pattern estimator's
+unbiasedness is proved, but its best-linear property and the variance estimator's unbiasedness
+require separate finite estimation theorems.
+
+`Test/BFPredictionWitness.lean` gives a one-point model with unit increments and zero process
+variance. It instantiates BF1--BF3, the future-reserve moments, and the conditional MSEP theorem.
+This checks satisfiability of the hypotheses but not a positive-variance version of the model.
 
 ## Non-vacuity
 
