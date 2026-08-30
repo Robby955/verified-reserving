@@ -1,173 +1,101 @@
-# verified-reserving
+# Verified Reserving
 
 [![CI](https://github.com/Robby955/verified-reserving/actions/workflows/ci.yml/badge.svg)](https://github.com/Robby955/verified-reserving/actions/workflows/ci.yml)
-[![Blueprint](https://github.com/Robby955/verified-reserving/actions/workflows/blueprint.yml/badge.svg)](https://robby955.github.io/verified-reserving/blueprint/)
+[![Blueprint](https://github.com/Robby955/verified-reserving/actions/workflows/blueprint.yml/badge.svg)](https://github.com/Robby955/verified-reserving/actions/workflows/blueprint.yml)
+[![Release](https://img.shields.io/github/v/release/Robby955/verified-reserving?label=release)](https://github.com/Robby955/verified-reserving/releases/latest)
 [![Lean 4](https://img.shields.io/badge/Lean-4.32.2-blue)](https://leanprover.github.io/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-green.svg)](LICENSE)
 
-Machine-checked claims reserving and actuarial risk mathematics in Lean 4. The library covers Mack and Munich chain ladder, stochastic ODP, one-year claims development, Bornhuetter-Ferguson, Bühlmann-Straub credibility, and Panjer recursion.
+**Machine-checked mathematics for claims reserving and actuarial risk in Lean 4.**
 
-[Blueprint](https://robby955.github.io/verified-reserving/blueprint/) (statements, dependency graph, what is proved) | [API docs](https://robby955.github.io/verified-reserving/docs/) | [Roadmap](ROADMAP.md) | [Contributing](CONTRIBUTING.md)
+The library formalizes results from Mack chain ladder, Munich chain ladder, over-dispersed Poisson models, one-year claims development, Bornhuetter-Ferguson prediction error, Bühlmann-Straub credibility, and Panjer recursion. The Lean statements expose their formal hypotheses; the statement-fidelity ledger records source alignment and gaps. The repository distinguishes proved theorems from encoded estimators, approximations, and actuarial conventions.
 
-## What is proved
+[Blueprint](https://robby955.github.io/verified-reserving/blueprint/) · [API documentation](https://robby955.github.io/verified-reserving/docs/) · [Theorem catalogue](docs/THEOREM_CATALOGUE.md) · [Statement fidelity](docs/STATEMENT_FIDELITY.md) · [Latest release](https://github.com/Robby955/verified-reserving/releases/latest)
 
-Everything below is in the repository and builds against mathlib without `sorry` or custom axioms. CI audits the proof dependencies of 479 named declarations; each uses only `propext`, `Classical.choice`, and `Quot.sound`, or no axioms.
+## Mathematical core
 
-Deterministic layer (`VerifiedReserving/ChainLadder.lean`). A run-off triangle is a function `C : ℕ → ℕ → ℝ`. The chain-ladder development factor, the individual factors, Mack's variance estimator, the projected ultimate, the reserve, and Mack's mean squared error of prediction (MSEP) are definitions. Proved: the development factor is the weighted mean of the individual factors; the weighted sum-of-squares decomposition that gives the `n-k-2` degrees of freedom of the variance estimator; the projection identities.
+For a cumulative run-off triangle $C_{i,k}$, the chain-ladder factor is
 
-Munich chain ladder, separate-projection gap (`VerifiedReserving/MunichChainLadder.lean`). Paid and incurred cumulative triangles are completed separately with their own chain-ladder factors. `sclColumnTotal_succ` proves that a completed column total evolves by the original factor, and `sclColumnTotal_eq_mul_prod` iterates that step. `quargMack_gap_identity` then proves Quarg and Mack's boxed Section 1.1.2 identity: separate chain ladder preserves each row's paid/incurred ratio relative to the completed portfolio ratio. This is the systematic gap that motivates the Munich correlation adjustment formalized in the next module.
+```math
+\widehat f_k
+=
+\frac{\displaystyle\sum_{i=0}^{n-k-2} C_{i,k+1}}
+     {\displaystyle\sum_{i=0}^{n-k-2} C_{i,k}}.
+```
 
-Munich residual and practical layers (`VerifiedReserving/MunichStochastic.lean`). `MunichTriangle` joins paid and incurred row histories. `MunichRowsIndep` states PIU for the finite `n` accident years through period `n - 1`, while `MunichPaidRegression` and `MunichIncurredRegression` state Quarg and Mack's PQ and IQ assumptions for adjacent periods within that horizon. Under explicit measurability, integrability, and unit conditional-second-moment standardization, `condExp_mul_eq_slope_of_residual_regression` proves that the residual cross-moment equals the common regression slope. The raw pattern, dispersion, residual, pooled-slope and adjusted-factor formulas of Section 3.1.2 are definitions. `munichProjection_zero` proves that the coupled projection reduces exactly to separate chain ladder when both residual slopes are zero.
+When each contributing $C_{i,k}$ is nonzero, Lean proves that $\widehat f_k$ is the $C_{i,k}$-weighted mean of the individual factors $F_{i,k}=C_{i,k+1}/C_{i,k}$ in [`fhat_eq_weighted_average`](VerifiedReserving/ChainLadder.lean).
 
-Published numerical example (`VerifiedReserving/Mack1993Table1.lean`). The Taylor-Ashe cumulative triangle from Mack (1993), Table 1 is an exact Lean definition. `taylorAshe_fhat_0` through `_8` and `taylorAshe_sigma2_0` through `_7` prove the rational estimator values corresponding to Mack's printed development factors and the eight variances supplied by the estimator. `taylorAshe_total_reserve_rounds` proves that the summed reserve lies in the nearest-thousand interval printed as 18,681 in Table 2. The ninth variance is extrapolated rather than estimated and is kept outside the theorem set; Mack's printed 0.477 conflicts with the stated extrapolation rule and printed standard errors, which give 0.447.
+For a $\mathcal D$-measurable predictor $P$ and target $Y$, under the stated measurability and integrability hypotheses, the exact conditional prediction-error identity holds almost surely:
 
-Model diagnostics (`VerifiedReserving/Mack1994Tests.lean`). Mack's 1994 Appendix G test ranks adjacent factor columns on their common accident years; Appendix H splits each factor column around its median and counts small and large factors along calendar diagonals. The exact uniform-permutation moments for one Spearman coefficient and the fair-label binomial formulas (H1)-(H2) are proved combinatorially. Mack's aggregate variance formulas and Normal cutoffs remain nominal definitions because they add cross-statistic uncorrelatedness and approximate Normality.
+```math
+\mathbb E\!\left[(P-Y)^2\mid\mathcal D\right]
+=
+\mathrm{Var}(Y\mid\mathcal D)
++
+\left(P-\mathbb E[Y\mid\mathcal D]\right)^2.
+```
 
-Lognormal approximation (`VerifiedReserving/LognormalCI.lean`). Mack's moment-matched parameters `σ² = log(1 + v/m²)` and `μ = log m - σ²/2` are definitions. For positive mean `m` and nonnegative variance `v`, the standard lognormal mean and variance expressions are proved to equal `m` and `v`. This checks the parameter conversion but makes no claim that a reserve distribution is lognormal.
+Lean proves this as [`condExp_sq_sub_of_stronglyMeasurable`](VerifiedReserving/Msep.lean). [`condMsep_eq`](VerifiedReserving/Msep.lean) specializes it under Mack's conditional moment assumptions plus explicit observed-data, measurability, and integrability hypotheses; [`condMsep_eq_of_rows`](VerifiedReserving/ObservedData.lean) derives these conditions from row-conditioned Mack assumptions, a row-generated filtration, and independent accident years.
 
-Bühlmann-Straub credibility (`VerifiedReserving/BuhlmannStraub.lean`). For exposure weights `P_l`, the module defines the weighted individual mean, the credibility factor `Z = P_· w / (v + P_· w)`, and the estimate `Z X̄ + (1-Z)m` in the form of Bühlmann and Straub (1970), display (4), with the source's portfolio mean supplied as `m`. Completing the weighted quadratic loss around the closed-form estimate proves its normal equation and minimality when the total quadratic coefficient is positive. Under nonnegative variance components the credibility factor lies in `[0,1]`. The variance components and collective mean are inputs; these deterministic theorems do not estimate them.
+Write $S_k=\sum_{r=0}^{n-k-2}C_{r,k}$ for the observed column total, $\widehat C_{i,k}$ for the chain-ladder projection, and $\widehat\sigma_k^2$ for Mack's variance estimator. The familiar plug-in expression is kept separate as a definition:
 
-Stochastic Bühlmann-Straub (`VerifiedReserving/BuhlmannStraubStochastic.lean`). A latent risk mean `M = μ(Θ)` has collective mean `m` and between-risk variance `w`; conditional loss-ratio variance is `σ²(Θ)/P_l`, its expectation is `v`, and distinct process residuals have zero conditional cross moment. When the total exposure `P` is nonzero, the kernel derives `E[(X̄-M)²] = v/P` and proves the exact prediction-risk identity `E[(M-(m+z(X̄-m)))²] = (1-z)²w + z²v/P`. It completes the resulting coefficient quadratic at `Z = Pw/(v+Pw)`. When `P > 0` and `v + Pw > 0`, the minimizing predictor is pointwise the existing deterministic estimate. A two-outcome witness has process variance `v=1>0` and a nonconstant observation. The source's stronger conditional independence and its estimation of the collective and variance parameters remain separate from these theorems.
+```math
+\widehat{\mathrm{msep}}_i
+=
+\widehat C_{i,n-1}^{\,2}
+\sum_{k=n-1-i}^{n-2}
+\frac{\widehat\sigma_k^{\,2}}{\widehat f_k^{\,2}}
+\left(
+  \frac{1}{\widehat C_{i,k}}
+  +
+  \frac{1}{S_k}
+\right).
+```
 
-Panjer recursion (`VerifiedReserving/Panjer.lean`). Claim-count coefficients satisfying Panjer's `(a,b,0)` recurrence are represented by a formal generating series. `panjerFrequency_iff_derivative` turns the count recurrence into its formal differential equation; substitution of a positive-integer severity series and the power-series chain rule then prove Panjer's discrete compound-distribution recursion, equation (5), coefficient by coefficient. `compoundMass_eq_finsum` gives the usual convolution mixture of equation (6), while the geometric count family with deterministic unit severity supplies an infinite algebraic check. The coefficients are real and need not be nonnegative or normalized, so probability interpretation remains a separate assumption.
+This separation prevents an exact conditional theorem from being confused with its data-based estimator.
 
-Mack 1999 equals Mack 1993 (`VerifiedReserving/Recursion.lean`). Mack's 1999 paper restates the 1993 MSEP as a recursion along each accident year and says the recursion leads to the closed form. `se2rec_eq_msep` proves the two are the same estimator (for the unit-weight, `α = 1` case) whenever the development factors along the row are nonzero.
+## Formalized scope
 
-Bornhuetter-Ferguson (`VerifiedReserving/BornhuetterFerguson.lean`). The BF reserve and ultimate on the chain-ladder pattern are definitions; proved: linearity in the a priori ultimate, BF with the chain-ladder ultimate as prior returns chain ladder exactly, and the BF reserve is a fraction of the prior when every development factor is at least one.
+| Area | Representative results |
+|---|---|
+| Mack chain ladder | [Conditional MSEP](VerifiedReserving/Msep.lean), [total MSEP](VerifiedReserving/TotalMsep.lean), process and estimation variance, factor moments, and [$\widehat\sigma_k^2$ unbiasedness](VerifiedReserving/SigmaUnbiased.lean). |
+| Reserving variants | [Weighted Mack 1999](VerifiedReserving/Mack1999.lean), the [represented Röhr formula](VerifiedReserving/Rohr.lean), [arbitrary-horizon definitions](VerifiedReserving/RohrHorizon.lean), and both branches of source-pinned R [`ChainLadder` 0.2.22](VerifiedReserving/ChainLadderR.lean). |
+| Paid and incurred | The [Quarg-Mack separate-projection gap](VerifiedReserving/MunichChainLadder.lean), [residual-regression identities](VerifiedReserving/MunichStochastic.lean), and reduction of the coupled Munich projection at zero slopes. |
+| One-year risk | [Development-year](VerifiedReserving/CDR.lean) and [calendar-year](VerifiedReserving/CDRCalendar.lean) true CDR moments, finite witnesses, and the [Merz-Wüthrich product-to-sum remainder](VerifiedReserving/CDRMsep.lean). |
+| ODP | [Chain-ladder score equations](VerifiedReserving/ODP.lean), [stochastic cell moments and prediction error](VerifiedReserving/ODPStochastic.lean), and definition-level delta-method and bootstrap formulas. |
+| Credibility and BF | [Bühlmann-Straub prediction risk](VerifiedReserving/BuhlmannStraubStochastic.lean) and credibility minimization; [Mack 2008 Bornhuetter-Ferguson](VerifiedReserving/BFPredictionError.lean) mean, variance, prediction error, and raw estimators. |
+| Aggregate loss | [Panjer's recursion](VerifiedReserving/Panjer.lean) as a formal-series identity; probability normalization and nonnegativity remain assumptions. |
 
-BF prior uncertainty (`VerifiedReserving/BFPriorUncertainty.lean`). The a priori ultimate is now a random variable whose generated sigma-algebra is independent of the observed triangle. `condExp_bfReservePriorRv` proves that its conditional BF reserve is the observed outstanding fraction times the prior mean, and `condVar_bfReservePriorRv` proves that its conditional variance is the square of that fraction times the prior variance. This is the exact prior component of Mack's 2008 product-variance calculation for the repository's chain-ladder-pattern BF specialization; the exact independence hypothesis is stronger than Mack's practical-independence description.
+The [theorem catalogue](docs/THEOREM_CATALOGUE.md) maps the source statements to Lean names and proof status. The [blueprint](https://robby955.github.io/verified-reserving/blueprint/) provides the dependency graph and a typeset account of the development.
 
-BF prediction error (`VerifiedReserving/BFPredictionError.lean`). Mack's BF1--BF3 increment model is stated directly: all increments are independent, `E[S_ik] = x_i y_k`, the `y_k` sum to one, and `Var(S_ik) = x_i σ_k²`. For `d≤m`, `integral_bfFutureReserveRv` and `variance_bfFutureReserveRv` prove the future reserve has mean `x_i(1-z_d)` and variance `x_i ∑_{k=d}^{m-1} σ_k²`. For an independent random prior and selected pattern, `variance_bfStochasticReserveEstimate` proves the exact product-variance formula. `condExp_sq_bfPredictionError_eq` gives Mack's single-year conditional MSEP split under explicit common independence from the observed data. `bfYRawRv_best_linear_unbiased` proves equation (1)'s best-linear-unbiased claim under nonnegative process variance, and `integral_bfSigma2RawOnRv` proves equation (2)'s residual variance estimator is unbiased. `Test/BFPredictionWitness.lean` instantiates BF1--BF3 and the conditional MSEP theorem on a one-point, zero-variance model. The selected-pattern standard-error assessments, plug-in MSEP, and total covariance approximation are definitions; smoothing, tail choices, covariance truncation, and validity of those selected assessments are not asserted as theorems.
+## Verification and boundaries
 
-Stochastic layer (`VerifiedReserving/Stochastic.lean`). A `RandomTriangle` carries random cumulative claims and the filtration `D k` of everything observed up to development year `k`. Assumption (M1), `E[C_{i,k+1} | D_k] = f_k C_{i,k}`, is a definition. Mack's Theorem 2 is proved in full: `condExp_fhatRv` gives `E[f̂_k | D_k] = f_k` on `{S_k ≠ 0}`, `condExp_fhatRv_mul` gives `E[f̂_j f̂_k | D_j] = f_j f_k` for `j < k` by the tower property, and `integral_fhatRv`, `integral_fhatRv_mul` are the unconditional forms: the chain-ladder factors are unbiased and uncorrelated.
-
-Mack's Theorem 1 (`VerifiedReserving/Ultimate.lean`). `condExp_C_of_Mack1` iterates (M1) to `E[C_{i,d+m} | D_d] = C_{i,d} ∏ f_k`; `condExp_ChatRv` shows the chain-ladder projection has the same conditional expectation; `condExp_ultimate_eq` gives the conditional statement: the chain-ladder ultimate is a conditionally unbiased estimator of the true ultimate claims, `E[Ĉ_{i,n-1} | D_d] = E[C_{i,n-1} | D_d]`.
-
-Estimation variance (`VerifiedReserving/Variance.lean`). Assumptions (M3) (conditional variance) and (M2') (conditional uncorrelatedness of residuals across accident years) are recorded as definitions; `condExp_sq_fhatRv_sub` proves E[(f̂_k − f_k)² | D_k] = σ²_k / S_k, the estimation-variance term of Mack's formula.
-
-Independence across accident years (`VerifiedReserving/Independence.lean`). Mack states (M1) and (M3) conditioned on a single accident year's own history and assumes separately that the accident years are independent; every theorem above conditions on `D_k`. `condExp_sup_of_indep` is the general fact behind the passage: if `m₂` is independent of a σ-algebra `m₁'` that carries both `f` and `m₁`, then `E[f | m₁ ⊔ m₂] = E[f | m₁]`. Mathlib has the case `m₁ = ⊥` (`condExp_indep_eq`); the join version is proved here from the characterisation of conditional expectation, on the π-system of rectangles `a ∩ b`. With the row σ-algebras `rowSigma`, `rowSigmaAll`, `otherRowsSigma`, with `RowsIndep` as (M2) and `RowsGenerateD` saying that `D_k` is the join of the rows' histories up to `k`, `mack1_of_mack1Row` and `mack3_of_mack3Row` derive (M1) and (M3) in the `D_k` form from Mack's row-conditioned statements. `mack2'_of_rows` goes one step further: the cross-term assumption (M2'), a hypothesis of the variance theorems, is a consequence of independence across accident years rather than an extra assumption.
-
-Independent-row witness (`VerifiedReserving/Test/IndependenceWitness.lean`). On the eight-outcome space, each accident year uses its own independent sign shock and the filtration is defined as the join of all row histories observed through development year `k`. The kernel checks `RowsIndep`, `RowsGenerateD`, `Mack1Row` and `Mack3Row`, then instantiates the derived `D_k` assumptions, the exact single-row and total MSEP wrappers, and three nonzero calendar CDR updates.
-
-Unbiasedness of σ̂² (`VerifiedReserving/SigmaUnbiased.lean`). `weighted_sq_dev_eps` rewrites the weighted sum of squares around f̂_k as residual terms minus S_k(f̂_k − f_k)²; `condExp_sigma2Rv` then gives E[σ̂²_k | D_k] = σ²_k for k + 3 ≤ n, which is exactly why Mack divides by n − k − 2.
-
-Process variance and Theorem 3 (`VerifiedReserving/ProcessVariance.lean`, `VerifiedReserving/Msep.lean`). Conditional second moments and their tower recursion; `procVar`, the process variance along a row, proved equal to the conditional variance of the true claims; the exact conditional-MSEP decomposition for any measurable predictor; and `condMsep_eq`, Mack's Theorem 3 in exact form conditioned on the observed data: process variance plus squared estimation error. Mack's plug-in estimators of the two terms, including the conditional-resampling approximation, are definitions (`mackProcess`, `mackEstimation`), so the exact statement and the approximation never get confused.
-
-The variant catalogue (`VerifiedReserving/Catalogue.lean`). With `a_k = σ̂²_k/(f̂²_k S_k)`, Mack's estimation-error term `Ĉ² Σ a_k` is proved to be the first-order part of the conditional-resampling term `Ĉ² (∏(1 + a_k) − 1)` of Buchwalder, Bühlmann, Merz and Wüthrich (2006). Their difference is exactly `Ĉ² (∏(1+a_k) − 1 − Σ a_k)`, and the two coincide when a single development factor is involved. When every `a_k` is nonnegative, Mack ≤ BBMW and the difference is at most `Ĉ² (e^{Σ a} − 1 − Σ a)`. The algebraic relationship is exact; comparative statistical performance remains a separate question (Gisler 2019, Siegenthaler 2023). `Counterexample.lean` exhibits a concrete four-by-four triangle on which the two estimators differ strictly (`exists_mackEstimation_lt_bbmwEstimation`), every number checked by `norm_num`. In R's `ChainLadder`, `mse.method = "Mack"` computes the sum and `mse.method = "Independence"` the product, so the identity is also the exact difference between those two options.
-
-Non-vacuity (`VerifiedReserving/Test/NontrivialModel.lean`, `Test/Witness.lean`). `exists_nontrivial_mack_model` constructs a genuinely stochastic Mack model (three accident years, eight equally likely outcomes, an independent ±1 shock per accident year, σ₀² = 4 > 0) satisfying (M1), (M3) and (M2'), and instantiates Theorems 1 and 2, the estimation variance and σ̂² unbiasedness on it. A degenerate witness is kept alongside. Writing the witnesses caught a hypothesis no real triangle could satisfy (a nonvanishing column sum demanded for columns with no contributors); the theorems now ask for it only where the row uses it, and the model assumptions are quantified over the triangle's rows rather than over all natural numbers.
-
-Total reserve (`VerifiedReserving/TotalReserve.lean`). Mack's Corollary (the aggregate MSEP with cross terms between accident years) and the aggregated conditional-resampling counterpart as definitions; the difference of the aggregated estimation-error terms is the row-wise product-minus-sum remainder weighted by the ultimates, so Mack's total is at most the resampling total under nonnegativity.
-
-R `ChainLadder` option semantics (`VerifiedReserving/ChainLadderR.lean`). The module pins package version 0.2.22 at source commit `41f4e949` and transcribes the parameter-risk recursions in `MackRecursive.S.E` and `TotalMack.S.E`. Both options share the step `c²v + pf²`; `mse.method = "Independence"` adds exactly the cross-product `pv` that `"Mack"` omits. For one accident year, induction proves that the two source branches return `mackEstimation` and `bbmwEstimation`. The generic total recursion is also proved equal to its finite-sum closed form, and the aggregate option formulas select `mackTotalEstimation` and `bbmwTotalEstimation`. This is a formula-level transcription of the pinned R source, not a claim that Lean executed the package.
-
-Exact total MSEP (`VerifiedReserving/TotalMsep.lean`). The object behind Mack's Corollary, as opposed to the plug-in `msepTotal`. `CondCrossFree` names the cross-term condition `E[(C_i - M_i)(C_j - M_j) | D] = 0` for `i ≠ j`, which is what independence across accident years supplies; `condMsepTotal_eq` proves that, conditionally on the observed data, the mean squared error of prediction of the summed ultimates is the sum of the single-year process variances plus the square of the summed estimation errors, so the cross terms of the Corollary are what expanding that square produces. `sum_procVar_le_condMsepTotal` is the corollary that the exact total is at least the sum of the process variances. On the deterministic side, `msepTotal_eq_sum_mackProcess_add_mackTotalEstimation` shows the plug-in has the same two-part shape once the row's development factors and projections are nonzero. `crossFree_ultimates` exhibits the cross-term condition on the nondegenerate model: three genuinely random ultimates whose centred versions are conditionally uncorrelated.
-
-The observed data (`VerifiedReserving/ObservedData.lean`). The exact MSEP theorems condition on a sigma-algebra of observed data and name what they need from it: that it says nothing about accident year `i` beyond that year's own history (two hypotheses, one for the conditional mean and one for the conditional second moment), that the chain-ladder prediction is measurable for it, and that the centred true ultimates of two accident years are conditionally uncorrelated. Mack gets all of them from independence across accident years in one sentence in the proof of Theorem 3. This module names the sigma-algebra, `obsSigma`, the join over accident years of each row's history up to its latest observed diagonal, and proves that sentence. `obsSigma_eq_sup` splits it at any one row; `condExp_obsSigma_eq_rowSigma` and `condExp_D_eq_rowSigma` then send both conditional expectations to the same one, so `condExp_obsSigma_eq_D` is the pair of `hfut` hypotheses of `condMsep_eq`; and every chain-ladder estimator is `obsSigma`-measurable with no hypothesis. `condMsep_eq_of_rows` is Mack's Theorem 3 in exact form from (M1row), (M3row), independence, the row-generated filtration and square integrability. `condCrossFree_of_rows` derives the cross-term condition, and `condMsepTotal_eq_of_rows` is the Corollary on the same footing. Both wrappers are instantiated on the eight-outcome witness.
-
-Röhr 2016 equals Mack 1993 (`VerifiedReserving/Rohr.lean`). Röhr (ASTIN Bulletin 46 (2016) 293-330) derives the prediction error from the error-propagation formula: the ultimate is a product of estimated development factors, so a first-order expansion turns the relative squared error of the product into a sum of relative squared errors, one per factor, each splitting into a process part σ̂²_k/(f̂²_k Ĉ_{i,k}) and a parameter part σ̂²_k/(f̂²_k S_k). `rohrMsep_eq_msep` proves that his linearized single-accident-year formula is Mack's 1993 closed form exactly, with no side condition: unlike the Mack-versus-BBMW row, this catalogue row has zero correction term. `rohrProcess_eq_mackProcess` is the substantive half, identifying the linearized relative process term with `procVar`, the recursive process variance, whenever the development factors and the projected claims along the row are nonzero; `rohrParameter_eq_mackEstimation` identifies the parameter term with Mack's estimation term, which `bbmwEstimation_sub_rohrParameter` then exhibits as the first-order part of the conditional-resampling term. Reading Mack's formula through that split gives `msep_eq_mackProcess_add_mackEstimation`, which the library did not previously have: the 1993 closed form is the plug-in process variance plus the estimation term. The full text of Röhr (2016) is paywalled; the module docstring records exactly which displayed formula was formalized and from which source, and Röhr's own aggregation over accident years is left as a documented definition (`rohrMsepTotal`) rather than attributed.
-
-Röhr arbitrary horizons (`VerifiedReserving/RohrHorizon.lean`). Röhr's primary-author CAE 2014 slides give the ultimate relative-MSEP approximation `Σ_j û_j² q̂_j` and the `k`-year CDR approximation `Σ_j û_j²(q̂_j-q̂_{j-k})/(1-q̂_{j-k})`, then split both algebraically into process and parameter terms. The module records the displayed formulas as definitions, proves the exact splits, and derives the zero-year, one-year, and ultimate endpoints with explicit denominator conditions. Under pointwise conditions `0 ≤ q̂_{j-k} ≤ q̂_j ≤ 1` and `q̂_{j-k} < 1`, it proves nonnegativity and `[0,1]` bounds for the horizon weights. The influence sequence and squared uncertainties are inputs. No theorem identifies these slide approximations with a stochastic MSEP or claims they are full-paper formulas.
-
-General weights and exponent (`VerifiedReserving/Mack1999.lean`, `VerifiedReserving/Mack1999Closure.lean`). Mack's 1999 paper widens the factor estimator to `f̂_k = ∑_i w_ik C_ik^α F_ik / ∑_i w_ik C_ik^α`, with weights `w_ik` and an exponent α; α = 1 with unit weights is the 1993 estimator, α = 0 the simple average of the individual factors, α = 2 the regression through the origin. The whole family is defined here (`fhatW`, `sigma2W`, the projection `ChatW`, the closed form `msepW` which is the paper's equation (*), and the recursion `se2recW` displayed below it), and `se2recW_eq_msepW` proves the recursion returns the closed form for every weight function and every natural-number exponent, under the same nonvanishing hypothesis on the development factors as the unit-weight case. In the stochastic layer, `Mack3WRow` states weighted CL2 given an accident year's own history and includes predictable weights; `mack3W_of_mack3WRow` transports it to `Mack3W` under `RowsGenerateD` and `RowsIndep`. `mack2Factor'_of_rows` derives the cross-factor condition from row-conditioned CL1 and independence. `activeContributors` omits deterministic zero weights, `Mack3WOn` restricts CL2 to those cells, and `condExp_sigma2WActiveRv` proves that the corresponding `sigma2WOn` estimator is conditionally unbiased with `active.card - 1` degrees of freedom. The eight-outcome model instantiates these results with positive variance at both α = 0 and α = 2. The tail factor of Section 3 is a convention whose parameters the actuary supplies, so `tailUltimate` and `tailSe2Step` are definitions and no theorem uses them.
-
-The one-year claims development result (`VerifiedReserving/CDR.lean`, `VerifiedReserving/CDRCalendar.lean`). The development-year form and the source's calendar-year form are both present. `calendarSigma t` is generated by the modeled cells with `i<n`, `j<n`, and `i+j≤t`; for `i<n` and `k<n`, at time `i+k` it splits into row `i` through `k` plus independent information from the other rows. The raw mean-zero equality needs only a finite measure; because mathlib sets conditional expectation to zero off the integrable case, it has its intended probabilistic meaning when the ultimate is integrable. For `i<n` and `k<n-1`, under (M1row), (M3row), accident-year independence, and the stated row and squared-residual integrability conditions, the true calendar CDR equals `(∏_{j>k} f_j)(f_k C_{i,k} - C_{i,k+1})` and has conditional second moment `(∏_{j>k} f_j)² σ_k² C_{i,k}`. The observable CDR remains a definition because its distribution uses an approximation.
-
-Chain ladder as a generalized linear model (`VerifiedReserving/ODP.lean`). Renshaw and Verrall (British Actuarial Journal 4 (1998) 903-923) model the incremental claims as an over-dispersed Poisson generalized linear model with a log link, mean `m_{i,k} = a_i b_k` and variance `φ m_{i,k}`; Mack (ASTIN Bulletin 21 (1991) 93-109) fits the same multiplicative mean by marginal sums. Both land on one system: the fitted values reproduce the observed row and column totals of the observed triangle. `hasDerivAt_rowQuasiLogLik` and `deriv_rowQuasiLogLik_eq_zero_iff`, with their column counterparts, prove that this system is the stationarity condition of the quasi-Poisson log-likelihood `∑ (X log m - m)/φ`, so the dispersion cancels and the equations are score equations rather than merely marginal totals. `chainLadder_fitted_row_totals` and `chainLadder_fitted_column_totals` prove that the chain-ladder fitted incrementals solve them: the row half is a telescoping identity needing no hypothesis, the column half is a downward induction whose step is the definition of `f̂_k` as the ratio of the two column sums, and it needs only that the development factors used are nonzero. `multFit_eq_CLincr` is the converse, Mack's uniqueness result: a positive multiplicative fit with `∑_k b_k = 1` satisfying the marginal sums is the chain-ladder fit cell by cell. Together they establish the represented chain-ladder/GLM equivalence. The two papers were not available in full text; the module docstring records that the marginal-sum system, not a numbered display, is what was formalized.
-
-Stochastic ODP layer (`VerifiedReserving/ODPStochastic.lean`). `ODPModel` couples positive dispersion, a positive corner-constrained log-link mean surface, and independent square-integrable incremental cells with `E[X_{i,k}] = m_{i,k}` and `Var(X_{i,k}) = φ m_{i,k}`. A future cell conditioned on any disjoint finite set of observed cells retains that mean and second central moment; finite future aggregates have variance `φ Σ m`. The process-plus-estimation MSEP identity is exact under explicit independence and unbiasedness. England and Verrall's delta-method single-cell and aggregate formulas remain definitions, as does the two-stage residual bootstrap; the Pearson residual inversion is proved exactly, but no coverage or validity result is claimed. The log-link and positive multiplicative parametrizations are proved equivalent under corner constraints. A four-coin product witness gives four genuinely independent random cells and conditions one future cell on a nonempty observed set.
-
-Merz-Wüthrich one-year uncertainty (`VerifiedReserving/CDRMsep.lean`). The exact development-year and calendar-year conditional moments are theorems. The published observable-CDR estimators remain definitions. Appendix (A.1) is now an explicit boundary: `mwA1ProductIncrement` is `∏(1+a)-1`, `mwA1LinearApprox` is `Σa`, and `mwA1Remainder` is their exact difference. Lean proves the source's lower-bound statement for nonnegative increments and identifies the two-factor discarded term as `ab`; it does not identify the remainder with zero or turn the surrounding resampling argument into an exact distribution theorem.
-
-Four hundred and seventy-nine named declarations have an explicit proof-dependency audit as of 2026-08-25. The generated blueprint manifest contains 660 links to 659 distinct declarations, all checked against the library. The library covers Mack chain-ladder variance, Munich paid/incurred reserving, stochastic ODP moments and prediction error, weighted Mack 1999 results, calendar-year CDR, Röhr horizon formulas, Bühlmann-Straub credibility, Bornhuetter-Ferguson prediction error, and Panjer recursion. [ROADMAP.md](ROADMAP.md) records the remaining distributional and approximation boundaries.
-
-## Theorem map
-
-Where the headline source statements live in the library. The theorem and witness entries are covered by `VerifiedReserving/Test/Axioms.lean`; definitions are checked by the full build and blueprint declaration checker.
-
-For each headline result, [docs/STATEMENT_FIDELITY.md](docs/STATEMENT_FIDELITY.md) sets the published statement beside the Lean statement with every hypothesis listed, says where the two differ, and lists the hypotheses still assumed rather than derived.
-
-| Paper statement | Lean name | Status |
-|---|---|---|
-| f̂_k is the C-weighted mean of the individual factors | `fhat_eq_weighted_average` | theorem |
-| Mack 1993 Theorem 1: Ĉ_{i,n-1} conditionally unbiased for C_{i,n-1} | `condExp_ultimate_eq` | theorem |
-| Mack 1993 Theorem 2: f̂_k unbiased; f̂_j and f̂_k uncorrelated | `condExp_fhatRv`, `condExp_fhatRv_mul`, `integral_fhatRv`, `integral_fhatRv_mul` | theorem |
-| σ̂²_k unbiased (why n-k-2 degrees of freedom) | `condExp_sigma2Rv` | theorem |
-| Estimation variance E[(f̂_k - f_k)² given D_k] = σ²_k/S_k | `condExp_sq_fhatRv_sub` | theorem |
-| Process variance along a row | `condVar_C_eq_procVar` | theorem |
-| Mack 1993 Theorem 3, exact conditional form | `condMsep_eq` | theorem |
-| Mack 1993 Theorem 3, plug-in estimator (2.2) | `msep`, `mackProcess`, `mackEstimation` | definition |
-| Mack 1993 Corollary (total reserve) | `msepTotal`, `mackTotalEstimation` | definition |
-| Mack 1999 recursion equals Mack 1993 closed form | `se2rec_eq_msep` | theorem |
-| Mack 1999 weighted estimation variance | `condExp_sq_fhatWrv_sub`, `condVar_fhatWrv` | theorem |
-| Mack 1999 weighted variance estimator is unbiased | `condExp_sigma2Wrv` | theorem |
-| Quarg-Mack normalized paid/incurred gap under separate chain ladder | `quargMack_gap_identity` | theorem |
-| Quarg-Mack PQ/IQ residual slope equals residual cross-moment | `munichPaid_residualCorrelation_eq`, `munichIncurred_residualCorrelation_eq` | theorem |
-| Munich coupled projection reduces to separate chain ladder at zero residual slopes | `munichProjection_zero` | theorem |
-| Mack 1999 row-conditioned weighted CL2 transports to observed data | `mack3W_of_mack3WRow`, `mack2Factor'_of_rows` | theorem |
-| Mack 1999 zero-weight active estimator is unbiased | `condExp_sigma2WActiveRv` | theorem |
-| Röhr 2016 linearized (error-propagation) form equals Mack 1993 | `rohrMsep_eq_msep`, `rohrProcess_eq_mackProcess`, `rohrParameter_eq_mackEstimation` | theorem |
-| Röhr CAE 2014 arbitrary-horizon approximations and exact split | `rohrKYearRelMsepApprox`, `rohrHorizonRelMsepApprox_split`, `rohrKYearRelMsepApprox_eq_ultimate` | definition and theorem |
-| BBMW 2006 / Murphy 1994 conditional-resampling term | `bbmwEstimation`, `bbmwTotalEstimation` | definition |
-| R `ChainLadder` `mse.method` branches | `chainLadderRowParameterRiskSq_mack_eq_mackEstimation`, `chainLadderRowParameterRiskSq_independence_eq_bbmwEstimation`, `chainLadderTotalParameterRiskSq_eq_sum` | theorem |
-| For nonnegative `a_k`: Mack ≤ BBMW and the second-order bound; exact difference without that sign condition | `mackEstimation_le_bbmwEstimation`, `bbmwEstimation_sub_mackEstimation`, `bbmwEstimation_sub_mackEstimation_le` | theorem |
-| Same for the total reserve | `mackTotalEstimation_le_bbmwTotalEstimation`, `bbmwTotalEstimation_sub_mackTotalEstimation` | theorem |
-| The two terms differ strictly on a concrete triangle | `exists_mackEstimation_lt_bbmwEstimation` | theorem |
-| Bornhuetter-Ferguson on the chain-ladder pattern | `bfReserve_of_ultimate`, `one_le_cdf`, `bfReserve_le` | theorem |
-| Bühlmann-Straub weighted estimate and credibility form | `buhlmannStraubEstimate_eq_credibility`, `buhlmannStraubCredibility_mem_Icc` | theorem |
-| Bühlmann-Straub expected prediction loss from conditional moments | `buhlmannStraubExpectedSqLoss_eq`, `buhlmannStraubExpectedSqLoss_scaled_eq_riskQuadratic` | theorem |
-| Bühlmann-Straub credibility minimizes expected squared loss | `buhlmannStraubCredibility_minimizes_expectedSqLoss`, `buhlmannStraubPredictor_credibility_eq_estimate` | theorem |
-| Mack 2008 BF reserve mean and process variance | `integral_bfFutureReserveRv`, `variance_bfFutureReserveRv` | theorem |
-| Mack 2008 BF product variance and conditional MSEP split | `variance_bfStochasticReserveEstimate`, `condExp_sq_bfPredictionError_eq` | theorem |
-| Mack 2008 BF raw estimators, equations (1)--(2) | `bfYRawRv_best_linear_unbiased`, `integral_bfSigma2RawOnRv` | theorem |
-| ODP conditional cell moments and aggregate process variance | `condExp_odpCell_given_observed`, `condExp_sq_odpCell_sub_given_observed`, `variance_odpAggregate` | theorem |
-| ODP process-plus-estimation identity | `meanSquaredPredictionError_eq_variance_add`, `odpAggregateMsep_eq` | theorem |
-| England-Verrall GLM MSEP and two-stage bootstrap formulas | `glmCellMsep`, `glmAggregateMsep`, `englandVerrallBootstrapMean`, `englandVerrallPredictiveReserve` | definition |
-| Panjer 1981 compound-distribution recursion, equation (5) | `compoundMass_panjer_equation5`, `compoundMass_zero` | theorem |
-| A nondegenerate Mack model satisfying (M1), (M3), and (M2') | `NontrivialModel.exists_nontrivial_mack_model` | theorem |
-| Last-period σ² extrapolation (Mack's minimum rule) | not formalized: a convention, kept outside the theorems | convention |
-| Conditioning on an independent enlargement, `E[f given m₁ ⊔ m₂] = E[f given m₁]` | `condExp_sup_of_indep` | theorem |
-| Passage from independence across accident years to the D_k form of (M1) and (M3) | `mack1_of_mack1Row`, `mack3_of_mack3Row` | theorem |
-| (M2'), the cross-term assumption, from independence across accident years | `mack2'_of_rows` | theorem |
-| Calendar-year true CDR: mean, residual, second moment and variance | `condExp_calendarTrueCDR_eq_zero`, `calendarTrueCDR_eq_of_rows`, `condExp_sq_calendarTrueCDR_of_rows`, `condVar_calendarTrueCDR_of_rows` | theorem |
-| Merz-Wüthrich Appendix A.1 product-to-sum boundary | `mwA1LinearApprox`, `mwA1Remainder`, `mwA1LinearApprox_le_productIncrement` | definition and theorem |
-| Exact MSEP and three calendar updates on the finite witness | `IndependenceWitness.condMsep_witness`, `IndependenceWitness.condMsepTotal_witness`, `IndependenceWitness.calendarTrueCDR_three_nondegenerate` | theorem |
-
-## Why
-
-Mack's formula is quoted from secondary sources and appears in several typographic variants: the Mack 1993 closed form, Mack 1999 recursion, Murphy 1994 and Buchwalder-Bühlmann-Merz-Wüthrich 2006 forms with extra cross terms, and Röhr's 2016 linearized form. Cross-package comparisons can also mix formula options with last-period variance rules; [chainladder-python issue #234](https://github.com/casact/chainladder-python/issues/234) records a historical example, while the case study here reproduces R `ChainLadder` when the settings match. The Lean development proves which represented variants are equal, records the hypotheses used by each result, and keeps last-period variance extrapolation outside the theorems as a convention.
-
-## Related work
-
-This project sits beside existing formalized actuarial mathematics: Yosuke Ito's `Actuarial_Mathematics` in the Isabelle Archive of Formal Proofs and `coq-actuary` package; Bjørn Kjos-Hanssen's `actlib` in Lean 4; and Raphael Coelho's `formal-mathfin` in Lean 4. Those libraries cover topics including interest theory, life contingencies, ruin theory, compound Poisson models, extreme values, and mathematical finance. Corrections or related-work additions are welcome through an issue with a source pointer.
+- The full library builds against mathlib without `sorry` or custom axioms.
+- CI audits the proof dependencies of 479 named declarations. Each audited declaration uses only `propext`, `Classical.choice`, and `Quot.sound`, or no axioms.
+- Finite nondegenerate stochastic models instantiate representative assumptions and wrapper theorems.
+- [`docs/STATEMENT_FIDELITY.md`](docs/STATEMENT_FIDELITY.md) records the hypotheses and source differences for headline results.
+- Delta-method formulas, bootstrap procedures, tail choices, and final-period variance extrapolation are marked as definitions or conventions. Their statistical validity is not asserted as a Lean theorem.
+- The scripts reproduce published examples and package outputs numerically; numerical agreement is evidence for the transcription, not a formal proof.
 
 ## Build
 
-Toolchain `leanprover/lean4:v4.32.2`, mathlib `v4.32.2`.
+Toolchain: `leanprover/lean4:v4.32.2`, mathlib `v4.32.2`.
 
-```
+```bash
 lake exe cache get
 lake build
 lake env lean VerifiedReserving/Test/Axioms.lean
 ```
 
-Docs and blueprint locally (needs `pip install leanblueprint` and a TeX distribution):
+Reference computations and their pinned Python dependencies are documented in [`scripts/README.md`](scripts/README.md).
 
-```
-lake -Kenv=dev exe cache get
-lake -Kenv=dev build VerifiedReserving:docs
-leanblueprint pdf
-leanblueprint web
-```
+## Documentation and citation
 
-## Reference computation
+- [Typeset blueprint](https://robby955.github.io/verified-reserving/blueprint/)
+- [Generated API documentation](https://robby955.github.io/verified-reserving/docs/)
+- [Statement-fidelity ledger](docs/STATEMENT_FIDELITY.md)
+- [Roadmap and explicit open boundaries](ROADMAP.md)
+- [Contributing](CONTRIBUTING.md)
+- [Release v0.2.0](https://github.com/Robby955/verified-reserving/releases/tag/v0.2.0)
 
-Python in [`scripts/`](scripts/README.md) implements the formalized definitions with the same index conventions: `reproduce_mack1993.py` uses only the standard library, while the RAA case study and Schedule P audit use the pinned NumPy, Pandas, and SciPy versions in [`scripts/requirements.txt`](scripts/requirements.txt). The scripts reproduce Mack's 1993 example, match R's `ChainLadder` on the RAA triangle to printed precision, and screen 779 company triangles against the data hypotheses of the theorems; 638 are audited and 141 are classified as degenerate. The Lean definitions are over `ℝ` and noncomputable; these scripts are reference computations, and their agreement with the definitions is checked numerically rather than proved.
-
-## Release status
-
-The current versioned release is [v0.2.0](https://github.com/Robby955/verified-reserving/releases/tag/v0.2.0). [CHANGELOG.md](CHANGELOG.md) records its contents, and [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) documents the release procedure.
-
-## Citation
-
-See [CITATION.cff](CITATION.cff). License: Apache 2.0.
+Citation metadata is in [`CITATION.cff`](CITATION.cff). The code is available under the [Apache 2.0 license](LICENSE).
